@@ -92,7 +92,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
             textAlign: TextAlign.center,
             style: const TextStyle(fontSize: 16, color: Colors.black54),
           ),
-          const SizedBox(height: 30),
+          const SizedBox(height: 100),
 
           SmoothPageIndicator(
             controller: _controller,
@@ -116,7 +116,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
             ),
             onPressed: () {
               if (isLast) {
-                Navigator.pushReplacementNamed(context, "/home");
+                Navigator.pushReplacementNamed(context, "/login");
               } else {
                 _controller.nextPage(
                   duration: const Duration(milliseconds: 400),

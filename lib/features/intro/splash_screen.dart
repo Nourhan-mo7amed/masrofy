@@ -12,10 +12,19 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  double _opacity = 0.0;
+
   @override
   void initState() {
     super.initState();
-    Timer(const Duration(seconds: 3), () {
+    // بعد 2 ثانية يبدأ الفيد إن
+    Future.delayed(const Duration(seconds: 2), () {
+      setState(() {
+        _opacity = 1.0;
+      });
+    });
+
+    Timer(const Duration(seconds: 8), () {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => const OnBoardingScreen()),
@@ -31,17 +40,17 @@ class _SplashScreenState extends State<SplashScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Lottie.asset(
-              "assets/animations/save.json",
-              height: 200,
-            ),
-            const SizedBox(height: 20),
-            Text(
-              "Masrofy",
-              style: TextStyle(
-                fontSize: 50,
-                fontWeight: FontWeight.bold,
-                color: AppColors.primary,
+            Lottie.asset("assets/animations/logo.json", height: 400),
+            AnimatedOpacity(
+              duration: const Duration(seconds: 2),
+              opacity: _opacity,
+              child: const Text(
+                "Masrofy",
+                style: TextStyle(
+                  fontSize: 50,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
               ),
             ),
           ],
