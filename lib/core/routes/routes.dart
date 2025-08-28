@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import '../../features/intro/splash_screen.dart';
-import '../features/auth/ui/screens/CategoriesScreen.dart';
-import '../features/auth/ui/screens/MonthlyBudget_Screen.dart';
-import '../features/auth/ui/screens/forgotPW_screen.dart';
-import '../features/auth/ui/screens/login_screen.dart';
-import '../features/auth/ui/screens/register_screen.dart';
-import '../features/auth/ui/screens/setup_compelete.dart';
-import '../features/intro/onbording screens/onbording.dart';
+import '../../view/intro/splash_screen.dart';
+import '../../view/categoriesView/CategoriesScreen.dart';
+import '../../view/monthlyBudgetView/MonthlyBudget_Screen.dart';
+import '../../view/forgotPasswordView/forgotPW_screen.dart';
+import '../../view/loginView/login_screen.dart';
+import '../../view/registerView/register_screen.dart';
+import '../../view/setupCompleteView/setup_compelete.dart';
+import '../../view/intro/onbording screens/onbording.dart';
 
 class AppRoutes {
   static const String splash = '/';

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import '../widgets/Custom_TextField.dart';
-import '../widgets/social_Icon.dart';
+import '../../widgets/Custom_TextField.dart';
+import '../../widgets/social_Icon.dart';
 
-class RegisterScreen extends StatelessWidget {
-  const RegisterScreen({super.key});
+class LoginScreen extends StatelessWidget {
+  const LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,77 +18,67 @@ class RegisterScreen extends StatelessWidget {
               const SizedBox(height: 32),
 
               // Title
-              Text(
-                "Create Account",
+              const Text(
+                "Welcome back",
                 style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 8),
-              Text(
-                "Sign up to start managing your budget.",
+              const Text(
+                "Log in to continue managing your budget.",
                 style: TextStyle(fontSize: 14, color: Colors.black54),
               ),
 
               const SizedBox(height: 32),
-
-              // Full Name
-              const Text(
-                'Full Name',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-              ),
-              const SizedBox(height: 8),
-              const CustomTextField(
-                hintText: 'Full Name',
-                icon: Icons.person_outline,
-              ),
-              const SizedBox(height: 16),
-
-              // Email
-              const Text(
+              Text(
                 'Email',
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
               ),
               const SizedBox(height: 8),
+              // Email
               const CustomTextField(
                 hintText: 'Email',
                 icon: Icons.email_outlined,
               ),
               const SizedBox(height: 16),
-
-              // Password
-              const Text(
+              Text(
                 'Password',
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
               ),
               const SizedBox(height: 8),
+              // Password
               const CustomTextField(
                 hintText: 'Password',
                 icon: Icons.lock_outline,
                 isPassword: true,
               ),
-              const SizedBox(height: 16),
 
-              // Confirm Password
-              const Text(
-                'Confirm Password',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-              ),
               const SizedBox(height: 8),
-              const CustomTextField(
-                hintText: 'Confirm Password',
-                icon: Icons.lock_outline,
-                isPassword: true,
+
+              // Forgot Password
+              Align(
+                alignment: Alignment.centerRight,
+                child: TextButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/forgotPassword');
+                  },
+                  child: const Text(
+                    "Forgot password?",
+                    style: TextStyle(
+                      color: Color(0xFF6155F5),
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
               ),
 
               const SizedBox(height: 35),
 
-              // Register Button
+              // Login Button
               SizedBox(
                 height: 50,
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/monthlyBudget');
-                  },
+                  onPressed: () {},
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF6155F5),
                     shape: RoundedRectangleBorder(
@@ -96,7 +86,7 @@ class RegisterScreen extends StatelessWidget {
                     ),
                   ),
                   child: const Text(
-                    "Sign Up",
+                    "Log In",
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
@@ -115,7 +105,7 @@ class RegisterScreen extends StatelessWidget {
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 8.0),
                     child: Text(
-                      "or sign up with",
+                      "or log in with",
                       style: TextStyle(color: Colors.black54),
                     ),
                   ),
@@ -139,17 +129,17 @@ class RegisterScreen extends StatelessWidget {
 
               const SizedBox(height: 24),
 
-              // Already have account
+              // Sign up
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text("Already have an account? "),
+                  const Text("Don't have an account? "),
                   GestureDetector(
                     onTap: () {
-                      Navigator.pop(context);
+                      Navigator.pushNamed(context, '/register');
                     },
                     child: const Text(
-                      "Log In",
+                      "Sign Up",
                       style: TextStyle(
                         color: Color(0xFF6155F5),
                         fontWeight: FontWeight.w600,
