@@ -17,20 +17,15 @@ class CustomTextField extends StatelessWidget {
     return TextField(
       obscureText: isPassword,
       decoration: InputDecoration(
-        prefixIcon: Icon(
-          icon,
-          color: Color(0xffA8A8A9), 
-        ),
+        prefixIcon: Icon(icon, color: Color(0xffA8A8A9)),
         suffixIcon: isPassword
-            ? const Icon(
-                Icons.visibility,
-                color: Color(0xffA8A8A9), 
-              )
+            ? const Icon(Icons.visibility, color: Color(0xffA8A8A9))
             : null,
         hintText: hintText,
-        enabledBorder: const OutlineInputBorder(
+        border: const OutlineInputBorder(
           borderSide: BorderSide(color: Color(0xffA8A8A9), width: 1),
         ),
+        //enabledBorder:
       ),
     );
   }
