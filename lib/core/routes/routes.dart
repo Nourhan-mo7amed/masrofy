@@ -17,7 +17,7 @@ class AppRoutes {
   static const String monthlyBudget = '/monthlyBudget';
   static const String categories = '/categories';
   static const String setupComplete = '/setupComplete';
-
+//hallo
   static Map<String, WidgetBuilder> routes = {
     splash: (context) => const SplashScreen(),
     onboarding: (context) => const OnBoardingScreen(),
