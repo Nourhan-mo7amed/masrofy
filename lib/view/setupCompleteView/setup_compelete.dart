@@ -56,7 +56,7 @@ class SetupCompleteScreen extends StatelessWidget {
                     ),
                   ),
                   onPressed: () {
-                    // Navigator.pushNamed(context, '/home');
+                    Navigator.pushNamed(context, '/home');
                   },
                   child: const Text(
                     "Start Budgeting",
