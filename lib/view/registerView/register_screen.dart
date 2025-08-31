@@ -1,5 +1,6 @@
+
 import 'package:flutter/material.dart';
-import '../../widgets/Custom_TextField.dart';
+import 'package:masrofy/view/registerView/Custom_regiestartion_form.dart';
 import '../../widgets/social_Icon.dart';
 
 class RegisterScreen extends StatelessWidget {
@@ -29,83 +30,9 @@ class RegisterScreen extends StatelessWidget {
               ),
 
               const SizedBox(height: 32),
+              CustomRegistrationForm(),
 
               // Full Name
-              const Text(
-                'Full Name',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-              ),
-              const SizedBox(height: 8),
-              const CustomTextField(
-                hintText: 'Full Name',
-                icon: Icons.person_outline,
-              ),
-              const SizedBox(height: 16),
-
-              // Email
-              const Text(
-                'Email',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-              ),
-              const SizedBox(height: 8),
-              const CustomTextField(
-                hintText: 'Email',
-                icon: Icons.email_outlined,
-              ),
-              const SizedBox(height: 16),
-
-              // Password
-              const Text(
-                'Password',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-              ),
-              const SizedBox(height: 8),
-              const CustomTextField(
-                hintText: 'Password',
-                icon: Icons.lock_outline,
-                isPassword: true,
-              ),
-              const SizedBox(height: 16),
-
-              // Confirm Password
-              const Text(
-                'Confirm Password',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-              ),
-              const SizedBox(height: 8),
-              const CustomTextField(
-                hintText: 'Confirm Password',
-                icon: Icons.lock_outline,
-                isPassword: true,
-              ),
-
-              const SizedBox(height: 35),
-
-              // Register Button
-              SizedBox(
-                height: 50,
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/monthlyBudget');
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF6155F5),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                  ),
-                  child: const Text(
-                    "Sign Up",
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-              ),
-
               const SizedBox(height: 24),
 
               // Divider with text
@@ -165,3 +92,5 @@ class RegisterScreen extends StatelessWidget {
     );
   }
 }
+
+

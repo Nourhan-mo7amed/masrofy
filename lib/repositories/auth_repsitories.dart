@@ -19,17 +19,14 @@ class AuthRepository {
 
       if (firebaseUser != null) {
         UserModel userModel = UserModel(
-          id: firebaseUser.uid,
           name: name,
           email: email,
           password: password,
         );
 
         await _firestore.collection('users').doc(firebaseUser.uid).set({
-          'id': userModel.id,
           'name': userModel.name,
           'email': userModel.email,
-          'password': userModel.password,
         });
 
         return userModel;
@@ -58,7 +55,6 @@ class AuthRepository {
 
         if (userDoc.exists) {
           return UserModel(
-            id: firebaseUser.uid,
             name: userDoc['name'],
             email: userDoc['email'],
             password: userDoc['password'],
