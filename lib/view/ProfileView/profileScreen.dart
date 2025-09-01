@@ -1,8 +1,22 @@
 import 'package:flutter/material.dart';
 import '../../widgets/profilecard.dart';
+import '../../widgets/LogoutBottomSheet.dart';
 
 class Profilescreen extends StatelessWidget {
   const Profilescreen({super.key});
+
+  void _showLogoutSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) {
+        return LogoutBottomSheet(
+          onConfirm: () {
+            Navigator.pushNamed(context, '/login');
+          },
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -10,10 +24,10 @@ class Profilescreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(height: 40),
+            const SizedBox(height: 40),
             Center(
               child: Column(
-                children: [
+                children: const [
                   CircleAvatar(
                     backgroundImage: AssetImage("assets/6eca1b5bc.png"),
                     radius: 50,
@@ -39,7 +53,7 @@ class Profilescreen extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Column(
               children: [
                 ProfileCard(
@@ -47,31 +61,35 @@ class Profilescreen extends StatelessWidget {
                   text: "Account Info",
                   color: Colors.purple,
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
+
                 ProfileCard(
                   icon: Icons.privacy_tip_outlined,
                   text: "Privacy Policy",
                   color: Colors.green,
+                  onTap: () {
+                    Navigator.pushNamed(context, '/privacypolicy');
+                  },
                 ),
-                SizedBox(height: 10),
-                ProfileCard(
-                  icon: Icons.lock_outline,
-                  text: "Security Code",
-                  color: Colors.blue,
-                ),
-                SizedBox(height: 10),
+
+                const SizedBox(height: 10),
                 ProfileCard(
                   icon: Icons.settings,
                   text: "Settings",
-                  color: Colors.orange,
+                  color: Color(0xFFB55E00),
+                  onTap: () {
+                    Navigator.pushNamed(context, '/settings');
+                  },
                 ),
-                SizedBox(height: 10),
+
+                const SizedBox(height: 10),
                 ProfileCard(
                   icon: Icons.logout,
                   text: "Logout",
-                  color: Colors.red,
+                  color: Color(0xFFFF0000),
+                  onTap: () => _showLogoutSheet(context),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
               ],
             ),
           ],

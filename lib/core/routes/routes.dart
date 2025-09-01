@@ -18,6 +18,8 @@ import '../../view/statisticsView/statisticsScreen.dart';
 import '../../view/SubscriptionsView/SubscriptionsScreen.dart';
 import '../../view/foodView/foodscreen.dart';
 import '../../view/anotherView/AnotherScreen.dart';
+import '../../view/privacypolicyView/privacypolicyScreen.dart';
+import '../../view/settingsView/settingScreen.dart';
 
 class AppRoutes {
   static const String splash = '/';
@@ -39,6 +41,9 @@ class AppRoutes {
   static const String subscriptions = '/subscriptions';
   static const String food = '/food';
   static const String another = '/another';
+  static const String privacypolicy = '/privacypolicy';
+  static const String settings = '/settings';
+
 
   static Map<String, WidgetBuilder> routes = {
     splash: (context) => const SplashScreen(),
@@ -60,6 +65,8 @@ class AppRoutes {
     subscriptions: (context) => const Subscriptions(),
     food: (context) => const FoodScreen(),
     another: (context) => const AnotherScreen(),
+    privacypolicy: (context) => const PrivacyPolicyScreen(),
+    settings: (context) => const SettingsScreen(),
 
   };
 }

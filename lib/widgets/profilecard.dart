@@ -4,12 +4,14 @@ class ProfileCard extends StatelessWidget {
   final IconData icon;
   final String text;
   final Color color;
+  final VoidCallback? onTap; 
 
   const ProfileCard({
     super.key,
     required this.icon,
     required this.text,
     required this.color,
+    this.onTap, 
   });
 
   @override
@@ -34,7 +36,7 @@ class ProfileCard extends StatelessWidget {
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
         trailing: Icon(Icons.arrow_forward_ios, size: 16),
-        onTap: () {},
+        onTap: onTap, 
       ),
     );
   }
