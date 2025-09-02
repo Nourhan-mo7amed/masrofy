@@ -21,7 +21,7 @@ class AuthRepository {
         UserModel userModel = UserModel(
           name: name,
           email: email,
-          password: password,
+          // متحطش الباسورد هنا في Firestore
         );
 
         await _firestore.collection('users').doc(firebaseUser.uid).set({
@@ -56,8 +56,7 @@ class AuthRepository {
         if (userDoc.exists) {
           return UserModel(
             name: userDoc['name'],
-            email: userDoc['email'],
-            password: userDoc['password'],
+            email: userDoc['email'], password: '',
           );
         }
       }
