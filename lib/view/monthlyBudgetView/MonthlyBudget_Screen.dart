@@ -50,7 +50,7 @@ class MonthlyBudgetScreen extends StatelessWidget {
                       // TextField
                       const CustomTextField(
                         hintText: 'Enter amount',
-                        icon: Icons.attach_money,
+                        icon: Icons.attach_money, controller: null,//error null!!!!!
                       ),
                       const SizedBox(height: 8),
                       Text('You can always change this later.'),
