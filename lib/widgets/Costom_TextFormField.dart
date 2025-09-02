@@ -20,7 +20,7 @@ class CustomTextFormField extends StatefulWidget {
 }
 
 class _CustomTextFormFieldState extends State<CustomTextFormField> {
-  bool sec = false;
+  bool sec = true;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +33,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         }
         return null;
       },
-      obscureText: sec,
+      obscureText: widget.isPassword==true?sec:false,
       decoration: InputDecoration(
         prefixIcon: Icon(widget.icon, color: Color(0xffA8A8A9)),
         suffixIcon: widget.isPassword
