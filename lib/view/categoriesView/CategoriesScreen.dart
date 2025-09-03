@@ -1,41 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:masrofy/core/constants/colors_app.dart';
+import 'package:masrofy/viewmodels/category_view.dart';
+import 'package:provider/provider.dart';
 
-class SpendingCategoriesScreen extends StatefulWidget {
+class SpendingCategoriesScreen extends StatelessWidget {
   const SpendingCategoriesScreen({super.key});
 
   @override
-  State<SpendingCategoriesScreen> createState() =>
-      _SpendingCategoriesScreenState();
-}
-
-class _SpendingCategoriesScreenState extends State<SpendingCategoriesScreen> {
-  final categories = [
-    "Groceries",
-    "Rent",
-    "Fuel",
-    "Dining",
-    "Utilities",
-    "Traveling",
-    "Subscriptions",
-    "Shopping",
-  ];
-
-  // هنا هنخزن الكاتيجوريز اللي متحددة
-  final Set<String> _selectedCategories = {};
-
-  void _toggleCategory(String category) {
-    setState(() {
-      if (_selectedCategories.contains(category)) {
-        _selectedCategories.remove(category); // لو متحددة تتشال
-      } else {
-        _selectedCategories.add(category); // لو مش متحددة تتضاف
-      }
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final categoryView = Provider.of<CategoryView>(context);
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -69,16 +43,16 @@ class _SpendingCategoriesScreenState extends State<SpendingCategoriesScreen> {
               Expanded(
                 child: GridView.builder(
                   shrinkWrap: true,
-                  itemCount: categories.length,
+                  itemCount: categoryView.categories.length,
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2, // 2 columns
+                    crossAxisCount: 2,
                     mainAxisSpacing: 12,
                     crossAxisSpacing: 12,
                     childAspectRatio: 3.5,
                   ),
                   itemBuilder: (context, index) {
-                    final category = categories[index];
-                    final isSelected = _selectedCategories.contains(category);
+                    final category = categoryView.categories[index];
+                    final isSelected = category.isSelected;
 
                     return OutlinedButton(
                       style: OutlinedButton.styleFrom(
@@ -95,8 +69,10 @@ class _SpendingCategoriesScreenState extends State<SpendingCategoriesScreen> {
                           borderRadius: BorderRadius.circular(8),
                         ),
                       ),
-                      onPressed: () => _toggleCategory(category),
-                      child: Text(category),
+                      onPressed: () {
+                        categoryView.toggleCategory(category);
+                      },
+                      child: Text("${category.icon} ${category.name}"),
                     );
                   },
                 ),
@@ -126,8 +102,8 @@ class _SpendingCategoriesScreenState extends State<SpendingCategoriesScreen> {
                   ),
                   onPressed: () {
                     debugPrint(
-                      "Selected Categories: $_selectedCategories",
-                    ); // تقدر تبعتها للسيرفر هنا
+                      "Selected: ${categoryView.selectedCategories.map((c) => c.name).toList()}",
+                    );
                     Navigator.pushNamed(context, '/setupComplete');
                   },
                   child: const Text(
