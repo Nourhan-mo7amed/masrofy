@@ -107,7 +107,7 @@ class _CustomRegistrationFormState extends State<CustomRegistrationForm> {
                       email: email!,
                       password: password!,
                     );
-                    Navigator.pop(context);
+                   // Navigator.pop(context);
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(content: Text("Passwords do not match")),

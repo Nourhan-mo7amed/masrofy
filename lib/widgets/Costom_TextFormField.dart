@@ -12,7 +12,8 @@ class CustomTextFormField extends StatefulWidget {
     required this.hintText,
     required this.icon,
     this.isPassword = false,
-    required this.controller, this.onChanged,
+    required this.controller,
+    this.onChanged,
   });
 
   @override
@@ -25,6 +26,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      
       onChanged: widget.onChanged,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       validator: (value) {
@@ -33,7 +35,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         }
         return null;
       },
-      obscureText: widget.isPassword==true?sec:false,
+      obscureText: widget.isPassword == true ? sec : false,
       decoration: InputDecoration(
         prefixIcon: Icon(widget.icon, color: Color(0xffA8A8A9)),
         suffixIcon: widget.isPassword
@@ -43,7 +45,10 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
                     sec = !sec;
                   });
                 },
-                icon: Icon(Icons.visibility, color: Color(0xffA8A8A9)),
+                icon: Icon(
+                  sec == true ? Icons.visibility : Icons.visibility_off,
+                  color: Color(0xffA8A8A9),
+                ),
               )
             : null,
         hintText: widget.hintText,

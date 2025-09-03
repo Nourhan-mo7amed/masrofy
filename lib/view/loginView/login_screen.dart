@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:masrofy/repositories/auth_repsitories.dart';
 import 'package:masrofy/widgets/Costom_TextFormField.dart';
-import '../../widgets/Custom_TextField.dart';
 import '../../widgets/social_Icon.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -18,8 +17,6 @@ class LoginScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 32),
-
-              // Title
               const Text(
                 "Welcome back",
                 style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
@@ -29,13 +26,9 @@ class LoginScreen extends StatelessWidget {
                 "Log in to continue managing your budget.",
                 style: TextStyle(fontSize: 14, color: Colors.black54),
               ),
-
               const SizedBox(height: 32),
-              CustomLoginForm(),
-
+              const CustomLoginForm(),
               const SizedBox(height: 24),
-
-              // Divider with text
               Row(
                 children: const [
                   Expanded(child: Divider(thickness: 1, color: Colors.grey)),
@@ -49,10 +42,7 @@ class LoginScreen extends StatelessWidget {
                   Expanded(child: Divider(thickness: 1, color: Colors.grey)),
                 ],
               ),
-
               const SizedBox(height: 24),
-
-              // Social Icons
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: const [
@@ -63,10 +53,7 @@ class LoginScreen extends StatelessWidget {
                   SocialIcon(imagePath: 'assets/images/apple.png'),
                 ],
               ),
-
               const SizedBox(height: 24),
-
-              // Sign up
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -115,16 +102,19 @@ class _CustomLoginFormState extends State<CustomLoginForm> {
     super.dispose();
   }
 
-  void _login() {
+  Future<void> _login() async {
     if (_globalKey.currentState!.validate()) {
       final email = _emailController.text.trim();
       final password = _passwordController.text.trim();
 
-      // استدعاء الريبو أو السيرفيس
-      repo.login(email: email, password: password);
+      final user = await repo.login(
+        email: email,
+        password: password,
+      );
 
-      // ممكن تعمل Navigator بعد نجاح اللوجين
-      // Navigator.pushReplacementNamed(context, '/home');
+      if (user != null && mounted) {
+        Navigator.pushReplacementNamed(context, '/home');
+      }
     }
   }
 
@@ -139,7 +129,6 @@ class _CustomLoginFormState extends State<CustomLoginForm> {
             style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
           ),
           const SizedBox(height: 8),
-          // Email
           CustomTextFormField(
             controller: _emailController,
             hintText: 'Email',
@@ -151,7 +140,6 @@ class _CustomLoginFormState extends State<CustomLoginForm> {
             style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
           ),
           const SizedBox(height: 8),
-          // Password
           CustomTextFormField(
             controller: _passwordController,
             hintText: 'Password',
@@ -159,8 +147,6 @@ class _CustomLoginFormState extends State<CustomLoginForm> {
             isPassword: true,
           ),
           const SizedBox(height: 8),
-
-          // Forgot Password
           Align(
             alignment: Alignment.centerRight,
             child: TextButton(
@@ -176,10 +162,7 @@ class _CustomLoginFormState extends State<CustomLoginForm> {
               ),
             ),
           ),
-
           const SizedBox(height: 35),
-
-          // Login Button
           SizedBox(
             height: 50,
             width: double.infinity,

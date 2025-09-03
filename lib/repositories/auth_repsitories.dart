@@ -12,27 +12,33 @@ class AuthRepository {
     required String password,
   }) async {
     try {
+      // إنشاء المستخدم في Firebase Authentication
       UserCredential userCredential = await _firebaseAuth
           .createUserWithEmailAndPassword(email: email, password: password);
 
       User? firebaseUser = userCredential.user;
 
       if (firebaseUser != null) {
-        UserModel userModel = UserModel(
-          name: name,
-          email: email,
-          // متحطش الباسورد هنا في Firestore
-        );
+        print("🔥 Firebase User UID: ${firebaseUser.uid}");
+        print("🔥 Adding to Firestore...");
 
+        // حفظ البيانات في Firestore
         await _firestore.collection('users').doc(firebaseUser.uid).set({
-          'name': userModel.name,
-          'email': userModel.email,
+          'uid': firebaseUser.uid,
+          'name': name,
+          'email': email,
+          'createdAt': FieldValue.serverTimestamp(),
         });
 
-        return userModel;
+        print("✅ Added to Firestore");
+        return UserModel(name: name, email: email);
       }
+    } on FirebaseAuthException catch (e) {
+      print('❌ FirebaseAuth Error in signUp: ${e.message}');
+    } on FirebaseException catch (e) {
+      print('❌ Firestore Error in signUp: ${e.message}');
     } catch (e) {
-      print('Error in signUp: $e');
+      print('❌ Unknown Error in signUp: $e');
     }
     return null;
   }
@@ -42,12 +48,14 @@ class AuthRepository {
     required String password,
   }) async {
     try {
+      // تسجيل الدخول
       UserCredential userCredential = await _firebaseAuth
           .signInWithEmailAndPassword(email: email, password: password);
 
       User? firebaseUser = userCredential.user;
 
       if (firebaseUser != null) {
+        // جلب بيانات المستخدم من Firestore
         DocumentSnapshot userDoc = await _firestore
             .collection('users')
             .doc(firebaseUser.uid)
@@ -56,12 +64,19 @@ class AuthRepository {
         if (userDoc.exists) {
           return UserModel(
             name: userDoc['name'],
-            email: userDoc['email'], password: '',
+            email: userDoc['email'],
+            password: '',
           );
+        } else {
+          print("⚠️ User document does not exist in Firestore.");
         }
       }
+    } on FirebaseAuthException catch (e) {
+      print('❌ FirebaseAuth Error in login: ${e.message}');
+    } on FirebaseException catch (e) {
+      print('❌ Firestore Error in login: ${e.message}');
     } catch (e) {
-      print('Error in login: $e');
+      print('❌ Unknown Error in login: $e');
     }
     return null;
   }
