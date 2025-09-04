@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:masrofy/core/constants/colors_app.dart';
-import 'package:masrofy/viewmodels/category_view.dart';
+import 'package:masrofy/viewmodels/category_viewModel.dart';
 import 'package:provider/provider.dart';
 
 class SpendingCategoriesScreen extends StatelessWidget {

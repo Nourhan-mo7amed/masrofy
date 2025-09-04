@@ -99,15 +99,20 @@ class _CustomRegistrationFormState extends State<CustomRegistrationForm> {
                   if (passwordController.text ==
                       confirmPasswordController.text) {
                     print("✅ Registered Successfully");
-                    print("Name: ${nameController.text}");
-                    print("Email: ${emailController.text}");
+                    print("Name: $name");
+                    print("Email: $email");
 
                     authRepo.signUp(
                       name: name!,
                       email: email!,
                       password: password!,
                     );
-                   // Navigator.pop(context);
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        backgroundColor: Colors.green,
+                        content: Text("success")),
+                    );
+                    Navigator.pop(context);
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(content: Text("Passwords do not match")),
