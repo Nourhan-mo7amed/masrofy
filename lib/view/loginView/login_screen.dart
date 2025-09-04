@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:masrofy/repositories/auth_repsitories.dart';
 import 'package:masrofy/widgets/Costom_TextFormField.dart';
 import '../../widgets/social_Icon.dart';
+import 'package:provider/provider.dart';
+import 'package:masrofy/viewmodels/Auth_ViewModel.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -93,8 +94,6 @@ class _CustomLoginFormState extends State<CustomLoginForm> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
-  final repo = AuthRepository();
-
   @override
   void dispose() {
     _emailController.dispose();
@@ -103,19 +102,23 @@ class _CustomLoginFormState extends State<CustomLoginForm> {
   }
 
   Future<void> _login() async {
-    if (_globalKey.currentState!.validate()) {
-      final email = _emailController.text.trim();
-      final password = _passwordController.text.trim();
+    if (!_globalKey.currentState!.validate()) return;
 
-      final user = await repo.login(
-        email: email,
-        password: password,
-      );
+    final email = _emailController.text.trim();
+    final password = _passwordController.text.trim();
 
-      if (user != null && mounted) {
-        Navigator.pushReplacementNamed(context, '/home');
-      }
+    final authVm = context.read<AuthViewModel>();
+    final errorMesaage = await authVm.login(email, password);
+
+    if (!mounted) return;
+
+    if (errorMesaage != null) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(errorMesaage)));
+      return;
     }
+    Navigator.pushReplacementNamed(context, '/home');
   }
 
   @override
