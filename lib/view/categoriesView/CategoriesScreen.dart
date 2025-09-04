@@ -3,7 +3,7 @@ import 'package:masrofy/core/constants/colors_app.dart';
 import 'package:masrofy/viewmodels/category_viewModel.dart';
 import 'package:provider/provider.dart';
 
-class SpendingCategoriesScreen extends StatelessWidget {
+class SpendingCategoriesScreen extends StatefulWidget {
   const SpendingCategoriesScreen({super.key});
 
   @override
@@ -12,30 +12,6 @@ class SpendingCategoriesScreen extends StatelessWidget {
 }
 
 class _SpendingCategoriesScreenState extends State<SpendingCategoriesScreen> {
-  final categories = [
-    "Groceries",
-    "Rent",
-    "Fuel",
-    "Dining",
-    "Utilities",
-    "Traveling",
-    "Subscriptions",
-    "Shopping",
-  ];
-
-  // هنا هنخزن الكاتيجوريز اللي متحددة
-  final Set<String> _selectedCategories = {};
-
-  void _toggleCategory(String category) {
-    setState(() {
-      if (_selectedCategories.contains(category)) {
-        _selectedCategories.remove(category); // لو متحددة تتشال
-      } else {
-        _selectedCategories.add(category); // لو مش متحددة تتضاف
-      }
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     final categoryView = Provider.of<CategoryView>(context);
@@ -86,12 +62,10 @@ class _SpendingCategoriesScreenState extends State<SpendingCategoriesScreen> {
 
                     return OutlinedButton(
                       style: OutlinedButton.styleFrom(
-                        backgroundColor: isSelected
-                            ? AppColors.primary
-                            : Colors.white,
-                        foregroundColor: isSelected
-                            ? Colors.white
-                            : Colors.black,
+                        backgroundColor:
+                            isSelected ? AppColors.primary : Colors.white,
+                        foregroundColor:
+                            isSelected ? Colors.white : Colors.black,
                         side: BorderSide(
                           color: isSelected ? AppColors.primary : Colors.grey,
                         ),
@@ -132,8 +106,8 @@ class _SpendingCategoriesScreenState extends State<SpendingCategoriesScreen> {
                   ),
                   onPressed: () {
                     debugPrint(
-                      "Selected Categories: $_selectedCategories",
-                    ); // تقدر تبعتها للسيرفر هنا
+                      "Selected Categories: ${categoryView.selectedCategories}",
+                    ); // هنا تقدر تبعت الداتا للسيرفر
                     Navigator.pushNamed(context, '/setupComplete');
                   },
                   child: const Text(
