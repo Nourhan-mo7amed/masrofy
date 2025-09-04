@@ -7,6 +7,36 @@ class SpendingCategoriesScreen extends StatelessWidget {
   const SpendingCategoriesScreen({super.key});
 
   @override
+  State<SpendingCategoriesScreen> createState() =>
+      _SpendingCategoriesScreenState();
+}
+
+class _SpendingCategoriesScreenState extends State<SpendingCategoriesScreen> {
+  final categories = [
+    "Groceries",
+    "Rent",
+    "Fuel",
+    "Dining",
+    "Utilities",
+    "Traveling",
+    "Subscriptions",
+    "Shopping",
+  ];
+
+  // هنا هنخزن الكاتيجوريز اللي متحددة
+  final Set<String> _selectedCategories = {};
+
+  void _toggleCategory(String category) {
+    setState(() {
+      if (_selectedCategories.contains(category)) {
+        _selectedCategories.remove(category); // لو متحددة تتشال
+      } else {
+        _selectedCategories.add(category); // لو مش متحددة تتضاف
+      }
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     final categoryView = Provider.of<CategoryView>(context);
 
@@ -102,8 +132,8 @@ class SpendingCategoriesScreen extends StatelessWidget {
                   ),
                   onPressed: () {
                     debugPrint(
-                      "Selected: ${categoryView.selectedCategories.map((c) => c.name).toList()}",
-                    );
+                      "Selected Categories: $_selectedCategories",
+                    ); // تقدر تبعتها للسيرفر هنا
                     Navigator.pushNamed(context, '/setupComplete');
                   },
                   child: const Text(
