@@ -107,10 +107,7 @@ class _CustomLoginFormState extends State<CustomLoginForm> {
       final email = _emailController.text.trim();
       final password = _passwordController.text.trim();
 
-      final user = await repo.login(
-        email: email,
-        password: password,
-      );
+      final user = await repo.login(email: email, password: password);
 
       if (user != null && mounted) {
         Navigator.pushReplacementNamed(context, '/home');
@@ -123,6 +120,7 @@ class _CustomLoginFormState extends State<CustomLoginForm> {
     return Form(
       key: _globalKey,
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Text(
             'Email',

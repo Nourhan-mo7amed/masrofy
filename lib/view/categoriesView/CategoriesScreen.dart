@@ -21,15 +21,14 @@ class _SpendingCategoriesScreenState extends State<SpendingCategoriesScreen> {
     "Shopping",
   ];
 
-  // هنا هنخزن الكاتيجوريز اللي متحددة
   final Set<String> _selectedCategories = {};
 
   void _toggleCategory(String category) {
     setState(() {
       if (_selectedCategories.contains(category)) {
-        _selectedCategories.remove(category); // لو متحددة تتشال
+        _selectedCategories.remove(category);
       } else {
-        _selectedCategories.add(category); // لو مش متحددة تتضاف
+        _selectedCategories.add(category);
       }
     });
   }
@@ -125,9 +124,7 @@ class _SpendingCategoriesScreenState extends State<SpendingCategoriesScreen> {
                     ),
                   ),
                   onPressed: () {
-                    debugPrint(
-                      "Selected Categories: $_selectedCategories",
-                    ); // تقدر تبعتها للسيرفر هنا
+                    debugPrint("Selected Categories: $_selectedCategories");
                     Navigator.pushNamed(context, '/setupComplete');
                   },
                   child: const Text(

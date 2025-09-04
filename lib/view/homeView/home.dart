@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import '../../widgets/expenseItem.dart';
-import '../../view/shoppingView/shoppingScreen.dart';
 import '../../view/statisticsView/StatisticsScreen.dart';
 import '../../view/addView/addScreen.dart';
 import '../../view/allTransactionView/all_transactionScreen.dart';
 import '../../view/profileView/profileScreen.dart';
-import '../../view/SubscriptionsView/SubscriptionsScreen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
