@@ -9,10 +9,15 @@ class AuthViewModel extends ChangeNotifier {
   UserModel? _currentUser;
   UserModel? get currentUser => _currentUser;
   bool get isLoggedIn => _currentUser != null;
+  bool _isLoading = false;
+  bool get isLoading => _isLoading;
 
   //login
   Future<String?> login(String email, String password) async {
+    _setLoading(true);
+
     final user = await _authRepository.login(email: email, password: password);
+    _setLoading(false);
     if (user == null) {
       return "Email or password is incorrect";
     }
@@ -23,11 +28,13 @@ class AuthViewModel extends ChangeNotifier {
 
   // sign Up
   Future<String?> signUp(String name, String email, String password) async {
+    _setLoading(true);
     final user = await _authRepository.signUp(
       name: name,
       email: email,
       password: password,
     );
+    _setLoading(false);
     if (user == null) {
       return "Faild to create account";
     }
@@ -52,6 +59,11 @@ class AuthViewModel extends ChangeNotifier {
 
   void logout() {
     _currentUser = null;
+    notifyListeners();
+  }
+
+  void _setLoading(bool value) {
+    _isLoading = value;
     notifyListeners();
   }
 }
