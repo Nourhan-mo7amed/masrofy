@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:masrofy/core/constants/colors_app.dart';
-import 'package:masrofy/viewmodels/category_view.dart';
+import 'package:masrofy/viewmodels/category_viewModel.dart';
 import 'package:provider/provider.dart';
 
-class SpendingCategoriesScreen extends StatelessWidget {
+class SpendingCategoriesScreen extends StatefulWidget {
   const SpendingCategoriesScreen({super.key});
 
+  @override
+  State<SpendingCategoriesScreen> createState() =>
+      _SpendingCategoriesScreenState();
+}
+
+class _SpendingCategoriesScreenState extends State<SpendingCategoriesScreen> {
   @override
   Widget build(BuildContext context) {
     final categoryView = Provider.of<CategoryView>(context);
@@ -56,12 +62,10 @@ class SpendingCategoriesScreen extends StatelessWidget {
 
                     return OutlinedButton(
                       style: OutlinedButton.styleFrom(
-                        backgroundColor: isSelected
-                            ? AppColors.primary
-                            : Colors.white,
-                        foregroundColor: isSelected
-                            ? Colors.white
-                            : Colors.black,
+                        backgroundColor:
+                            isSelected ? AppColors.primary : Colors.white,
+                        foregroundColor:
+                            isSelected ? Colors.white : Colors.black,
                         side: BorderSide(
                           color: isSelected ? AppColors.primary : Colors.grey,
                         ),
@@ -102,8 +106,8 @@ class SpendingCategoriesScreen extends StatelessWidget {
                   ),
                   onPressed: () {
                     debugPrint(
-                      "Selected: ${categoryView.selectedCategories.map((c) => c.name).toList()}",
-                    );
+                      "Selected Categories: ${categoryView.selectedCategories}",
+                    ); // هنا تقدر تبعت الداتا للسيرفر
                     Navigator.pushNamed(context, '/setupComplete');
                   },
                   child: const Text(

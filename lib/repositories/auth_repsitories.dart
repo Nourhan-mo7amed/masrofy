@@ -49,6 +49,9 @@ class AuthRepository {
   }) async {
     try {
       // تسجيل الدخول
+
+      print(email);
+      print(password);
       UserCredential userCredential = await _firebaseAuth
           .signInWithEmailAndPassword(email: email, password: password);
 
@@ -60,18 +63,18 @@ class AuthRepository {
             .collection('users')
             .doc(firebaseUser.uid)
             .get();
+            print("wellllllllllllll hooooooooooooooooo😍😎😎😋😍😎");
 
         if (userDoc.exists) {
-          return UserModel(
-            name: userDoc['name'],
-            email: userDoc['email'],
-            password: '',
-          );
+          return UserModel(name: userDoc['name'], email: userDoc['email']);
         } else {
           print("⚠️ User document does not exist in Firestore.");
         }
       }
     } on FirebaseAuthException catch (e) {
+      print(" emaaaaail $email");
+      print("passssssword  $password");
+
       print('❌ FirebaseAuth Error in login: ${e.message}');
     } on FirebaseException catch (e) {
       print('❌ Firestore Error in login: ${e.message}');
