@@ -14,7 +14,7 @@ class _CustomLoginFormState extends State<CustomLoginForm> {
   final GlobalKey<FormState> _globalKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-
+  String? email, password;
   @override
   void dispose() {
     _emailController.dispose();
@@ -40,6 +40,9 @@ class _CustomLoginFormState extends State<CustomLoginForm> {
             controller: _emailController,
             hintText: 'Email',
             icon: Icons.email_outlined,
+            onChanged: (value) {
+              email = value;
+            },
           ),
           const SizedBox(height: 16),
           const Text(
@@ -53,6 +56,9 @@ class _CustomLoginFormState extends State<CustomLoginForm> {
             hintText: 'Password',
             icon: Icons.lock_outline,
             isPassword: true,
+            onChanged: (value) {
+              password = value;
+            },
           ),
           const SizedBox(height: 8),
           Align(
@@ -80,8 +86,8 @@ class _CustomLoginFormState extends State<CustomLoginForm> {
                   : () async {
                       if (_globalKey.currentState!.validate()) {
                         final errorMessage = await authVm.login(
-                          _emailController.text.trim(),
-                          _passwordController.text.trim(),
+                          email!,
+                          password!,
                         );
                         if (errorMessage == null && mounted) {
                           ScaffoldMessenger.of(context).showSnackBar(
