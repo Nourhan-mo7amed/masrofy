@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:masrofy/repositories/auth_repsitories.dart';
 import 'package:masrofy/view/loginView/custom_login_form.dart';
 import '../../widgets/social_Icon.dart';
 
@@ -44,8 +45,19 @@ class LoginScreen extends StatelessWidget {
               const SizedBox(height: 24),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  SocialIcon(imagePath: 'assets/images/google.png'),
+                children: [
+                  SocialIcon(
+                    imagePath: 'assets/images/google.png',
+                    onTap: () async {
+                      final user = await AuthService().signInWithGoogle();
+                      if (user != null) {
+                        print('✅ Logged in as: ${user.displayName}');
+                        Navigator.pushReplacementNamed(context, '/home');
+                      } else {
+                        print('❌ Google Sign-In Failed');
+                      }
+                    },
+                  ),
                   SizedBox(width: 16),
                   SocialIcon(imagePath: 'assets/images/facebook.png'),
                   SizedBox(width: 16),
@@ -78,5 +90,3 @@ class LoginScreen extends StatelessWidget {
     );
   }
 }
-
-
