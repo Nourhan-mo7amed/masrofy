@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:masrofy/repositories/auth_repsitories.dart';
+import 'package:masrofy/viewmodels/Auth_ViewModel.dart';
 import 'package:masrofy/widgets/Costom_TextFormField.dart';
+import 'package:provider/provider.dart';
 
 class CustomRegistrationForm extends StatefulWidget {
   const CustomRegistrationForm({super.key});
@@ -16,10 +17,20 @@ class _CustomRegistrationFormState extends State<CustomRegistrationForm> {
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPasswordController =
       TextEditingController();
-  String? name, password, email;
-  final authRepo = AuthRepository();
+
+  @override
+  void dispose() {
+    nameController.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+    confirmPasswordController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
+    final authVm = context.watch<AuthViewModel>();
+
     return Form(
       key: _globalKey,
       child: Column(
@@ -35,9 +46,6 @@ class _CustomRegistrationFormState extends State<CustomRegistrationForm> {
             hintText: 'Full Name',
             icon: Icons.person_outline,
             controller: nameController,
-            onChanged: (value) {
-              name = value;
-            },
           ),
           const SizedBox(height: 16),
 
@@ -51,9 +59,6 @@ class _CustomRegistrationFormState extends State<CustomRegistrationForm> {
             hintText: 'Email',
             icon: Icons.email_outlined,
             controller: emailController,
-            onChanged: (value) {
-              email = value;
-            },
           ),
           const SizedBox(height: 16),
 
@@ -68,9 +73,6 @@ class _CustomRegistrationFormState extends State<CustomRegistrationForm> {
             icon: Icons.lock_outline,
             isPassword: true,
             controller: passwordController,
-            onChanged: (value) {
-              password = value;
-            },
           ),
           const SizedBox(height: 16),
 
@@ -94,46 +96,58 @@ class _CustomRegistrationFormState extends State<CustomRegistrationForm> {
             height: 50,
             width: double.infinity,
             child: ElevatedButton(
-              onPressed: () {
-                if (_globalKey.currentState!.validate()) {
-                  if (passwordController.text ==
-                      confirmPasswordController.text) {
-                    print("✅ Registered Successfully");
-                    print("Name: $name");
-                    print("Email: $email");
+              onPressed: authVm.isLoading
+                  ? null
+                  : () async {
+                      if (_globalKey.currentState!.validate()) {
+                        if (passwordController.text ==
+                            confirmPasswordController.text) {
+                          print("✅ Registered Successfully");
+                          print("Name: ${nameController.text}");
+                          print("Email: ${emailController.text}");
+                          final errorMessage = await authVm.signUp(
+                            nameController.text.trim(),
+                            emailController.text.trim(),
+                            passwordController.text.trim(),
+                          );
 
-                    authRepo.signUp(
-                      name: name!,
-                      email: email!,
-                      password: password!,
-                    );
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        backgroundColor: Colors.green,
-                        content: Text("success")),
-                    );
-                    Navigator.pop(context);
-                  } else {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text("Passwords do not match")),
-                    );
-                  }
-                }
-              },
+                          if (errorMessage != null) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text(errorMessage)),
+                            );
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text("Registration successful"),
+                              ),
+                            );
+                            Navigator.pushReplacementNamed(context, '/login');
+                          }
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text("Passwords do not match"),
+                            ),
+                          );
+                        }
+                      }
+                    },
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xFF6155F5),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8),
                 ),
               ),
-              child: const Text(
-                "Sign Up",
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                ),
-              ),
+              child: authVm.isLoading
+                  ? const CircularProgressIndicator(color: Colors.white)
+                  : const Text(
+                      "Sign Up",
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
             ),
           ),
         ],
