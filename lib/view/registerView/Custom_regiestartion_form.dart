@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:masrofy/repositories/auth_repsitories.dart';
+import 'package:masrofy/viewmodels/Auth_ViewModel.dart';
 import 'package:masrofy/widgets/Costom_TextFormField.dart';
+import 'package:provider/provider.dart';
 
 class CustomRegistrationForm extends StatefulWidget {
   const CustomRegistrationForm({super.key});
@@ -17,7 +18,7 @@ class _CustomRegistrationFormState extends State<CustomRegistrationForm> {
   final TextEditingController confirmPasswordController =
       TextEditingController();
   String? name, password, email;
-  final authRepo = AuthRepository();
+
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -94,20 +95,32 @@ class _CustomRegistrationFormState extends State<CustomRegistrationForm> {
             height: 50,
             width: double.infinity,
             child: ElevatedButton(
-              onPressed: () {
+              onPressed: () async {
                 if (_globalKey.currentState!.validate()) {
                   if (passwordController.text ==
                       confirmPasswordController.text) {
                     print("✅ Registered Successfully");
                     print("Name: ${nameController.text}");
                     print("Email: ${emailController.text}");
-
-                    authRepo.signUp(
-                      name: name!,
-                      email: email!,
-                      password: password!,
+                    final authVm = context.read<AuthViewModel>();
+                    final errorMessage = await authVm.signUp(
+                      nameController.text.trim(),
+                      emailController.text.trim(),
+                      passwordController.text.trim(),
                     );
-                   // Navigator.pop(context);
+
+                    if (errorMessage != null) {
+                      ScaffoldMessenger.of(
+                        context,
+                      ).showSnackBar(SnackBar(content: Text(errorMessage)));
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text("Registration successful"),
+                        ),
+                      );
+                      Navigator.pushReplacementNamed(context, '/login');
+                    }
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(content: Text("Passwords do not match")),
