@@ -17,7 +17,7 @@ class _CustomRegistrationFormState extends State<CustomRegistrationForm> {
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPasswordController =
       TextEditingController();
-
+  String? name, email, password;
   @override
   void dispose() {
     nameController.dispose();
@@ -46,6 +46,9 @@ class _CustomRegistrationFormState extends State<CustomRegistrationForm> {
             hintText: 'Full Name',
             icon: Icons.person_outline,
             controller: nameController,
+            onChanged: (value) {
+              name = value;
+            },
           ),
           const SizedBox(height: 16),
 
@@ -59,6 +62,9 @@ class _CustomRegistrationFormState extends State<CustomRegistrationForm> {
             hintText: 'Email',
             icon: Icons.email_outlined,
             controller: emailController,
+            onChanged: (value) {
+              email = value;
+            },
           ),
           const SizedBox(height: 16),
 
@@ -73,6 +79,9 @@ class _CustomRegistrationFormState extends State<CustomRegistrationForm> {
             icon: Icons.lock_outline,
             isPassword: true,
             controller: passwordController,
+            onChanged: (value) {
+              password = value;
+            },
           ),
           const SizedBox(height: 16),
 
@@ -106,9 +115,9 @@ class _CustomRegistrationFormState extends State<CustomRegistrationForm> {
                           print("Name: ${nameController.text}");
                           print("Email: ${emailController.text}");
                           final errorMessage = await authVm.signUp(
-                            nameController.text.trim(),
-                            emailController.text.trim(),
-                            passwordController.text.trim(),
+                            name!,
+                            email!,
+                            password!,
                           );
 
                           if (errorMessage != null) {
