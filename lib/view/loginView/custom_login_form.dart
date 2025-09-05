@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:masrofy/repositories/auth_repsitories.dart';
+import 'package:masrofy/viewmodels/Auth_ViewModel.dart';
 import 'package:masrofy/widgets/Costom_TextFormField.dart';
+import 'package:provider/provider.dart';
 
 class CustomLoginForm extends StatefulWidget {
   const CustomLoginForm({super.key});
@@ -13,7 +15,7 @@ class _CustomLoginFormState extends State<CustomLoginForm> {
   final GlobalKey<FormState> _globalKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final repo = AuthRepository();
+
   @override
   void dispose() {
     _emailController.dispose();
@@ -29,7 +31,6 @@ class _CustomLoginFormState extends State<CustomLoginForm> {
       key: _globalKey,
       child: Column(
         children: [
-
           //email textform
           const Text(
             'Email',
@@ -81,21 +82,26 @@ class _CustomLoginFormState extends State<CustomLoginForm> {
             width: double.infinity,
             child: ElevatedButton(
               onPressed: () async {
-                if (_globalKey.currentState!.validate()) {
-                  final user = await repo.login(
-                    email: email!,
-                    password: password!,
+                final authVm = context.read<AuthViewModel>();
+                final errorMessage = await authVm.login(
+                  _emailController.text.trim(),
+                  _passwordController.text.trim(),
+                );
+                if (errorMessage == null && mounted) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      backgroundColor: Colors.green,
+                      content: Text("Login successful"),
+                    ),
                   );
-
-                  if (user != null && mounted) {
-
-                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        backgroundColor: Colors.green,
-                        content: Text("success")),
-                    );
-                    Navigator.pushReplacementNamed(context, '/home');
-                  }
+                  Navigator.pushReplacementNamed(context, '/home');
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      backgroundColor: Colors.red,
+                      content: Text(errorMessage ?? "Login failed"),
+                    ),
+                  );
                 }
               },
               style: ElevatedButton.styleFrom(
