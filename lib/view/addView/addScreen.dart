@@ -11,10 +11,7 @@ class AddScreen extends StatelessWidget {
         preferredSize: Size.fromHeight(40),
         child: AppBar(
           centerTitle: true,
-          title: const Text(
-            "Add",
-            style: TextStyle(fontWeight: FontWeight.bold),
-          ),
+          title: Text("Add", style: TextStyle(fontWeight: FontWeight.bold)),
           leading: IconButton(
             icon: Icon(Icons.arrow_back),
             onPressed: () {
@@ -23,7 +20,6 @@ class AddScreen extends StatelessWidget {
           ),
         ),
       ),
-      backgroundColor: Colors.white,
       body: Padding(
         padding: EdgeInsets.all(16.0),
         child: Column(

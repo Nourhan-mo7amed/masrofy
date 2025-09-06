@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import '../../widgets/profilecard.dart';
-import '../../widgets/LogoutBottomSheet.dart';
+import '../../widgets/LogoutDialog.dart';
 
 class Profilescreen extends StatelessWidget {
   const Profilescreen({super.key});
 
-  void _showLogoutSheet(BuildContext context) {
-    showModalBottomSheet(
+  void _showLogoutDialog(BuildContext context) {
+    showDialog(
       context: context,
+      barrierDismissible: false,
       builder: (context) {
-        return LogoutBottomSheet(
+        return LogoutDialog(
           onConfirm: () {
             Navigator.pushNamed(context, '/login');
           },
@@ -58,8 +59,11 @@ class Profilescreen extends StatelessWidget {
               children: [
                 ProfileCard(
                   icon: Icons.account_circle,
-                  text: "Account Info",
+                  text: "Edit Profile",
                   color: Colors.purple,
+                  onTap: () {
+                    Navigator.pushNamed(context, '/editprofile');
+                  },
                 ),
                 const SizedBox(height: 10),
 
@@ -81,13 +85,22 @@ class Profilescreen extends StatelessWidget {
                     Navigator.pushNamed(context, '/settings');
                   },
                 ),
+                const SizedBox(height: 10),
+                ProfileCard(
+                  icon: Icons.help_outline_outlined,
+                  text: "Help",
+                  color: Color.fromARGB(255, 33, 130, 240),
+                  onTap: () {
+                    Navigator.pushNamed(context, '/help');
+                  },
+                ),
 
                 const SizedBox(height: 10),
                 ProfileCard(
                   icon: Icons.logout,
                   text: "Logout",
                   color: Color(0xFFFF0000),
-                  onTap: () => _showLogoutSheet(context),
+                  onTap: () => _showLogoutDialog(context),
                 ),
                 const SizedBox(height: 20),
               ],

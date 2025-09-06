@@ -44,17 +44,11 @@ class _HomeScreenState extends State<HomeScreen> {
         children: [
           Padding(
             padding: EdgeInsets.all(8.0),
-            child: Row(
-              children: [
-                IconButton(onPressed: () {}, icon: Icon(Icons.list, size: 30)),
-                SizedBox(width: 90),
-                Center(
-                  child: Text(
-                    "Home",
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                  ),
-                ),
-              ],
+            child: Center(
+              child: Text(
+                "Home",
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
             ),
           ),
           Container(

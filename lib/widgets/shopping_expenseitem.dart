@@ -17,8 +17,10 @@ class ShoppingExpenseitem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      color: Colors.white,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       margin: EdgeInsets.symmetric(vertical: 8),
+      elevation: 0,
       child: ListTile(
         leading: Container(
           width: 40,
@@ -29,12 +31,19 @@ class ShoppingExpenseitem extends StatelessWidget {
           ),
           child: Icon(Icons.attach_money, color: Colors.grey, size: 22),
         ),
-        title: Text(title,
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
+        title: Text(
+          title,
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+        ),
         subtitle: Text(date, style: TextStyle(fontSize: 12)),
-        trailing: Text(amount,
-            style: TextStyle(
-                color: color, fontWeight: FontWeight.bold, fontSize: 14)),
+        trailing: Text(
+          amount,
+          style: TextStyle(
+            color: color,
+            fontWeight: FontWeight.bold,
+            fontSize: 14,
+          ),
+        ),
       ),
     );
   }

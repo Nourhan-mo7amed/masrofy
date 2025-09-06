@@ -20,6 +20,11 @@ import '../../view/foodView/foodscreen.dart';
 import '../../view/anotherView/AnotherScreen.dart';
 import '../../view/privacypolicyView/privacypolicyScreen.dart';
 import '../../view/settingsView/settingScreen.dart';
+import '../../view/feedbackView/feedbackScreen.dart';
+import '../../view/editprofileView/editprofileScreen.dart';
+import '../../view/helpView/helpScreen.dart';
+import '../../view/aboutView/aboutScreen.dart';
+import '../../view/passwordManagerView/passwordmanagerScreen.dart';
 
 class AppRoutes {
   static const String splash = '/';
@@ -43,7 +48,11 @@ class AppRoutes {
   static const String another = '/another';
   static const String privacypolicy = '/privacypolicy';
   static const String settings = '/settings';
-
+  static const String feedback = '/feedback';
+  static const String editprofile = '/editprofile';
+  static const String help = '/help';
+  static const String about = '/about';
+  static const String passwordManager = '/passwordManager';
 
   static Map<String, WidgetBuilder> routes = {
     splash: (context) => const SplashScreen(),
@@ -67,6 +76,10 @@ class AppRoutes {
     another: (context) => const AnotherScreen(),
     privacypolicy: (context) => const PrivacyPolicyScreen(),
     settings: (context) => const SettingsScreen(),
-
+    feedback: (context) => const FeedbackScreen(),
+    editprofile: (context) => const EditProfileScreen(),
+    help: (context) => const HelpScreen(),
+    about: (context) => const AboutScreen(),
+    passwordManager: (context) => PasswordManager(),
   };
 }

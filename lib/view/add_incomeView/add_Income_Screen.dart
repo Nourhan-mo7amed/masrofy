@@ -23,7 +23,6 @@ class _AddIncomeScreen extends State<AddIncomeScreen> {
         ),
         centerTitle: true,
       ),
-      backgroundColor: Colors.white,
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.all(20.0),
@@ -31,8 +30,10 @@ class _AddIncomeScreen extends State<AddIncomeScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("Expense Title",
-                    style: TextStyle(fontWeight: FontWeight.bold)),
+                Text(
+                  "Expense Title",
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
                 SizedBox(height: 10),
                 TextField(
                   controller: _titleController,
@@ -50,8 +51,10 @@ class _AddIncomeScreen extends State<AddIncomeScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text("Amount",
-                              style: TextStyle(fontWeight: FontWeight.bold)),
+                          Text(
+                            "Amount",
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
                           SizedBox(height: 10),
                           TextField(
                             controller: _amountController,
@@ -72,8 +75,10 @@ class _AddIncomeScreen extends State<AddIncomeScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text("Select Date",
-                              style: TextStyle(fontWeight: FontWeight.bold)),
+                          Text(
+                            "Select Date",
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
                           SizedBox(height: 10),
                           TextField(
                             controller: _dateController,
@@ -133,11 +138,13 @@ class _AddIncomeScreen extends State<AddIncomeScreen> {
                     onPressed: () {},
                     child: Text(
                       "Save",
-                      style:
-                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
-                )
+                ),
               ],
             ),
           ),
@@ -159,7 +166,7 @@ class _AddIncomeScreen extends State<AddIncomeScreen> {
       "september",
       "october",
       "november",
-      "december"
+      "december",
     ];
     return months[month - 1];
   }

@@ -31,7 +31,6 @@ class _AddExpenseScreen extends State<AddExpenseScreen> {
         ),
         centerTitle: true,
       ),
-      backgroundColor: Colors.white,
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.all(20.0),
@@ -39,8 +38,10 @@ class _AddExpenseScreen extends State<AddExpenseScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("Expense Title",
-                    style: TextStyle(fontWeight: FontWeight.bold)),
+                Text(
+                  "Expense Title",
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
                 SizedBox(height: 5),
                 TextField(
                   controller: _titleController,
@@ -103,8 +104,10 @@ class _AddExpenseScreen extends State<AddExpenseScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text("Amount",
-                              style: TextStyle(fontWeight: FontWeight.bold)),
+                          Text(
+                            "Amount",
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
                           SizedBox(height: 10),
                           TextField(
                             controller: _amountController,
@@ -126,8 +129,10 @@ class _AddExpenseScreen extends State<AddExpenseScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text("Select Date",
-                              style: TextStyle(fontWeight: FontWeight.bold)),
+                          Text(
+                            "Select Date",
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
                           SizedBox(height: 10),
                           TextField(
                             controller: _dateController,
@@ -187,11 +192,13 @@ class _AddExpenseScreen extends State<AddExpenseScreen> {
                     onPressed: () {},
                     child: Text(
                       "Save",
-                      style:
-                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
-                )
+                ),
               ],
             ),
           ),
@@ -213,7 +220,7 @@ class _AddExpenseScreen extends State<AddExpenseScreen> {
       "september",
       "october",
       "november",
-      "december"
+      "december",
     ];
     return months[month - 1];
   }
