@@ -111,7 +111,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get spendingQuestion => 'What do you spend most on?';
 
   @override
-  String get skip => 'Skip';
+  String get skip => 'SKIP';
 
   @override
   String get next => 'Next';
@@ -214,4 +214,16 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get signUp => 'Sign Up';
+
+  @override
+  String get monthlyBudgetTitle => 'Monthly Budget Goal';
+
+  @override
+  String get monthlyBudgetSubtitle => 'Do you have a monthly spending goal?';
+
+  @override
+  String get enterAmountHint => 'Enter amount';
+
+  @override
+  String get changeLaterNote => 'You can always change this later.';
 }

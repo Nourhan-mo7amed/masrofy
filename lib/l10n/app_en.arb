@@ -100,5 +100,12 @@
   "loginDescription": "Log in to continue managing your budget.",
   "orLoginWith": "or log in with",
   "dontHaveAccount": "Don't have an account? ",
-  "signUp": "Sign Up"
+  "signUp": "Sign Up",
+
+   "monthlyBudgetTitle": "Monthly Budget Goal",
+  "monthlyBudgetSubtitle": "Do you have a monthly spending goal?",
+  "enterAmountHint": "Enter amount",
+  "changeLaterNote": "You can always change this later.",
+  "skip": "SKIP",
+  "next": "Next"
 }

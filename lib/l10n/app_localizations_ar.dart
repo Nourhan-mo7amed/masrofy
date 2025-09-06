@@ -214,4 +214,16 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get signUp => 'إنشاء حساب';
+
+  @override
+  String get monthlyBudgetTitle => 'هدف الميزانية الشهرية';
+
+  @override
+  String get monthlyBudgetSubtitle => 'هل لديك هدف للإنفاق الشهري؟';
+
+  @override
+  String get enterAmountHint => 'أدخل المبلغ';
+
+  @override
+  String get changeLaterNote => 'يمكنك تغييره لاحقًا في أي وقت.';
 }

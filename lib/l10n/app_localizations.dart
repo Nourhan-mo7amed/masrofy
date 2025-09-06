@@ -302,7 +302,7 @@ abstract class AppLocalizations {
   /// No description provided for @skip.
   ///
   /// In en, this message translates to:
-  /// **'Skip'**
+  /// **'SKIP'**
   String get skip;
 
   /// No description provided for @next.
@@ -508,6 +508,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Sign Up'**
   String get signUp;
+
+  /// No description provided for @monthlyBudgetTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Monthly Budget Goal'**
+  String get monthlyBudgetTitle;
+
+  /// No description provided for @monthlyBudgetSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Do you have a monthly spending goal?'**
+  String get monthlyBudgetSubtitle;
+
+  /// No description provided for @enterAmountHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter amount'**
+  String get enterAmountHint;
+
+  /// No description provided for @changeLaterNote.
+  ///
+  /// In en, this message translates to:
+  /// **'You can always change this later.'**
+  String get changeLaterNote;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

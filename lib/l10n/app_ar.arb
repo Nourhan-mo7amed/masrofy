@@ -100,7 +100,14 @@
   "loginDescription": "سجّل الدخول لمتابعة إدارة ميزانيتك.",
   "orLoginWith": "أو سجّل الدخول باستخدام",
   "dontHaveAccount": "ليس لديك حساب؟ ",
-  "signUp": "إنشاء حساب"
+  "signUp": "إنشاء حساب",
+
+   "monthlyBudgetTitle": "هدف الميزانية الشهرية",
+  "monthlyBudgetSubtitle": "هل لديك هدف للإنفاق الشهري؟",
+  "enterAmountHint": "أدخل المبلغ",
+  "changeLaterNote": "يمكنك تغييره لاحقًا في أي وقت.",
+  "skip": "تخطي",
+  "next": "التالي"
 
 
 }
