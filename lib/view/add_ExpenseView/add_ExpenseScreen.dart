@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:masrofy/l10n/app_localizations.dart';
+// import 'lib/l10n/app_localizations.dart'; // generated with flutter gen-l10n
 
 class AddExpenseScreen extends StatefulWidget {
+  const AddExpenseScreen({super.key});
+
   @override
-  _AddExpenseScreen createState() => _AddExpenseScreen();
+  State<AddExpenseScreen> createState() => _AddExpenseScreenState();
 }
 
-class _AddExpenseScreen extends State<AddExpenseScreen> {
+class _AddExpenseScreenState extends State<AddExpenseScreen> {
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _dateController = TextEditingController();
   final TextEditingController _notesController = TextEditingController();
@@ -23,43 +27,45 @@ class _AddExpenseScreen extends State<AddExpenseScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Add Expens",
-          style: TextStyle(fontWeight: FontWeight.bold),
+          l10n.addExpense,
+          style: const TextStyle(fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
       ),
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.all(20.0),
+          padding: const EdgeInsets.all(20.0),
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("Expense Title",
-                    style: TextStyle(fontWeight: FontWeight.bold)),
-                SizedBox(height: 5),
+                Text(l10n.expenseTitle,
+                    style: const TextStyle(fontWeight: FontWeight.bold)),
+                const SizedBox(height: 5),
                 TextField(
                   controller: _titleController,
                   decoration: InputDecoration(
-                    hintText: "Food",
+                    hintText: l10n.food,
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
-                      "Category",
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                      l10n.category,
+                      style: const TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    SizedBox(width: 15),
+                    const SizedBox(width: 15),
                     Row(
                       children: List.generate(categories.length, (index) {
                         final List<Color> colors = [
@@ -76,8 +82,8 @@ class _AddExpenseScreen extends State<AddExpenseScreen> {
                             });
                           },
                           child: Container(
-                            margin: EdgeInsets.only(right: 12),
-                            padding: EdgeInsets.all(12),
+                            margin: const EdgeInsets.only(right: 12),
+                            padding: const EdgeInsets.all(12),
                             decoration: BoxDecoration(
                               color: selectedCategory == index
                                   ? colors[index].withOpacity(0.2)
@@ -96,21 +102,23 @@ class _AddExpenseScreen extends State<AddExpenseScreen> {
                     ),
                   ],
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Row(
                   children: [
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text("Amount",
-                              style: TextStyle(fontWeight: FontWeight.bold)),
-                          SizedBox(height: 10),
+                          Text(l10n.amount,
+                              style:
+                                  const TextStyle(fontWeight: FontWeight.bold)),
+                          const SizedBox(height: 10),
                           TextField(
                             controller: _amountController,
                             keyboardType: TextInputType.number,
                             decoration: InputDecoration(
-                              prefixIcon: Icon(Icons.attach_money, size: 20),
+                              prefixIcon:
+                                  const Icon(Icons.attach_money, size: 20),
                               hintText: "\$ 2000",
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(12),
@@ -120,22 +128,22 @@ class _AddExpenseScreen extends State<AddExpenseScreen> {
                         ],
                       ),
                     ),
-                    SizedBox(width: 15),
-
+                    const SizedBox(width: 15),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text("Select Date",
-                              style: TextStyle(fontWeight: FontWeight.bold)),
-                          SizedBox(height: 10),
+                          Text(l10n.selectDate,
+                              style:
+                                  const TextStyle(fontWeight: FontWeight.bold)),
+                          const SizedBox(height: 10),
                           TextField(
                             controller: _dateController,
                             readOnly: true,
                             onTap: () async {
                               DateTime? pickedDate = await showDatePicker(
                                 context: context,
-                                initialDate: DateTime(2025, 7, 22),
+                                initialDate: DateTime.now(),
                                 firstDate: DateTime(2000),
                                 lastDate: DateTime(2100),
                               );
@@ -143,13 +151,14 @@ class _AddExpenseScreen extends State<AddExpenseScreen> {
                                 setState(() {
                                   selectedDate = pickedDate;
                                   _dateController.text =
-                                      "${pickedDate.day} ${_monthName(pickedDate.month)} ${pickedDate.year}";
+                                      "${pickedDate.day} ${_monthName(context, pickedDate.month)} ${pickedDate.year}";
                                 });
                               }
                             },
                             decoration: InputDecoration(
-                              prefixIcon: Icon(Icons.calendar_today, size: 20),
-                              hintText: "22 july 2025",
+                              prefixIcon:
+                                  const Icon(Icons.calendar_today, size: 20),
+                              hintText: l10n.july,
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(12),
                               ),
@@ -160,9 +169,10 @@ class _AddExpenseScreen extends State<AddExpenseScreen> {
                     ),
                   ],
                 ),
-                SizedBox(height: 20),
-                Text("Notes", style: TextStyle(fontWeight: FontWeight.bold)),
-                SizedBox(height: 10),
+                const SizedBox(height: 20),
+                Text(l10n.notes,
+                    style: const TextStyle(fontWeight: FontWeight.bold)),
+                const SizedBox(height: 10),
                 TextField(
                   controller: _notesController,
                   maxLines: 5,
@@ -172,23 +182,25 @@ class _AddExpenseScreen extends State<AddExpenseScreen> {
                     ),
                   ),
                 ),
-                SizedBox(height: 70),
+                const SizedBox(height: 70),
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      padding: EdgeInsets.symmetric(vertical: 15),
-                      backgroundColor: Color(0xFF6C63FF),
+                      padding: const EdgeInsets.symmetric(vertical: 15),
+                      backgroundColor: const Color(0xFF6C63FF),
                       foregroundColor: Colors.white,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      // TODO: handle save
+                    },
                     child: Text(
-                      "Save",
-                      style:
-                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                      l10n.save,
+                      style: const TextStyle(
+                          fontSize: 16, fontWeight: FontWeight.bold),
                     ),
                   ),
                 )
@@ -200,20 +212,22 @@ class _AddExpenseScreen extends State<AddExpenseScreen> {
     );
   }
 
-  String _monthName(int month) {
-    const months = [
-      "january",
-      "february",
-      "march",
-      "april",
-      "may",
-      "june",
-      "july",
-      "august",
-      "september",
-      "october",
-      "november",
-      "december"
+  /// Helper: get localized month name
+  String _monthName(BuildContext context, int month) {
+    final l10n = AppLocalizations.of(context)!;
+    final months = [
+      l10n.january,
+      l10n.february,
+      l10n.march,
+      l10n.april,
+      l10n.may,
+      l10n.june,
+      l10n.july,
+      l10n.august,
+      l10n.september,
+      l10n.october,
+      l10n.november,
+      l10n.december,
     ];
     return months[month - 1];
   }
