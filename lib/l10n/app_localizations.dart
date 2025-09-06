@@ -436,6 +436,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Reduce waste and watch your savings grow effortlessly.'**
   String get page3Subtitle;
+
+  /// No description provided for @appName.
+  ///
+  /// In en, this message translates to:
+  /// **'Masrofy'**
+  String get appName;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

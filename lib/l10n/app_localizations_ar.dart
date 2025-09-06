@@ -178,4 +178,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get page3Subtitle => 'قلل الهدر وشاهد مدخراتك تنمو بسهولة.';
+
+  @override
+  String get appName => 'مصروفي';
 }

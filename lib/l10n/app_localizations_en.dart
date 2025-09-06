@@ -178,4 +178,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get page3Subtitle => 'Reduce waste and watch your savings grow effortlessly.';
+
+  @override
+  String get appName => 'Masrofy';
 }

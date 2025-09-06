@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+// import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:masrofy/l10n/app_localizations.dart';
 import '../../core/constants/colors_app.dart';
 import 'onbording screens/onbording.dart';
 
@@ -10,7 +12,6 @@ class SplashScreen extends StatefulWidget {
   @override
   State<SplashScreen> createState() => _SplashScreenState();
 }
-
 
 class _SplashScreenState extends State<SplashScreen> {
   double _opacity = 0.0;
@@ -34,6 +35,8 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
+
     return Scaffold(
       backgroundColor: AppColors.background,
       body: Center(
@@ -44,9 +47,9 @@ class _SplashScreenState extends State<SplashScreen> {
             AnimatedOpacity(
               duration: const Duration(seconds: 2),
               opacity: _opacity,
-              child: const Text(
-                "Masrofy",
-                style: TextStyle(
+              child: Text(
+                loc.appName,
+                style: const TextStyle(
                   fontSize: 50,
                   fontWeight: FontWeight.bold,
                   color: Colors.black,
