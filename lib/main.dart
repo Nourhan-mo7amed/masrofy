@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:masrofy/viewmodels/Auth_ViewModel.dart';
 import 'package:masrofy/viewmodels/category_viewModel.dart';
+import 'package:masrofy/viewmodels/transaction_viewModel.dart';
 import 'package:provider/provider.dart';
 import 'core/routes/routes.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -12,7 +13,11 @@ void main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(
     MultiProvider(
-      providers: [ChangeNotifierProvider(create: (_) => CategoryView())],
+      providers: [
+        ChangeNotifierProvider(create: (_) => AuthViewModel()),
+        ChangeNotifierProvider(create: (_) => CategoryView()),
+        ChangeNotifierProvider(create: (_) => TransactionViewmodel()),
+      ],
       child: const MyApp(),
     ),
   );
@@ -23,13 +28,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [ChangeNotifierProvider(create: (_) => AuthViewModel())],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        initialRoute: AppRoutes.splash,
-        routes: AppRoutes.routes,
-      ),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      initialRoute: AppRoutes.splash,
+      routes: AppRoutes.routes,
     );
   }
 }
