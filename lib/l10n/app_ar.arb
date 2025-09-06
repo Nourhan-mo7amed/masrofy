@@ -38,5 +38,9 @@
   "seeAll": "عرض الكل",
   "food": "طعام",
   "payToEmployees": "دفع للموظفين",
-  "healthExpenditures": "المصروفات الصحية"
+  "healthExpenditures": "المصروفات الصحية",
+
+  "allTransactions": "جميع المعاملات",
+  "expenses": "المصروفات",
+  "income": "الدخل"
 }

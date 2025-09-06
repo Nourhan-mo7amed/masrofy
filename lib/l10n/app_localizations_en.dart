@@ -91,4 +91,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get healthExpenditures => 'Health Expenditures';
+
+  @override
+  String get allTransactions => 'All Transactions';
+
+  @override
+  String get expenses => 'Expenses';
+
+  @override
+  String get income => 'Income';
 }

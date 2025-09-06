@@ -38,5 +38,9 @@
   "seeAll": "See All",
   "food": "Food",
   "payToEmployees": "Pay to Employees",
-  "healthExpenditures": "Health Expenditures"
+  "healthExpenditures": "Health Expenditures",
+
+   "allTransactions": "All Transactions",
+  "expenses": "Expenses",
+  "income": "Income"  
 }

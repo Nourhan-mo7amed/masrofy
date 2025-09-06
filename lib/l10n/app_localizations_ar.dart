@@ -91,4 +91,13 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get healthExpenditures => 'المصروفات الصحية';
+
+  @override
+  String get allTransactions => 'جميع المعاملات';
+
+  @override
+  String get expenses => 'المصروفات';
+
+  @override
+  String get income => 'الدخل';
 }
