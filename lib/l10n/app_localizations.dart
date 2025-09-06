@@ -592,6 +592,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'We do not sell or share your personal data with third parties. Data may only be shared if required by law.'**
   String get dataSharingDetails;
+
+  /// No description provided for @accountInfo.
+  ///
+  /// In en, this message translates to:
+  /// **'Account Info'**
+  String get accountInfo;
+
+  /// No description provided for @privacyPolicy.
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy Policy'**
+  String get privacyPolicy;
+
+  /// No description provided for @settings.
+  ///
+  /// In en, this message translates to:
+  /// **'Settings'**
+  String get settings;
+
+  /// No description provided for @logout.
+  ///
+  /// In en, this message translates to:
+  /// **'Logout'**
+  String get logout;
+
+  /// No description provided for @userName.
+  ///
+  /// In en, this message translates to:
+  /// **'Ahmed Hamdy'**
+  String get userName;
+
+  /// No description provided for @userEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'ahmed.hamdy@gmail.com'**
+  String get userEmail;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

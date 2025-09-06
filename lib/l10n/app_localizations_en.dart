@@ -256,4 +256,22 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get dataSharingDetails => 'We do not sell or share your personal data with third parties. Data may only be shared if required by law.';
+
+  @override
+  String get accountInfo => 'Account Info';
+
+  @override
+  String get privacyPolicy => 'Privacy Policy';
+
+  @override
+  String get settings => 'Settings';
+
+  @override
+  String get logout => 'Logout';
+
+  @override
+  String get userName => 'Ahmed Hamdy';
+
+  @override
+  String get userEmail => 'ahmed.hamdy@gmail.com';
 }

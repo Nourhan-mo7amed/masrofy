@@ -256,4 +256,22 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get dataSharingDetails => 'نحن لا نبيع أو نشارك بياناتك الشخصية مع أطراف ثالثة. قد يتم مشاركة البيانات فقط إذا طلب القانون ذلك.';
+
+  @override
+  String get accountInfo => 'معلومات الحساب';
+
+  @override
+  String get privacyPolicy => 'سياسة الخصوصية';
+
+  @override
+  String get settings => 'الإعدادات';
+
+  @override
+  String get logout => 'تسجيل الخروج';
+
+  @override
+  String get userName => 'أحمد حمدي';
+
+  @override
+  String get userEmail => 'ahmed.hamdy@gmail.com';
 }

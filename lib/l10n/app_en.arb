@@ -118,5 +118,12 @@
   "storageAndSecurity": "Storage & Security",
   "storageAndSecurityDetails": "• Your data is saved on your device (offline mode).\n• If you enable cloud sync, data is stored securely on Firebase servers.\n• We take reasonable steps to protect your information from unauthorized access.",
   "dataSharing": "Data Sharing",
-  "dataSharingDetails": "We do not sell or share your personal data with third parties. Data may only be shared if required by law."
+  "dataSharingDetails": "We do not sell or share your personal data with third parties. Data may only be shared if required by law.",
+
+  "accountInfo": "Account Info",
+  "privacyPolicy": "Privacy Policy",
+  "settings": "Settings",
+  "logout": "Logout",
+  "userName": "Ahmed Hamdy",
+  "userEmail": "ahmed.hamdy@gmail.com"
 }
