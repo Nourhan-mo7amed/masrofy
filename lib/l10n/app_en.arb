@@ -72,5 +72,16 @@
   "shopping": "Shopping",
   "subscriptions": "Subscriptions",
   "food": "Food",
-  "another": "Another"
+  "another": "Another",
+
+   "back": "Back",
+  "skip": "Skip",
+  "next": "Next",
+  "getStarted": "Get Started",
+  "page1Title": "Your Budget, Your Rules",
+  "page1Subtitle": "Easily track your expenses, plan your budget, and achieve your financial goals.",
+  "page2Title": "Track Your Spending",
+  "page2Subtitle": "Easily record your daily expenses and stay on top of your budget.",
+  "page3Title": "Save Smarter",
+  "page3Subtitle": "Reduce waste and watch your savings grow effortlessly."
 }

@@ -111,7 +111,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get spendingQuestion => 'What do you spend most on?';
 
   @override
-  String get skip => 'SKIP';
+  String get skip => 'Skip';
 
   @override
   String get next => 'Next';
@@ -154,4 +154,28 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get subscriptions => 'Subscriptions';
+
+  @override
+  String get back => 'Back';
+
+  @override
+  String get getStarted => 'Get Started';
+
+  @override
+  String get page1Title => 'Your Budget, Your Rules';
+
+  @override
+  String get page1Subtitle => 'Easily track your expenses, plan your budget, and achieve your financial goals.';
+
+  @override
+  String get page2Title => 'Track Your Spending';
+
+  @override
+  String get page2Subtitle => 'Easily record your daily expenses and stay on top of your budget.';
+
+  @override
+  String get page3Title => 'Save Smarter';
+
+  @override
+  String get page3Subtitle => 'Reduce waste and watch your savings grow effortlessly.';
 }

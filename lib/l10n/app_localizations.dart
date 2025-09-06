@@ -302,7 +302,7 @@ abstract class AppLocalizations {
   /// No description provided for @skip.
   ///
   /// In en, this message translates to:
-  /// **'SKIP'**
+  /// **'Skip'**
   String get skip;
 
   /// No description provided for @next.
@@ -388,6 +388,54 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Subscriptions'**
   String get subscriptions;
+
+  /// No description provided for @back.
+  ///
+  /// In en, this message translates to:
+  /// **'Back'**
+  String get back;
+
+  /// No description provided for @getStarted.
+  ///
+  /// In en, this message translates to:
+  /// **'Get Started'**
+  String get getStarted;
+
+  /// No description provided for @page1Title.
+  ///
+  /// In en, this message translates to:
+  /// **'Your Budget, Your Rules'**
+  String get page1Title;
+
+  /// No description provided for @page1Subtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Easily track your expenses, plan your budget, and achieve your financial goals.'**
+  String get page1Subtitle;
+
+  /// No description provided for @page2Title.
+  ///
+  /// In en, this message translates to:
+  /// **'Track Your Spending'**
+  String get page2Title;
+
+  /// No description provided for @page2Subtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Easily record your daily expenses and stay on top of your budget.'**
+  String get page2Subtitle;
+
+  /// No description provided for @page3Title.
+  ///
+  /// In en, this message translates to:
+  /// **'Save Smarter'**
+  String get page3Title;
+
+  /// No description provided for @page3Subtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Reduce waste and watch your savings grow effortlessly.'**
+  String get page3Subtitle;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

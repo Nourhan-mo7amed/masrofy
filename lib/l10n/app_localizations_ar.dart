@@ -154,4 +154,28 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get subscriptions => 'الاشتراكات';
+
+  @override
+  String get back => 'رجوع';
+
+  @override
+  String get getStarted => 'ابدأ الآن';
+
+  @override
+  String get page1Title => 'ميزانيتك، قواعدك';
+
+  @override
+  String get page1Subtitle => 'تتبع مصروفاتك بسهولة، خطط ميزانيتك، وحقق أهدافك المالية.';
+
+  @override
+  String get page2Title => 'تتبع مصروفاتك';
+
+  @override
+  String get page2Subtitle => 'سجل مصروفاتك اليومية بسهولة وابقَ على اطلاع بميزانيتك.';
+
+  @override
+  String get page3Title => 'ادخر بذكاء';
+
+  @override
+  String get page3Subtitle => 'قلل الهدر وشاهد مدخراتك تنمو بسهولة.';
 }
