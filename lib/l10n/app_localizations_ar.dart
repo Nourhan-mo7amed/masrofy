@@ -346,4 +346,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get startBudgeting => 'ابدأ الميزانية';
+
+  @override
+  String get shoppingTitle => 'التسوق';
 }

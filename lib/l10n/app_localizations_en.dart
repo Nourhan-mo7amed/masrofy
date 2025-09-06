@@ -346,4 +346,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get startBudgeting => 'Start Budgeting';
+
+  @override
+  String get shoppingTitle => 'Shopping';
 }

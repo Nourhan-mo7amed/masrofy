@@ -155,5 +155,10 @@
 
    "setupCompleteTitle": "Setup complete!",
   "setupCompleteSubtitle": "You can now start tracking and organizing your expenses",
-  "startBudgeting": "Start Budgeting"
+  "startBudgeting": "Start Budgeting",
+
+   "shoppingTitle": "Shopping",
+  "food": "Food",
+  "payToEmployees": "Pay to Employees",
+  "healthExpenditures": "Health Expenditures"
 }

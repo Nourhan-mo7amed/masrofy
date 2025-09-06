@@ -155,7 +155,12 @@
 
   "setupCompleteTitle": "تم إعداد التطبيق!",
   "setupCompleteSubtitle": "يمكنك الآن البدء في متابعة وتنظيم مصاريفك",
-  "startBudgeting": "ابدأ الميزانية"
+  "startBudgeting": "ابدأ الميزانية",
+
+   "shoppingTitle": "التسوق",
+  "food": "طعام",
+  "payToEmployees": "دفع للموظفين",
+  "healthExpenditures": "نفقات صحية"
 
 
 }

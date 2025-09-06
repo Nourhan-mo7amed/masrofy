@@ -772,6 +772,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Start Budgeting'**
   String get startBudgeting;
+
+  /// No description provided for @shoppingTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Shopping'**
+  String get shoppingTitle;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
