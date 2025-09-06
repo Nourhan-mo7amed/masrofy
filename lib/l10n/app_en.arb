@@ -56,5 +56,11 @@
 
     "foodTitle": "Food",
   "payToEmployeesTitle": "Pay to Employees",
-  "healthExpendituresTitle": "Health Expenditures"
+  "healthExpendituresTitle": "Health Expenditures",
+
+   "forgotPasswordTitle": "Forgot Password",
+  "forgotPasswordSubtitle": "Enter your email address and we'll send you a code to reset your password.",
+  "emailLabel": "Email",
+  "emailHint": "Enter your email",
+  "sendResetLink": "Send Reset Link"
 }

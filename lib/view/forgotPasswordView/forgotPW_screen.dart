@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:masrofy/l10n/app_localizations.dart';
+// import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../widgets/Custom_TextField.dart';
 
 class ForgotPasswordScreen extends StatelessWidget {
@@ -6,6 +8,9 @@ class ForgotPasswordScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
+    final emailController = TextEditingController();
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -17,29 +22,30 @@ class ForgotPasswordScreen extends StatelessWidget {
               const SizedBox(height: 32),
 
               // Title
-              const Text(
-                "Forgot Password",
-                style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+              Text(
+                loc.forgotPasswordTitle,
+                style: const TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 8),
-              const Text(
-                "Enter your email address and we'll send you a code to reset your password.",
-                style: TextStyle(fontSize: 14, color: Colors.black54),
+              Text(
+                loc.forgotPasswordSubtitle,
+                style: const TextStyle(fontSize: 14, color: Colors.black54),
               ),
 
               const SizedBox(height: 32),
 
               // Email label
-              const Text(
-                'Email',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+              Text(
+                loc.emailLabel,
+                style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
               ),
               const SizedBox(height: 8),
 
               // Email field
-              const CustomTextField(
-                hintText: 'Enter your email',
-                icon: Icons.email_outlined, controller: null,//error null!!!!!
+              CustomTextField(
+                hintText: loc.emailHint,
+                icon: Icons.email_outlined,
+                controller: emailController,
               ),
 
               const SizedBox(height: 35),
@@ -50,6 +56,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () {
+                    // Handle reset action
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF6155F5),
@@ -57,9 +64,9 @@ class ForgotPasswordScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(8),
                     ),
                   ),
-                  child: const Text(
-                    "Send Reset Link",
-                    style: TextStyle(
+                  child: Text(
+                    loc.sendResetLink,
+                    style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
                       color: Colors.white,

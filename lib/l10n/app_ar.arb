@@ -56,7 +56,13 @@
 
    "foodTitle": "طعام",
   "payToEmployeesTitle": "دفع للموظفين",
-  "healthExpendituresTitle": "النفقات الصحية"
+  "healthExpendituresTitle": "النفقات الصحية",
+
+   "forgotPasswordTitle": "نسيت كلمة المرور",
+  "forgotPasswordSubtitle": "أدخل بريدك الإلكتروني وسنرسل لك رمزًا لإعادة تعيين كلمة المرور.",
+  "emailLabel": "البريد الإلكتروني",
+  "emailHint": "أدخل بريدك الإلكتروني",
+  "sendResetLink": "إرسال رابط إعادة التعيين"
 
 
 }

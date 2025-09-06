@@ -124,4 +124,19 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get healthExpendituresTitle => 'النفقات الصحية';
+
+  @override
+  String get forgotPasswordTitle => 'نسيت كلمة المرور';
+
+  @override
+  String get forgotPasswordSubtitle => 'أدخل بريدك الإلكتروني وسنرسل لك رمزًا لإعادة تعيين كلمة المرور.';
+
+  @override
+  String get emailLabel => 'البريد الإلكتروني';
+
+  @override
+  String get emailHint => 'أدخل بريدك الإلكتروني';
+
+  @override
+  String get sendResetLink => 'إرسال رابط إعادة التعيين';
 }

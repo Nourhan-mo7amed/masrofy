@@ -124,4 +124,19 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get healthExpendituresTitle => 'Health Expenditures';
+
+  @override
+  String get forgotPasswordTitle => 'Forgot Password';
+
+  @override
+  String get forgotPasswordSubtitle => 'Enter your email address and we\'ll send you a code to reset your password.';
+
+  @override
+  String get emailLabel => 'Email';
+
+  @override
+  String get emailHint => 'Enter your email';
+
+  @override
+  String get sendResetLink => 'Send Reset Link';
 }
