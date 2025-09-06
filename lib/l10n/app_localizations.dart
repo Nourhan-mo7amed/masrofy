@@ -310,6 +310,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Next'**
   String get next;
+
+  /// No description provided for @foodTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Food'**
+  String get foodTitle;
+
+  /// No description provided for @payToEmployeesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Pay to Employees'**
+  String get payToEmployeesTitle;
+
+  /// No description provided for @healthExpendituresTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Health Expenditures'**
+  String get healthExpendituresTitle;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

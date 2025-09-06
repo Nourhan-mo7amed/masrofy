@@ -115,4 +115,13 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get next => 'التالي';
+
+  @override
+  String get foodTitle => 'طعام';
+
+  @override
+  String get payToEmployeesTitle => 'دفع للموظفين';
+
+  @override
+  String get healthExpendituresTitle => 'النفقات الصحية';
 }

@@ -115,4 +115,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get next => 'Next';
+
+  @override
+  String get foodTitle => 'Food';
+
+  @override
+  String get payToEmployeesTitle => 'Pay to Employees';
+
+  @override
+  String get healthExpendituresTitle => 'Health Expenditures';
 }

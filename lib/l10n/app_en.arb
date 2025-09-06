@@ -52,5 +52,9 @@
    "spendingCategories": "Spending Categories",
   "spendingQuestion": "What do you spend most on?",
   "skip": "SKIP",
-  "next": "Next"
+  "next": "Next",
+
+    "foodTitle": "Food",
+  "payToEmployeesTitle": "Pay to Employees",
+  "healthExpendituresTitle": "Health Expenditures"
 }

@@ -52,7 +52,11 @@
   "spendingCategories": "فئات الإنفاق",
   "spendingQuestion": "ما الذي تنفق عليه أكثر؟",
   "skip": "تخطي",
-  "next": "التالي"
+  "next": "التالي",
+
+   "foodTitle": "طعام",
+  "payToEmployeesTitle": "دفع للموظفين",
+  "healthExpendituresTitle": "النفقات الصحية"
 
 
 }
