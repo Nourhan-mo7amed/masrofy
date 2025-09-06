@@ -532,6 +532,66 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'You can always change this later.'**
   String get changeLaterNote;
+
+  /// No description provided for @privacyPolicyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy Policy'**
+  String get privacyPolicyTitle;
+
+  /// No description provided for @privacyIntro.
+  ///
+  /// In en, this message translates to:
+  /// **'We value your privacy and want you to feel safe while using our app.'**
+  String get privacyIntro;
+
+  /// No description provided for @whatWeCollect.
+  ///
+  /// In en, this message translates to:
+  /// **'What We Collect'**
+  String get whatWeCollect;
+
+  /// No description provided for @whatWeCollectDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'• Basic information you provide such as expenses, notes, and uploaded receipts.\n• Optional account details like email (if you sign up).\n• No sensitive banking or card details are collected.'**
+  String get whatWeCollectDetails;
+
+  /// No description provided for @howWeUseData.
+  ///
+  /// In en, this message translates to:
+  /// **'How We Use Data'**
+  String get howWeUseData;
+
+  /// No description provided for @howWeUseDataDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'• To help you record and organize your daily expenses.\n• To create reports and charts that show your spending.\n• To let you save receipts and link them to your records.\n• To sync your data across devices (if you use cloud backup - Firebase).'**
+  String get howWeUseDataDetails;
+
+  /// No description provided for @storageAndSecurity.
+  ///
+  /// In en, this message translates to:
+  /// **'Storage & Security'**
+  String get storageAndSecurity;
+
+  /// No description provided for @storageAndSecurityDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'• Your data is saved on your device (offline mode).\n• If you enable cloud sync, data is stored securely on Firebase servers.\n• We take reasonable steps to protect your information from unauthorized access.'**
+  String get storageAndSecurityDetails;
+
+  /// No description provided for @dataSharing.
+  ///
+  /// In en, this message translates to:
+  /// **'Data Sharing'**
+  String get dataSharing;
+
+  /// No description provided for @dataSharingDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'We do not sell or share your personal data with third parties. Data may only be shared if required by law.'**
+  String get dataSharingDetails;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

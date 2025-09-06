@@ -107,5 +107,16 @@
   "enterAmountHint": "Enter amount",
   "changeLaterNote": "You can always change this later.",
   "skip": "SKIP",
-  "next": "Next"
+  "next": "Next",
+
+   "privacyPolicyTitle": "Privacy Policy",
+  "privacyIntro": "We value your privacy and want you to feel safe while using our app.",
+  "whatWeCollect": "What We Collect",
+  "whatWeCollectDetails": "• Basic information you provide such as expenses, notes, and uploaded receipts.\n• Optional account details like email (if you sign up).\n• No sensitive banking or card details are collected.",
+  "howWeUseData": "How We Use Data",
+  "howWeUseDataDetails": "• To help you record and organize your daily expenses.\n• To create reports and charts that show your spending.\n• To let you save receipts and link them to your records.\n• To sync your data across devices (if you use cloud backup - Firebase).",
+  "storageAndSecurity": "Storage & Security",
+  "storageAndSecurityDetails": "• Your data is saved on your device (offline mode).\n• If you enable cloud sync, data is stored securely on Firebase servers.\n• We take reasonable steps to protect your information from unauthorized access.",
+  "dataSharing": "Data Sharing",
+  "dataSharingDetails": "We do not sell or share your personal data with third parties. Data may only be shared if required by law."
 }

@@ -226,4 +226,34 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get changeLaterNote => 'يمكنك تغييره لاحقًا في أي وقت.';
+
+  @override
+  String get privacyPolicyTitle => 'سياسة الخصوصية';
+
+  @override
+  String get privacyIntro => 'نحن نحترم خصوصيتك ونريدك أن تشعر بالأمان أثناء استخدام التطبيق.';
+
+  @override
+  String get whatWeCollect => 'ما نجمعه';
+
+  @override
+  String get whatWeCollectDetails => '• المعلومات الأساسية التي تقدمها مثل المصاريف والملاحظات والإيصالات المحملة.\n• تفاصيل الحساب الاختيارية مثل البريد الإلكتروني (إذا قمت بالتسجيل).\n• لا يتم جمع أي بيانات مصرفية أو بطاقة حساسة.';
+
+  @override
+  String get howWeUseData => 'كيفية استخدام البيانات';
+
+  @override
+  String get howWeUseDataDetails => '• لمساعدتك على تسجيل وتنظيم مصاريفك اليومية.\n• لإنشاء تقارير ورسوم بيانية تظهر إنفاقك.\n• للسماح لك بحفظ الإيصالات وربطها بسجلاتك.\n• لمزامنة بياناتك عبر الأجهزة (إذا كنت تستخدم النسخ الاحتياطي السحابي - Firebase).';
+
+  @override
+  String get storageAndSecurity => 'التخزين والأمان';
+
+  @override
+  String get storageAndSecurityDetails => '• يتم حفظ بياناتك على جهازك (وضع عدم الاتصال).\n• إذا قمت بتمكين المزامنة السحابية، يتم تخزين البيانات بأمان على خوادم Firebase.\n• نتخذ خطوات معقولة لحماية معلوماتك من الوصول غير المصرح به.';
+
+  @override
+  String get dataSharing => 'مشاركة البيانات';
+
+  @override
+  String get dataSharingDetails => 'نحن لا نبيع أو نشارك بياناتك الشخصية مع أطراف ثالثة. قد يتم مشاركة البيانات فقط إذا طلب القانون ذلك.';
 }
