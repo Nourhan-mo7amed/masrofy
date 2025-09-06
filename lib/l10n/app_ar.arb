@@ -125,7 +125,21 @@
   "settings": "الإعدادات",
   "logout": "تسجيل الخروج",
   "userName": "أحمد حمدي",
-  "userEmail": "ahmed.hamdy@gmail.com"
+  "userEmail": "ahmed.hamdy@gmail.com",
+
+   "fullName": "الاسم الكامل",
+  "email": "البريد الإلكتروني",
+  "password": "كلمة المرور",
+  "confirmPassword": "تأكيد كلمة المرور",
+  "signUp": "إنشاء حساب",
+  "registrationSuccessful": "تم التسجيل بنجاح",
+  "passwordsDoNotMatch": "كلمتا المرور غير متطابقتين",
+
+   "createAccount": "إنشاء حساب",
+  "signUpToStart": "سجل لبدء إدارة ميزانيتك.",
+  "orSignUpWith": "أو سجل باستخدام",
+  "alreadyHaveAccount": "هل لديك حساب بالفعل؟",
+  "logIn": "تسجيل الدخول"
 
 
 }

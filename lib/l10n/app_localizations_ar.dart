@@ -274,4 +274,37 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get userEmail => 'ahmed.hamdy@gmail.com';
+
+  @override
+  String get fullName => 'الاسم الكامل';
+
+  @override
+  String get email => 'البريد الإلكتروني';
+
+  @override
+  String get password => 'كلمة المرور';
+
+  @override
+  String get confirmPassword => 'تأكيد كلمة المرور';
+
+  @override
+  String get registrationSuccessful => 'تم التسجيل بنجاح';
+
+  @override
+  String get passwordsDoNotMatch => 'كلمتا المرور غير متطابقتين';
+
+  @override
+  String get createAccount => 'إنشاء حساب';
+
+  @override
+  String get signUpToStart => 'سجل لبدء إدارة ميزانيتك.';
+
+  @override
+  String get orSignUpWith => 'أو سجل باستخدام';
+
+  @override
+  String get alreadyHaveAccount => 'هل لديك حساب بالفعل؟';
+
+  @override
+  String get logIn => 'تسجيل الدخول';
 }

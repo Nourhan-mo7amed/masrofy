@@ -274,4 +274,37 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get userEmail => 'ahmed.hamdy@gmail.com';
+
+  @override
+  String get fullName => 'Full Name';
+
+  @override
+  String get email => 'Email';
+
+  @override
+  String get password => 'Password';
+
+  @override
+  String get confirmPassword => 'Confirm Password';
+
+  @override
+  String get registrationSuccessful => 'Registration successful';
+
+  @override
+  String get passwordsDoNotMatch => 'Passwords do not match';
+
+  @override
+  String get createAccount => 'Create Account';
+
+  @override
+  String get signUpToStart => 'Sign up to start managing your budget.';
+
+  @override
+  String get orSignUpWith => 'or sign up with';
+
+  @override
+  String get alreadyHaveAccount => 'Already have an account?';
+
+  @override
+  String get logIn => 'Log In';
 }

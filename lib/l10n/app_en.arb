@@ -125,5 +125,19 @@
   "settings": "Settings",
   "logout": "Logout",
   "userName": "Ahmed Hamdy",
-  "userEmail": "ahmed.hamdy@gmail.com"
+  "userEmail": "ahmed.hamdy@gmail.com",
+
+   "fullName": "Full Name",
+  "email": "Email",
+  "password": "Password",
+  "confirmPassword": "Confirm Password",
+  "signUp": "Sign Up",
+  "registrationSuccessful": "Registration successful",
+  "passwordsDoNotMatch": "Passwords do not match",
+
+  "createAccount": "Create Account",
+  "signUpToStart": "Sign up to start managing your budget.",
+  "orSignUpWith": "or sign up with",
+  "alreadyHaveAccount": "Already have an account?",
+  "logIn": "Log In"
 }
