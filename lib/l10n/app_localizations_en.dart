@@ -100,4 +100,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get income => 'Income';
+
+  @override
+  String get another => 'Another';
 }

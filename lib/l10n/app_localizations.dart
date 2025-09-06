@@ -280,6 +280,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Income'**
   String get income;
+
+  /// No description provided for @another.
+  ///
+  /// In en, this message translates to:
+  /// **'Another'**
+  String get another;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

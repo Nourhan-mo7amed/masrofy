@@ -42,5 +42,10 @@
 
   "allTransactions": "جميع المعاملات",
   "expenses": "المصروفات",
-  "income": "الدخل"
+  "income": "الدخل",
+
+   "another": "أخرى",
+  "food": "طعام",
+  "payToEmployees": "دفع للموظفين",
+  "healthExpenditures": "نفقات صحية"
 }

@@ -90,7 +90,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get payToEmployees => 'دفع للموظفين';
 
   @override
-  String get healthExpenditures => 'المصروفات الصحية';
+  String get healthExpenditures => 'نفقات صحية';
 
   @override
   String get allTransactions => 'جميع المعاملات';
@@ -100,4 +100,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get income => 'الدخل';
+
+  @override
+  String get another => 'أخرى';
 }
