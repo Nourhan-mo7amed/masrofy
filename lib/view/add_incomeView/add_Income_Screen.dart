@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:masrofy/models/transaction_model.dart';
+import 'package:provider/provider.dart';
+import '../../viewmodels/transaction_viewModel.dart';
 
 class AddIncomeScreen extends StatefulWidget {
   @override
@@ -31,8 +34,10 @@ class _AddIncomeScreen extends State<AddIncomeScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("Expense Title",
-                    style: TextStyle(fontWeight: FontWeight.bold)),
+                Text(
+                  "Expense Title",
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
                 SizedBox(height: 10),
                 TextField(
                   controller: _titleController,
@@ -50,8 +55,10 @@ class _AddIncomeScreen extends State<AddIncomeScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text("Amount",
-                              style: TextStyle(fontWeight: FontWeight.bold)),
+                          Text(
+                            "Amount",
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
                           SizedBox(height: 10),
                           TextField(
                             controller: _amountController,
@@ -72,8 +79,10 @@ class _AddIncomeScreen extends State<AddIncomeScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text("Select Date",
-                              style: TextStyle(fontWeight: FontWeight.bold)),
+                          Text(
+                            "Select Date",
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
                           SizedBox(height: 10),
                           TextField(
                             controller: _dateController,
@@ -130,14 +139,38 @@ class _AddIncomeScreen extends State<AddIncomeScreen> {
                         borderRadius: BorderRadius.circular(10),
                       ),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      if (_titleController.text.isEmpty ||
+                          _amountController.text.isEmpty ||
+                          selectedDate == null) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text("Please fill all fields")),
+                        );
+                        return;
+                      }
+                      final newTransaction = TransactionModel(
+                        title: _titleController.text,
+                        amount: double.tryParse(_amountController.text) ?? 0.0,
+                        date: selectedDate!,
+                        type: "income",
+                        notes: _notesController.text.isEmpty
+                            ? null
+                            : _notesController.text,
+                      );
+                      context.read<TransactionViewmodel>().addTransaction(
+                        newTransaction,
+                      );
+                      Navigator.pop(context);
+                    },
                     child: Text(
                       "Save",
-                      style:
-                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
-                )
+                ),
               ],
             ),
           ),
@@ -159,7 +192,7 @@ class _AddIncomeScreen extends State<AddIncomeScreen> {
       "september",
       "october",
       "november",
-      "december"
+      "december",
     ];
     return months[month - 1];
   }
