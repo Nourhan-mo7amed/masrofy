@@ -21,5 +21,22 @@
   "september": "September",
   "october": "October",
   "november": "November",
-  "december": "December"
+  "december": "December",
+
+  "addIncome": "Add Income",
+  "incomeTitle": "Income Title",
+  "food": "Food",
+  "amount": "Amount",
+  "selectDate": "Select Date",
+  "sampleDate": "22 July 2025",
+  "notes": "Notes",
+  "save": "Save",
+   "add": "Add",
+  "addIncome": "Add Income",
+  "addExpense": "Add Expense",
+  "lastExpenses": "Last Expenses",
+  "seeAll": "See All",
+  "food": "Food",
+  "payToEmployees": "Pay to Employees",
+  "healthExpenditures": "Health Expenditures"
 }

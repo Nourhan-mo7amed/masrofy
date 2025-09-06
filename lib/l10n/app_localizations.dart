@@ -214,6 +214,54 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'December'**
   String get december;
+
+  /// No description provided for @addIncome.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Income'**
+  String get addIncome;
+
+  /// No description provided for @incomeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Income Title'**
+  String get incomeTitle;
+
+  /// No description provided for @sampleDate.
+  ///
+  /// In en, this message translates to:
+  /// **'22 July 2025'**
+  String get sampleDate;
+
+  /// No description provided for @add.
+  ///
+  /// In en, this message translates to:
+  /// **'Add'**
+  String get add;
+
+  /// No description provided for @lastExpenses.
+  ///
+  /// In en, this message translates to:
+  /// **'Last Expenses'**
+  String get lastExpenses;
+
+  /// No description provided for @seeAll.
+  ///
+  /// In en, this message translates to:
+  /// **'See All'**
+  String get seeAll;
+
+  /// No description provided for @payToEmployees.
+  ///
+  /// In en, this message translates to:
+  /// **'Pay to Employees'**
+  String get payToEmployees;
+
+  /// No description provided for @healthExpenditures.
+  ///
+  /// In en, this message translates to:
+  /// **'Health Expenditures'**
+  String get healthExpenditures;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

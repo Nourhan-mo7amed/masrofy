@@ -67,4 +67,28 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get december => 'ديسمبر';
+
+  @override
+  String get addIncome => 'إضافة دخل';
+
+  @override
+  String get incomeTitle => 'عنوان الدخل';
+
+  @override
+  String get sampleDate => '٢٢ يوليو ٢٠٢٥';
+
+  @override
+  String get add => 'إضافة';
+
+  @override
+  String get lastExpenses => 'أحدث المصروفات';
+
+  @override
+  String get seeAll => 'عرض الكل';
+
+  @override
+  String get payToEmployees => 'دفع للموظفين';
+
+  @override
+  String get healthExpenditures => 'المصروفات الصحية';
 }

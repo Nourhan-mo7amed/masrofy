@@ -67,4 +67,28 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get december => 'December';
+
+  @override
+  String get addIncome => 'Add Income';
+
+  @override
+  String get incomeTitle => 'Income Title';
+
+  @override
+  String get sampleDate => '22 July 2025';
+
+  @override
+  String get add => 'Add';
+
+  @override
+  String get lastExpenses => 'Last Expenses';
+
+  @override
+  String get seeAll => 'See All';
+
+  @override
+  String get payToEmployees => 'Pay to Employees';
+
+  @override
+  String get healthExpenditures => 'Health Expenditures';
 }

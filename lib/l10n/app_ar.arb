@@ -21,5 +21,22 @@
   "september": "سبتمبر",
   "october": "أكتوبر",
   "november": "نوفمبر",
-  "december": "ديسمبر"
+  "december": "ديسمبر",
+
+  "addIncome": "إضافة دخل",
+  "incomeTitle": "عنوان الدخل",
+  "food": "طعام",
+  "amount": "المبلغ",
+  "selectDate": "اختر التاريخ",
+  "sampleDate": "٢٢ يوليو ٢٠٢٥",
+  "notes": "ملاحظات",
+  "save": "حفظ",
+  "add": "إضافة",
+  "addIncome": "إضافة دخل",
+  "addExpense": "إضافة مصروف",
+  "lastExpenses": "أحدث المصروفات",
+  "seeAll": "عرض الكل",
+  "food": "طعام",
+  "payToEmployees": "دفع للموظفين",
+  "healthExpenditures": "المصروفات الصحية"
 }
