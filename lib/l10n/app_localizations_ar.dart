@@ -99,7 +99,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get expenses => 'المصروفات';
 
   @override
-  String get income => 'الدخل';
+  String get income => 'الإيرادات';
 
   @override
   String get another => 'أخرى';
@@ -139,4 +139,19 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get sendResetLink => 'إرسال رابط إعادة التعيين';
+
+  @override
+  String get homeTitle => 'الرئيسية';
+
+  @override
+  String get totalBalance => 'إجمالي الرصيد';
+
+  @override
+  String get expense => 'المصروف';
+
+  @override
+  String get shopping => 'تسوق';
+
+  @override
+  String get subscriptions => 'الاشتراكات';
 }

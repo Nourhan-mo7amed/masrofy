@@ -62,5 +62,15 @@
   "forgotPasswordSubtitle": "Enter your email address and we'll send you a code to reset your password.",
   "emailLabel": "Email",
   "emailHint": "Enter your email",
-  "sendResetLink": "Send Reset Link"
+  "sendResetLink": "Send Reset Link",
+
+   "homeTitle": "Home",
+  "totalBalance": "Total Balance",
+  "income": "Income",
+  "expenses": "Expenses",
+  "expense": "Expense",
+  "shopping": "Shopping",
+  "subscriptions": "Subscriptions",
+  "food": "Food",
+  "another": "Another"
 }

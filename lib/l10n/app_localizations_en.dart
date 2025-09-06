@@ -139,4 +139,19 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get sendResetLink => 'Send Reset Link';
+
+  @override
+  String get homeTitle => 'Home';
+
+  @override
+  String get totalBalance => 'Total Balance';
+
+  @override
+  String get expense => 'Expense';
+
+  @override
+  String get shopping => 'Shopping';
+
+  @override
+  String get subscriptions => 'Subscriptions';
 }

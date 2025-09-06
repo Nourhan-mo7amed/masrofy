@@ -62,7 +62,17 @@
   "forgotPasswordSubtitle": "أدخل بريدك الإلكتروني وسنرسل لك رمزًا لإعادة تعيين كلمة المرور.",
   "emailLabel": "البريد الإلكتروني",
   "emailHint": "أدخل بريدك الإلكتروني",
-  "sendResetLink": "إرسال رابط إعادة التعيين"
+  "sendResetLink": "إرسال رابط إعادة التعيين",
+
+   "homeTitle": "الرئيسية",
+  "totalBalance": "إجمالي الرصيد",
+  "income": "الإيرادات",
+  "expenses": "المصروفات",
+  "expense": "المصروف",
+  "shopping": "تسوق",
+  "subscriptions": "الاشتراكات",
+  "food": "طعام",
+  "another": "أخرى"
 
 
 }
