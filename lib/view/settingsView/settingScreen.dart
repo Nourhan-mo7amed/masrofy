@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:masrofy/l10n/app_localizations.dart';
 import '../../widgets/SettingsSwitchTile.dart';
 import '../../widgets/SettingsTile.dart';
+// import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -16,19 +18,22 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
+
     return Scaffold(
       appBar: AppBar(
-        title: Text("Settings"),
+        title: Text(loc.settings),
         centerTitle: true,
         elevation: 0,
         foregroundColor: Colors.black,
       ),
       body: ListView(
         children: [
-          SettingsTile(icon: Icons.person, text: "Account", onTap: () {}),
+          SettingsTile(icon: Icons.person, text: loc.account, onTap: () {}),
+
           SettingsSwitchTile(
             icon: Icons.notifications,
-            text: "Notifications",
+            text: loc.notifications,
             value: notifications,
             onChanged: (val) {
               setState(() => notifications = val);
@@ -37,7 +42,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
           SettingsSwitchTile(
             icon: Icons.brightness_6,
-            text: "Mode",
+            text: loc.mode,
             value: mode,
             onChanged: (val) {
               setState(() => mode = val);
@@ -45,11 +50,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ),
 
           ListTile(
-            leading: Icon(Icons.language_outlined, color: Colors.black),
-            title: Text("Language"),
+            leading: const Icon(Icons.language_outlined, color: Colors.black),
+            title: Text(loc.language),
             trailing: DropdownButton<String>(
               value: selectedLanguage,
-              items: ["English", "Arabic"].map((lang) {
+              items: [loc.english, loc.arabic].map((lang) {
                 return DropdownMenuItem<String>(value: lang, child: Text(lang));
               }).toList(),
               onChanged: (val) {
@@ -60,13 +65,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ),
           ),
 
-          SizedBox(height: 32),
+          const SizedBox(height: 32),
 
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             child: Text(
-              "Support",
-              style: TextStyle(
+              loc.supportTitle,
+              style: const TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
                 color: Colors.black,
@@ -74,9 +79,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ),
           ),
 
-          SettingsTile(text: "Support", onTap: () {}),
-          SettingsTile(text: "Help", onTap: () {}),
-          SettingsTile(text: "FAQ", onTap: () {}),
+          SettingsTile(text: loc.support, onTap: () {}),
+          SettingsTile(text: loc.help, onTap: () {}),
+          SettingsTile(text: loc.faq, onTap: () {}),
         ],
       ),
     );

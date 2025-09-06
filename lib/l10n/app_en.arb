@@ -139,5 +139,17 @@
   "signUpToStart": "Sign up to start managing your budget.",
   "orSignUpWith": "or sign up with",
   "alreadyHaveAccount": "Already have an account?",
-  "logIn": "Log In"
+  "logIn": "Log In",
+
+   "settings": "Settings",
+  "account": "Account",
+  "notifications": "Notifications",
+  "mode": "Mode",
+  "language": "Language",
+  "english": "English",
+  "arabic": "Arabic",
+  "supportTitle": "Support",
+  "support": "Support",
+  "help": "Help",
+  "faq": "FAQ"
 }

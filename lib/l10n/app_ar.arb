@@ -139,7 +139,19 @@
   "signUpToStart": "سجل لبدء إدارة ميزانيتك.",
   "orSignUpWith": "أو سجل باستخدام",
   "alreadyHaveAccount": "هل لديك حساب بالفعل؟",
-  "logIn": "تسجيل الدخول"
+  "logIn": "تسجيل الدخول",
+
+   "settings": "الإعدادات",
+  "account": "الحساب",
+  "notifications": "الإشعارات",
+  "mode": "الوضع",
+  "language": "اللغة",
+  "english": "الإنجليزية",
+  "arabic": "العربية",
+  "supportTitle": "الدعم",
+  "support": "الدعم",
+  "help": "مساعدة",
+  "faq": "الأسئلة الشائعة"
 
 
 }

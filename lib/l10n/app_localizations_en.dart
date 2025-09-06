@@ -307,4 +307,34 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get logIn => 'Log In';
+
+  @override
+  String get account => 'Account';
+
+  @override
+  String get notifications => 'Notifications';
+
+  @override
+  String get mode => 'Mode';
+
+  @override
+  String get language => 'Language';
+
+  @override
+  String get english => 'English';
+
+  @override
+  String get arabic => 'Arabic';
+
+  @override
+  String get supportTitle => 'Support';
+
+  @override
+  String get support => 'Support';
+
+  @override
+  String get help => 'Help';
+
+  @override
+  String get faq => 'FAQ';
 }

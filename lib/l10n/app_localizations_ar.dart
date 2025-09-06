@@ -307,4 +307,34 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get logIn => 'تسجيل الدخول';
+
+  @override
+  String get account => 'الحساب';
+
+  @override
+  String get notifications => 'الإشعارات';
+
+  @override
+  String get mode => 'الوضع';
+
+  @override
+  String get language => 'اللغة';
+
+  @override
+  String get english => 'الإنجليزية';
+
+  @override
+  String get arabic => 'العربية';
+
+  @override
+  String get supportTitle => 'الدعم';
+
+  @override
+  String get support => 'الدعم';
+
+  @override
+  String get help => 'مساعدة';
+
+  @override
+  String get faq => 'الأسئلة الشائعة';
 }

@@ -694,6 +694,66 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Log In'**
   String get logIn;
+
+  /// No description provided for @account.
+  ///
+  /// In en, this message translates to:
+  /// **'Account'**
+  String get account;
+
+  /// No description provided for @notifications.
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications'**
+  String get notifications;
+
+  /// No description provided for @mode.
+  ///
+  /// In en, this message translates to:
+  /// **'Mode'**
+  String get mode;
+
+  /// No description provided for @language.
+  ///
+  /// In en, this message translates to:
+  /// **'Language'**
+  String get language;
+
+  /// No description provided for @english.
+  ///
+  /// In en, this message translates to:
+  /// **'English'**
+  String get english;
+
+  /// No description provided for @arabic.
+  ///
+  /// In en, this message translates to:
+  /// **'Arabic'**
+  String get arabic;
+
+  /// No description provided for @supportTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Support'**
+  String get supportTitle;
+
+  /// No description provided for @support.
+  ///
+  /// In en, this message translates to:
+  /// **'Support'**
+  String get support;
+
+  /// No description provided for @help.
+  ///
+  /// In en, this message translates to:
+  /// **'Help'**
+  String get help;
+
+  /// No description provided for @faq.
+  ///
+  /// In en, this message translates to:
+  /// **'FAQ'**
+  String get faq;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
