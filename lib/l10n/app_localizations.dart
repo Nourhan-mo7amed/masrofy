@@ -754,6 +754,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'FAQ'**
   String get faq;
+
+  /// No description provided for @setupCompleteTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Setup complete!'**
+  String get setupCompleteTitle;
+
+  /// No description provided for @setupCompleteSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'You can now start tracking and organizing your expenses'**
+  String get setupCompleteSubtitle;
+
+  /// No description provided for @startBudgeting.
+  ///
+  /// In en, this message translates to:
+  /// **'Start Budgeting'**
+  String get startBudgeting;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

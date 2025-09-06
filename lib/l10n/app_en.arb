@@ -151,5 +151,9 @@
   "supportTitle": "Support",
   "support": "Support",
   "help": "Help",
-  "faq": "FAQ"
+  "faq": "FAQ",
+
+   "setupCompleteTitle": "Setup complete!",
+  "setupCompleteSubtitle": "You can now start tracking and organizing your expenses",
+  "startBudgeting": "Start Budgeting"
 }

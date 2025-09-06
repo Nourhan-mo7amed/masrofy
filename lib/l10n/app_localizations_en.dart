@@ -337,4 +337,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get faq => 'FAQ';
+
+  @override
+  String get setupCompleteTitle => 'Setup complete!';
+
+  @override
+  String get setupCompleteSubtitle => 'You can now start tracking and organizing your expenses';
+
+  @override
+  String get startBudgeting => 'Start Budgeting';
 }

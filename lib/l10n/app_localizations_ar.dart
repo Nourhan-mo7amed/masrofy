@@ -337,4 +337,13 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get faq => 'الأسئلة الشائعة';
+
+  @override
+  String get setupCompleteTitle => 'تم إعداد التطبيق!';
+
+  @override
+  String get setupCompleteSubtitle => 'يمكنك الآن البدء في متابعة وتنظيم مصاريفك';
+
+  @override
+  String get startBudgeting => 'ابدأ الميزانية';
 }

@@ -151,7 +151,11 @@
   "supportTitle": "الدعم",
   "support": "الدعم",
   "help": "مساعدة",
-  "faq": "الأسئلة الشائعة"
+  "faq": "الأسئلة الشائعة",
+
+  "setupCompleteTitle": "تم إعداد التطبيق!",
+  "setupCompleteSubtitle": "يمكنك الآن البدء في متابعة وتنظيم مصاريفك",
+  "startBudgeting": "ابدأ الميزانية"
 
 
 }
