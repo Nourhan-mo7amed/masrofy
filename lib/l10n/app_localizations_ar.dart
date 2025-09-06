@@ -103,4 +103,16 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get another => 'أخرى';
+
+  @override
+  String get spendingCategories => 'فئات الإنفاق';
+
+  @override
+  String get spendingQuestion => 'ما الذي تنفق عليه أكثر؟';
+
+  @override
+  String get skip => 'تخطي';
+
+  @override
+  String get next => 'التالي';
 }

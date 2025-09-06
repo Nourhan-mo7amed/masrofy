@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+// import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:masrofy/core/constants/colors_app.dart';
+import 'package:masrofy/l10n/app_localizations.dart';
 import 'package:masrofy/viewmodels/category_viewModel.dart';
 import 'package:provider/provider.dart';
 
@@ -15,6 +17,7 @@ class _SpendingCategoriesScreenState extends State<SpendingCategoriesScreen> {
   @override
   Widget build(BuildContext context) {
     final categoryView = Provider.of<CategoryView>(context);
+    final loc = AppLocalizations.of(context)!;
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -31,15 +34,16 @@ class _SpendingCategoriesScreenState extends State<SpendingCategoriesScreen> {
               ),
               const SizedBox(height: 24),
 
-              const Text(
-                "Spending Categories",
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              Text(
+                loc.spendingCategories,
+                style:
+                    const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 8),
-              const Text(
-                "What do you spend most on?",
-                style: TextStyle(fontSize: 14, color: Colors.black54),
+              Text(
+                loc.spendingQuestion,
+                style: const TextStyle(fontSize: 14, color: Colors.black54),
                 textAlign: TextAlign.center,
               ),
 
@@ -87,9 +91,9 @@ class _SpendingCategoriesScreenState extends State<SpendingCategoriesScreen> {
                 onPressed: () {
                   Navigator.pushNamed(context, '/setupComplete');
                 },
-                child: const Text(
-                  "SKIP",
-                  style: TextStyle(color: Colors.black54),
+                child: Text(
+                  loc.skip,
+                  style: const TextStyle(color: Colors.black54),
                 ),
               ),
 
@@ -110,9 +114,9 @@ class _SpendingCategoriesScreenState extends State<SpendingCategoriesScreen> {
                     ); // هنا تقدر تبعت الداتا للسيرفر
                     Navigator.pushNamed(context, '/setupComplete');
                   },
-                  child: const Text(
-                    "Next",
-                    style: TextStyle(color: Colors.white, fontSize: 16),
+                  child: Text(
+                    loc.next,
+                    style: const TextStyle(color: Colors.white, fontSize: 16),
                   ),
                 ),
               ),

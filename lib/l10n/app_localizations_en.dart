@@ -103,4 +103,16 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get another => 'Another';
+
+  @override
+  String get spendingCategories => 'Spending Categories';
+
+  @override
+  String get spendingQuestion => 'What do you spend most on?';
+
+  @override
+  String get skip => 'SKIP';
+
+  @override
+  String get next => 'Next';
 }

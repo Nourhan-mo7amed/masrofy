@@ -47,5 +47,12 @@
    "another": "أخرى",
   "food": "طعام",
   "payToEmployees": "دفع للموظفين",
-  "healthExpenditures": "نفقات صحية"
+  "healthExpenditures": "نفقات صحية",
+
+  "spendingCategories": "فئات الإنفاق",
+  "spendingQuestion": "ما الذي تنفق عليه أكثر؟",
+  "skip": "تخطي",
+  "next": "التالي"
+
+
 }

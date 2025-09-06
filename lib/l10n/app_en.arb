@@ -47,5 +47,10 @@
   "another": "Another",
   "food": "Food",
   "payToEmployees": "Pay to Employees",
-  "healthExpenditures": "Health Expenditures"
+  "healthExpenditures": "Health Expenditures",
+
+   "spendingCategories": "Spending Categories",
+  "spendingQuestion": "What do you spend most on?",
+  "skip": "SKIP",
+  "next": "Next"
 }

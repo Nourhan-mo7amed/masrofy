@@ -286,6 +286,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Another'**
   String get another;
+
+  /// No description provided for @spendingCategories.
+  ///
+  /// In en, this message translates to:
+  /// **'Spending Categories'**
+  String get spendingCategories;
+
+  /// No description provided for @spendingQuestion.
+  ///
+  /// In en, this message translates to:
+  /// **'What do you spend most on?'**
+  String get spendingQuestion;
+
+  /// No description provided for @skip.
+  ///
+  /// In en, this message translates to:
+  /// **'SKIP'**
+  String get skip;
+
+  /// No description provided for @next.
+  ///
+  /// In en, this message translates to:
+  /// **'Next'**
+  String get next;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
