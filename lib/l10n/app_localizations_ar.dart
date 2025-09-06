@@ -181,4 +181,37 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get appName => 'مصروفي';
+
+  @override
+  String get passwordLabel => 'كلمة المرور';
+
+  @override
+  String get passwordHint => 'أدخل كلمة المرور';
+
+  @override
+  String get forgotPassword => 'هل نسيت كلمة المرور؟';
+
+  @override
+  String get loginButton => 'تسجيل الدخول';
+
+  @override
+  String get loginSuccess => 'تم تسجيل الدخول بنجاح';
+
+  @override
+  String get loginFailed => 'فشل تسجيل الدخول';
+
+  @override
+  String get welcomeBack => 'مرحبًا بعودتك';
+
+  @override
+  String get loginDescription => 'سجّل الدخول لمتابعة إدارة ميزانيتك.';
+
+  @override
+  String get orLoginWith => 'أو سجّل الدخول باستخدام';
+
+  @override
+  String get dontHaveAccount => 'ليس لديك حساب؟ ';
+
+  @override
+  String get signUp => 'إنشاء حساب';
 }

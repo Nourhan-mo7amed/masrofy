@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:masrofy/l10n/app_localizations.dart';
 import 'package:masrofy/viewmodels/Auth_ViewModel.dart';
 import 'package:masrofy/widgets/Costom_TextFormField.dart';
 import 'package:provider/provider.dart';
+// import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CustomLoginForm extends StatefulWidget {
   const CustomLoginForm({super.key});
@@ -15,6 +17,7 @@ class _CustomLoginFormState extends State<CustomLoginForm> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   String? email, password;
+
   @override
   void dispose() {
     _emailController.dispose();
@@ -25,51 +28,51 @@ class _CustomLoginFormState extends State<CustomLoginForm> {
   @override
   Widget build(BuildContext context) {
     final authVm = context.watch<AuthViewModel>();
+    final loc = AppLocalizations.of(context)!;
 
     return Form(
       key: _globalKey,
       child: Column(
         children: [
-          //email textform
-          const Text(
-            'Email',
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+          // Email label
+          Text(
+            loc.emailLabel,
+            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
           ),
           const SizedBox(height: 8),
           CustomTextFormField(
             controller: _emailController,
-            hintText: 'Email',
+            hintText: loc.emailHint,
             icon: Icons.email_outlined,
-            onChanged: (value) {
-              email = value;
-            },
+            onChanged: (value) => email = value,
           ),
           const SizedBox(height: 16),
-          const Text(
-            'Password',
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+
+          // Password label
+          Text(
+            loc.passwordLabel,
+            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
           ),
           const SizedBox(height: 8),
           CustomTextFormField(
             controller: _passwordController,
-
-            hintText: 'Password',
+            hintText: loc.passwordHint,
             icon: Icons.lock_outline,
             isPassword: true,
-            onChanged: (value) {
-              password = value;
-            },
+            onChanged: (value) => password = value,
           ),
           const SizedBox(height: 8),
+
+          // Forgot password
           Align(
             alignment: Alignment.centerRight,
             child: TextButton(
               onPressed: () {
                 Navigator.pushNamed(context, '/forgotPassword');
               },
-              child: const Text(
-                "Forgot password?",
-                style: TextStyle(
+              child: Text(
+                loc.forgotPassword,
+                style: const TextStyle(
                   color: Color(0xFF6155F5),
                   fontWeight: FontWeight.w500,
                 ),
@@ -77,6 +80,8 @@ class _CustomLoginFormState extends State<CustomLoginForm> {
             ),
           ),
           const SizedBox(height: 35),
+
+          // Login Button
           SizedBox(
             height: 50,
             width: double.infinity,
@@ -91,9 +96,9 @@ class _CustomLoginFormState extends State<CustomLoginForm> {
                         );
                         if (errorMessage == null && mounted) {
                           ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
+                            SnackBar(
                               backgroundColor: Colors.green,
-                              content: Text("Login successful"),
+                              content: Text(loc.loginSuccess),
                             ),
                           );
                           Navigator.pushReplacementNamed(context, '/home');
@@ -101,7 +106,8 @@ class _CustomLoginFormState extends State<CustomLoginForm> {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
                               backgroundColor: Colors.red,
-                              content: Text(errorMessage ?? "Login failed"),
+                              content: Text(
+                                  errorMessage ?? loc.loginFailed),
                             ),
                           );
                         }
@@ -115,9 +121,9 @@ class _CustomLoginFormState extends State<CustomLoginForm> {
               ),
               child: authVm.isLoading
                   ? const CircularProgressIndicator(color: Colors.white)
-                  : const Text(
-                      "Log In",
-                      style: TextStyle(
+                  : Text(
+                      loc.loginButton,
+                      style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
                         color: Colors.white,

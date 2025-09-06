@@ -85,7 +85,22 @@
   "page3Title": "ادخر بذكاء",
   "page3Subtitle": "قلل الهدر وشاهد مدخراتك تنمو بسهولة.",
 
-  "appName": "مصروفي"
+  "appName": "مصروفي",
+
+   "emailLabel": "البريد الإلكتروني",
+  "emailHint": "أدخل بريدك الإلكتروني",
+  "passwordLabel": "كلمة المرور",
+  "passwordHint": "أدخل كلمة المرور",
+  "forgotPassword": "هل نسيت كلمة المرور؟",
+  "loginButton": "تسجيل الدخول",
+  "loginSuccess": "تم تسجيل الدخول بنجاح",
+  "loginFailed": "فشل تسجيل الدخول",
+
+  "welcomeBack": "مرحبًا بعودتك",
+  "loginDescription": "سجّل الدخول لمتابعة إدارة ميزانيتك.",
+  "orLoginWith": "أو سجّل الدخول باستخدام",
+  "dontHaveAccount": "ليس لديك حساب؟ ",
+  "signUp": "إنشاء حساب"
 
 
 }

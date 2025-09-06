@@ -181,4 +181,37 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get appName => 'Masrofy';
+
+  @override
+  String get passwordLabel => 'Password';
+
+  @override
+  String get passwordHint => 'Enter your password';
+
+  @override
+  String get forgotPassword => 'Forgot password?';
+
+  @override
+  String get loginButton => 'Log In';
+
+  @override
+  String get loginSuccess => 'Login successful';
+
+  @override
+  String get loginFailed => 'Login failed';
+
+  @override
+  String get welcomeBack => 'Welcome back';
+
+  @override
+  String get loginDescription => 'Log in to continue managing your budget.';
+
+  @override
+  String get orLoginWith => 'or log in with';
+
+  @override
+  String get dontHaveAccount => 'Don\'t have an account? ';
+
+  @override
+  String get signUp => 'Sign Up';
 }

@@ -442,6 +442,72 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Masrofy'**
   String get appName;
+
+  /// No description provided for @passwordLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Password'**
+  String get passwordLabel;
+
+  /// No description provided for @passwordHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your password'**
+  String get passwordHint;
+
+  /// No description provided for @forgotPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Forgot password?'**
+  String get forgotPassword;
+
+  /// No description provided for @loginButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Log In'**
+  String get loginButton;
+
+  /// No description provided for @loginSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Login successful'**
+  String get loginSuccess;
+
+  /// No description provided for @loginFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Login failed'**
+  String get loginFailed;
+
+  /// No description provided for @welcomeBack.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome back'**
+  String get welcomeBack;
+
+  /// No description provided for @loginDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Log in to continue managing your budget.'**
+  String get loginDescription;
+
+  /// No description provided for @orLoginWith.
+  ///
+  /// In en, this message translates to:
+  /// **'or log in with'**
+  String get orLoginWith;
+
+  /// No description provided for @dontHaveAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Don\'t have an account? '**
+  String get dontHaveAccount;
+
+  /// No description provided for @signUp.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign Up'**
+  String get signUp;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

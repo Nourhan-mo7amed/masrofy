@@ -85,5 +85,20 @@
   "page3Title": "Save Smarter",
   "page3Subtitle": "Reduce waste and watch your savings grow effortlessly.",
 
-    "appName": "Masrofy"
+    "appName": "Masrofy",
+
+     "emailLabel": "Email",
+  "emailHint": "Enter your email",
+  "passwordLabel": "Password",
+  "passwordHint": "Enter your password",
+  "forgotPassword": "Forgot password?",
+  "loginButton": "Log In",
+  "loginSuccess": "Login successful",
+  "loginFailed": "Login failed",
+
+    "welcomeBack": "Welcome back",
+  "loginDescription": "Log in to continue managing your budget.",
+  "orLoginWith": "or log in with",
+  "dontHaveAccount": "Don't have an account? ",
+  "signUp": "Sign Up"
 }
