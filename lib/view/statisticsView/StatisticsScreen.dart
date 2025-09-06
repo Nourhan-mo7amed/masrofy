@@ -1,23 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
+import 'package:masrofy/l10n/app_localizations.dart';
 import '../../widgets/Buildcategorycard.dart';
+// import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class StatisticsScreen extends StatelessWidget {
   const StatisticsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
+
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(40),
+        preferredSize: const Size.fromHeight(40),
         child: AppBar(
           centerTitle: true,
           title: Text(
-            "Statistics",
-            style: TextStyle(fontWeight: FontWeight.bold),
+            loc.statisticsTitle,
+            style: const TextStyle(fontWeight: FontWeight.bold),
           ),
           leading: IconButton(
-            icon: Icon(Icons.arrow_back),
+            icon: const Icon(Icons.arrow_back),
             onPressed: () {
               Navigator.pushNamed(context, '/home');
             },
@@ -25,19 +29,20 @@ class StatisticsScreen extends StatelessWidget {
         ),
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
+            // Dropdown
             Row(
               children: [
                 Expanded(
                   child: DropdownButton<String>(
-                    value: "Monthly",
+                    value: loc.monthly,
                     isExpanded: true,
                     items: [
                       DropdownMenuItem(
-                        value: "Monthly",
-                        child: Text("Monthly"),
+                        value: loc.monthly,
+                        child: Text(loc.monthly),
                       ),
                     ],
                     onChanged: (val) {},
@@ -45,7 +50,9 @@ class StatisticsScreen extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
+
+            // Pie Chart
             SizedBox(
               height: 220,
               child: Stack(
@@ -56,26 +63,10 @@ class StatisticsScreen extends StatelessWidget {
                       sectionsSpace: 2,
                       centerSpaceRadius: 70,
                       sections: [
-                        PieChartSectionData(
-                          value: 300.4,
-                          color: Colors.blue,
-                          title: "",
-                        ),
-                        PieChartSectionData(
-                          value: 2100,
-                          color: Colors.red,
-                          title: "",
-                        ),
-                        PieChartSectionData(
-                          value: 2700,
-                          color: Colors.orange,
-                          title: "",
-                        ),
-                        PieChartSectionData(
-                          value: 500,
-                          color: Colors.purple,
-                          title: "",
-                        ),
+                        PieChartSectionData(value: 300.4, color: Colors.blue, title: ""),
+                        PieChartSectionData(value: 2100, color: Colors.red, title: ""),
+                        PieChartSectionData(value: 2700, color: Colors.orange, title: ""),
+                        PieChartSectionData(value: 500, color: Colors.purple, title: ""),
                       ],
                     ),
                   ),
@@ -83,11 +74,11 @@ class StatisticsScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        "Total Balance",
-                        style: TextStyle(color: Colors.grey),
+                        loc.totalBalance,
+                        style: const TextStyle(color: Colors.grey),
                       ),
-                      SizedBox(height: 4),
-                      Text(
+                      const SizedBox(height: 4),
+                      const Text(
                         "\$3,350.00",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
@@ -99,47 +90,51 @@ class StatisticsScreen extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
+
+            // Category Grid
             GridView.count(
               shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
+              physics: const NeverScrollableScrollPhysics(),
               crossAxisCount: 2,
               mainAxisSpacing: 10,
               crossAxisSpacing: 10,
               childAspectRatio: 1.0,
               children: [
                 BuildCategoryCard(
-                  title: "Another",
+                  title: loc.another,
                   amount: "\$300.4",
                   description: "Mauris hendrerit mollis bibendum quisque.",
                   color: Colors.blue,
                 ),
                 BuildCategoryCard(
-                  title: "Subscriptions",
+                  title: loc.subscriptions,
                   amount: "\$2,100",
                   description: "Porin sagittis imperdiet egestas aenean maxi",
                   color: Colors.red,
                 ),
                 BuildCategoryCard(
-                  title: "Shopping",
+                  title: loc.shopping,
                   amount: "\$2,700",
                   description: "Maecenas quis purus at metus posuere dapib.",
                   color: Colors.orange,
                 ),
                 BuildCategoryCard(
-                  title: "Food",
+                  title: loc.food,
                   amount: "\$500",
                   description: "Maecenas quis purus at metus posuere dapib.",
                   color: Colors.purple,
                 ),
               ],
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
+
+            // Recent Header
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text("Recent", style: TextStyle(fontWeight: FontWeight.bold)),
-                Text("See All", style: TextStyle(color: Colors.grey)),
+                Text(loc.recent, style: const TextStyle(fontWeight: FontWeight.bold)),
+                Text(loc.seeAll, style: const TextStyle(color: Colors.grey)),
               ],
             ),
           ],
@@ -148,4 +143,3 @@ class StatisticsScreen extends StatelessWidget {
     );
   }
 }
-

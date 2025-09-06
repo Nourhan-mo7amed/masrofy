@@ -349,4 +349,16 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get shoppingTitle => 'Shopping';
+
+  @override
+  String get statisticsTitle => 'Statistics';
+
+  @override
+  String get monthly => 'Monthly';
+
+  @override
+  String get recent => 'Recent';
+
+  @override
+  String get subscriptionsTitle => 'Subscriptions';
 }

@@ -778,6 +778,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Shopping'**
   String get shoppingTitle;
+
+  /// No description provided for @statisticsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Statistics'**
+  String get statisticsTitle;
+
+  /// No description provided for @monthly.
+  ///
+  /// In en, this message translates to:
+  /// **'Monthly'**
+  String get monthly;
+
+  /// No description provided for @recent.
+  ///
+  /// In en, this message translates to:
+  /// **'Recent'**
+  String get recent;
+
+  /// No description provided for @subscriptionsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Subscriptions'**
+  String get subscriptionsTitle;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

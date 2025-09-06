@@ -160,5 +160,20 @@
    "shoppingTitle": "Shopping",
   "food": "Food",
   "payToEmployees": "Pay to Employees",
+  "healthExpenditures": "Health Expenditures",
+
+  "statisticsTitle": "Statistics",
+  "monthly": "Monthly",
+  "totalBalance": "Total Balance",
+  "another": "Another",
+  "subscriptions": "Subscriptions",
+  "shopping": "Shopping",
+  "food": "Food",
+  "recent": "Recent",
+  "seeAll": "See All",
+
+    "subscriptionsTitle": "Subscriptions",
+  "food": "Food",
+  "payToEmployees": "Pay to Employees",
   "healthExpenditures": "Health Expenditures"
 }

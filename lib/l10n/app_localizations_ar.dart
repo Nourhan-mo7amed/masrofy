@@ -90,7 +90,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get payToEmployees => 'دفع للموظفين';
 
   @override
-  String get healthExpenditures => 'نفقات صحية';
+  String get healthExpenditures => 'النفقات الصحية';
 
   @override
   String get allTransactions => 'جميع المعاملات';
@@ -102,7 +102,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get income => 'الإيرادات';
 
   @override
-  String get another => 'أخرى';
+  String get another => 'آخر';
 
   @override
   String get spendingCategories => 'فئات الإنفاق';
@@ -144,13 +144,13 @@ class AppLocalizationsAr extends AppLocalizations {
   String get homeTitle => 'الرئيسية';
 
   @override
-  String get totalBalance => 'إجمالي الرصيد';
+  String get totalBalance => 'الرصيد الإجمالي';
 
   @override
   String get expense => 'المصروف';
 
   @override
-  String get shopping => 'تسوق';
+  String get shopping => 'التسوق';
 
   @override
   String get subscriptions => 'الاشتراكات';
@@ -349,4 +349,16 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get shoppingTitle => 'التسوق';
+
+  @override
+  String get statisticsTitle => 'الإحصائيات';
+
+  @override
+  String get monthly => 'شهري';
+
+  @override
+  String get recent => 'الأخيرة';
+
+  @override
+  String get subscriptionsTitle => 'الاشتراكات';
 }

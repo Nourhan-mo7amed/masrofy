@@ -160,7 +160,22 @@
    "shoppingTitle": "التسوق",
   "food": "طعام",
   "payToEmployees": "دفع للموظفين",
-  "healthExpenditures": "نفقات صحية"
+  "healthExpenditures": "نفقات صحية",
+
+    "statisticsTitle": "الإحصائيات",
+  "monthly": "شهري",
+  "totalBalance": "الرصيد الإجمالي",
+  "another": "آخر",
+  "subscriptions": "الاشتراكات",
+  "shopping": "التسوق",
+  "food": "الطعام",
+  "recent": "الأخيرة",
+  "seeAll": "عرض الكل",
+
+    "subscriptionsTitle": "الاشتراكات",
+  "food": "طعام",
+  "payToEmployees": "دفع للموظفين",
+  "healthExpenditures": "النفقات الصحية"
 
 
 }
