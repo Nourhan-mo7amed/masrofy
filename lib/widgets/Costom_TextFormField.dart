@@ -26,7 +26,6 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      
       onChanged: widget.onChanged,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       validator: (value) {
@@ -46,7 +45,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
                   });
                 },
                 icon: Icon(
-                  sec == true ? Icons.visibility : Icons.visibility_off,
+                  sec ? Icons.visibility_off : Icons.visibility,
                   color: Color(0xffA8A8A9),
                 ),
               )
