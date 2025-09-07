@@ -54,6 +54,8 @@ class AppRoutes {
   static const String about = '/about';
   static const String passwordManager = '/passwordManager';
 
+
+
   static Map<String, WidgetBuilder> routes = {
     splash: (context) => const SplashScreen(),
     onboarding: (context) => const OnBoardingScreen(),
@@ -81,5 +83,7 @@ class AppRoutes {
     help: (context) => const HelpScreen(),
     about: (context) => const AboutScreen(),
     passwordManager: (context) => PasswordManager(),
+
+    
   };
 }

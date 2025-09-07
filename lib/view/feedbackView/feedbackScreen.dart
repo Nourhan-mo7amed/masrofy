@@ -55,8 +55,8 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
               SizedBox(height: 12),
               RatingStars(
                 rating: rating,
-                onRate: (val) {
-                  setState(() => rating = val);
+                onRate: (value) {
+                  setState(() => rating = value);
                 },
               ),
 
