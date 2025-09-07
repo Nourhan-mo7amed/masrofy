@@ -33,6 +33,7 @@ class _CustomLoginFormState extends State<CustomLoginForm> {
     return Form(
       key: _globalKey,
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Email label
           Text(
@@ -106,8 +107,7 @@ class _CustomLoginFormState extends State<CustomLoginForm> {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
                               backgroundColor: Colors.red,
-                              content: Text(
-                                  errorMessage ?? loc.loginFailed),
+                              content: Text(errorMessage ?? loc.loginFailed),
                             ),
                           );
                         }
