@@ -17,6 +17,7 @@ class _AddIncomeScreen extends State<AddIncomeScreen> {
   final TextEditingController _amountController = TextEditingController();
 
   DateTime? selectedDate;
+  int selectedCategory = -1;
 
   @override
   Widget build(BuildContext context) {
@@ -169,6 +170,7 @@ class _AddIncomeScreen extends State<AddIncomeScreen> {
                         notes: _notesController.text.isEmpty
                             ? null
                             : _notesController.text,
+                        categoryIndex: selectedCategory,
                       );
                       context.read<TransactionViewmodel>().addTransaction(
                         newTransaction,
