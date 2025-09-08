@@ -32,7 +32,7 @@ class AuthRepository {
         });
 
         print("✅ Added to Firestore");
-        return UserModel(name: name, email: email);
+        return UserModel(name: name, email: email, uid: firebaseUser.uid);
       }
     } on FirebaseAuthException catch (e) {
       print('❌ FirebaseAuth Error in signUp: ${e.message}');
@@ -50,7 +50,6 @@ class AuthRepository {
   }) async {
     try {
       // تسجيل الدخول
-
       print(email);
       print(password);
       UserCredential userCredential = await _firebaseAuth
@@ -64,10 +63,12 @@ class AuthRepository {
             .collection('users')
             .doc(firebaseUser.uid)
             .get();
-            print("wellllllllllllll hooooooooooooooooo😍😎😎😋😍😎");
 
         if (userDoc.exists) {
-          return UserModel(name: userDoc['name'], email: userDoc['email']);
+          return UserModel(
+              name: userDoc['name'],
+              email: userDoc['email'],
+              uid: firebaseUser.uid);
         } else {
           print("⚠️ User document does not exist in Firestore.");
         }
@@ -84,9 +85,19 @@ class AuthRepository {
     }
     return null;
   }
+
+  // 🟢 Forgot Password
+  Future<void> resetPassword({required String email}) async {
+    try {
+      await _firebaseAuth.sendPasswordResetEmail(email: email);
+      print("✅ Password reset email sent to $email");
+    } on FirebaseAuthException catch (e) {
+      print("❌ FirebaseAuth Error in resetPassword: ${e.message}");
+    } catch (e) {
+      print("❌ Unknown Error in resetPassword: $e");
+    }
+  }
 }
-
-
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -99,7 +110,8 @@ class AuthService {
       if (googleUser == null) return null;
 
       // 2. جلب بيانات المصادقة
-      final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser.authentication;
 
       // 3. إنشاء credential
       final AuthCredential credential = GoogleAuthProvider.credential(
@@ -108,7 +120,8 @@ class AuthService {
       );
 
       // 4. تسجيل الدخول في Firebase
-      final UserCredential userCredential = await _auth.signInWithCredential(credential);
+      final UserCredential userCredential =
+          await _auth.signInWithCredential(credential);
 
       return userCredential.user;
     } catch (e) {
