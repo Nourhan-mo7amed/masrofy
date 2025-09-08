@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
-import 'package:masrofy/models/transaction_model.dart';
-import 'package:provider/provider.dart';
-import '../../viewmodels/transaction_viewModel.dart';
-=======
 // import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:masrofy/l10n/app_localizations.dart';
->>>>>>> 47816bf63063bbdf9b277b79f58e293c456513cb
+import 'package:masrofy/models/transaction_model.dart';
+import 'package:masrofy/viewmodels/transaction_viewModel.dart';
+import 'package:provider/provider.dart';
 
 class AddIncomeScreen extends StatefulWidget {
   @override
@@ -41,17 +38,11 @@ class _AddIncomeScreen extends State<AddIncomeScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-<<<<<<< HEAD
                 Text(
-                  "Expense Title",
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  loc.incomeTitle,
+                  style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
-                SizedBox(height: 10),
-=======
-                Text(loc.incomeTitle,
-                    style: const TextStyle(fontWeight: FontWeight.bold)),
                 const SizedBox(height: 10),
->>>>>>> 47816bf63063bbdf9b277b79f58e293c456513cb
                 TextField(
                   controller: _titleController,
                   decoration: InputDecoration(
@@ -68,24 +59,19 @@ class _AddIncomeScreen extends State<AddIncomeScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-<<<<<<< HEAD
                           Text(
-                            "Amount",
-                            style: TextStyle(fontWeight: FontWeight.bold),
+                            loc.amount,
+                            style: const TextStyle(fontWeight: FontWeight.bold),
                           ),
-                          SizedBox(height: 10),
-=======
-                          Text(loc.amount,
-                              style:
-                                  const TextStyle(fontWeight: FontWeight.bold)),
                           const SizedBox(height: 10),
->>>>>>> 47816bf63063bbdf9b277b79f58e293c456513cb
                           TextField(
                             controller: _amountController,
                             keyboardType: TextInputType.number,
                             decoration: InputDecoration(
-                              prefixIcon:
-                                  const Icon(Icons.attach_money, size: 20),
+                              prefixIcon: const Icon(
+                                Icons.attach_money,
+                                size: 20,
+                              ),
                               hintText: "\$ 2000",
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(12),
@@ -100,18 +86,11 @@ class _AddIncomeScreen extends State<AddIncomeScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-<<<<<<< HEAD
                           Text(
-                            "Select Date",
-                            style: TextStyle(fontWeight: FontWeight.bold),
+                            loc.selectDate,
+                            style: const TextStyle(fontWeight: FontWeight.bold),
                           ),
-                          SizedBox(height: 10),
-=======
-                          Text(loc.selectDate,
-                              style:
-                                  const TextStyle(fontWeight: FontWeight.bold)),
                           const SizedBox(height: 10),
->>>>>>> 47816bf63063bbdf9b277b79f58e293c456513cb
                           TextField(
                             controller: _dateController,
                             readOnly: true,
@@ -131,8 +110,10 @@ class _AddIncomeScreen extends State<AddIncomeScreen> {
                               }
                             },
                             decoration: InputDecoration(
-                              prefixIcon:
-                                  const Icon(Icons.calendar_today, size: 20),
+                              prefixIcon: const Icon(
+                                Icons.calendar_today,
+                                size: 20,
+                              ),
                               hintText: loc.sampleDate,
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(12),
@@ -145,8 +126,10 @@ class _AddIncomeScreen extends State<AddIncomeScreen> {
                   ],
                 ),
                 const SizedBox(height: 20),
-                Text(loc.notes,
-                    style: const TextStyle(fontWeight: FontWeight.bold)),
+                Text(
+                  loc.notes,
+                  style: const TextStyle(fontWeight: FontWeight.bold),
+                ),
                 const SizedBox(height: 10),
                 TextField(
                   controller: _notesController,
@@ -193,17 +176,11 @@ class _AddIncomeScreen extends State<AddIncomeScreen> {
                       Navigator.pop(context);
                     },
                     child: Text(
-<<<<<<< HEAD
-                      "Save",
-                      style: TextStyle(
+                      loc.save,
+                      style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
                       ),
-=======
-                      loc.save,
-                      style: const TextStyle(
-                          fontSize: 16, fontWeight: FontWeight.bold),
->>>>>>> 47816bf63063bbdf9b277b79f58e293c456513cb
                     ),
                   ),
                 ),
@@ -215,22 +192,6 @@ class _AddIncomeScreen extends State<AddIncomeScreen> {
     );
   }
 
-<<<<<<< HEAD
-  String _monthName(int month) {
-    const months = [
-      "january",
-      "february",
-      "march",
-      "april",
-      "may",
-      "june",
-      "july",
-      "august",
-      "september",
-      "october",
-      "november",
-      "december",
-=======
   String _monthName(int month, AppLocalizations loc) {
     final months = [
       loc.january,
@@ -244,8 +205,7 @@ class _AddIncomeScreen extends State<AddIncomeScreen> {
       loc.september,
       loc.october,
       loc.november,
-      loc.december
->>>>>>> 47816bf63063bbdf9b277b79f58e293c456513cb
+      loc.december,
     ];
     return months[month - 1];
   }
