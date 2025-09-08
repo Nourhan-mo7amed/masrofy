@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:masrofy/models/user_model.dart';
 
 class AuthRepository {
@@ -82,5 +83,42 @@ class AuthRepository {
       print('❌ Unknown Error in login: $e');
     }
     return null;
+  }
+}
+
+
+
+class AuthService {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final GoogleSignIn _googleSignIn = GoogleSignIn();
+
+  Future<User?> signInWithGoogle() async {
+    try {
+      // 1. تسجيل الدخول من جوجل
+      final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
+      if (googleUser == null) return null;
+
+      // 2. جلب بيانات المصادقة
+      final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+
+      // 3. إنشاء credential
+      final AuthCredential credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+
+      // 4. تسجيل الدخول في Firebase
+      final UserCredential userCredential = await _auth.signInWithCredential(credential);
+
+      return userCredential.user;
+    } catch (e) {
+      print('❌ Error in Google Sign-In: $e');
+      return null;
+    }
+  }
+
+  Future<void> signOut() async {
+    await _googleSignIn.signOut();
+    await _auth.signOut();
   }
 }

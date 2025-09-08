@@ -1,13 +1,16 @@
-
 import 'package:flutter/material.dart';
+import 'package:masrofy/l10n/app_localizations.dart';
 import 'package:masrofy/view/registerView/Custom_regiestartion_form.dart';
 import '../../widgets/social_Icon.dart';
+// import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class RegisterScreen extends StatelessWidget {
   const RegisterScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -20,33 +23,32 @@ class RegisterScreen extends StatelessWidget {
 
               // Title
               Text(
-                "Create Account",
-                style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+                loc.createAccount,
+                style: const TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 8),
               Text(
-                "Sign up to start managing your budget.",
-                style: TextStyle(fontSize: 14, color: Colors.black54),
+                loc.signUpToStart,
+                style: const TextStyle(fontSize: 14, color: Colors.black54),
               ),
 
               const SizedBox(height: 32),
-              CustomRegistrationForm(),
+              const CustomRegistrationForm(),
 
-              // Full Name
               const SizedBox(height: 24),
 
               // Divider with text
               Row(
-                children: const [
-                  Expanded(child: Divider(thickness: 1, color: Colors.grey)),
+                children: [
+                  const Expanded(child: Divider(thickness: 1, color: Colors.grey)),
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 8.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
                     child: Text(
-                      "or sign up with",
-                      style: TextStyle(color: Colors.black54),
+                      loc.orSignUpWith,
+                      style: const TextStyle(color: Colors.black54),
                     ),
                   ),
-                  Expanded(child: Divider(thickness: 1, color: Colors.grey)),
+                  const Expanded(child: Divider(thickness: 1, color: Colors.grey)),
                 ],
               ),
 
@@ -70,14 +72,14 @@ class RegisterScreen extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text("Already have an account? "),
+                  Text(loc.alreadyHaveAccount + " "),
                   GestureDetector(
                     onTap: () {
                       Navigator.pop(context);
                     },
-                    child: const Text(
-                      "Log In",
-                      style: TextStyle(
+                    child: Text(
+                      loc.logIn,
+                      style: const TextStyle(
                         color: Color(0xFF6155F5),
                         fontWeight: FontWeight.w600,
                       ),
@@ -92,5 +94,3 @@ class RegisterScreen extends StatelessWidget {
     );
   }
 }
-
-

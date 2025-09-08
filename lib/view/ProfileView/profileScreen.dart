@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+// import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:masrofy/l10n/app_localizations.dart';
 import '../../widgets/profilecard.dart';
 import '../../widgets/LogoutBottomSheet.dart';
 
@@ -20,6 +22,8 @@ class Profilescreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -27,24 +31,24 @@ class Profilescreen extends StatelessWidget {
             const SizedBox(height: 40),
             Center(
               child: Column(
-                children: const [
-                  CircleAvatar(
+                children: [
+                  const CircleAvatar(
                     backgroundImage: AssetImage("assets/6eca1b5bc.png"),
                     radius: 50,
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   Text(
-                    "Ahmed Hamdy",
-                    style: TextStyle(
+                    loc.userName,
+                    style: const TextStyle(
                       color: Colors.black,
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(height: 5),
+                  const SizedBox(height: 5),
                   Text(
-                    "ahmed.hamdy@gmail.com",
-                    style: TextStyle(
+                    loc.userEmail,
+                    style: const TextStyle(
                       color: Colors.grey,
                       fontSize: 12,
                       fontWeight: FontWeight.bold,
@@ -58,35 +62,32 @@ class Profilescreen extends StatelessWidget {
               children: [
                 ProfileCard(
                   icon: Icons.account_circle,
-                  text: "Account Info",
+                  text: loc.accountInfo,
                   color: Colors.purple,
                 ),
                 const SizedBox(height: 10),
-
                 ProfileCard(
                   icon: Icons.privacy_tip_outlined,
-                  text: "Privacy Policy",
+                  text: loc.privacyPolicy,
                   color: Colors.green,
                   onTap: () {
                     Navigator.pushNamed(context, '/privacypolicy');
                   },
                 ),
-
                 const SizedBox(height: 10),
                 ProfileCard(
                   icon: Icons.settings,
-                  text: "Settings",
-                  color: Color(0xFFB55E00),
+                  text: loc.settings,
+                  color: const Color(0xFFB55E00),
                   onTap: () {
                     Navigator.pushNamed(context, '/settings');
                   },
                 ),
-
                 const SizedBox(height: 10),
                 ProfileCard(
                   icon: Icons.logout,
-                  text: "Logout",
-                  color: Color(0xFFFF0000),
+                  text: loc.logout,
+                  color: const Color(0xFFFF0000),
                   onTap: () => _showLogoutSheet(context),
                 ),
                 const SizedBox(height: 20),

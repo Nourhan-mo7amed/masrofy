@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:masrofy/core/constants/colors_app.dart';
+import 'package:masrofy/l10n/app_localizations.dart';
 import '../../widgets/Custom_TextField.dart';
+// import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class MonthlyBudgetScreen extends StatelessWidget {
   const MonthlyBudgetScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -30,30 +34,31 @@ class MonthlyBudgetScreen extends StatelessWidget {
                       const SizedBox(height: 24),
 
                       // Title
-                      const Text(
-                        "Monthly Budget Goal",
-                        style: TextStyle(
+                      Text(
+                        loc.monthlyBudgetTitle,
+                        style: const TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
                         ),
                         textAlign: TextAlign.center,
                       ),
                       const SizedBox(height: 8),
-                      const Text(
-                        "Do you have a monthly spending goal?",
-                        style: TextStyle(fontSize: 14, color: Colors.black54),
+                      Text(
+                        loc.monthlyBudgetSubtitle,
+                        style: const TextStyle(fontSize: 14, color: Colors.black54),
                         textAlign: TextAlign.center,
                       ),
 
                       const SizedBox(height: 32),
 
                       // TextField
-                      const CustomTextField(
-                        hintText: 'Enter amount',
-                        icon: Icons.attach_money, controller: null,//error null!!!!!
+                      CustomTextField(
+                        hintText: loc.enterAmountHint,
+                        icon: Icons.attach_money,
+                        controller: null, // assign a controller if needed
                       ),
                       const SizedBox(height: 8),
-                      Text('You can always change this later.'),
+                      Text(loc.changeLaterNote),
 
                       const SizedBox(height: 16),
 
@@ -62,9 +67,9 @@ class MonthlyBudgetScreen extends StatelessWidget {
                         onPressed: () {
                           Navigator.pushNamed(context, '/categories');
                         },
-                        child: const Text(
-                          "SKIP",
-                          style: TextStyle(
+                        child: Text(
+                          loc.skip,
+                          style: const TextStyle(
                             color: Colors.black,
                             fontSize: 16,
                             fontWeight: FontWeight.w500,
@@ -90,9 +95,9 @@ class MonthlyBudgetScreen extends StatelessWidget {
                   onPressed: () {
                     Navigator.pushNamed(context, '/categories');
                   },
-                  child: const Text(
-                    "Next",
-                    style: TextStyle(color: Colors.white, fontSize: 16),
+                  child: Text(
+                    loc.next,
+                    style: const TextStyle(color: Colors.white, fontSize: 16),
                   ),
                 ),
               ),

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:masrofy/l10n/app_localizations.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+// import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../core/constants/colors_app.dart';
 
 class OnBoardingScreen extends StatefulWidget {
@@ -15,40 +17,42 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   bool isLastPage = false;
   int currentPage = 0;
 
-  final List<Map<String, String>> pages = [
-    {
-      "animation": "assets/animations/budget.json",
-      "title": "Your Budget, Your Rules",
-      "subtitle":
-          "Easily track your expenses, plan your budget, and achieve your financial goals.",
-    },
-    {
-      "animation": "assets/animations/spending.json",
-      "title": "Track Your Spending",
-      "subtitle":
-          "Easily record your daily expenses and stay on top of your budget.",
-    },
-    {
-      "animation": "assets/animations/save1.json",
-      "title": "Save Smarter",
-      "subtitle": "Reduce waste and watch your savings grow effortlessly.",
-    },
-  ];
+  late final List<Map<String, String>> pages;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final loc = AppLocalizations.of(context)!;
+    pages = [
+      {
+        "animation": "assets/animations/budget.json",
+        "title": loc.page1Title,
+        "subtitle": loc.page1Subtitle,
+      },
+      {
+        "animation": "assets/animations/spending.json",
+        "title": loc.page2Title,
+        "subtitle": loc.page2Subtitle,
+      },
+      {
+        "animation": "assets/animations/save1.json",
+        "title": loc.page3Title,
+        "subtitle": loc.page3Subtitle,
+      },
+    ];
+  }
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
+
     return Scaffold(
       backgroundColor: AppColors.background,
       body: SafeArea(
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.only(
-                left: 24,
-                right: 24,
-                top: 30,
-                bottom: 0,
-              ),
+              padding: const EdgeInsets.only(left: 24, right: 24, top: 30),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -60,10 +64,9 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                           curve: Curves.easeInOut,
                         );
                       },
-
-                      child: const Text(
-                        "Back",
-                        style: TextStyle(
+                      child: Text(
+                        loc.back,
+                        style: const TextStyle(
                           fontSize: 16,
                           color: Colors.black54,
                           fontWeight: FontWeight.w600,
@@ -76,9 +79,9 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                     onTap: () {
                       Navigator.pushReplacementNamed(context, "/login");
                     },
-                    child: const Text(
-                      "Skip",
-                      style: TextStyle(
+                    child: Text(
+                      loc.skip,
+                      style: const TextStyle(
                         fontSize: 16,
                         color: AppColors.primary,
                         fontWeight: FontWeight.w600,
@@ -141,7 +144,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
             SmoothPageIndicator(
               controller: _controller,
               count: pages.length,
-              effect: ExpandingDotsEffect(
+              effect: const ExpandingDotsEffect(
                 activeDotColor: AppColors.primary,
                 dotColor: AppColors.unselected,
                 dotHeight: 8,
@@ -173,7 +176,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                   }
                 },
                 child: Text(
-                  isLastPage ? "Get Started" : "Next",
+                  isLastPage ? loc.getStarted : loc.next,
                   style: const TextStyle(color: Colors.white, fontSize: 16),
                 ),
               ),

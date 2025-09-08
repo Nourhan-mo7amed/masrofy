@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:masrofy/l10n/app_localizations.dart';
+import 'package:masrofy/repositories/auth_repsitories.dart';
 import 'package:masrofy/view/loginView/custom_login_form.dart';
 import '../../widgets/social_Icon.dart';
+// import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -16,54 +21,77 @@ class LoginScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 32),
-              const Text(
-                "Welcome back",
-                style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+
+              // Welcome Text
+              Text(
+                loc.welcomeBack,
+                style: const TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 8),
-              const Text(
-                "Log in to continue managing your budget.",
-                style: TextStyle(fontSize: 14, color: Colors.black54),
+
+              // Description
+              Text(
+                loc.loginDescription,
+                style: const TextStyle(fontSize: 14, color: Colors.black54),
               ),
               const SizedBox(height: 32),
+
+              // Custom Login Form
               const CustomLoginForm(),
               const SizedBox(height: 24),
+
+              // Or login with
               Row(
-                children: const [
-                  Expanded(child: Divider(thickness: 1, color: Colors.grey)),
+                children: [
+                  const Expanded(child: Divider(thickness: 1, color: Colors.grey)),
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 8.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
                     child: Text(
-                      "or log in with",
-                      style: TextStyle(color: Colors.black54),
+                      loc.orLoginWith,
+                      style: const TextStyle(color: Colors.black54),
                     ),
                   ),
-                  Expanded(child: Divider(thickness: 1, color: Colors.grey)),
+                  const Expanded(child: Divider(thickness: 1, color: Colors.grey)),
                 ],
               ),
               const SizedBox(height: 24),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  SocialIcon(imagePath: 'assets/images/google.png'),
-                  SizedBox(width: 16),
-                  SocialIcon(imagePath: 'assets/images/facebook.png'),
-                  SizedBox(width: 16),
-                  SocialIcon(imagePath: 'assets/images/apple.png'),
-                ],
-              ),
-              const SizedBox(height: 24),
+
+              // Social Icons
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text("Don't have an account? "),
+                  SocialIcon(
+                    imagePath: 'assets/images/google.png',
+                    onTap: () async {
+                      final user = await AuthService().signInWithGoogle();
+                      if (user != null) {
+                        print('✅ Logged in as: ${user.displayName}');
+                        Navigator.pushReplacementNamed(context, '/home');
+                      } else {
+                        print('❌ Google Sign-In Failed');
+                      }
+                    },
+                  ),
+                  const SizedBox(width: 16),
+                  const SocialIcon(imagePath: 'assets/images/facebook.png'),
+                  const SizedBox(width: 16),
+                  const SocialIcon(imagePath: 'assets/images/apple.png'),
+                ],
+              ),
+              const SizedBox(height: 24),
+
+              // Sign Up
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(loc.dontHaveAccount),
                   GestureDetector(
                     onTap: () {
                       Navigator.pushNamed(context, '/register');
                     },
-                    child: const Text(
-                      "Sign Up",
-                      style: TextStyle(
+                    child: Text(
+                      loc.signUp,
+                      style: const TextStyle(
                         color: Color(0xFF6155F5),
                         fontWeight: FontWeight.w600,
                       ),
@@ -78,5 +106,3 @@ class LoginScreen extends StatelessWidget {
     );
   }
 }
-
-

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:masrofy/l10n/app_localizations.dart';
+// import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../widgets/expenseItem.dart';
 import '../../view/statisticsView/StatisticsScreen.dart';
 import '../../view/addView/addScreen.dart';
@@ -15,41 +17,29 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
 
-  late final List<Widget> _pages;
-
-  @override
-  void initState() {
-    super.initState();
-    _pages = [
-      _buildHomePage(),
-      StatisticsScreen(),
-      AddScreen(),
-      AlltransactionScreen(),
-      Profilescreen(),
-    ];
-  }
-
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
     });
   }
 
-  Widget _buildHomePage() {
+  Widget _buildHomePage(BuildContext context) {
+    final t = AppLocalizations.of(context)!; // for translations
+
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(8.0),
             child: Row(
               children: [
-                IconButton(onPressed: () {}, icon: Icon(Icons.list, size: 30)),
-                SizedBox(width: 90),
+                const Icon(Icons.list, size: 30),
+                const SizedBox(width: 90),
                 Center(
                   child: Text(
-                    "Home",
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    t.homeTitle,
+                    style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                 ),
               ],
@@ -58,11 +48,11 @@ class _HomeScreenState extends State<HomeScreen> {
           Container(
             height: 160,
             width: double.infinity,
-            margin: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-            padding: EdgeInsets.all(16),
+            margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+            padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
-              gradient: LinearGradient(
+              gradient: const LinearGradient(
                 colors: [
                   Color.fromARGB(255, 52, 92, 224),
                   Color.fromARGB(255, 211, 74, 181),
@@ -81,21 +71,17 @@ class _HomeScreenState extends State<HomeScreen> {
                     Row(
                       children: [
                         Text(
-                          "Total Balance ",
-                          style: TextStyle(color: Colors.white, fontSize: 14),
+                          t.totalBalance,
+                          style: const TextStyle(color: Colors.white, fontSize: 14),
                         ),
-                        Icon(
-                          Icons.keyboard_arrow_down,
-                          color: Colors.white,
-                          size: 18,
-                        ),
+                        const Icon(Icons.keyboard_arrow_down, color: Colors.white, size: 18),
                       ],
                     ),
-                    Icon(Icons.more_horiz, color: Colors.white),
+                    const Icon(Icons.more_horiz, color: Colors.white),
                   ],
                 ),
-                SizedBox(height: 8),
-                Text(
+                const SizedBox(height: 8),
+                const Text(
                   "\$ 3,350.00",
                   style: TextStyle(
                     color: Colors.white,
@@ -103,21 +89,17 @@ class _HomeScreenState extends State<HomeScreen> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                Spacer(flex: 2),
+                const Spacer(flex: 2),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Row(
                       children: [
-                        Icon(
-                          Icons.arrow_circle_up_outlined,
-                          color: Colors.white,
-                          size: 20,
-                        ),
-                        SizedBox(width: 6),
+                        const Icon(Icons.arrow_circle_up_outlined, color: Colors.white, size: 20),
+                        const SizedBox(width: 6),
                         Text(
-                          "Income \n\$ 2,250.00",
-                          style: TextStyle(
+                          "${t.income}\n\$ 2,250.00",
+                          style: const TextStyle(
                             color: Colors.white,
                             fontSize: 14,
                             fontWeight: FontWeight.bold,
@@ -127,15 +109,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     Row(
                       children: [
-                        Icon(
-                          Icons.arrow_circle_down_outlined,
-                          color: Colors.white,
-                          size: 20,
-                        ),
-                        SizedBox(width: 6),
+                        const Icon(Icons.arrow_circle_down_outlined, color: Colors.white, size: 20),
+                        const SizedBox(width: 6),
                         Text(
-                          "Expenses\n\$ 1,300.00",
-                          style: TextStyle(
+                          "${t.expenses}\n\$ 1,300.00",
+                          style: const TextStyle(
                             color: Colors.white,
                             fontSize: 14,
                             fontWeight: FontWeight.bold,
@@ -148,56 +126,48 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
             child: Text(
-              "Expense",
-              style: TextStyle(fontSize: 30, color: Colors.black),
+              t.expense,
+              style: const TextStyle(fontSize: 30, color: Colors.black),
             ),
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           InkWell(
-            onTap: () {
-              Navigator.pushNamed(context, '/shopping');
-            },
+            onTap: () => Navigator.pushNamed(context, '/shopping'),
             child: ExpenseItem(
               icon: Icons.shopping_bag_outlined,
               color: Colors.orange,
-              title: "Shopping",
+              title: t.shopping,
               amount: "- 300.49",
             ),
           ),
           InkWell(
-            onTap: () {
-              Navigator.pushNamed(context, '/subscriptions');
-            },
+            onTap: () => Navigator.pushNamed(context, '/subscriptions'),
             child: ExpenseItem(
               icon: Icons.subscriptions_outlined,
               color: Colors.pink,
-              title: "Subscriptions",
+              title: t.subscriptions,
               amount: "- 300.49",
             ),
           ),
           InkWell(
-            onTap: () {
-              Navigator.pushNamed(context, '/food');
-            },
+            onTap: () => Navigator.pushNamed(context, '/food'),
             child: ExpenseItem(
               icon: Icons.fastfood_outlined,
               color: Colors.purple,
-              title: "Food",
+              title: t.food,
               amount: "- 300.49",
             ),
           ),
           InkWell(
-            onTap: () {
-              Navigator.pushNamed(context, '/another');
-            },
+            onTap: () => Navigator.pushNamed(context, '/another'),
             child: ExpenseItem(
               icon: Icons.widgets_outlined,
               color: Colors.blue,
-              title: "Another",
+              title: t.another,
               amount: "- 300.49",
             ),
           ),
@@ -208,19 +178,28 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // Build pages here so context is valid
+    final pages = [
+      _buildHomePage(context),
+      const StatisticsScreen(),
+      const AddScreen(),
+      const AlltransactionScreen(),
+      const Profilescreen(),
+    ];
+
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(20),
         child: AppBar(automaticallyImplyLeading: false),
       ),
-      body: _pages[_selectedIndex],
+      body: pages[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         currentIndex: _selectedIndex,
-        selectedItemColor: Color(0xFF6155F5),
+        selectedItemColor: const Color(0xFF6155F5),
         unselectedItemColor: Colors.grey,
         onTap: _onItemTapped,
-        items: [
+        items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home_outlined, size: 30),
             label: "",

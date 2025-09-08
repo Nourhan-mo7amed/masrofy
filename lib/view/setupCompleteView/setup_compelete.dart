@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:masrofy/core/constants/colors_app.dart';
+// import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:masrofy/l10n/app_localizations.dart';
 
 class SetupCompleteScreen extends StatelessWidget {
   const SetupCompleteScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -26,9 +30,10 @@ class SetupCompleteScreen extends StatelessWidget {
               ),
               const SizedBox(height: 24),
 
-              const Text(
-                "Setup complete!",
-                style: TextStyle(
+              // Title
+              Text(
+                loc.setupCompleteTitle,
+                style: const TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.bold,
                   color: AppColors.income,
@@ -36,9 +41,11 @@ class SetupCompleteScreen extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 8),
-              const Text(
-                "You can now start tracking and organizing your expenses",
-                style: TextStyle(fontSize: 14, color: Colors.black54),
+
+              // Subtitle
+              Text(
+                loc.setupCompleteSubtitle,
+                style: const TextStyle(fontSize: 14, color: Colors.black54),
                 textAlign: TextAlign.center,
               ),
 
@@ -58,9 +65,9 @@ class SetupCompleteScreen extends StatelessWidget {
                   onPressed: () {
                     Navigator.pushNamed(context, '/home');
                   },
-                  child: const Text(
-                    "Start Budgeting",
-                    style: TextStyle(color: Colors.white, fontSize: 16),
+                  child: Text(
+                    loc.startBudgeting,
+                    style: const TextStyle(color: Colors.white, fontSize: 16),
                   ),
                 ),
               ),

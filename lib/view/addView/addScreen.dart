@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:masrofy/l10n/app_localizations.dart';
+// import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../widgets/add_expenseitem.dart';
 
 class AddScreen extends StatelessWidget {
@@ -6,17 +8,19 @@ class AddScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
+
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(40),
+        preferredSize: const Size.fromHeight(40),
         child: AppBar(
           centerTitle: true,
-          title: const Text(
-            "Add",
-            style: TextStyle(fontWeight: FontWeight.bold),
+          title: Text(
+            loc.add,
+            style: const TextStyle(fontWeight: FontWeight.bold),
           ),
           leading: IconButton(
-            icon: Icon(Icons.arrow_back),
+            icon: const Icon(Icons.arrow_back),
             onPressed: () {
               Navigator.pushNamed(context, '/home');
             },
@@ -25,11 +29,11 @@ class AddScreen extends StatelessWidget {
       ),
       backgroundColor: Colors.white,
       body: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 40),
+            const SizedBox(height: 40),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -39,23 +43,23 @@ class AddScreen extends StatelessWidget {
                       Navigator.pushNamed(context, '/addIncome');
                     },
                     child: Container(
-                      padding: EdgeInsets.all(20),
-                      margin: EdgeInsets.only(right: 8),
+                      padding: const EdgeInsets.all(20),
+                      margin: const EdgeInsets.only(right: 8),
                       decoration: BoxDecoration(
                         color: Colors.deepPurple.shade100,
                         borderRadius: BorderRadius.circular(16),
                       ),
                       child: Column(
                         children: [
-                          Icon(
+                          const Icon(
                             Icons.account_balance_wallet,
                             size: 40,
                             color: Colors.deepPurple,
                           ),
-                          SizedBox(height: 8),
+                          const SizedBox(height: 8),
                           Text(
-                            "Add Income",
-                            style: TextStyle(fontWeight: FontWeight.bold),
+                            loc.addIncome,
+                            style: const TextStyle(fontWeight: FontWeight.bold),
                           ),
                         ],
                       ),
@@ -68,23 +72,23 @@ class AddScreen extends StatelessWidget {
                       Navigator.pushNamed(context, '/addExpense');
                     },
                     child: Container(
-                      padding: EdgeInsets.all(20),
-                      margin: EdgeInsets.only(left: 8),
+                      padding: const EdgeInsets.all(20),
+                      margin: const EdgeInsets.only(left: 8),
                       decoration: BoxDecoration(
                         color: Colors.orange.shade100,
                         borderRadius: BorderRadius.circular(16),
                       ),
                       child: Column(
                         children: [
-                          Icon(
+                          const Icon(
                             Icons.shopping_bag,
                             size: 40,
                             color: Colors.orange,
                           ),
-                          SizedBox(height: 8),
+                          const SizedBox(height: 8),
                           Text(
-                            "Add Expense",
-                            style: TextStyle(fontWeight: FontWeight.bold),
+                            loc.addExpense,
+                            style: const TextStyle(fontWeight: FontWeight.bold),
                           ),
                         ],
                       ),
@@ -93,71 +97,74 @@ class AddScreen extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 30),
+            const SizedBox(height: 30),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "Last Expenses",
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  loc.lastExpenses,
+                  style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 ),
-                Text("See All", style: TextStyle(color: Colors.grey)),
+                Text(
+                  loc.seeAll,
+                  style: const TextStyle(color: Colors.grey),
+                ),
               ],
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Expanded(
               child: ListView(
                 children: [
                   AddExpenseItem(
-                    title: "Food",
+                    title: loc.food,
                     date: "22 July 2025",
                     amount: "-\$300.49",
                     color: Colors.red,
                   ),
                   AddExpenseItem(
-                    title: "Pay to Employees",
+                    title: loc.payToEmployees,
                     date: "20 July",
                     amount: "-\$12,400.00",
                     color: Colors.red,
                   ),
                   AddExpenseItem(
-                    title: "Health Expenditures",
+                    title: loc.healthExpenditures,
                     date: "14 July 2021",
                     amount: "-\$280.00",
                     color: Colors.red,
                   ),
                   AddExpenseItem(
-                    title: "Food",
+                    title: loc.food,
                     date: "22 July 2025",
                     amount: "-\$300.49",
                     color: Colors.red,
                   ),
                   AddExpenseItem(
-                    title: "Pay to Employees",
+                    title: loc.payToEmployees,
                     date: "20 July",
                     amount: "-\$12,400.00",
                     color: Colors.red,
                   ),
                   AddExpenseItem(
-                    title: "Health Expenditures",
+                    title: loc.healthExpenditures,
                     date: "14 July 2021",
                     amount: "-\$280.00",
                     color: Colors.red,
                   ),
                   AddExpenseItem(
-                    title: "Food",
+                    title: loc.food,
                     date: "22 July 2025",
                     amount: "-\$300.49",
                     color: Colors.red,
                   ),
                   AddExpenseItem(
-                    title: "Pay to Employees",
+                    title: loc.payToEmployees,
                     date: "20 July",
                     amount: "-\$12,400.00",
                     color: Colors.red,
                   ),
                   AddExpenseItem(
-                    title: "Health Expenditures",
+                    title: loc.healthExpenditures,
                     date: "14 July 2021",
                     amount: "-\$280.00",
                     color: Colors.red,

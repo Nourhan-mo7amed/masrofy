@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:masrofy/l10n/app_localizations.dart';
+// import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../widgets/tapButtom.dart';
 
 class AlltransactionScreen extends StatefulWidget {
@@ -12,17 +14,19 @@ class _AlltransactionScreen extends State<AlltransactionScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
+
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(40),
+        preferredSize: const Size.fromHeight(40),
         child: AppBar(
           centerTitle: true,
           title: Text(
-            "All Transaction",
-            style: TextStyle(fontWeight: FontWeight.bold),
+            loc.allTransactions,
+            style: const TextStyle(fontWeight: FontWeight.bold),
           ),
           leading: IconButton(
-            icon: Icon(Icons.arrow_back),
+            icon: const Icon(Icons.arrow_back),
             onPressed: () {
               Navigator.pushNamed(context, '/home');
             },
@@ -35,13 +39,13 @@ class _AlltransactionScreen extends State<AlltransactionScreen> {
           children: [
             const SizedBox(height: 20),
             Padding(
-              padding: EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Expanded(
                     child: TabButton(
-                      text: "Expenses",
+                      text: loc.expenses,
                       isSelected: selectedTab == 0,
                       onTap: () {
                         setState(() {
@@ -50,10 +54,10 @@ class _AlltransactionScreen extends State<AlltransactionScreen> {
                       },
                     ),
                   ),
-                  SizedBox(width: 10),
+                  const SizedBox(width: 10),
                   Expanded(
                     child: TabButton(
-                      text: "Income",
+                      text: loc.income,
                       isSelected: selectedTab == 1,
                       onTap: () {
                         setState(() {
@@ -65,11 +69,10 @@ class _AlltransactionScreen extends State<AlltransactionScreen> {
                 ],
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
           ],
         ),
       ),
     );
   }
 }
-

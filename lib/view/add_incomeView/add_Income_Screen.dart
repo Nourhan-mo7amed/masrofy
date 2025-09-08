@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
 import 'package:masrofy/models/transaction_model.dart';
 import 'package:provider/provider.dart';
 import '../../viewmodels/transaction_viewModel.dart';
+=======
+// import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:masrofy/l10n/app_localizations.dart';
+>>>>>>> 47816bf63063bbdf9b277b79f58e293c456513cb
 
 class AddIncomeScreen extends StatefulWidget {
   @override
@@ -18,53 +23,69 @@ class _AddIncomeScreen extends State<AddIncomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Add Income",
-          style: TextStyle(fontWeight: FontWeight.bold),
+          loc.addIncome,
+          style: const TextStyle(fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
       ),
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.all(20.0),
+          padding: const EdgeInsets.all(20.0),
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+<<<<<<< HEAD
                 Text(
                   "Expense Title",
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
                 SizedBox(height: 10),
+=======
+                Text(loc.incomeTitle,
+                    style: const TextStyle(fontWeight: FontWeight.bold)),
+                const SizedBox(height: 10),
+>>>>>>> 47816bf63063bbdf9b277b79f58e293c456513cb
                 TextField(
                   controller: _titleController,
                   decoration: InputDecoration(
-                    hintText: "Food",
+                    hintText: loc.food,
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Row(
                   children: [
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+<<<<<<< HEAD
                           Text(
                             "Amount",
                             style: TextStyle(fontWeight: FontWeight.bold),
                           ),
                           SizedBox(height: 10),
+=======
+                          Text(loc.amount,
+                              style:
+                                  const TextStyle(fontWeight: FontWeight.bold)),
+                          const SizedBox(height: 10),
+>>>>>>> 47816bf63063bbdf9b277b79f58e293c456513cb
                           TextField(
                             controller: _amountController,
                             keyboardType: TextInputType.number,
                             decoration: InputDecoration(
-                              prefixIcon: Icon(Icons.attach_money, size: 20),
+                              prefixIcon:
+                                  const Icon(Icons.attach_money, size: 20),
                               hintText: "\$ 2000",
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(12),
@@ -74,16 +95,23 @@ class _AddIncomeScreen extends State<AddIncomeScreen> {
                         ],
                       ),
                     ),
-                    SizedBox(width: 15),
+                    const SizedBox(width: 15),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+<<<<<<< HEAD
                           Text(
                             "Select Date",
                             style: TextStyle(fontWeight: FontWeight.bold),
                           ),
                           SizedBox(height: 10),
+=======
+                          Text(loc.selectDate,
+                              style:
+                                  const TextStyle(fontWeight: FontWeight.bold)),
+                          const SizedBox(height: 10),
+>>>>>>> 47816bf63063bbdf9b277b79f58e293c456513cb
                           TextField(
                             controller: _dateController,
                             readOnly: true,
@@ -98,13 +126,14 @@ class _AddIncomeScreen extends State<AddIncomeScreen> {
                                 setState(() {
                                   selectedDate = pickedDate;
                                   _dateController.text =
-                                      "${pickedDate.day} ${_monthName(pickedDate.month)} ${pickedDate.year}";
+                                      "${pickedDate.day} ${_monthName(pickedDate.month, loc)} ${pickedDate.year}";
                                 });
                               }
                             },
                             decoration: InputDecoration(
-                              prefixIcon: Icon(Icons.calendar_today, size: 20),
-                              hintText: "22 july 2025",
+                              prefixIcon:
+                                  const Icon(Icons.calendar_today, size: 20),
+                              hintText: loc.sampleDate,
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(12),
                               ),
@@ -115,9 +144,10 @@ class _AddIncomeScreen extends State<AddIncomeScreen> {
                     ),
                   ],
                 ),
-                SizedBox(height: 20),
-                Text("Notes", style: TextStyle(fontWeight: FontWeight.bold)),
-                SizedBox(height: 10),
+                const SizedBox(height: 20),
+                Text(loc.notes,
+                    style: const TextStyle(fontWeight: FontWeight.bold)),
+                const SizedBox(height: 10),
                 TextField(
                   controller: _notesController,
                   maxLines: 5,
@@ -127,13 +157,13 @@ class _AddIncomeScreen extends State<AddIncomeScreen> {
                     ),
                   ),
                 ),
-                SizedBox(height: 80),
+                const SizedBox(height: 80),
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      padding: EdgeInsets.symmetric(vertical: 15),
-                      backgroundColor: Color(0xFF6C63FF),
+                      padding: const EdgeInsets.symmetric(vertical: 15),
+                      backgroundColor: const Color(0xFF6C63FF),
                       foregroundColor: Colors.white,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
@@ -163,11 +193,17 @@ class _AddIncomeScreen extends State<AddIncomeScreen> {
                       Navigator.pop(context);
                     },
                     child: Text(
+<<<<<<< HEAD
                       "Save",
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
                       ),
+=======
+                      loc.save,
+                      style: const TextStyle(
+                          fontSize: 16, fontWeight: FontWeight.bold),
+>>>>>>> 47816bf63063bbdf9b277b79f58e293c456513cb
                     ),
                   ),
                 ),
@@ -179,6 +215,7 @@ class _AddIncomeScreen extends State<AddIncomeScreen> {
     );
   }
 
+<<<<<<< HEAD
   String _monthName(int month) {
     const months = [
       "january",
@@ -193,6 +230,22 @@ class _AddIncomeScreen extends State<AddIncomeScreen> {
       "october",
       "november",
       "december",
+=======
+  String _monthName(int month, AppLocalizations loc) {
+    final months = [
+      loc.january,
+      loc.february,
+      loc.march,
+      loc.april,
+      loc.may,
+      loc.june,
+      loc.july,
+      loc.august,
+      loc.september,
+      loc.october,
+      loc.november,
+      loc.december
+>>>>>>> 47816bf63063bbdf9b277b79f58e293c456513cb
     ];
     return months[month - 1];
   }
