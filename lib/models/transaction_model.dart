@@ -12,6 +12,6 @@ class TransactionModel {
     required this.date,
     this.notes,
     required this.type,
-    this.categoryIndex,
+    required this.categoryIndex,
   });
 }
