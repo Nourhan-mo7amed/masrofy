@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:masrofy/l10n/app_localizations.dart';
 
 class AddExpenseScreen extends StatefulWidget {
   const AddExpenseScreen({super.key});
@@ -220,20 +221,22 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
     );
   }
 
-  String _monthName(int month) {
-    const months = [
-      "january",
-      "february",
-      "march",
-      "april",
-      "may",
-      "june",
-      "july",
-      "august",
-      "september",
-      "october",
-      "november",
-      "december",
+  /// Helper: get localized month name
+  String _monthName(BuildContext context, int month) {
+    final l10n = AppLocalizations.of(context)!;
+    final months = [
+      l10n.january,
+      l10n.february,
+      l10n.march,
+      l10n.april,
+      l10n.may,
+      l10n.june,
+      l10n.july,
+      l10n.august,
+      l10n.september,
+      l10n.october,
+      l10n.november,
+      l10n.december,
     ];
     return months[month - 1];
   }
