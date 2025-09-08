@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:masrofy/l10n/app_localizations.dart';
+import 'package:masrofy/models/transaction_model.dart';
+import 'package:masrofy/viewmodels/transaction_viewModel.dart';
+import 'package:provider/provider.dart';
+// import 'lib/l10n/app_localizations.dart'; // generated with flutter gen-l10n
 
 class AddExpenseScreen extends StatefulWidget {
   const AddExpenseScreen({super.key});
@@ -45,10 +49,10 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Expense Title",
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  l10n.expenseTitle,
+                  style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
-                SizedBox(height: 5),
+                const SizedBox(height: 5),
                 TextField(
                   controller: _titleController,
                   decoration: InputDecoration(
@@ -111,10 +115,10 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Amount",
-                            style: TextStyle(fontWeight: FontWeight.bold),
+                            l10n.amount,
+                            style: const TextStyle(fontWeight: FontWeight.bold),
                           ),
-                          SizedBox(height: 10),
+                          const SizedBox(height: 10),
                           TextField(
                             controller: _amountController,
                             keyboardType: TextInputType.number,
@@ -138,10 +142,10 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Select Date",
-                            style: TextStyle(fontWeight: FontWeight.bold),
+                            l10n.selectDate,
+                            style: const TextStyle(fontWeight: FontWeight.bold),
                           ),
-                          SizedBox(height: 10),
+                          const SizedBox(height: 10),
                           TextField(
                             controller: _dateController,
                             readOnly: true,
@@ -203,10 +207,34 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                         borderRadius: BorderRadius.circular(10),
                       ),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      if (_titleController.text.isEmpty ||
+                          _amountController.text.isEmpty ||
+                          selectedDate == null ||
+                          selectedCategory == -1) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text("Please fill all fields")),
+                        );
+                        return;
+                      }
+                      final newTransaction = TransactionModel(
+                        title: _titleController.text,
+                        amount: double.tryParse(_amountController.text) ?? 0.0,
+                        date: selectedDate!,
+                        type: "expense",
+                        notes: _notesController.text.isEmpty
+                            ? null
+                            : _notesController.text,
+                        categoryIndex: selectedCategory,
+                      );
+                      context.read<TransactionViewmodel>().addTransaction(
+                        newTransaction,
+                      );
+                      Navigator.pop(context);
+                    },
                     child: Text(
-                      "Save",
-                      style: TextStyle(
+                      l10n.save,
+                      style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
                       ),
