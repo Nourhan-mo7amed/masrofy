@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:masrofy/view/allTransactionView/custom_expeneses_listView.dart';
+import 'package:masrofy/view/allTransactionView/custom_income_listView.dart';
 import '../../widgets/tapButtom.dart';
 
 class AlltransactionScreen extends StatefulWidget {
@@ -8,7 +10,7 @@ class AlltransactionScreen extends StatefulWidget {
 }
 
 class _AlltransactionScreen extends State<AlltransactionScreen> {
-  int selectedTab = 0;
+  bool selectedTab = false;
 
   @override
   Widget build(BuildContext context) {
@@ -42,10 +44,10 @@ class _AlltransactionScreen extends State<AlltransactionScreen> {
                   Expanded(
                     child: TabButton(
                       text: "Expenses",
-                      isSelected: selectedTab == 0,
+                      isSelected: selectedTab == false,
                       onTap: () {
                         setState(() {
-                          selectedTab = 0;
+                          selectedTab = false;
                         });
                       },
                     ),
@@ -54,10 +56,10 @@ class _AlltransactionScreen extends State<AlltransactionScreen> {
                   Expanded(
                     child: TabButton(
                       text: "Income",
-                      isSelected: selectedTab == 1,
+                      isSelected: selectedTab == true,
                       onTap: () {
                         setState(() {
-                          selectedTab = 1;
+                          selectedTab = true;
                         });
                       },
                     ),
@@ -66,10 +68,12 @@ class _AlltransactionScreen extends State<AlltransactionScreen> {
               ),
             ),
             SizedBox(height: 20),
+           selectedTab==false? CustomExpamdedExpenses():CustomExpandedIncomes(),
           ],
         ),
       ),
     );
   }
 }
+
 

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:masrofy/core/constants/month_name.dart';
+import 'package:masrofy/models/ExpenseModel.dart';
+import 'package:cloud_firestore/cloud_firestore.dart'; // 🟢 Firestore
 
 class AddExpenseScreen extends StatefulWidget {
   @override
@@ -21,12 +24,59 @@ class _AddExpenseScreen extends State<AddExpenseScreen> {
     Icons.fastfood_outlined,
   ];
 
+  final List<String> categoryIds = [
+    "general",
+    "shopping",
+    "bills",
+    "food",
+  ];
+
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+  Future<void> _saveExpense() async {
+    if (_titleController.text.isEmpty ||
+        _amountController.text.isEmpty ||
+        selectedDate == null ||
+        selectedCategory == -1) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("⚠️ Please fill all fields")),
+      );
+      return;
+    }
+
+    final expense = ExpenseModel(
+      id: _firestore.collection("expenses").doc().id, // 🟢 Auto ID
+      title: _titleController.text.trim(),
+      amount: double.tryParse(_amountController.text.trim()) ?? 0,
+      categoryId: categoryIds[selectedCategory],
+      date: selectedDate!,
+      note: _notesController.text.trim(),
+    );
+
+    try {
+      await _firestore
+          .collection("expenses")
+          .doc(expense.id)
+          .set(expense.toJson());
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("✅ Expense Added")),
+      );
+
+      Navigator.pop(context); // 🟢 رجوع بعد الحفظ
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("❌ Error: $e")),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Add Expens",
+          "Add Expense",
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
@@ -39,6 +89,7 @@ class _AddExpenseScreen extends State<AddExpenseScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                // 🔹 العنوان
                 Text("Expense Title",
                     style: TextStyle(fontWeight: FontWeight.bold)),
                 SizedBox(height: 5),
@@ -52,6 +103,8 @@ class _AddExpenseScreen extends State<AddExpenseScreen> {
                   ),
                 ),
                 SizedBox(height: 20),
+
+                // 🔹 الكاتيجوري
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
@@ -97,6 +150,8 @@ class _AddExpenseScreen extends State<AddExpenseScreen> {
                   ],
                 ),
                 SizedBox(height: 20),
+
+                // 🔹 المبلغ + التاريخ
                 Row(
                   children: [
                     Expanded(
@@ -121,7 +176,6 @@ class _AddExpenseScreen extends State<AddExpenseScreen> {
                       ),
                     ),
                     SizedBox(width: 15),
-
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -135,7 +189,7 @@ class _AddExpenseScreen extends State<AddExpenseScreen> {
                             onTap: () async {
                               DateTime? pickedDate = await showDatePicker(
                                 context: context,
-                                initialDate: DateTime(2025, 7, 22),
+                                initialDate: DateTime.now(),
                                 firstDate: DateTime(2000),
                                 lastDate: DateTime(2100),
                               );
@@ -143,13 +197,13 @@ class _AddExpenseScreen extends State<AddExpenseScreen> {
                                 setState(() {
                                   selectedDate = pickedDate;
                                   _dateController.text =
-                                      "${pickedDate.day} ${_monthName(pickedDate.month)} ${pickedDate.year}";
+                                      "${pickedDate.day} ${monthName(pickedDate.month)} ${pickedDate.year}";
                                 });
                               }
                             },
                             decoration: InputDecoration(
                               prefixIcon: Icon(Icons.calendar_today, size: 20),
-                              hintText: "22 july 2025",
+                              hintText: "22 July 2025",
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(12),
                               ),
@@ -161,6 +215,8 @@ class _AddExpenseScreen extends State<AddExpenseScreen> {
                   ],
                 ),
                 SizedBox(height: 20),
+
+                // 🔹 الملاحظات
                 Text("Notes", style: TextStyle(fontWeight: FontWeight.bold)),
                 SizedBox(height: 10),
                 TextField(
@@ -173,6 +229,8 @@ class _AddExpenseScreen extends State<AddExpenseScreen> {
                   ),
                 ),
                 SizedBox(height: 70),
+
+                // 🔹 زرار الحفظ
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
@@ -184,7 +242,7 @@ class _AddExpenseScreen extends State<AddExpenseScreen> {
                         borderRadius: BorderRadius.circular(10),
                       ),
                     ),
-                    onPressed: () {},
+                    onPressed: _saveExpense, // 🟢 استدعاء الفانكشن
                     child: Text(
                       "Save",
                       style:
@@ -198,23 +256,5 @@ class _AddExpenseScreen extends State<AddExpenseScreen> {
         ),
       ),
     );
-  }
-
-  String _monthName(int month) {
-    const months = [
-      "january",
-      "february",
-      "march",
-      "april",
-      "may",
-      "june",
-      "july",
-      "august",
-      "september",
-      "october",
-      "november",
-      "december"
-    ];
-    return months[month - 1];
   }
 }
