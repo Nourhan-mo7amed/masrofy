@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:masrofy/repositories/auth_repsitories.dart';
+import 'package:masrofy/viewmodels/Auth_ViewModel.dart';
+import 'package:provider/provider.dart';
 import '../../widgets/profilecard.dart';
 import '../../widgets/LogoutBottomSheet.dart';
 
@@ -10,8 +13,16 @@ class Profilescreen extends StatelessWidget {
       context: context,
       builder: (context) {
         return LogoutBottomSheet(
-          onConfirm: () {
-            Navigator.pushNamed(context, '/login');
+          onConfirm: () async {
+            // 🟢 استدعاء تسجيل الخروج
+            await AuthRepository().signOut();
+
+            // 🔴 بعد ما يسجل خروج يروح للـ Login
+            Navigator.pushNamedAndRemoveUntil(
+              context,
+              '/login',
+              (route) => false, // يشيل كل الصفحات اللي قبله من الـ stack
+            );
           },
         );
       },
@@ -20,6 +31,7 @@ class Profilescreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final authVM = Provider.of<AuthViewModel>(context);
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -27,23 +39,23 @@ class Profilescreen extends StatelessWidget {
             const SizedBox(height: 40),
             Center(
               child: Column(
-                children: const [
-                  CircleAvatar(
+                children: [
+                  const CircleAvatar(
                     backgroundImage: AssetImage("assets/6eca1b5bc.png"),
                     radius: 50,
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   Text(
-                    "Ahmed Hamdy",
-                    style: TextStyle(
+                    "${authVM.currentUser!.name}",
+                    style: const TextStyle(
                       color: Colors.black,
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(height: 5),
-                  Text(
-                    "ahmed.hamdy@gmail.com",
+                  const SizedBox(height: 5),
+                   Text(
+                    "${authVM.currentUser!.email}",
                     style: TextStyle(
                       color: Colors.grey,
                       fontSize: 12,

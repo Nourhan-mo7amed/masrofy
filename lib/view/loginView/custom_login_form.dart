@@ -42,6 +42,7 @@ class _CustomLoginFormState extends State<CustomLoginForm> {
             icon: Icons.email_outlined,
             onChanged: (value) {
               email = value;
+              
             },
           ),
           const SizedBox(height: 16),

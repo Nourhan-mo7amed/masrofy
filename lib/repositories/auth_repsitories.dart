@@ -97,6 +97,16 @@ class AuthRepository {
       print("❌ Unknown Error in resetPassword: $e");
     }
   }
+
+  // 🔴 Logout
+  Future<void> signOut() async {
+    try {
+      await _firebaseAuth.signOut();
+      print("✅ User signed out successfully");
+    } catch (e) {
+      print("❌ Error in signOut: $e");
+    }
+  }
 }
 
 class AuthService {
