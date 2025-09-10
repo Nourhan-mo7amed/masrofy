@@ -23,7 +23,7 @@ class CustomExpamdedExpenses extends StatelessWidget {
       }
 
       final expenses = snapshot.data!.docs.map((doc) {
-        return ExpenseModel.fromJson(doc.data() as Map<String, dynamic>);
+        return ExpenseModel.fromJson(doc.data());
       }).toList();
 
       return ListView.builder(
