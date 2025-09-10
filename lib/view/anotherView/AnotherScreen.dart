@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 // import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:masrofy/l10n/app_localizations.dart';
+import 'package:masrofy/viewmodels/anotherviewmodel.dart';
+import 'package:masrofy/viewmodels/shopingviewmodel.dart';
+import 'package:provider/provider.dart';
 import '../../widgets/another_expenseitem.dart';
 
 class AnotherScreen extends StatelessWidget {
@@ -9,6 +12,7 @@ class AnotherScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
+    final anotherVM = context.watch<AnotherViewModel>();
 
     return Scaffold(
       appBar: AppBar(
@@ -18,66 +22,19 @@ class AnotherScreen extends StatelessWidget {
         ),
         centerTitle: true,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(12.0),
-        child: ListView(
-          children: [
-            AnotherExpenseItem(
-              title: loc.food,
-              date: "22 July 2025",
-              amount: "-\$300.49",
-              color: Colors.red,
+      body: ListView.builder(
+        itemCount: anotherVM.expenses.length,
+        itemBuilder: (context, index) {
+          final expense = anotherVM.expenses[index];
+          return ListTile(
+            title: Text(expense.title),
+            subtitle: Text(expense.date),
+            trailing: Text(
+              expense.amount,
+              style: TextStyle(color: expense.color),
             ),
-            AnotherExpenseItem(
-              title: loc.payToEmployees,
-              date: "20 July",
-              amount: "-\$12,400.00",
-              color: Colors.red,
-            ),
-            AnotherExpenseItem(
-              title: loc.healthExpenditures,
-              date: "14 July 2021",
-              amount: "-\$280.00",
-              color: Colors.red,
-            ),
-            AnotherExpenseItem(
-              title: loc.food,
-              date: "22 July 2025",
-              amount: "-\$300.49",
-              color: Colors.red,
-            ),
-            AnotherExpenseItem(
-              title: loc.payToEmployees,
-              date: "20 July",
-              amount: "-\$12,400.00",
-              color: Colors.red,
-            ),
-            AnotherExpenseItem(
-              title: loc.healthExpenditures,
-              date: "14 July 2021",
-              amount: "-\$280.00",
-              color: Colors.red,
-            ),
-            AnotherExpenseItem(
-              title: loc.food,
-              date: "22 July 2025",
-              amount: "-\$300.49",
-              color: Colors.red,
-            ),
-            AnotherExpenseItem(
-              title: loc.payToEmployees,
-              date: "20 July",
-              amount: "-\$12,400.00",
-              color: Colors.red,
-            ),
-            AnotherExpenseItem(
-              title: loc.healthExpenditures,
-              date: "14 July 2021",
-              amount: "-\$280.00",
-              color: Colors.red,
-            ),
-          ],
-        ),
+          );
+        },
       ),
     );
   }

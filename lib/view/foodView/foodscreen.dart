@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:masrofy/l10n/app_localizations.dart';
+import 'package:masrofy/viewmodels/foodviewmodel.dart';
+import 'package:provider/provider.dart';
 // import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import '../../widgets/food_expenseitem.dart';
 
 class FoodScreen extends StatelessWidget {
   const FoodScreen({super.key});
@@ -9,6 +10,7 @@ class FoodScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
+    final foodVM = context.watch<FoodViewModel>();
 
     return Scaffold(
       appBar: AppBar(
@@ -18,68 +20,19 @@ class FoodScreen extends StatelessWidget {
         ),
         centerTitle: true,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(12.0),
-        child: Expanded(
-          child: ListView(
-            children: [
-              FoodExpenseItem(
-                title: loc.foodTitle,
-                date: "22 July 2025",
-                amount: "-\$300.49",
-                color: Colors.red,
-              ),
-              FoodExpenseItem(
-                title: loc.payToEmployeesTitle,
-                date: "20 July",
-                amount: "-\$12,400.00",
-                color: Colors.red,
-              ),
-              FoodExpenseItem(
-                title: loc.healthExpendituresTitle,
-                date: "14 July 2021",
-                amount: "-\$280.00",
-                color: Colors.red,
-              ),
-              FoodExpenseItem(
-                title: loc.foodTitle,
-                date: "22 July 2025",
-                amount: "-\$300.49",
-                color: Colors.red,
-              ),
-              FoodExpenseItem(
-                title: loc.payToEmployeesTitle,
-                date: "20 July",
-                amount: "-\$12,400.00",
-                color: Colors.red,
-              ),
-              FoodExpenseItem(
-                title: loc.healthExpendituresTitle,
-                date: "14 July 2021",
-                amount: "-\$280.00",
-                color: Colors.red,
-              ),
-              FoodExpenseItem(
-                title: loc.foodTitle,
-                date: "22 July 2025",
-                amount: "-\$300.49",
-                color: Colors.red,
-              ),
-              FoodExpenseItem(
-                title: loc.payToEmployeesTitle,
-                date: "20 July",
-                amount: "-\$12,400.00",
-                color: Colors.red,
-              ),
-              FoodExpenseItem(
-                title: loc.healthExpendituresTitle,
-                date: "14 July 2021",
-                amount: "-\$280.00",
-                color: Colors.red,
-              ),
-            ],
-          ),
-        ),
+      body: ListView.builder(
+        itemCount: foodVM.expenses.length,
+        itemBuilder: (context, index) {
+          final expense = foodVM.expenses[index];
+          return ListTile(
+            title: Text(expense.title),
+            subtitle: Text(expense.date),
+            trailing: Text(
+              expense.amount,
+              style: TextStyle(color: expense.color),
+            ),
+          );
+        },
       ),
     );
   }

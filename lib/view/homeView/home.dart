@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:masrofy/l10n/app_localizations.dart';
+import 'package:masrofy/viewmodels/category_viewModel.dart';
 // import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../widgets/expenseItem.dart';
 import '../../view/statisticsView/StatisticsScreen.dart';
 import '../../view/addView/addScreen.dart';
+import 'package:provider/provider.dart';
 import '../../view/allTransactionView/all_transactionScreen.dart';
 import '../../view/profileView/profileScreen.dart';
 
@@ -12,6 +14,7 @@ class HomeScreen extends StatefulWidget {
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
+  // Remove this line; access providers inside build or state methods where context is available.
 }
 
 class _HomeScreenState extends State<HomeScreen> {
@@ -25,6 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _buildHomePage(BuildContext context) {
     final t = AppLocalizations.of(context)!; // for translations
+    final textTheme = Theme.of(context).textTheme;
 
     return SingleChildScrollView(
       child: Column(
@@ -39,7 +43,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 Center(
                   child: Text(
                     t.homeTitle,
-                    style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    style: const TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ],
@@ -72,9 +79,16 @@ class _HomeScreenState extends State<HomeScreen> {
                       children: [
                         Text(
                           t.totalBalance,
-                          style: const TextStyle(color: Colors.white, fontSize: 14),
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 14,
+                          ),
                         ),
-                        const Icon(Icons.keyboard_arrow_down, color: Colors.white, size: 18),
+                        const Icon(
+                          Icons.keyboard_arrow_down,
+                          color: Colors.white,
+                          size: 18,
+                        ),
                       ],
                     ),
                     const Icon(Icons.more_horiz, color: Colors.white),
@@ -95,7 +109,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: [
                     Row(
                       children: [
-                        const Icon(Icons.arrow_circle_up_outlined, color: Colors.white, size: 20),
+                        const Icon(
+                          Icons.arrow_circle_up_outlined,
+                          color: Colors.white,
+                          size: 20,
+                        ),
                         const SizedBox(width: 6),
                         Text(
                           "${t.income}\n\$ 2,250.00",
@@ -109,7 +127,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     Row(
                       children: [
-                        const Icon(Icons.arrow_circle_down_outlined, color: Colors.white, size: 20),
+                        const Icon(
+                          Icons.arrow_circle_down_outlined,
+                          color: Colors.white,
+                          size: 20,
+                        ),
                         const SizedBox(width: 6),
                         Text(
                           "${t.expenses}\n\$ 1,300.00",
@@ -131,7 +153,10 @@ class _HomeScreenState extends State<HomeScreen> {
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
             child: Text(
               t.expense,
-              style: const TextStyle(fontSize: 30, color: Colors.black),
+              style: textTheme.headlineSmall?.copyWith(
+                // ✅ dynamic بدل Colors.black
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
           const SizedBox(height: 10),
@@ -196,7 +221,7 @@ class _HomeScreenState extends State<HomeScreen> {
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         currentIndex: _selectedIndex,
-        selectedItemColor: const Color(0xFF6155F5),
+        selectedItemColor: Theme.of(context).iconTheme.color,
         unselectedItemColor: Colors.grey,
         onTap: _onItemTapped,
         items: const [

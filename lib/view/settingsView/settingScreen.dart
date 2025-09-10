@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:masrofy/l10n/app_localizations.dart';
+import 'package:masrofy/viewmodels/settings_viewmodel.dart';
+import 'package:provider/provider.dart';
 import '../../widgets/SettingsSwitchTile.dart';
 import '../../widgets/SettingsTile.dart';
 // import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -19,6 +21,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
+    final viewModel = Provider.of<SettingsViewModel>(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -40,13 +43,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
             },
           ),
 
-          SettingsSwitchTile(
-            icon: Icons.brightness_6,
-            text: loc.mode,
-            value: mode,
-            onChanged: (val) {
-              setState(() => mode = val);
-            },
+          SwitchListTile(
+            title: const Text("Dark Mode"),
+            value: viewModel.settings.darkMode,
+            onChanged: viewModel.toggleDarkMode,
           ),
 
           ListTile(
@@ -58,9 +58,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 return DropdownMenuItem<String>(value: lang, child: Text(lang));
               }).toList(),
               onChanged: (val) {
-                if (val != null) {
-                  setState(() => selectedLanguage = val);
-                }
+                if (val != null) viewModel.changeLanguage(val);
               },
             ),
           ),

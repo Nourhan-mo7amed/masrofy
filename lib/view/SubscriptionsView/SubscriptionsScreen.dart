@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:masrofy/l10n/app_localizations.dart';
-import '../../widgets/subscriptions_ExpenseItem.dart';
+import 'package:masrofy/viewmodels/subscriptionsviewmodel.dart';
+import 'package:provider/provider.dart';
 // import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class Subscriptions extends StatelessWidget {
@@ -9,6 +10,7 @@ class Subscriptions extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
+    final subscriptionsVM = context.watch<SubscriptionsViewModel>();
 
     return Scaffold(
       appBar: AppBar(
@@ -18,59 +20,19 @@ class Subscriptions extends StatelessWidget {
         ),
         centerTitle: true,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(12.0),
-        child: Expanded(
-          child: ListView(
-            children: [
-              SubscriptionsExpenseitem(
-                  title: loc.food,
-                  date: "22 July 2025",
-                  amount: "-\$300.49",
-                  color: Colors.red),
-              SubscriptionsExpenseitem(
-                  title: loc.payToEmployees,
-                  date: "20 July",
-                  amount: "-\$12,400.00",
-                  color: Colors.red),
-              SubscriptionsExpenseitem(
-                  title: loc.healthExpenditures,
-                  date: "14 July 2021",
-                  amount: "-\$280.00",
-                  color: Colors.red),
-              SubscriptionsExpenseitem(
-                  title: loc.food,
-                  date: "22 July 2025",
-                  amount: "-\$300.49",
-                  color: Colors.red),
-              SubscriptionsExpenseitem(
-                  title: loc.payToEmployees,
-                  date: "20 July",
-                  amount: "-\$12,400.00",
-                  color: Colors.red),
-              SubscriptionsExpenseitem(
-                  title: loc.healthExpenditures,
-                  date: "14 July 2021",
-                  amount: "-\$280.00",
-                  color: Colors.red),
-              SubscriptionsExpenseitem(
-                  title: loc.food,
-                  date: "22 July 2025",
-                  amount: "-\$300.49",
-                  color: Colors.red),
-              SubscriptionsExpenseitem(
-                  title: loc.payToEmployees,
-                  date: "20 July",
-                  amount: "-\$12,400.00",
-                  color: Colors.red),
-              SubscriptionsExpenseitem(
-                  title: loc.healthExpenditures,
-                  date: "14 July 2021",
-                  amount: "-\$280.00",
-                  color: Colors.red),
-            ],
-          ),
-        ),
+      body: ListView.builder(
+        itemCount: subscriptionsVM.expenses.length,
+        itemBuilder: (context, index) {
+          final expense = subscriptionsVM.expenses[index];
+          return ListTile(
+            title: Text(expense.title),
+            subtitle: Text(expense.date),
+            trailing: Text(
+              expense.amount,
+              style: TextStyle(color: expense.color),
+            ),
+          );
+        },
       ),
     );
   }
