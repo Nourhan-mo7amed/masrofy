@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:masrofy/view/allTransactionView/custom_expeneses_listView.dart';
-import 'package:masrofy/view/allTransactionView/custom_income_listView.dart';
+import 'package:masrofy/view/allTransactionView/widgets/custom_expeneses_listView.dart';
+import 'package:masrofy/view/allTransactionView/widgets/custom_income_listView.dart';
 import '../../widgets/tapButtom.dart';
 
 class AlltransactionScreen extends StatefulWidget {

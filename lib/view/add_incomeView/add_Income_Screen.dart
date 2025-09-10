@@ -46,7 +46,6 @@ class _CustomIncomeFormFieldState extends State<CustomIncomeFormField> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text("⚠️ Please fill all required fields")),
       );
-      Navigator.pop(context);
       return;
     }
 
@@ -62,6 +61,7 @@ class _CustomIncomeFormFieldState extends State<CustomIncomeFormField> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text("✅ Income Added Successfully")),
       );
+      Navigator.pop(context);
 
       // clear inputs
       _titleController.clear();

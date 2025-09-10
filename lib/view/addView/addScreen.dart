@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../widgets/add_expenseitem.dart';
+import 'package:masrofy/view/addView/widgets/last_expenses-listView.dart';
 
 class AddScreen extends StatelessWidget {
   const AddScreen({super.key});
@@ -105,69 +105,12 @@ class AddScreen extends StatelessWidget {
               ],
             ),
             SizedBox(height: 20),
-            Expanded(
-              child: ListView(
-                children: [
-                  AddExpenseItem(
-                    title: "Food",
-                    date: "22 July 2025",
-                    amount: "-\$300.49",
-                    color: Colors.red,
-                  ),
-                  AddExpenseItem(
-                    title: "Pay to Employees",
-                    date: "20 July",
-                    amount: "-\$12,400.00",
-                    color: Colors.red,
-                  ),
-                  AddExpenseItem(
-                    title: "Health Expenditures",
-                    date: "14 July 2021",
-                    amount: "-\$280.00",
-                    color: Colors.red,
-                  ),
-                  AddExpenseItem(
-                    title: "Food",
-                    date: "22 July 2025",
-                    amount: "-\$300.49",
-                    color: Colors.red,
-                  ),
-                  AddExpenseItem(
-                    title: "Pay to Employees",
-                    date: "20 July",
-                    amount: "-\$12,400.00",
-                    color: Colors.red,
-                  ),
-                  AddExpenseItem(
-                    title: "Health Expenditures",
-                    date: "14 July 2021",
-                    amount: "-\$280.00",
-                    color: Colors.red,
-                  ),
-                  AddExpenseItem(
-                    title: "Food",
-                    date: "22 July 2025",
-                    amount: "-\$300.49",
-                    color: Colors.red,
-                  ),
-                  AddExpenseItem(
-                    title: "Pay to Employees",
-                    date: "20 July",
-                    amount: "-\$12,400.00",
-                    color: Colors.red,
-                  ),
-                  AddExpenseItem(
-                    title: "Health Expenditures",
-                    date: "14 July 2021",
-                    amount: "-\$280.00",
-                    color: Colors.red,
-                  ),
-                ],
-              ),
-            ),
+            LastExpensesListView(),
           ],
         ),
       ),
     );
   }
 }
+
+
