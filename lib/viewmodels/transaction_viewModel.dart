@@ -1,18 +1,24 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:masrofy/models/transaction_model.dart';
 
 class TransactionViewmodel extends ChangeNotifier {
   final List<TransactionModel> _transactions = [];
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   List<TransactionModel> get transactions => _transactions;
 
-  void addTransaction(TransactionModel transaction) {
-    _transactions.add(transaction);
-    notifyListeners();
-  }
+  Future<void> addTransaction(TransactionModel transaction) async {
+    try {
+      await _firestore
+          .collection("transactions")
+          .doc(transaction.id)
+          .set(transaction.toJson());
 
-  List<TransactionModel> get expenses =>
-      _transactions.where((tx) => tx.type == "expense").toList();
-  List<TransactionModel> get incomes =>
-      _transactions.where((tx) => tx.type == "income").toList();
+      _transactions.add(transaction);
+      notifyListeners();
+    } catch (e) {
+      throw Exception("Failed to save transaction: $e");
+    }
+  }
 }
