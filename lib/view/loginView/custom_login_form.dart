@@ -45,7 +45,9 @@ class _CustomLoginFormState extends State<CustomLoginForm> {
             controller: _emailController,
             hintText: loc.emailHint,
             icon: Icons.email_outlined,
-            onChanged: (value) => email = value,
+            onChanged: (value) {
+              email = value;
+            },
           ),
           const SizedBox(height: 16),
 

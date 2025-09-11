@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:masrofy/repositories/auth_repsitories.dart';
+import 'package:masrofy/viewmodels/Auth_ViewModel.dart';
+import 'package:provider/provider.dart';
 // import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:masrofy/l10n/app_localizations.dart';
 import '../../widgets/profilecard.dart';
@@ -12,8 +15,16 @@ class Profilescreen extends StatelessWidget {
       context: context,
       builder: (context) {
         return LogoutBottomSheet(
-          onConfirm: () {
-            Navigator.pushNamed(context, '/login');
+          onConfirm: () async {
+            // 🟢 استدعاء تسجيل الخروج
+            await AuthRepository().signOut();
+
+            // 🔴 بعد ما يسجل خروج يروح للـ Login
+            Navigator.pushNamedAndRemoveUntil(
+              context,
+              '/login',
+              (route) => false, // يشيل كل الصفحات اللي قبله من الـ stack
+            );
           },
         );
       },
@@ -22,6 +33,7 @@ class Profilescreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final authVM = Provider.of<AuthViewModel>(context);
     final loc = AppLocalizations.of(context)!;
 
     return Scaffold(
@@ -38,7 +50,7 @@ class Profilescreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 10),
                   Text(
-                    loc.userName,
+                    "${authVM.currentUser!.name}",
                     style: const TextStyle(
                       color: Colors.black,
                       fontSize: 20,
@@ -47,8 +59,8 @@ class Profilescreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 5),
                   Text(
-                    loc.userEmail,
-                    style: const TextStyle(
+                    "${authVM.currentUser!.email}",
+                    style: TextStyle(
                       color: Colors.grey,
                       fontSize: 12,
                       fontWeight: FontWeight.bold,

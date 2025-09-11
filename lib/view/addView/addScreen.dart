@@ -1,11 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:masrofy/core/routes/routes.dart';
-import 'package:masrofy/l10n/app_localizations.dart';
-import 'package:masrofy/viewmodels/transaction_viewModel.dart';
-import 'package:provider/provider.dart';
-// import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../widgets/add_expenseitem.dart';
-import 'package:intl/intl.dart';
 
 class AddScreen extends StatelessWidget {
   const AddScreen({super.key});
@@ -129,25 +123,66 @@ class AddScreen extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: 20),
             Expanded(
-              child: expenses.isEmpty
-                  ? Center(child: Text("No Transactions"))
-                  : ListView.builder(
-                      itemCount: expenses.length,
-                      itemBuilder: (context, index) {
-                        final tx = expenses[index];
-                        final formattedDate = DateFormat(
-                          'dd MMM yyyy',
-                        ).format(tx.date);
-                        return AddExpenseItem(
-                          title: tx.title,
-                          date: formattedDate,
-                          amount: "-\$${tx.amount.toStringAsFixed(2)}",
-                          color: Colors.red,
-                        );
-                      },
-                    ),
+              child: ListView(
+                children: [
+                  AddExpenseItem(
+                    title: "Food",
+                    date: "22 July 2025",
+                    amount: "-\$300.49",
+                    color: Colors.red,
+                  ),
+                  AddExpenseItem(
+                    title: "Pay to Employees",
+                    date: "20 July",
+                    amount: "-\$12,400.00",
+                    color: Colors.red,
+                  ),
+                  AddExpenseItem(
+                    title: "Health Expenditures",
+                    date: "14 July 2021",
+                    amount: "-\$280.00",
+                    color: Colors.red,
+                  ),
+                  AddExpenseItem(
+                    title: "Food",
+                    date: "22 July 2025",
+                    amount: "-\$300.49",
+                    color: Colors.red,
+                  ),
+                  AddExpenseItem(
+                    title: "Pay to Employees",
+                    date: "20 July",
+                    amount: "-\$12,400.00",
+                    color: Colors.red,
+                  ),
+                  AddExpenseItem(
+                    title: "Health Expenditures",
+                    date: "14 July 2021",
+                    amount: "-\$280.00",
+                    color: Colors.red,
+                  ),
+                  AddExpenseItem(
+                    title: "Food",
+                    date: "22 July 2025",
+                    amount: "-\$300.49",
+                    color: Colors.red,
+                  ),
+                  AddExpenseItem(
+                    title: "Pay to Employees",
+                    date: "20 July",
+                    amount: "-\$12,400.00",
+                    color: Colors.red,
+                  ),
+                  AddExpenseItem(
+                    title: "Health Expenditures",
+                    date: "14 July 2021",
+                    amount: "-\$280.00",
+                    color: Colors.red,
+                  ),
+                ],
+              ),
             ),
           ],
         ),

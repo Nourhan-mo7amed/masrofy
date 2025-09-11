@@ -1,15 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:masrofy/l10n/app_localizations.dart';
-import 'package:masrofy/models/transaction_model.dart';
-import 'package:masrofy/viewmodels/transaction_viewModel.dart';
-import 'package:provider/provider.dart';
-// import 'lib/l10n/app_localizations.dart'; // generated with flutter gen-l10n
 
 class AddExpenseScreen extends StatefulWidget {
   const AddExpenseScreen({super.key});
 
   @override
-  State<AddExpenseScreen> createState() => _AddExpenseScreenState();
+  _AddExpenseScreen createState() => _AddExpenseScreen();
 }
 
 class _AddExpenseScreenState extends State<AddExpenseScreen> {
@@ -19,14 +14,65 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
   final TextEditingController _amountController = TextEditingController();
 
   DateTime? selectedDate;
-  int selectedCategory = -1;
+  CategoryModel? selectedCategory;
 
-  final List<IconData> categories = [
-    Icons.widgets_outlined,
-    Icons.shopping_bag,
-    Icons.receipt,
-    Icons.fastfood_outlined,
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+  /// 🔹 الكاتيجوريز (ممكن تخزنهم في فايرستور أو local حسب مشروعك)
+  final List<CategoryModel> categories = [
+    CategoryModel(id: "food", name: "Food", icon: "🍔", color: Colors.purple),
+    CategoryModel(
+      id: "shopping",
+      name: "Shopping",
+      icon: "🛍️",
+      color: Colors.orange,
+    ),
+    CategoryModel(id: "bills", name: "Bills", icon: "📄", color: Colors.red),
+    CategoryModel(
+      id: "transport",
+      name: "Transport",
+      icon: "🚗",
+      color: Colors.blue,
+    ),
   ];
+
+  Future<void> _saveExpense() async {
+    if (_titleController.text.isEmpty ||
+        _amountController.text.isEmpty ||
+        selectedDate == null ||
+        selectedCategory == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("⚠️ Please fill all fields")),
+      );
+      return;
+    }
+
+    final expense = ExpenseModel(
+      id: _firestore.collection("expenses").doc().id,
+      title: _titleController.text.trim(),
+      amount: double.tryParse(_amountController.text.trim()) ?? 0,
+      categoryId: selectedCategory!.id,
+      date: selectedDate!,
+      note: _notesController.text.trim(),
+    );
+
+    try {
+      await _firestore
+          .collection("expenses")
+          .doc(expense.id)
+          .set(expense.toJson());
+
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text("✅ Expense Added")));
+
+      Navigator.pop(context);
+    } catch (e) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text("❌ Error: $e")));
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,12 +81,11 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          l10n.addExpense,
-          style: const TextStyle(fontWeight: FontWeight.bold),
+          "Add Expens",
+          style: TextStyle(fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
       ),
-      backgroundColor: Colors.white,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(20.0),
@@ -49,10 +94,10 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  l10n.expenseTitle,
-                  style: const TextStyle(fontWeight: FontWeight.bold),
+                  "Expense Title",
+                  style: TextStyle(fontWeight: FontWeight.bold),
                 ),
-                const SizedBox(height: 5),
+                SizedBox(height: 5),
                 TextField(
                   controller: _titleController,
                   decoration: InputDecoration(
@@ -62,15 +107,15 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 20),
+                SizedBox(height: 20),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
-                      l10n.category,
-                      style: const TextStyle(fontWeight: FontWeight.bold),
+                      "Category",
+                      style: TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    const SizedBox(width: 15),
+                    SizedBox(width: 15),
                     Row(
                       children: List.generate(categories.length, (index) {
                         final List<Color> colors = [
@@ -87,8 +132,8 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                             });
                           },
                           child: Container(
-                            margin: const EdgeInsets.only(right: 12),
-                            padding: const EdgeInsets.all(12),
+                            margin: EdgeInsets.only(right: 12),
+                            padding: EdgeInsets.all(12),
                             decoration: BoxDecoration(
                               color: selectedCategory == index
                                   ? colors[index].withOpacity(0.2)
@@ -107,7 +152,7 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                     ),
                   ],
                 ),
-                const SizedBox(height: 20),
+                SizedBox(height: 20),
                 Row(
                   children: [
                     Expanded(
@@ -115,18 +160,15 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            l10n.amount,
-                            style: const TextStyle(fontWeight: FontWeight.bold),
+                            "Amount",
+                            style: TextStyle(fontWeight: FontWeight.bold),
                           ),
-                          const SizedBox(height: 10),
+                          SizedBox(height: 10),
                           TextField(
                             controller: _amountController,
                             keyboardType: TextInputType.number,
                             decoration: InputDecoration(
-                              prefixIcon: const Icon(
-                                Icons.attach_money,
-                                size: 20,
-                              ),
+                              prefixIcon: Icon(Icons.attach_money, size: 20),
                               hintText: "\$ 2000",
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(12),
@@ -142,17 +184,17 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            l10n.selectDate,
-                            style: const TextStyle(fontWeight: FontWeight.bold),
+                            "Select Date",
+                            style: TextStyle(fontWeight: FontWeight.bold),
                           ),
-                          const SizedBox(height: 10),
+                          SizedBox(height: 10),
                           TextField(
                             controller: _dateController,
                             readOnly: true,
                             onTap: () async {
                               DateTime? pickedDate = await showDatePicker(
                                 context: context,
-                                initialDate: DateTime.now(),
+                                initialDate: DateTime(2025, 7, 22),
                                 firstDate: DateTime(2000),
                                 lastDate: DateTime(2100),
                               );
@@ -160,16 +202,13 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                                 setState(() {
                                   selectedDate = pickedDate;
                                   _dateController.text =
-                                      "${pickedDate.day} ${_monthName(context, pickedDate.month)} ${pickedDate.year}";
+                                      "${pickedDate.day} ${_monthName(pickedDate.month)} ${pickedDate.year}";
                                 });
                               }
                             },
                             decoration: InputDecoration(
-                              prefixIcon: const Icon(
-                                Icons.calendar_today,
-                                size: 20,
-                              ),
-                              hintText: l10n.july,
+                              prefixIcon: Icon(Icons.calendar_today, size: 20),
+                              hintText: "22 july 2025",
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(12),
                               ),
@@ -180,12 +219,9 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                     ),
                   ],
                 ),
-                const SizedBox(height: 20),
-                Text(
-                  l10n.notes,
-                  style: const TextStyle(fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(height: 10),
+                SizedBox(height: 20),
+                Text("Notes", style: TextStyle(fontWeight: FontWeight.bold)),
+                SizedBox(height: 10),
                 TextField(
                   controller: _notesController,
                   maxLines: 5,
@@ -195,46 +231,22 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 70),
+                SizedBox(height: 70),
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(vertical: 15),
-                      backgroundColor: const Color(0xFF6C63FF),
+                      padding: EdgeInsets.symmetric(vertical: 15),
+                      backgroundColor: Color(0xFF6C63FF),
                       foregroundColor: Colors.white,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
                     ),
-                    onPressed: () {
-                      if (_titleController.text.isEmpty ||
-                          _amountController.text.isEmpty ||
-                          selectedDate == null ||
-                          selectedCategory == -1) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text("Please fill all fields")),
-                        );
-                        return;
-                      }
-                      final newTransaction = TransactionModel(
-                        title: _titleController.text,
-                        amount: double.tryParse(_amountController.text) ?? 0.0,
-                        date: selectedDate!,
-                        type: "expense",
-                        notes: _notesController.text.isEmpty
-                            ? null
-                            : _notesController.text,
-                        categoryIndex: selectedCategory,
-                      );
-                      context.read<TransactionViewmodel>().addTransaction(
-                        newTransaction,
-                      );
-                      Navigator.pop(context);
-                    },
+                    onPressed: () {},
                     child: Text(
-                      l10n.save,
-                      style: const TextStyle(
+                      "Save",
+                      style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
                       ),
@@ -249,22 +261,20 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
     );
   }
 
-  /// Helper: get localized month name
-  String _monthName(BuildContext context, int month) {
-    final l10n = AppLocalizations.of(context)!;
-    final months = [
-      l10n.january,
-      l10n.february,
-      l10n.march,
-      l10n.april,
-      l10n.may,
-      l10n.june,
-      l10n.july,
-      l10n.august,
-      l10n.september,
-      l10n.october,
-      l10n.november,
-      l10n.december,
+  String _monthName(int month) {
+    const months = [
+      "january",
+      "february",
+      "march",
+      "april",
+      "may",
+      "june",
+      "july",
+      "august",
+      "september",
+      "october",
+      "november",
+      "december",
     ];
     return months[month - 1];
   }

@@ -20,8 +20,6 @@ dependencies:
   provider: ^6.1.5+1
   fl_chart: ^0.69.0
   google_sign_in: ^6.1.5
-  flutter_localizations:
-    sdk: flutter
 
 
 dev_dependencies:

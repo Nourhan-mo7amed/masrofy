@@ -1,24 +1,8 @@
 import 'package:flutter/material.dart';
-// import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:masrofy/l10n/app_localizations.dart';
-import 'package:masrofy/models/transaction_model.dart';
-import 'package:masrofy/viewmodels/transaction_viewModel.dart';
-import 'package:provider/provider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:masrofy/core/constants/month_name.dart';
 
-class AddIncomeScreen extends StatefulWidget {
-  @override
-  _AddIncomeScreen createState() => _AddIncomeScreen();
-}
-
-class _AddIncomeScreen extends State<AddIncomeScreen> {
-  final TextEditingController _titleController = TextEditingController();
-  final TextEditingController _dateController = TextEditingController();
-  final TextEditingController _notesController = TextEditingController();
-  final TextEditingController _amountController = TextEditingController();
-
-  DateTime? selectedDate;
-  int selectedCategory = -1;
-
+class AddIncomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
@@ -34,162 +18,185 @@ class _AddIncomeScreen extends State<AddIncomeScreen> {
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  loc.incomeTitle,
-                  style: const TextStyle(fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(height: 10),
-                TextField(
-                  controller: _titleController,
-                  decoration: InputDecoration(
-                    hintText: loc.food,
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 20),
-                Row(
+          padding: EdgeInsets.all(20.0),
+          child: SingleChildScrollView(child: CustomIncomeFormField()),
+        ),
+      ),
+    );
+  }
+}
+
+class CustomIncomeFormField extends StatefulWidget {
+  const CustomIncomeFormField({super.key});
+
+  @override
+  State<CustomIncomeFormField> createState() => _CustomIncomeFormFieldState();
+}
+
+class _CustomIncomeFormFieldState extends State<CustomIncomeFormField> {
+  final TextEditingController _titleController = TextEditingController();
+  final TextEditingController _dateController = TextEditingController();
+  final TextEditingController _notesController = TextEditingController();
+  final TextEditingController _amountController = TextEditingController();
+
+  DateTime? selectedDate;
+
+  Future<void> _saveIncome() async {
+    if (_titleController.text.isEmpty ||
+        _amountController.text.isEmpty ||
+        selectedDate == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("⚠️ Please fill all required fields")),
+      );
+      return;
+    }
+
+    try {
+      await FirebaseFirestore.instance.collection("incomes").add({
+        "title": _titleController.text.trim(),
+        "amount": double.tryParse(_amountController.text.trim()) ?? 0.0,
+        "date": selectedDate!.toIso8601String(),
+        "note": _notesController.text.trim(),
+        "createdAt": FieldValue.serverTimestamp(),
+      });
+
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text("✅ Income Added Successfully")));
+      Navigator.pop(context);
+
+      // clear inputs
+      _titleController.clear();
+      _amountController.clear();
+      _notesController.clear();
+      _dateController.clear();
+      setState(() {
+        selectedDate = null;
+      });
+    } catch (e) {
+      print("❌ Error saving income: $e");
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text("❌ Failed to save income")));
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Form(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text("Income Title", style: TextStyle(fontWeight: FontWeight.bold)),
+          SizedBox(height: 10),
+          TextField(
+            controller: _titleController,
+            decoration: InputDecoration(
+              hintText: "Salary",
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+            ),
+          ),
+          SizedBox(height: 20),
+          Row(
+            children: [
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            loc.amount,
-                            style: const TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                          const SizedBox(height: 10),
-                          TextField(
-                            controller: _amountController,
-                            keyboardType: TextInputType.number,
-                            decoration: InputDecoration(
-                              prefixIcon: const Icon(
-                                Icons.attach_money,
-                                size: 20,
-                              ),
-                              hintText: "\$ 2000",
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(12),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
+                    Text(
+                      "Amount",
+                      style: TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    const SizedBox(width: 15),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            loc.selectDate,
-                            style: const TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                          const SizedBox(height: 10),
-                          TextField(
-                            controller: _dateController,
-                            readOnly: true,
-                            onTap: () async {
-                              DateTime? pickedDate = await showDatePicker(
-                                context: context,
-                                initialDate: DateTime(2025, 7, 22),
-                                firstDate: DateTime(2000),
-                                lastDate: DateTime(2100),
-                              );
-                              if (pickedDate != null) {
-                                setState(() {
-                                  selectedDate = pickedDate;
-                                  _dateController.text =
-                                      "${pickedDate.day} ${_monthName(pickedDate.month, loc)} ${pickedDate.year}";
-                                });
-                              }
-                            },
-                            decoration: InputDecoration(
-                              prefixIcon: const Icon(
-                                Icons.calendar_today,
-                                size: 20,
-                              ),
-                              hintText: loc.sampleDate,
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(12),
-                              ),
-                            ),
-                          ),
-                        ],
+                    SizedBox(height: 10),
+                    TextField(
+                      controller: _amountController,
+                      keyboardType: TextInputType.number,
+                      decoration: InputDecoration(
+                        prefixIcon: Icon(Icons.attach_money, size: 20),
+                        hintText: "\$ 2000",
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
                       ),
                     ),
                   ],
                 ),
-                const SizedBox(height: 20),
-                Text(
-                  loc.notes,
-                  style: const TextStyle(fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(height: 10),
-                TextField(
-                  controller: _notesController,
-                  maxLines: 5,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
+              ),
+              SizedBox(width: 15),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Select Date",
+                      style: TextStyle(fontWeight: FontWeight.bold),
                     ),
-                  ),
-                ),
-                const SizedBox(height: 80),
-                SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(vertical: 15),
-                      backgroundColor: const Color(0xFF6C63FF),
-                      foregroundColor: Colors.white,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                    onPressed: () {
-                      if (_titleController.text.isEmpty ||
-                          _amountController.text.isEmpty ||
-                          selectedDate == null) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text("Please fill all fields")),
+                    SizedBox(height: 10),
+                    TextField(
+                      controller: _dateController,
+                      readOnly: true,
+                      onTap: () async {
+                        DateTime? pickedDate = await showDatePicker(
+                          context: context,
+                          initialDate: DateTime.now(),
+                          firstDate: DateTime(2000),
+                          lastDate: DateTime(2100),
                         );
-                        return;
-                      }
-                      final newTransaction = TransactionModel(
-                        title: _titleController.text,
-                        amount: double.tryParse(_amountController.text) ?? 0.0,
-                        date: selectedDate!,
-                        type: "income",
-                        notes: _notesController.text.isEmpty
-                            ? null
-                            : _notesController.text,
-                        categoryIndex: selectedCategory,
-                      );
-                      context.read<TransactionViewmodel>().addTransaction(
-                        newTransaction,
-                      );
-                      Navigator.pop(context);
-                    },
-                    child: Text(
-                      loc.save,
-                      style: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
+                        if (pickedDate != null) {
+                          setState(() {
+                            selectedDate = pickedDate;
+                            _dateController.text =
+                                "${pickedDate.day} ${monthName(pickedDate.month)} ${pickedDate.year}";
+                          });
+                        }
+                      },
+                      decoration: InputDecoration(
+                        prefixIcon: Icon(Icons.calendar_today, size: 20),
+                        hintText: "22 July 2025",
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
                       ),
                     ),
-                  ),
+                  ],
                 ),
-              ],
+              ),
+            ],
+          ),
+          SizedBox(height: 20),
+          Text("Notes", style: TextStyle(fontWeight: FontWeight.bold)),
+          SizedBox(height: 10),
+          TextField(
+            controller: _notesController,
+            maxLines: 5,
+            decoration: InputDecoration(
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
             ),
           ),
-        ),
+          SizedBox(height: 80),
+          SizedBox(
+            width: double.infinity,
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                padding: EdgeInsets.symmetric(vertical: 15),
+                backgroundColor: Color(0xFF6C63FF),
+                foregroundColor: Colors.white,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+              onPressed: _saveIncome,
+              child: Text(
+                "Save",
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
