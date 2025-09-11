@@ -1,10 +1,14 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:masrofy/l10n/app_localizations.dart';
+import 'package:masrofy/models/ExpenseModel.dart';
+import 'package:masrofy/models/category_model.dart';
 
 class AddExpenseScreen extends StatefulWidget {
   const AddExpenseScreen({super.key});
 
   @override
-  _AddExpenseScreen createState() => _AddExpenseScreen();
+  _AddExpenseScreenState createState() => _AddExpenseScreenState();
 }
 
 class _AddExpenseScreenState extends State<AddExpenseScreen> {
@@ -128,7 +132,7 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                         return GestureDetector(
                           onTap: () {
                             setState(() {
-                              selectedCategory = index;
+                              selectedCategory = index as CategoryModel?;
                             });
                           },
                           child: Container(
@@ -141,7 +145,7 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                               shape: BoxShape.circle,
                             ),
                             child: Icon(
-                              categories[index],
+                              categories[index] as IconData?,
                               color: selectedCategory == index
                                   ? colors[index]
                                   : Colors.black54,
