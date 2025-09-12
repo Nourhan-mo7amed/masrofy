@@ -14,7 +14,7 @@ class Billsscreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          "Subscriptions",
+          "Bills",
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
         centerTitle: true,

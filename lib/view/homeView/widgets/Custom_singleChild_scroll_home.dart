@@ -98,7 +98,7 @@ class CustomSingleChildScrollViewHome extends StatelessWidget {
                   Navigator.pushNamed(context, '/bills');
                 },
                 child: ExpenseItem(
-                  icon: Icons.subscriptions_outlined,
+                  icon: Icons.receipt_long_outlined,
                   color: Colors.pink,
                   title: "bills",
                   amount: "- ${totals["bills"]!.toStringAsFixed(2)}",
@@ -120,7 +120,7 @@ class CustomSingleChildScrollViewHome extends StatelessWidget {
                   Navigator.pushNamed(context, '/transport');
                 },
                 child: ExpenseItem(
-                  icon: Icons.widgets_outlined,
+                  icon: Icons.directions_car_outlined,
                   color: Colors.blue,
                   title: "Transport",
                   amount: "- ${totals["transport"]!.toStringAsFixed(2)}",
