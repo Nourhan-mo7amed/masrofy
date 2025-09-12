@@ -17,7 +17,7 @@ import '../../view/shoppingView/shoppingscreen.dart';
 import '../../view/statisticsView/statisticsScreen.dart';
 import '../../view/SubscriptionsView/billsScreen.dart';
 import '../../view/foodView/foodscreen.dart';
-import '../../view/anotherView/AnotherScreen.dart';
+import '../../view/transportView/transportScreen.dart';
 import '../../view/privacypolicyView/privacypolicyScreen.dart';
 import '../../view/settingsView/settingScreen.dart';
 
@@ -40,7 +40,7 @@ class AppRoutes {
   static const String statistics = '/statistics';
   static const String bills = '/bills';
   static const String food = '/food';
-  static const String another = '/another';
+  static const String transport = '/transport';
   static const String privacypolicy = '/privacypolicy';
   static const String settings = '/settings';
 
@@ -63,7 +63,7 @@ class AppRoutes {
     statistics: (context) => const StatisticsScreen(),
     bills: (context) => const Billsscreen(),
     food: (context) => const FoodScreen(),
-    another: (context) => const AnotherScreen(),
+    transport: (context) => const Transportscreen(),
     privacypolicy: (context) => const PrivacyPolicyScreen(),
     settings: (context) => const SettingsScreen(),
   };

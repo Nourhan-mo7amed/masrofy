@@ -4,8 +4,8 @@ import 'package:firebase_auth/firebase_auth.dart'; // 🟢 عشان نجيب uid
 import '../../widgets/another_expenseitem.dart';
 import 'package:intl/intl.dart';
 
-class AnotherScreen extends StatelessWidget {
-  const AnotherScreen({super.key});
+class Transportscreen extends StatelessWidget {
+  const Transportscreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,7 @@ class AnotherScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          "Another",
+          "transport",
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
@@ -28,7 +28,10 @@ class AnotherScreen extends StatelessWidget {
           stream: FirebaseFirestore.instance
               .collection("expenses")
               .where("userId", isEqualTo: uid) // 🟢 فلترة باليوزر
-              .where("categoryId", isEqualTo: "general") // 👈 فلترة بالكاتيجوري
+              .where(
+                "categoryId",
+                isEqualTo: "transport",
+              ) // 👈 فلترة بالكاتيجوري
               .snapshots(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
@@ -38,7 +41,7 @@ class AnotherScreen extends StatelessWidget {
             if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
               return const Center(
                 child: Text(
-                  "No Another Transactions Yet",
+                  "No Transport Transactions Yet",
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
                 ),
               );
