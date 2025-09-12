@@ -15,7 +15,7 @@ class TransactionViewmodel extends ChangeNotifier {
         .snapshots()
         .map(
           (snapshot) => snapshot.docs
-              .map((doc) => TransactionModel.fromJson(doc.data(), doc.id))
+              .map((doc) => TransactionModel.fromFirestore(doc))
               .toList(),
         );
   }
