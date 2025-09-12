@@ -6,6 +6,7 @@ import '../../view/addView/addScreen.dart';
 import '../../view/allTransactionView/all_transactionScreen.dart';
 import '../../view/profileView/profileScreen.dart';
 import '../../view/SubscriptionsView/SubscriptionsScreen.dart';
+import '../../view/chatbotView/chatbotScreen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -28,6 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
       AddScreen(),
       AlltransactionScreen(),
       Profilescreen(),
+      ChatBotScreen(),
     ];
   }
 
@@ -235,6 +237,24 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person_outline, size: 30),
+            label: "",
+          ),
+          BottomNavigationBarItem(
+            icon: IconButton(
+              icon: Icon(Icons.smart_toy_outlined, size: 30),
+              onPressed: () {
+                if (ChatBotScreen.isCompleted) {
+                  Navigator.pushNamed(
+                    context,
+                    '/report',
+                    arguments: ChatBotScreen.answers,
+                  );
+                } else {
+                  Navigator.pushNamed(context, '/chatbot');
+                }
+              },
+            ),
+
             label: "",
           ),
         ],
