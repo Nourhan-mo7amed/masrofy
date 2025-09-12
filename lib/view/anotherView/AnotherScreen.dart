@@ -9,8 +9,11 @@ class AnotherScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final String uid = FirebaseAuth.instance.currentUser!.uid; // 🟢 هنا جبت uid
-
+    final user = FirebaseAuth.instance.currentUser;
+    if (user == null) {
+      return const Scaffold(body: Center(child: Text("❌ User not logged in")));
+    }
+    final String uid = user.uid;
     return Scaffold(
       appBar: AppBar(
         title: const Text(
