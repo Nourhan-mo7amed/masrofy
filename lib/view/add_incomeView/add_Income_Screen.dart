@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart'; // ✅ عشان نجيب uid
 import 'package:masrofy/core/constants/month_name.dart';
 import 'package:masrofy/l10n/app_localizations.dart';
 import 'package:masrofy/models/transaction_model.dart';
@@ -55,6 +56,8 @@ class _CustomIncomeFormFieldState extends State<CustomIncomeFormField> {
       return;
     }
     final transaction = TransactionModel(
+      final String userId = FirebaseAuth.instance.currentUser!.uid; // ✅
+
       id: FirebaseFirestore.instance.collection("transactions").doc().id,
       title: _titleController.text.trim(),
       amount: double.tryParse(_amountController.text.trim()) ?? 0.0,
@@ -68,6 +71,7 @@ class _CustomIncomeFormFieldState extends State<CustomIncomeFormField> {
       final viewModel = Provider.of<TransactionViewmodel>(
         context,
         listen: false,
+        "userId": userId, // ✅ ربط الدخل باليوزر الحالي
       );
       await viewModel.addTransaction(transaction);
       ScaffoldMessenger.of(

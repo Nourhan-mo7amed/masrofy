@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-// import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:masrofy/l10n/app_localizations.dart';
-import 'package:masrofy/viewmodels/transaction_viewModel.dart';
-import 'package:provider/provider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart'; // 🟢 عشان نجيب uid
 import '../../widgets/another_expenseitem.dart';
 import 'package:intl/intl.dart';
 
@@ -11,38 +9,79 @@ class AnotherScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final loc = AppLocalizations.of(context)!;
-
-    final txViewModel = Provider.of<TransactionViewmodel>(context);
-    final expenses = txViewModel.expenses;
+    final String uid = FirebaseAuth.instance.currentUser!.uid; // 🟢 هنا جبت uid
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          loc.another,
-          style: const TextStyle(fontWeight: FontWeight.bold),
+        title: const Text(
+          "Another",
+          style: TextStyle(fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
       ),
       body: Padding(
         padding: const EdgeInsets.all(12.0),
-        child: expenses.isEmpty
-            ? Center(child: Text("No Transactions"))
-            : ListView.builder(
-                itemCount: expenses.length,
-                itemBuilder: (context, index) {
-                  final tx = expenses[index];
-                  final formattedDate = DateFormat(
-                    'dd MMM yyyy',
-                  ).format(tx.date);
-                  return AnotherExpenseItem(
-                    title: tx.title,
-                    date: formattedDate,
-                    amount: "-\$${tx.amount.toStringAsFixed(2)}",
-                    color: Colors.red,
-                  );
-                },
-              ),
+        child: StreamBuilder(
+          stream: FirebaseFirestore.instance
+              .collection("expenses")
+              .where("userId", isEqualTo: uid) // 🟢 فلترة باليوزر
+              .where("categoryId", isEqualTo: "general") // 👈 فلترة بالكاتيجوري
+              .snapshots(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(child: CircularProgressIndicator());
+            }
+
+            if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+              return const Center(
+                child: Text(
+                  "No Another Transactions Yet",
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                ),
+              );
+            }
+
+            final docs = snapshot.data!.docs;
+
+            return ListView.builder(
+              itemCount: docs.length,
+              itemBuilder: (context, index) {
+                final data = docs[index].data();
+
+                final String title = data["title"] ?? "No Title";
+                final double amount =
+                    (data["amount"] as num?)?.toDouble() ?? 0.0;
+                final String type = data["type"] ?? "expense";
+
+                // ✅ التاريخ ممكن يبقى String أو Timestamp
+                DateTime? date;
+                if (data["date"] is String) {
+                  try {
+                    date = DateTime.parse(data["date"]);
+                  } catch (e) {
+                    date = null;
+                  }
+                } else if (data["date"] != null) {
+                  try {
+                    date = (data["date"] as Timestamp).toDate();
+                  } catch (e) {
+                    date = null;
+                  }
+                }
+
+                return AnotherExpenseItem(
+                  title: title,
+                  date: date != null
+                      ? "${date.day}-${date.month}-${date.year}"
+                      : "Unknown",
+                  amount:
+                      "${type == "income" ? "+" : "-"} \$${amount.toStringAsFixed(2)}",
+                  color: type == "income" ? Colors.green : Colors.red,
+                );
+              },
+            );
+          },
+        ),
       ),
     );
   }

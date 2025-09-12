@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:masrofy/models/category_model.dart';
 import 'package:masrofy/l10n/app_localizations.dart';
@@ -14,37 +15,78 @@ class StatisticsScreen extends StatefulWidget {
 }
 
 class _StatisticsScreenState extends State<StatisticsScreen> {
-  /// 🔹 نفس الكاتيجوريز (لازم تطابق AddExpenseScreen)
   final List<CategoryModel> categories = [
-    CategoryModel(id: "food", name: "Food", icon: "🍔", color: Colors.purple),
+    CategoryModel(
+      id: "food",
+      name: "Food",
+      icon: "🍔",
+      color: Colors.purple,
+      userId: '',
+    ),
     CategoryModel(
       id: "shopping",
       name: "Shopping",
       icon: "🛍️",
       color: Colors.orange,
+      userId: '',
     ),
-    CategoryModel(id: "bills", name: "Bills", icon: "📄", color: Colors.red),
+    CategoryModel(
+      id: "bills",
+      name: "Bills",
+      icon: "📄",
+      color: Colors.red,
+      userId: '',
+    ),
     CategoryModel(
       id: "transport",
       name: "Transport",
       icon: "🚗",
       color: Colors.blue,
+      userId: '',
     ),
   ];
 
-  Stream<Map<String, double>> _getCategoryTotals() {
-    return FirebaseFirestore.instance.collection("expenses").snapshots().map((
-      snapshot,
-    ) {
-      final Map<String, double> totals = {};
-      for (var doc in snapshot.docs) {
+  Stream<Map<String, dynamic>> _getTotals() {
+    final uid = FirebaseAuth.instance.currentUser?.uid;
+    if (uid == null) return const Stream.empty();
+
+    final expensesStream = FirebaseFirestore.instance
+        .collection("expenses")
+        .where("userId", isEqualTo: uid)
+        .snapshots();
+
+    final incomesStream = FirebaseFirestore.instance
+        .collection("incomes")
+        .where("userId", isEqualTo: uid)
+        .snapshots();
+
+    return expensesStream.asyncMap((expenseSnap) async {
+      final incomeSnap = await incomesStream.first;
+
+      double totalExpenses = 0;
+      final Map<String, double> categoryTotals = {};
+      for (var doc in expenseSnap.docs) {
         final data = doc.data();
         final String categoryId = data["categoryId"] ?? "other";
         final double amount = (data["amount"] as num?)?.toDouble() ?? 0.0;
 
-        totals[categoryId] = (totals[categoryId] ?? 0) + amount;
+        totalExpenses += amount;
+        categoryTotals[categoryId] = (categoryTotals[categoryId] ?? 0) + amount;
       }
-      return totals;
+
+      double totalIncome = 0;
+      for (var doc in incomeSnap.docs) {
+        final data = doc.data();
+        final double amount = (data["amount"] as num?)?.toDouble() ?? 0.0;
+        totalIncome += amount;
+      }
+
+      return {
+        "categoryTotals": categoryTotals,
+        "totalIncome": totalIncome,
+        "totalExpenses": totalExpenses,
+        "balance": totalIncome - totalExpenses,
+      };
     });
   }
 
@@ -60,15 +102,27 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
         ),
         centerTitle: true,
       ),
-      body: StreamBuilder<Map<String, double>>(
-        stream: _getCategoryTotals(),
+      body: StreamBuilder<Map<String, dynamic>>(
+        stream: _getTotals(),
         builder: (context, snapshot) {
-          if (!snapshot.hasData) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
           }
 
-          final totals = snapshot.data!;
-          final totalAmount = totals.values.fold(0.0, (a, b) => a + b);
+          if (!snapshot.hasData || snapshot.data!.isEmpty) {
+            return const Center(
+              child: Text(
+                "No Statistics Available",
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+              ),
+            );
+          }
+
+          final categoryTotals =
+              snapshot.data!["categoryTotals"] as Map<String, double>;
+          final totalIncome = snapshot.data!["totalIncome"] as double;
+          final totalExpenses = snapshot.data!["totalExpenses"] as double;
+          final balance = snapshot.data!["balance"] as double;
 
           return SingleChildScrollView(
             padding: const EdgeInsets.all(16.0),
@@ -84,7 +138,7 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
                         PieChartData(
                           sectionsSpace: 2,
                           centerSpaceRadius: 70,
-                          sections: totals.entries.map((entry) {
+                          sections: categoryTotals.entries.map((entry) {
                             final cat = categories.firstWhere(
                               (c) => c.id == entry.key,
                               orElse: () => CategoryModel(
@@ -92,6 +146,7 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
                                 name: "Other",
                                 icon: "❓",
                                 color: Colors.grey,
+                                userId: '',
                               ),
                             );
                             return PieChartSectionData(
@@ -111,10 +166,25 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
                           ),
                           const SizedBox(height: 4),
                           Text(
-                            "\$${totalAmount.toStringAsFixed(2)}",
+                            "\$${balance.toStringAsFixed(2)}",
                             style: const TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 20,
+                            ),
+                          ),
+                          const SizedBox(height: 4),
+                          Text(
+                            "Income: \$${totalIncome.toStringAsFixed(2)}",
+                            style: TextStyle(
+                              color: Colors.green[600],
+                              fontSize: 12,
+                            ),
+                          ),
+                          Text(
+                            "Expenses: \$${totalExpenses.toStringAsFixed(2)}",
+                            style: TextStyle(
+                              color: Colors.red[600],
+                              fontSize: 12,
                             ),
                           ),
                         ],
@@ -130,7 +200,7 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
                   mainAxisSpacing: 10,
                   crossAxisSpacing: 10,
                   childAspectRatio: 1.0,
-                  children: totals.entries.map((entry) {
+                  children: categoryTotals.entries.map((entry) {
                     final cat = categories.firstWhere(
                       (c) => c.id == entry.key,
                       orElse: () => CategoryModel(
@@ -138,6 +208,7 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
                         name: "Other",
                         icon: "❓",
                         color: Colors.grey,
+                        userId: '',
                       ),
                     );
                     return BuildCategoryCard(
