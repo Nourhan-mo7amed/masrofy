@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:masrofy/core/constants/month_name.dart';
 import 'package:masrofy/l10n/app_localizations.dart';
+import 'package:firebase_auth/firebase_auth.dart'; // 👈 لازم نضيفها
 import 'package:masrofy/models/ExpenseModel.dart';
 import 'package:masrofy/models/category_model.dart';
 import 'package:masrofy/models/transaction_model.dart';
@@ -25,23 +27,40 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
 
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  /// 🔹 الكاتيجوريز (ممكن تخزنهم في فايرستور أو local حسب مشروعك)
-  final List<CategoryModel> categories = [
-    CategoryModel(id: "food", name: "Food", icon: "🍔", color: Colors.purple),
-    CategoryModel(
-      id: "shopping",
-      name: "Shopping",
-      icon: "🛍️",
-      color: Colors.orange,
-    ),
-    CategoryModel(id: "bills", name: "Bills", icon: "📄", color: Colors.red),
-    CategoryModel(
-      id: "transport",
-      name: "Transport",
-      icon: "🚗",
-      color: Colors.blue,
-    ),
-  ];
+  List<CategoryModel> get categories {
+    final String currentUserId = FirebaseAuth.instance.currentUser?.uid ?? "";
+    return [
+      CategoryModel(
+        id: "food",
+        name: "Food",
+        icon: "🍔",
+        color: Colors.purple,
+        userId: currentUserId,
+      ),
+      CategoryModel(
+        id: "shopping",
+        name: "Shopping",
+        icon: "🛍️",
+        color: Colors.orange,
+        userId: currentUserId,
+      ),
+      CategoryModel(
+        id: "bills",
+        name: "Bills",
+        icon: "📄",
+        color: Colors.red,
+        userId: currentUserId,
+      ),
+      CategoryModel(
+        id: "transport",
+        name: "Transport",
+        icon: "🚗",
+        color: Colors.blue,
+        userId: currentUserId,
+      ),
+    ];
+  }
+
   Future<void> _saveExpense() async {
     if (_titleController.text.isEmpty ||
         _amountController.text.isEmpty ||
@@ -57,16 +76,23 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
       ).showSnackBar(SnackBar(content: Text("⚠️ Please select a category")));
       return;
     }
-
+    final userId = FirebaseAuth.instance.currentUser?.uid;
+    if (userId == null) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text("❌ User not logged in")));
+      return;
+    }
     final transaction = TransactionModel(
       id: FirebaseFirestore.instance.collection("transactions").doc().id,
       title: _titleController.text.trim(),
       amount: double.tryParse(_amountController.text.trim()) ?? 0.0,
       date: selectedDate!,
+      userId: userId, // 👈 هنا أضفنا uid
       notes: _notesController.text.trim(),
-      type: "expense",
-      categoryId: selectedCategory!.id,
+      type: 'expense',
       source: null,
+      categoryId: selectedCategory!.id,
     );
     try {
       final viewModel = Provider.of<TransactionViewmodel>(
@@ -92,7 +118,7 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           "Add Expense",
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
@@ -105,11 +131,12 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                /// Title
+                const Text(
                   "Expense Title",
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
-                SizedBox(height: 5),
+                const SizedBox(height: 5),
                 TextField(
                   controller: _titleController,
                   decoration: InputDecoration(
@@ -120,52 +147,28 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                   ),
                 ),
                 SizedBox(height: 20),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                      "Category",
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    SizedBox(width: 15),
-                    Row(
-                      children: List.generate(categories.length, (index) {
-                        final List<Color> colors = [
-                          Colors.blue,
-                          Colors.orange,
-                          Colors.red,
-                          Colors.purple,
-                        ];
 
-                        return GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              selectedCategory = categories[index];
-                            });
-                          },
-                          child: Container(
-                            margin: EdgeInsets.only(right: 12),
-                            padding: EdgeInsets.all(12),
-                            decoration: BoxDecoration(
-                              color: selectedCategory == categories[index]
-                                  ? colors[index].withOpacity(0.2)
-                                  : Colors.grey.shade200,
-                              shape: BoxShape.circle,
-                            ),
-                            child: Text(
-                              categories[index].icon,
-                              style: TextStyle(
-                                fontSize: 20,
-                                color: selectedCategory == categories[index]
-                                    ? colors[index]
-                                    : Colors.black54,
-                              ),
-                            ),
-                          ),
-                        );
-                      }),
-                    ),
-                  ],
+                /// Category
+                const Text(
+                  "Category",
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 10),
+                Wrap(
+                  spacing: 12,
+                  children: categories.map((cat) {
+                    final isSelected = selectedCategory?.id == cat.id;
+                    return ChoiceChip(
+                      label: Text(cat.icon),
+                      selected: isSelected,
+                      selectedColor: cat.color.withOpacity(0.2),
+                      onSelected: (_) {
+                        setState(() {
+                          selectedCategory = cat;
+                        });
+                      },
+                    );
+                  }).toList(),
                 ),
                 SizedBox(height: 20),
                 Row(
@@ -203,13 +206,14 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                             style: TextStyle(fontWeight: FontWeight.bold),
                           ),
                           SizedBox(height: 10),
+
                           TextField(
                             controller: _dateController,
                             readOnly: true,
                             onTap: () async {
                               DateTime? pickedDate = await showDatePicker(
                                 context: context,
-                                initialDate: DateTime(2025, 7, 22),
+                                initialDate: DateTime.now(),
                                 firstDate: DateTime(2000),
                                 lastDate: DateTime(2100),
                               );
@@ -217,13 +221,16 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                                 setState(() {
                                   selectedDate = pickedDate;
                                   _dateController.text =
-                                      "${pickedDate.day} ${_monthName(pickedDate.month)} ${pickedDate.year}";
+                                      "${pickedDate.day} ${monthName(pickedDate.month)} ${pickedDate.year}";
                                 });
                               }
                             },
                             decoration: InputDecoration(
-                              prefixIcon: Icon(Icons.calendar_today, size: 20),
-                              hintText: "22 july 2025",
+                              prefixIcon: const Icon(
+                                Icons.calendar_today,
+                                size: 20,
+                              ),
+                              hintText: "22 July 2025",
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(12),
                               ),
@@ -234,9 +241,14 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                     ),
                   ],
                 ),
-                SizedBox(height: 20),
-                Text("Notes", style: TextStyle(fontWeight: FontWeight.bold)),
-                SizedBox(height: 10),
+                const SizedBox(height: 20),
+
+                /// Notes
+                const Text(
+                  "Notes",
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 10),
                 TextField(
                   controller: _notesController,
                   maxLines: 5,
@@ -251,8 +263,8 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                   width: double.infinity,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      padding: EdgeInsets.symmetric(vertical: 15),
-                      backgroundColor: Color(0xFF6C63FF),
+                      padding: const EdgeInsets.symmetric(vertical: 15),
+                      backgroundColor: const Color(0xFF6C63FF),
                       foregroundColor: Colors.white,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
