@@ -10,34 +10,42 @@ class CustomSingleChildScrollViewHome extends StatelessWidget {
   final BuildContext context;
 
   Stream<Map<String, double>> _getCategoryTotals() {
-    final uid = FirebaseAuth.instance.currentUser?.uid;
-    if (uid == null) return const Stream.empty();
+  final uid = FirebaseAuth.instance.currentUser?.uid;
+  if (uid == null) return const Stream.empty();
 
-    return FirebaseFirestore.instance
-        .collection("expenses")
-        .where("userId", isEqualTo: uid)
-        .snapshots()
-        .map((snapshot) {
-      final Map<String, double> totals = {
-        "shopping": 0.0,
-        "subscriptions": 0.0,
-        "food": 0.0,
-        "another": 0.0,
-      };
+  return FirebaseFirestore.instance
+      .collection("expenses")
+      .where("userId", isEqualTo: uid)
+      .snapshots()
+      .map((snapshot) {
+    final Map<String, double> totals = {
+      "shopping": 0.0,
+      "subscriptions": 0.0,
+      "food": 0.0,
+      "another": 0.0,
+    };
 
-      for (var doc in snapshot.docs) {
-        final data = doc.data();
-        final categoryId = data["categoryId"] ?? "another";
-        final amount = (data["amount"] as num?)?.toDouble() ?? 0.0;
+    for (var doc in snapshot.docs) {
+      final data = doc.data();
+      String categoryId = data["categoryId"] ?? "another";
 
-        if (totals.containsKey(categoryId)) {
-          totals[categoryId] = totals[categoryId]! + amount;
-        }
+      // 🔹 إذا اسمها في Firebase "bills" اعتبرها "subscriptions"
+      if (categoryId == "bills") categoryId = "subscriptions";
+
+      final amount = (data["amount"] as num?)?.toDouble() ?? 0.0;
+
+      if (totals.containsKey(categoryId)) {
+        totals[categoryId] = totals[categoryId]! + amount;
+      } else {
+        // أي تصنيف غير معروف نضيفه للـ "another"
+        totals["another"] = totals["another"]! + amount;
       }
+    }
 
-      return totals;
-    });
-  }
+    return totals;
+  });
+}
+
 
   @override
   Widget build(BuildContext context) {

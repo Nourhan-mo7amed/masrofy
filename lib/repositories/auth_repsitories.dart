@@ -100,18 +100,25 @@ class AuthRepository {
 
   // 🔴 Logout
   Future<void> signOut() async {
-    try {
-      await _firebaseAuth.signOut();
-      print("✅ User signed out successfully");
-    } catch (e) {
-      print("❌ Error in signOut: $e");
-    }
+  try {
+    // تسجيل خروج من Firebase
+    await _firebaseAuth.signOut();
+
+    // تسجيل خروج من Google
+    final googleSignIn = GoogleSignIn();
+    await googleSignIn.signOut();
+
+    print("✅ User signed out from Firebase & Google");
+  } catch (e) {
+    print("❌ Error in signOut: $e");
   }
+}
 }
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   Future<User?> signInWithGoogle() async {
     try {
@@ -133,7 +140,36 @@ class AuthService {
       final UserCredential userCredential =
           await _auth.signInWithCredential(credential);
 
-      return userCredential.user;
+      final User? user = userCredential.user;
+
+      if (user != null) {
+        final uid = user.uid;
+        final email = user.email ?? "";
+        final username = email.contains("@") ? email.split("@")[0] : email;
+
+        final userDoc = _firestore.collection("users").doc(uid);
+        final snapshot = await userDoc.get();
+
+        if (!snapshot.exists) {
+          // أول مرة يدخل بحساب جوجل → نحفظ بياناته
+          await userDoc.set({
+            "uid": uid,
+            "name": user.displayName ?? username,
+            "email": email,
+            "username": username,
+            "photoURL": user.photoURL,
+            "createdAt": FieldValue.serverTimestamp(),
+          });
+          print("✅ User added to Firestore with Google Sign-In");
+        } else {
+          // لو موجود ممكن نعمل update لو حابب
+          await userDoc.update({
+            "lastLogin": FieldValue.serverTimestamp(),
+          });
+        }
+      }
+
+      return user;
     } catch (e) {
       print('❌ Error in Google Sign-In: $e');
       return null;
@@ -145,3 +181,4 @@ class AuthService {
     await _auth.signOut();
   }
 }
+
