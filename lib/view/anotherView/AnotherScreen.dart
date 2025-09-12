@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart'; // 🟢 عشان نجيب uid
 import '../../widgets/another_expenseitem.dart';
 
 class AnotherScreen extends StatelessWidget {
@@ -7,6 +8,8 @@ class AnotherScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final String uid = FirebaseAuth.instance.currentUser!.uid; // 🟢 هنا جبت uid
+
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -19,8 +22,9 @@ class AnotherScreen extends StatelessWidget {
         padding: const EdgeInsets.all(12.0),
         child: StreamBuilder(
           stream: FirebaseFirestore.instance
-              .collection("expenses") // 👈 الكولكشن
-              .where("categoryId", isEqualTo: "general") // 👈 id الكاتيجوري
+              .collection("expenses")
+              .where("userId", isEqualTo: uid) // 🟢 فلترة باليوزر
+              .where("categoryId", isEqualTo: "general") // 👈 فلترة بالكاتيجوري
               .snapshots(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
@@ -41,7 +45,7 @@ class AnotherScreen extends StatelessWidget {
             return ListView.builder(
               itemCount: docs.length,
               itemBuilder: (context, index) {
-                final data = docs[index].data() as Map<String, dynamic>;
+                final data = docs[index].data();
 
                 final String title = data["title"] ?? "No Title";
                 final double amount =

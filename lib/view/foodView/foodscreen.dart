@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart'; // 👈 مهم
 import '../../widgets/food_expenseitem.dart';
 
 class FoodScreen extends StatelessWidget {
@@ -7,6 +8,14 @@ class FoodScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final uid = FirebaseAuth.instance.currentUser?.uid; // 👈 جلب uid الحالي
+
+    if (uid == null) {
+      return const Scaffold(
+        body: Center(child: Text("User not logged in")),
+      );
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("Food", style: TextStyle(fontWeight: FontWeight.bold)),
@@ -18,6 +27,7 @@ class FoodScreen extends StatelessWidget {
           stream: FirebaseFirestore.instance
               .collection("expenses")
               .where("categoryId", isEqualTo: "food")
+              .where("userId", isEqualTo: uid) // 👈 فلترة بالـ uid
               .snapshots(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
@@ -38,21 +48,22 @@ class FoodScreen extends StatelessWidget {
             return ListView.builder(
               itemCount: docs.length,
               itemBuilder: (context, index) {
-                final data = docs[index].data() as Map<String, dynamic>;
+                final data = docs[index].data();
                 final title = data["title"] ?? "No Title";
                 final double amount =
                     (data["amount"] as num?)?.toDouble() ?? 0.0;
                 final String type = data["type"] ?? "expense";
 
-                // ✅ التعامل مع التاريخ كـ String
-                final dateString = data["date"] as String?;
+                // ✅ التعامل مع التاريخ كـ String أو Timestamp
                 DateTime? date;
-                if (dateString != null) {
+                if (data["date"] is String) {
                   try {
-                    date = DateTime.parse(dateString);
+                    date = DateTime.parse(data["date"]);
                   } catch (e) {
                     date = null;
                   }
+                } else if (data["date"] is Timestamp) {
+                  date = (data["date"] as Timestamp).toDate();
                 }
 
                 return FoodExpenseItem(

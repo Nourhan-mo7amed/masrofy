@@ -4,7 +4,8 @@ class ExpenseModel {
   final double amount;
   final String categoryId;
   final DateTime date;
-  final String? note; 
+  final String userId;   // 👈 نضيف userId
+  final String? note;
 
   ExpenseModel({
     required this.id,
@@ -12,7 +13,8 @@ class ExpenseModel {
     required this.amount,
     required this.categoryId,
     required this.date,
-    this.note, 
+    required this.userId,   // 👈 لازم يتبعت
+    this.note,
   });
 
   Map<String, dynamic> toJson() => {
@@ -21,6 +23,7 @@ class ExpenseModel {
         "amount": amount,
         "categoryId": categoryId,
         "date": date.toIso8601String(),
+        "userId": userId, // 👈 نضيفه في الداتا
         "note": note,
       };
 
@@ -30,6 +33,7 @@ class ExpenseModel {
         amount: (json["amount"] as num).toDouble(),
         categoryId: json["categoryId"],
         date: DateTime.parse(json["date"]),
+        userId: json["userId"], // 👈 نستقبل الـ uid
         note: json["note"],
       );
 }

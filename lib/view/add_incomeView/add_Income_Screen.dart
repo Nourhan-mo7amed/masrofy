@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart'; // ✅ عشان نجيب uid
 import 'package:masrofy/core/constants/month_name.dart';
 
 class AddIncomeScreen extends StatelessWidget {
@@ -50,12 +51,15 @@ class _CustomIncomeFormFieldState extends State<CustomIncomeFormField> {
     }
 
     try {
+      final String userId = FirebaseAuth.instance.currentUser!.uid; // ✅
+
       await FirebaseFirestore.instance.collection("incomes").add({
         "title": _titleController.text.trim(),
         "amount": double.tryParse(_amountController.text.trim()) ?? 0.0,
         "date": selectedDate!.toIso8601String(),
         "note": _notesController.text.trim(),
         "createdAt": FieldValue.serverTimestamp(),
+        "userId": userId, // ✅ ربط الدخل باليوزر الحالي
       });
 
       ScaffoldMessenger.of(context).showSnackBar(

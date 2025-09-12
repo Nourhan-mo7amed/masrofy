@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart'; // 👈 لازم نضيفها
 import 'package:masrofy/models/ExpenseModel.dart';
 import 'package:masrofy/core/constants/month_name.dart';
 import 'package:masrofy/models/category_model.dart';
@@ -22,17 +23,39 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
 
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  /// 🔹 الكاتيجوريز (ممكن تخزنهم في فايرستور أو local حسب مشروعك)
-  final List<CategoryModel> categories = [
-    CategoryModel(
-        id: "food", name: "Food", icon: "🍔", color: Colors.purple),
-    CategoryModel(
-        id: "shopping", name: "Shopping", icon: "🛍️", color: Colors.orange),
-    CategoryModel(
-        id: "bills", name: "Bills", icon: "📄", color: Colors.red),
-    CategoryModel(
-        id: "transport", name: "Transport", icon: "🚗", color: Colors.blue),
-  ];
+  List<CategoryModel> get categories {
+    final String currentUserId = FirebaseAuth.instance.currentUser?.uid ?? "";
+    return [
+      CategoryModel(
+        id: "food",
+        name: "Food",
+        icon: "🍔",
+        color: Colors.purple,
+        userId: currentUserId,
+      ),
+      CategoryModel(
+        id: "shopping",
+        name: "Shopping",
+        icon: "🛍️",
+        color: Colors.orange,
+        userId: currentUserId,
+      ),
+      CategoryModel(
+        id: "bills",
+        name: "Bills",
+        icon: "📄",
+        color: Colors.red,
+        userId: currentUserId,
+      ),
+      CategoryModel(
+        id: "transport",
+        name: "Transport",
+        icon: "🚗",
+        color: Colors.blue,
+        userId: currentUserId,
+      ),
+    ];
+  }
 
   Future<void> _saveExpense() async {
     if (_titleController.text.isEmpty ||
@@ -45,12 +68,24 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
       return;
     }
 
+    /// 👇 ناخد uid من FirebaseAuth
+    final userId = FirebaseAuth.instance.currentUser?.uid;
+    if (userId == null) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text("❌ User not logged in")));
+      return;
+    }
+
+    final expenseId = _firestore.collection("expenses").doc().id;
+
     final expense = ExpenseModel(
-      id: _firestore.collection("expenses").doc().id,
+      id: expenseId,
       title: _titleController.text.trim(),
       amount: double.tryParse(_amountController.text.trim()) ?? 0,
       categoryId: selectedCategory!.id,
       date: selectedDate!,
+      userId: userId, // 👈 هنا أضفنا uid
       note: _notesController.text.trim(),
     );
 
@@ -60,15 +95,15 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
           .doc(expense.id)
           .set(expense.toJson());
 
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("✅ Expense Added")),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text("✅ Expense Added")));
 
       Navigator.pop(context);
     } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("❌ Error: $e")),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text("❌ Error: $e")));
     }
   }
 
@@ -76,8 +111,10 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Add Expense",
-            style: TextStyle(fontWeight: FontWeight.bold)),
+        title: const Text(
+          "Add Expense",
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
         centerTitle: true,
       ),
       body: SafeArea(
@@ -88,8 +125,10 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 /// Title
-                const Text("Expense Title",
-                    style: TextStyle(fontWeight: FontWeight.bold)),
+                const Text(
+                  "Expense Title",
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
                 const SizedBox(height: 5),
                 TextField(
                   controller: _titleController,
@@ -103,8 +142,10 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                 const SizedBox(height: 20),
 
                 /// Category
-                const Text("Category",
-                    style: TextStyle(fontWeight: FontWeight.bold)),
+                const Text(
+                  "Category",
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
                 const SizedBox(height: 10),
                 Wrap(
                   spacing: 12,
@@ -132,8 +173,7 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                         controller: _amountController,
                         keyboardType: TextInputType.number,
                         decoration: InputDecoration(
-                          prefixIcon:
-                              const Icon(Icons.attach_money, size: 20),
+                          prefixIcon: const Icon(Icons.attach_money, size: 20),
                           hintText: "\$ 2000",
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
@@ -162,8 +202,10 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                           }
                         },
                         decoration: InputDecoration(
-                          prefixIcon:
-                              const Icon(Icons.calendar_today, size: 20),
+                          prefixIcon: const Icon(
+                            Icons.calendar_today,
+                            size: 20,
+                          ),
                           hintText: "22 July 2025",
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
@@ -176,8 +218,10 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                 const SizedBox(height: 20),
 
                 /// Notes
-                const Text("Notes",
-                    style: TextStyle(fontWeight: FontWeight.bold)),
+                const Text(
+                  "Notes",
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
                 const SizedBox(height: 10),
                 TextField(
                   controller: _notesController,
@@ -195,8 +239,7 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                   width: double.infinity,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      padding:
-                          const EdgeInsets.symmetric(vertical: 15),
+                      padding: const EdgeInsets.symmetric(vertical: 15),
                       backgroundColor: const Color(0xFF6C63FF),
                       foregroundColor: Colors.white,
                       shape: RoundedRectangleBorder(
@@ -207,10 +250,12 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                     child: const Text(
                       "Save",
                       style: TextStyle(
-                          fontSize: 16, fontWeight: FontWeight.bold),
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
-                )
+                ),
               ],
             ),
           ),

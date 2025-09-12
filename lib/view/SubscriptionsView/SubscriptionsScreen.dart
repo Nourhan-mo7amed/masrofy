@@ -39,7 +39,7 @@ class Subscriptions extends StatelessWidget {
             return ListView.builder(
               itemCount: docs.length,
               itemBuilder: (context, index) {
-                final data = docs[index].data() as Map<String, dynamic>;
+                final data = docs[index].data();
                 final title = data["title"] ?? "No Title";
                 final double amount =
                     (data["amount"] as num?)?.toDouble() ?? 0.0;

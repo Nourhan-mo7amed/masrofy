@@ -6,6 +6,7 @@ class IncomeModel {
   final double amount;
   final DateTime date;
   final String source;
+  final String userId;   // 👈 نضيف userId
   final String? note;
 
   IncomeModel({
@@ -14,6 +15,7 @@ class IncomeModel {
     required this.amount,
     required this.date,
     required this.source,
+    required this.userId, // 👈 لازم يتبعت
     this.note,
   });
 
@@ -23,6 +25,7 @@ class IncomeModel {
         "amount": amount,
         "date": date.toIso8601String(),
         "source": source,
+        "userId": userId, // 👈 نخزنه في الداتا
         "note": note,
       };
 
@@ -33,6 +36,7 @@ class IncomeModel {
         amount: (json["amount"] as num).toDouble(),
         date: DateTime.parse(json["date"]),
         source: json["source"] ?? "",
+        userId: json["userId"], // 👈 نستقبله هنا
         note: json["note"],
       );
 

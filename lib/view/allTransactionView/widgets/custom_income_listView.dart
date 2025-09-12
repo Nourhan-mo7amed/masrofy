@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart'; // 🟢 لازم نجيب الـ uid
 import 'package:masrofy/models/IncomeModel.dart';
 
 class CustomExpandedIncomes extends StatelessWidget {
@@ -7,11 +8,14 @@ class CustomExpandedIncomes extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final String uid = FirebaseAuth.instance.currentUser!.uid; // 🟢 جبت الـ uid
+
     return Expanded(
       child: StreamBuilder(
         stream: FirebaseFirestore.instance
-            .collection("incomes") // 🟢 غيرنا الـ collection
-            .orderBy("date", descending: true)
+            .collection("incomes")
+            .where("userId", isEqualTo: uid) // 🟢 فلترة باليوزر
+           // .orderBy("createdAt", descending: true)
             .snapshots(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
@@ -32,7 +36,6 @@ class CustomExpandedIncomes extends StatelessWidget {
             itemBuilder: (context, index) {
               final income = incomes[index];
 
-              // 🟢 Map sources to Icons
               final sourceIcons = {
                 "salary": Icons.work,
                 "freelance": Icons.laptop_mac,
@@ -48,10 +51,8 @@ class CustomExpandedIncomes extends StatelessWidget {
                     color: Colors.green,
                   ),
                 ),
-                title: Text(
-                  income.title,
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
+                title: Text(income.title,
+                    style: TextStyle(fontWeight: FontWeight.bold)),
                 subtitle: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
