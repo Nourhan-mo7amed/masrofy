@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:masrofy/l10n/app_localizations.dart';
 import 'package:masrofy/models/ExpenseModel.dart';
 import 'package:masrofy/models/category_model.dart';
+import 'package:masrofy/models/transaction_model.dart';
+import 'package:masrofy/viewmodels/transaction_viewModel.dart';
+import 'package:provider/provider.dart';
 
 class AddExpenseScreen extends StatefulWidget {
   const AddExpenseScreen({super.key});
@@ -39,42 +42,47 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
       color: Colors.blue,
     ),
   ];
-
   Future<void> _saveExpense() async {
     if (_titleController.text.isEmpty ||
         _amountController.text.isEmpty ||
-        selectedDate == null ||
-        selectedCategory == null) {
+        selectedDate == null) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("⚠️ Please fill all fields")),
+        SnackBar(content: Text("⚠️ Please fill all required fields")),
       );
       return;
     }
-
-    final expense = ExpenseModel(
-      id: _firestore.collection("expenses").doc().id,
-      title: _titleController.text.trim(),
-      amount: double.tryParse(_amountController.text.trim()) ?? 0,
-      categoryId: selectedCategory!.id,
-      date: selectedDate!,
-      note: _notesController.text.trim(),
-    );
-
-    try {
-      await _firestore
-          .collection("expenses")
-          .doc(expense.id)
-          .set(expense.toJson());
-
+    if (selectedCategory == null) {
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(const SnackBar(content: Text("✅ Expense Added")));
+      ).showSnackBar(SnackBar(content: Text("⚠️ Please select a category")));
+      return;
+    }
 
+    final transaction = TransactionModel(
+      id: FirebaseFirestore.instance.collection("transactions").doc().id,
+      title: _titleController.text.trim(),
+      amount: double.tryParse(_amountController.text.trim()) ?? 0.0,
+      date: selectedDate!,
+      notes: _notesController.text.trim(),
+      type: "expense",
+      categoryId: selectedCategory!.id,
+      source: null,
+    );
+    try {
+      final viewModel = Provider.of<TransactionViewmodel>(
+        context,
+        listen: false,
+      );
+      await viewModel.addTransaction(transaction);
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text("✅ Expense Added Successfully")));
       Navigator.pop(context);
     } catch (e) {
+      print("❌ Error saving expense: $e");
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(SnackBar(content: Text("❌ Error: $e")));
+      ).showSnackBar(SnackBar(content: Text("❌ Failed to save expense")));
     }
   }
 
@@ -85,7 +93,7 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Add Expens",
+          "Add Expense",
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
@@ -132,23 +140,26 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                         return GestureDetector(
                           onTap: () {
                             setState(() {
-                              selectedCategory = index as CategoryModel?;
+                              selectedCategory = categories[index];
                             });
                           },
                           child: Container(
                             margin: EdgeInsets.only(right: 12),
                             padding: EdgeInsets.all(12),
                             decoration: BoxDecoration(
-                              color: selectedCategory == index
+                              color: selectedCategory == categories[index]
                                   ? colors[index].withOpacity(0.2)
                                   : Colors.grey.shade200,
                               shape: BoxShape.circle,
                             ),
-                            child: Icon(
-                              categories[index] as IconData?,
-                              color: selectedCategory == index
-                                  ? colors[index]
-                                  : Colors.black54,
+                            child: Text(
+                              categories[index].icon,
+                              style: TextStyle(
+                                fontSize: 20,
+                                color: selectedCategory == categories[index]
+                                    ? colors[index]
+                                    : Colors.black54,
+                              ),
                             ),
                           ),
                         );
@@ -247,7 +258,7 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                         borderRadius: BorderRadius.circular(10),
                       ),
                     ),
-                    onPressed: () {},
+                    onPressed: _saveExpense,
                     child: Text(
                       "Save",
                       style: TextStyle(
@@ -281,5 +292,14 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
       "december",
     ];
     return months[month - 1];
+  }
+
+  @override
+  void dispose() {
+    _titleController.dispose();
+    _amountController.dispose();
+    _notesController.dispose();
+    _dateController.dispose();
+    super.dispose();
   }
 }
