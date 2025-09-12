@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:masrofy/view/billsView/billsScreen.dart';
 import '../../view/intro/splash_screen.dart';
 import '../../view/categoriesView/CategoriesScreen.dart';
 import '../../view/monthlyBudgetView/MonthlyBudget_Screen.dart';
@@ -15,7 +16,6 @@ import '../../view/add_ExpenseView/add_ExpenseScreen.dart';
 import '../../view/add_incomeView/add_Income_Screen.dart';
 import '../../view/shoppingView/shoppingscreen.dart';
 import '../../view/statisticsView/statisticsScreen.dart';
-import '../../view/SubscriptionsView/billsScreen.dart';
 import '../../view/foodView/foodscreen.dart';
 import '../../view/transportView/transportScreen.dart';
 import '../../view/privacypolicyView/privacypolicyScreen.dart';
