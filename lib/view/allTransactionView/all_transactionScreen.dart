@@ -1,12 +1,7 @@
-import 'dart:math';
 import 'package:intl/intl.dart';
-
 import 'package:flutter/material.dart';
-import 'package:masrofy/view/allTransactionView/widgets/custom_expeneses_listView.dart';
-import 'package:masrofy/view/allTransactionView/widgets/custom_income_listView.dart';
 import 'package:masrofy/core/constants/colors_app.dart';
 import 'package:masrofy/l10n/app_localizations.dart';
-import 'package:masrofy/models/transaction_model.dart';
 import 'package:provider/provider.dart';
 // import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../widgets/tapButtom.dart';
@@ -26,12 +21,25 @@ class _AlltransactionScreen extends State<AlltransactionScreen> {
     final loc = AppLocalizations.of(context)!;
 
     final txViewModel = Provider.of<TransactionViewmodel>(context);
-    final transactions = txViewModel.transactions;
 
     // فلترة حسب التاب
     final filteredTransactions = selectedTab == 0
         ? txViewModel.expenses
         : txViewModel.incomes;
+
+    // 🟢 Mapping categories & sources
+    final categoryIcons = {
+      "food": Icons.fastfood,
+      "shopping": Icons.shopping_bag,
+      "transport": Icons.directions_car,
+      "rent": Icons.home,
+    };
+    final sourceIcons = {
+      "salary": Icons.work,
+      "freelance": Icons.laptop_mac,
+      "gift": Icons.card_giftcard,
+      "investment": Icons.trending_up,
+    };
 
     return Scaffold(
       appBar: PreferredSize(
@@ -118,8 +126,10 @@ class _AlltransactionScreen extends State<AlltransactionScreen> {
                                   : AppColors.income.withOpacity(0.1),
                               child: Icon(
                                 isExpense
-                                    ? Icons.arrow_upward
-                                    : Icons.arrow_downward,
+                                    ? categoryIcons[tx.categoryId] ??
+                                          Icons.category
+                                    : sourceIcons[tx.source] ??
+                                          Icons.attach_money,
                                 color: isExpense
                                     ? AppColors.expense
                                     : AppColors.income,
@@ -137,7 +147,7 @@ class _AlltransactionScreen extends State<AlltransactionScreen> {
                               style: const TextStyle(color: Colors.grey),
                             ),
                             trailing: Text(
-                              "${tx.amount.toStringAsFixed(2)}",
+                              "${isExpense ? '-' : '+'}${tx.amount.toStringAsFixed(2)} EGP",
                               style: TextStyle(
                                 color: isExpense
                                     ? AppColors.expense
