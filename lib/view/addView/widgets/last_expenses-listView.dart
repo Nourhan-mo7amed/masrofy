@@ -20,7 +20,7 @@ class LastExpensesListView extends StatelessWidget {
         stream: FirebaseFirestore.instance
             .collection("expenses")
             .where("userId", isEqualTo: uid) // 🔹 يجيب بس مصاريف اليوزر الحالي
-            .orderBy("date", descending: true)
+            //.orderBy("date", descending: true)
             .limit(10)
             .snapshots(),
         builder: (context, snapshot) {

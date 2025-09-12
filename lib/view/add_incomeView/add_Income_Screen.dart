@@ -72,7 +72,7 @@ class _CustomIncomeFormFieldState extends State<CustomIncomeFormField> {
       return;
     }
     final transaction = TransactionModel(
-      id: FirebaseFirestore.instance.collection("transactions").doc().id,
+      id: " ",
       userId: userId, // ✅ ربط الدخل باليوزر الحالي
       title: _titleController.text.trim(),
       amount: double.tryParse(_amountController.text.trim()) ?? 0.0,

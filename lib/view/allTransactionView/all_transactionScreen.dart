@@ -67,7 +67,7 @@ class _AlltransactionScreen extends State<AlltransactionScreen> {
                   Expanded(
                     child: TabButton(
                       text: loc.expenses,
-                      isSelected: selectedTab == 0,
+                      isSelected: selectedTab == false,
                       onTap: () {
                         setState(() {
                           selectedTab = false;
@@ -79,7 +79,7 @@ class _AlltransactionScreen extends State<AlltransactionScreen> {
                   Expanded(
                     child: TabButton(
                       text: loc.income,
-                      isSelected: selectedTab == 1,
+                      isSelected: selectedTab == true,
                       onTap: () {
                         setState(() {
                           selectedTab = true;

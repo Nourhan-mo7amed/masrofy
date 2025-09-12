@@ -5,23 +5,38 @@ import 'package:flutter/material.dart';
 import 'package:masrofy/models/transaction_model.dart';
 
 class TransactionViewmodel extends ChangeNotifier {
-  final List<TransactionModel> _transactions = [];
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  List<TransactionModel> get transactions => _transactions;
+  /// ✅ إضافة معاملة جديدة
+  Future<void> addTransaction(TransactionModel transaction) async {
+    try {
+      final collectionName = transaction.type == "expense"
+          ? "expenses"
+          : "incomes";
 
-  Stream<List<TransactionModel>> get transactionsStream {
-    final userId = FirebaseAuth.instance.currentUser?.uid;
-    if (userId == null) {
-      return Stream.value([]);
+      final docRef = _firestore.collection(collectionName).doc();
+
+      await docRef.set({
+        ...transaction.toJson(),
+        "id": docRef.id,
+        "userId": FirebaseAuth.instance.currentUser!.uid,
+      });
+
+      notifyListeners();
+    } catch (e) {
+      throw Exception("Failed to save transaction: $e");
     }
+  }
+
+  /// ✅ مصاريف
+  Stream<List<TransactionModel>> get expensesStream {
+    final uid = FirebaseAuth.instance.currentUser?.uid;
+    if (uid == null) return Stream.value([]);
+
     return _firestore
-        .collection("transactions")
-        .where(
-          "userId",
-          isEqualTo: userId,
-        ) // ✅ جلب المعاملات الخاصة بالمستخدم الحالي فقط
-        .orderBy("date", descending: true)
+        .collection("expenses")
+        .where("userId", isEqualTo: uid)
+        //.orderBy("date", descending: true)
         .snapshots()
         .map(
           (snapshot) => snapshot.docs
@@ -30,29 +45,20 @@ class TransactionViewmodel extends ChangeNotifier {
         );
   }
 
-  Future<void> addTransaction(TransactionModel transaction) async {
-    try {
-      await _firestore
-          .collection("transactions")
-          .doc(transaction.id)
-          .set(transaction.toJson());
-
-      _transactions.add(transaction);
-      notifyListeners();
-    } catch (e) {
-      throw Exception("Failed to save transaction: $e");
-    }
-  }
-
-  Stream<List<TransactionModel>> get expensesStream {
-    return transactionsStream.map(
-      (allTx) => allTx.where((tx) => tx.type == "expense").toList(),
-    );
-  }
-
+  /// ✅ دخل
   Stream<List<TransactionModel>> get incomesStream {
-    return transactionsStream.map(
-      (allTx) => allTx.where((tx) => tx.type == "income").toList(),
-    );
+    final uid = FirebaseAuth.instance.currentUser?.uid;
+    if (uid == null) return Stream.value([]);
+
+    return _firestore
+        .collection("incomes")
+        .where("userId", isEqualTo: uid)
+        // .orderBy("date", descending: true)
+        .snapshots()
+        .map(
+          (snapshot) => snapshot.docs
+              .map((doc) => TransactionModel.fromFirestore(doc))
+              .toList(),
+        );
   }
 }

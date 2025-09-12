@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:masrofy/core/constants/month_name.dart';
@@ -84,7 +86,7 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
       return;
     }
     final transaction = TransactionModel(
-      id: FirebaseFirestore.instance.collection("transactions").doc().id,
+      id: "",
       title: _titleController.text.trim(),
       amount: double.tryParse(_amountController.text.trim()) ?? 0.0,
       date: selectedDate!,
