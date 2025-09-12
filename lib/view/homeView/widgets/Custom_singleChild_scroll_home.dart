@@ -8,7 +8,6 @@ class CustomSingleChildScrollViewHome extends StatelessWidget {
   const CustomSingleChildScrollViewHome({super.key, required this.context});
 
   final BuildContext context;
-
   Stream<Map<String, double>> _getCategoryTotals() {
     final uid = FirebaseAuth.instance.currentUser?.uid;
     if (uid == null) return const Stream.empty();
@@ -18,25 +17,25 @@ class CustomSingleChildScrollViewHome extends StatelessWidget {
         .where("userId", isEqualTo: uid)
         .snapshots()
         .map((snapshot) {
-      final Map<String, double> totals = {
-        "shopping": 0.0,
-        "subscriptions": 0.0,
-        "food": 0.0,
-        "another": 0.0,
-      };
+          final Map<String, double> totals = {
+            "food": 0.0,
+            "shopping": 0.0,
+            "bills": 0.0,
+            "transport": 0.0,
+          };
 
-      for (var doc in snapshot.docs) {
-        final data = doc.data();
-        final categoryId = data["categoryId"] ?? "another";
-        final amount = (data["amount"] as num?)?.toDouble() ?? 0.0;
+          for (var doc in snapshot.docs) {
+            final data = doc.data();
+            final categoryId = data["categoryId"] ?? "another";
+            final amount = (data["amount"] as num?)?.toDouble() ?? 0.0;
 
-        if (totals.containsKey(categoryId)) {
-          totals[categoryId] = totals[categoryId]! + amount;
-        }
-      }
+            if (totals.containsKey(categoryId)) {
+              totals[categoryId] = totals[categoryId]! + amount;
+            }
+          }
 
-      return totals;
-    });
+          return totals;
+        });
   }
 
   @override
@@ -44,12 +43,9 @@ class CustomSingleChildScrollViewHome extends StatelessWidget {
     return StreamBuilder<Map<String, double>>(
       stream: _getCategoryTotals(),
       builder: (context, snapshot) {
-        final totals = snapshot.data ?? {
-          "shopping": 0.0,
-          "subscriptions": 0.0,
-          "food": 0.0,
-          "another": 0.0,
-        };
+        final totals =
+            snapshot.data ??
+            {"food": 0.0, "shopping": 0.0, "bills": 0.0, "transport": 0.0};
 
         return SingleChildScrollView(
           child: Column(
@@ -68,7 +64,9 @@ class CustomSingleChildScrollViewHome extends StatelessWidget {
                       child: Text(
                         "Home",
                         style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ],
@@ -97,13 +95,13 @@ class CustomSingleChildScrollViewHome extends StatelessWidget {
               ),
               InkWell(
                 onTap: () {
-                  Navigator.pushNamed(context, '/subscriptions');
+                  Navigator.pushNamed(context, '/bills');
                 },
                 child: ExpenseItem(
                   icon: Icons.subscriptions_outlined,
                   color: Colors.pink,
-                  title: "Subscriptions",
-                  amount: "- ${totals["subscriptions"]!.toStringAsFixed(2)}",
+                  title: "bills",
+                  amount: "- ${totals["bills"]!.toStringAsFixed(2)}",
                 ),
               ),
               InkWell(
@@ -119,13 +117,13 @@ class CustomSingleChildScrollViewHome extends StatelessWidget {
               ),
               InkWell(
                 onTap: () {
-                  Navigator.pushNamed(context, '/another');
+                  Navigator.pushNamed(context, '/transport');
                 },
                 child: ExpenseItem(
                   icon: Icons.widgets_outlined,
                   color: Colors.blue,
-                  title: "Another",
-                  amount: "- ${totals["another"]!.toStringAsFixed(2)}",
+                  title: "Transport",
+                  amount: "- ${totals["transport"]!.toStringAsFixed(2)}",
                 ),
               ),
             ],

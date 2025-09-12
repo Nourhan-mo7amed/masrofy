@@ -15,7 +15,7 @@ import '../../view/add_ExpenseView/add_ExpenseScreen.dart';
 import '../../view/add_incomeView/add_Income_Screen.dart';
 import '../../view/shoppingView/shoppingscreen.dart';
 import '../../view/statisticsView/statisticsScreen.dart';
-import '../../view/SubscriptionsView/SubscriptionsScreen.dart';
+import '../../view/SubscriptionsView/billsScreen.dart';
 import '../../view/foodView/foodscreen.dart';
 import '../../view/anotherView/AnotherScreen.dart';
 import '../../view/privacypolicyView/privacypolicyScreen.dart';
@@ -38,12 +38,11 @@ class AppRoutes {
   static const String addIncome = '/addIncome';
   static const String shopping = '/shopping';
   static const String statistics = '/statistics';
-  static const String subscriptions = '/subscriptions';
+  static const String bills = '/bills';
   static const String food = '/food';
   static const String another = '/another';
   static const String privacypolicy = '/privacypolicy';
   static const String settings = '/settings';
-
 
   static Map<String, WidgetBuilder> routes = {
     splash: (context) => const SplashScreen(),
@@ -62,11 +61,10 @@ class AppRoutes {
     addIncome: (context) => AddIncomeScreen(),
     shopping: (context) => const ShoppingScreen(),
     statistics: (context) => const StatisticsScreen(),
-    subscriptions: (context) => const Subscriptions(),
+    bills: (context) => const Billsscreen(),
     food: (context) => const FoodScreen(),
     another: (context) => const AnotherScreen(),
     privacypolicy: (context) => const PrivacyPolicyScreen(),
     settings: (context) => const SettingsScreen(),
-
   };
 }
