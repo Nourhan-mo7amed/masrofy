@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class TransactionModel {
   final String id;
+  final String userId;
   final String title;
   final double amount;
   final DateTime date;
@@ -11,6 +12,7 @@ class TransactionModel {
   final String? source;
 
   TransactionModel({
+    required this.userId,
     required this.id,
     this.categoryId,
     this.source,
@@ -22,6 +24,7 @@ class TransactionModel {
   });
   Map<String, dynamic> toJson() => {
     "id": id,
+    "userId": userId,
     "title": title,
     "amount": amount,
     "categoryId": categoryId,
@@ -33,6 +36,7 @@ class TransactionModel {
   factory TransactionModel.fromJson(Map<String, dynamic> json, String id) =>
       TransactionModel(
         id: id,
+        userId: json["userId"],
         title: json["title"] ?? "",
         amount: (json["amount"] as num).toDouble(),
         date: DateTime.parse(json["date"]),
