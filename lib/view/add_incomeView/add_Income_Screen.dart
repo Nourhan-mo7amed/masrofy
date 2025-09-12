@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:masrofy/core/constants/month_name.dart';
 import 'package:masrofy/l10n/app_localizations.dart';
+import 'package:masrofy/models/transaction_model.dart';
+import 'package:masrofy/viewmodels/transaction_viewModel.dart';
+import 'package:provider/provider.dart';
 
 class AddIncomeScreen extends StatelessWidget {
   @override
@@ -51,16 +54,22 @@ class _CustomIncomeFormFieldState extends State<CustomIncomeFormField> {
       );
       return;
     }
-
+    final transaction = TransactionModel(
+      id: FirebaseFirestore.instance.collection("transactions").doc().id,
+      title: _titleController.text.trim(),
+      amount: double.tryParse(_amountController.text.trim()) ?? 0.0,
+      date: selectedDate!,
+      notes: _notesController.text.trim(),
+      type: "income",
+      categoryId: null,
+      source: null,
+    );
     try {
-      await FirebaseFirestore.instance.collection("incomes").add({
-        "title": _titleController.text.trim(),
-        "amount": double.tryParse(_amountController.text.trim()) ?? 0.0,
-        "date": selectedDate!.toIso8601String(),
-        "note": _notesController.text.trim(),
-        "createdAt": FieldValue.serverTimestamp(),
-      });
-
+      final viewModel = Provider.of<TransactionViewmodel>(
+        context,
+        listen: false,
+      );
+      await viewModel.addTransaction(transaction);
       ScaffoldMessenger.of(
         context,
       ).showSnackBar(SnackBar(content: Text("✅ Income Added Successfully")));
@@ -200,23 +209,5 @@ class _CustomIncomeFormFieldState extends State<CustomIncomeFormField> {
         ],
       ),
     );
-  }
-
-  String _monthName(int month, AppLocalizations loc) {
-    final months = [
-      loc.january,
-      loc.february,
-      loc.march,
-      loc.april,
-      loc.may,
-      loc.june,
-      loc.july,
-      loc.august,
-      loc.september,
-      loc.october,
-      loc.november,
-      loc.december,
-    ];
-    return months[month - 1];
   }
 }

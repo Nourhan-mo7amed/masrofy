@@ -8,6 +8,18 @@ class TransactionViewmodel extends ChangeNotifier {
 
   List<TransactionModel> get transactions => _transactions;
 
+  Stream<List<TransactionModel>> get transactionsStream {
+    return _firestore
+        .collection("transactions")
+        .orderBy("date", descending: true)
+        .snapshots()
+        .map(
+          (snapshot) => snapshot.docs
+              .map((doc) => TransactionModel.fromJson(doc.data(), doc.id))
+              .toList(),
+        );
+  }
+
   Future<void> addTransaction(TransactionModel transaction) async {
     try {
       await _firestore
@@ -21,4 +33,10 @@ class TransactionViewmodel extends ChangeNotifier {
       throw Exception("Failed to save transaction: $e");
     }
   }
+
+  List<TransactionModel> get expenses =>
+      _transactions.where((tx) => tx.type == "expense").toList();
+
+  List<TransactionModel> get incomes =>
+      _transactions.where((tx) => tx.type == "income").toList();
 }
