@@ -46,6 +46,15 @@ class _CustomIncomeFormFieldState extends State<CustomIncomeFormField> {
 
   DateTime? selectedDate;
 
+  @override
+  void dispose() {
+    _titleController.dispose();
+    _dateController.dispose();
+    _notesController.dispose();
+    _amountController.dispose();
+    super.dispose();
+  }
+
   Future<void> _saveIncome() async {
     if (_titleController.text.isEmpty ||
         _amountController.text.isEmpty ||
@@ -55,10 +64,16 @@ class _CustomIncomeFormFieldState extends State<CustomIncomeFormField> {
       );
       return;
     }
+    final userId = FirebaseAuth.instance.currentUser?.uid; // ✅ جلب uid الحالي
+    if (userId == null) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text("❌ User not logged in")));
+      return;
+    }
     final transaction = TransactionModel(
-      final String userId = FirebaseAuth.instance.currentUser!.uid; // ✅
-
       id: FirebaseFirestore.instance.collection("transactions").doc().id,
+      userId: userId, // ✅ ربط الدخل باليوزر الحالي
       title: _titleController.text.trim(),
       amount: double.tryParse(_amountController.text.trim()) ?? 0.0,
       date: selectedDate!,
@@ -71,7 +86,6 @@ class _CustomIncomeFormFieldState extends State<CustomIncomeFormField> {
       final viewModel = Provider.of<TransactionViewmodel>(
         context,
         listen: false,
-        "userId": userId, // ✅ ربط الدخل باليوزر الحالي
       );
       await viewModel.addTransaction(transaction);
       ScaffoldMessenger.of(
@@ -79,11 +93,12 @@ class _CustomIncomeFormFieldState extends State<CustomIncomeFormField> {
       ).showSnackBar(SnackBar(content: Text("✅ Income Added Successfully")));
       Navigator.pop(context);
 
-      // clear inputs
+      // reset form
       _titleController.clear();
       _amountController.clear();
-      _notesController.clear();
       _dateController.clear();
+      _notesController.clear();
+      setState(() => selectedDate = null);
       setState(() {
         selectedDate = null;
       });
