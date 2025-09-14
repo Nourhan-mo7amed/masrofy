@@ -14,7 +14,7 @@ class ReportScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Financial Report"),
+        title: Text("Financial Report",style: TextStyle(fontWeight: FontWeight.bold)),
         centerTitle: true,
         leading: IconButton(
           icon: Icon(Icons.arrow_back),

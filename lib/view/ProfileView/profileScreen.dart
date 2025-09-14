@@ -22,6 +22,19 @@ class Profilescreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(40),
+        child: AppBar(
+          centerTitle: true,
+          title: Text("Profile", style: TextStyle(fontWeight: FontWeight.bold)),
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.pushNamed(context, '/home');
+            },
+          ),
+        ),
+      ),
       body: SingleChildScrollView(
         child: Column(
           children: [

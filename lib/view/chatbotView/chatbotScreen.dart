@@ -14,7 +14,7 @@ class ChatBotScreen extends StatefulWidget {
 }
 
 class _ChatBotScreenState extends State<ChatBotScreen> {
-  final List<ChatMessage> _messages = []; 
+  final List<ChatMessage> _messages = [];
   final ChatUser _user = ChatUser(id: "1", firstName: "You");
   final ChatUser _bot = ChatUser(id: "2", firstName: "Bot");
 
@@ -61,7 +61,7 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
       });
 
       Future.delayed(Duration(seconds: 1), () {
-        ChatBotScreen.isCompleted = true;        
+        ChatBotScreen.isCompleted = true;
         ChatBotScreen.answers = _messages;
         Navigator.pushNamed(context, '/report', arguments: _messages);
       });
@@ -72,7 +72,7 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Chat Bot"),
+        title: Text("Chat Bot", style: TextStyle(fontWeight: FontWeight.bold)),
         centerTitle: true,
         leading: IconButton(
           icon: Icon(Icons.arrow_back),

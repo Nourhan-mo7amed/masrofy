@@ -10,27 +10,43 @@ class ContactTab extends StatelessWidget {
       {
         "icon": Icon(Icons.headset_mic, color: Color(0xFF6C63FF)),
         "title": "Customer Service",
-        "details": "",
+        "details": '''
+Phone : +1 555 123 4567
+Email : support@masrofy.com
+Working Hours : 9:00 AM – 6:00 PM
+''',
       },
       {
         "icon": Icon(Icons.language, color: Color(0xFF6C63FF)),
         "title": "Website",
-        "details": "",
+        "details": '''
+Visit us : www.masrofy.com
+Contact Form : www.masrofy.com/contact
+''',
       },
       {
         "icon": FaIcon(FontAwesomeIcons.whatsapp, color: Color(0xFF6C63FF)),
         "title": "Whatsapp",
-        "details": "",
+        "details": '''
+Chat with us : +1 555 987 6543
+Available : 10:00 AM – 8:00 PM 
+''',
       },
       {
         "icon": FaIcon(FontAwesomeIcons.facebook, color: Color(0xFF6C63FF)),
         "title": "Facebook",
-        "details": "",
+        "details": '''
+Page : facebook.com/masrofyapp
+Messenger : m.me/masrofyapp
+''',
       },
       {
         "icon": FaIcon(FontAwesomeIcons.instagram, color: Color(0xFF6C63FF)),
         "title": "Instagram",
-        "details": "",
+        "details": '''
+Follow us : instagram.com/masrofyapp
+DM us for support
+''',
       },
     ];
     return ListView.builder(
@@ -54,7 +70,7 @@ class ContactTab extends StatelessWidget {
                   padding: EdgeInsets.all(12.0),
                   child: Text(
                     contacts[index]["details"] as String,
-                    style: TextStyle(color: Colors.grey),
+                    style: TextStyle(color: Colors.grey, fontSize: 16),
                   ),
                 ),
               ],

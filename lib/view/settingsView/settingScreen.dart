@@ -26,7 +26,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       body: ListView(
         children: [
           Padding(
-            padding:  EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
+            padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
             child: Text(
               "Account",
               style: TextStyle(
@@ -40,7 +40,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
             avatar: AssetImage("assets/images/profile.jpg"),
             text: "joe_john",
             subtext: "joe_john 45@gmail.com",
-            onTap: () {},
+            onTap: () {
+              Navigator.pushNamed(context, '/editprofile');
+            },
           ),
           Divider(
             thickness: 1,
@@ -53,7 +55,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             child: Text(
               "Settings",
               style: TextStyle(
-                fontSize: 16,
+                fontSize: 18,
                 fontWeight: FontWeight.bold,
                 color: Colors.black,
               ),

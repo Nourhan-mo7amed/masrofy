@@ -29,7 +29,6 @@ class _HomeScreenState extends State<HomeScreen> {
       AddScreen(),
       AlltransactionScreen(),
       Profilescreen(),
-      ChatBotScreen(),
     ];
   }
 
@@ -46,13 +45,41 @@ class _HomeScreenState extends State<HomeScreen> {
         children: [
           Padding(
             padding: EdgeInsets.all(8.0),
-            child: Center(
-              child: Text(
-                "Home",
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              ),
+            child: Row(
+              children: [
+                Expanded(
+                  child: Center(
+                    child: Text(
+                      "Home",
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+                IconButton(
+                  icon: Icon(
+                    Icons.smart_toy_outlined,
+                    size: 35,
+                    color: Colors.black,
+                  ),
+                  onPressed: () {
+                    if (ChatBotScreen.isCompleted) {
+                      Navigator.pushNamed(
+                        context,
+                        '/report',
+                        arguments: ChatBotScreen.answers,
+                      );
+                    } else {
+                      Navigator.pushNamed(context, '/chatbot');
+                    }
+                  },
+                ),
+              ],
             ),
           ),
+
           Container(
             height: 160,
             width: double.infinity,
@@ -237,24 +264,6 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person_outline, size: 30),
-            label: "",
-          ),
-          BottomNavigationBarItem(
-            icon: IconButton(
-              icon: Icon(Icons.smart_toy_outlined, size: 30),
-              onPressed: () {
-                if (ChatBotScreen.isCompleted) {
-                  Navigator.pushNamed(
-                    context,
-                    '/report',
-                    arguments: ChatBotScreen.answers,
-                  );
-                } else {
-                  Navigator.pushNamed(context, '/chatbot');
-                }
-              },
-            ),
-
             label: "",
           ),
         ],
