@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:masrofy/repositories/auth_repsitories.dart';
-import 'package:masrofy/viewmodels/Auth_ViewModel.dart';
-import 'package:provider/provider.dart';
-// import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:masrofy/l10n/app_localizations.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
 import '../../widgets/profilecard.dart';
 import '../../widgets/LogoutBottomSheet.dart';
 
@@ -16,14 +16,11 @@ class Profilescreen extends StatelessWidget {
       builder: (context) {
         return LogoutBottomSheet(
           onConfirm: () async {
-            // 🟢 استدعاء تسجيل الخروج
             await AuthRepository().signOut();
-
-            // 🔴 بعد ما يسجل خروج يروح للـ Login
             Navigator.pushNamedAndRemoveUntil(
               context,
               '/login',
-              (route) => false, // يشيل كل الصفحات اللي قبله من الـ stack
+              (route) => false,
             );
           },
         );
@@ -33,80 +30,108 @@ class Profilescreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final authVM = Provider.of<AuthViewModel>(context);
     final loc = AppLocalizations.of(context)!;
+    final String uid = FirebaseAuth.instance.currentUser!.uid;
 
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            const SizedBox(height: 40),
-            Center(
-              child: Column(
-                children: [
-                  const CircleAvatar(
-                    backgroundImage: AssetImage("assets/6eca1b5bc.png"),
-                    radius: 50,
-                  ),
-                  const SizedBox(height: 10),
-                  Text(
-                    "${authVM.currentUser!.name}",
-                    style: const TextStyle(
-                      color: Colors.black,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const SizedBox(height: 5),
-                  Text(
-                    "${authVM.currentUser!.email}",
-                    style: TextStyle(
-                      color: Colors.grey,
-                      fontSize: 12,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 20),
-            Column(
+      body: StreamBuilder<DocumentSnapshot>(
+        stream: FirebaseFirestore.instance
+            .collection("users")
+            .doc(uid)
+            .snapshots(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          }
+          if (!snapshot.hasData || !snapshot.data!.exists) {
+            return const Center(child: Text("No user data found"));
+          }
+
+          final userData = snapshot.data!.data() as Map<String, dynamic>;
+
+          return SingleChildScrollView(
+            child: Column(
               children: [
-                ProfileCard(
-                  icon: Icons.account_circle,
-                  text: loc.accountInfo,
-                  color: Colors.purple,
-                ),
-                const SizedBox(height: 10),
-                ProfileCard(
-                  icon: Icons.privacy_tip_outlined,
-                  text: loc.privacyPolicy,
-                  color: Colors.green,
-                  onTap: () {
-                    Navigator.pushNamed(context, '/privacypolicy');
-                  },
-                ),
-                const SizedBox(height: 10),
-                ProfileCard(
-                  icon: Icons.settings,
-                  text: loc.settings,
-                  color: const Color(0xFFB55E00),
-                  onTap: () {
-                    Navigator.pushNamed(context, '/settings');
-                  },
-                ),
-                const SizedBox(height: 10),
-                ProfileCard(
-                  icon: Icons.logout,
-                  text: loc.logout,
-                  color: const Color(0xFFFF0000),
-                  onTap: () => _showLogoutSheet(context),
+                const SizedBox(height: 40),
+                Center(
+                  child: Column(
+                    children: [
+                      CircleAvatar(
+                        backgroundImage: userData["photoURL"] != null
+                            ? NetworkImage(userData["photoURL"])
+                            : const AssetImage("assets/images/gest.png")
+                                  as ImageProvider,
+                        radius: 50,
+                      ),
+                      const SizedBox(height: 10),
+                      Text(
+                        userData["name"] ?? "",
+                        style: const TextStyle(
+                          color: Colors.black,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const SizedBox(height: 5),
+                      Text(
+                        userData["email"] ?? "",
+                        style: const TextStyle(
+                          color: Colors.grey,
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const SizedBox(height: 5),
+                      Text(
+                        "@${userData["username"] ?? ""}",
+                        style: const TextStyle(
+                          color: Colors.grey,
+                          fontSize: 14,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
                 const SizedBox(height: 20),
+                Column(
+                  children: [
+                    ProfileCard(
+                      icon: Icons.account_circle,
+                      text: loc.accountInfo,
+                      color: Colors.purple,
+                    ),
+                    const SizedBox(height: 10),
+                    ProfileCard(
+                      icon: Icons.privacy_tip_outlined,
+                      text: loc.privacyPolicy,
+                      color: Colors.green,
+                      onTap: () {
+                        Navigator.pushNamed(context, '/privacypolicy');
+                      },
+                    ),
+                    const SizedBox(height: 10),
+                    ProfileCard(
+                      icon: Icons.settings,
+                      text: loc.settings,
+                      color: const Color(0xFFB55E00),
+                      onTap: () {
+                        Navigator.pushNamed(context, '/settings');
+                      },
+                    ),
+                    const SizedBox(height: 10),
+                    ProfileCard(
+                      icon: Icons.logout,
+                      text: loc.logout,
+                      color: const Color(0xFFFF0000),
+                      onTap: () => _showLogoutSheet(context),
+                    ),
+                    const SizedBox(height: 20),
+                  ],
+                ),
               ],
             ),
-          ],
-        ),
+          );
+        },
       ),
     );
   }

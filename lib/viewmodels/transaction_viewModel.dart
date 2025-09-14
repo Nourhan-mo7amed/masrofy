@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:masrofy/models/transaction_model.dart';
 
@@ -10,9 +9,8 @@ class TransactionViewmodel extends ChangeNotifier {
   /// ✅ إضافة معاملة جديدة
   Future<void> addTransaction(TransactionModel transaction) async {
     try {
-      final collectionName = transaction.type == "expense"
-          ? "expenses"
-          : "incomes";
+      final collectionName =
+          transaction.type == "expense" ? "expenses" : "incomes";
 
       final docRef = _firestore.collection(collectionName).doc();
 
@@ -28,7 +26,7 @@ class TransactionViewmodel extends ChangeNotifier {
     }
   }
 
-  /// ✅ مصاريف
+  /// ✅ Stream للمصاريف
   Stream<List<TransactionModel>> get expensesStream {
     final uid = FirebaseAuth.instance.currentUser?.uid;
     if (uid == null) return Stream.value([]);
@@ -36,7 +34,7 @@ class TransactionViewmodel extends ChangeNotifier {
     return _firestore
         .collection("expenses")
         .where("userId", isEqualTo: uid)
-        //.orderBy("date", descending: true)
+        .orderBy("date", descending: true) // 🟢 يترتب بالتاريخ
         .snapshots()
         .map(
           (snapshot) => snapshot.docs
@@ -45,7 +43,7 @@ class TransactionViewmodel extends ChangeNotifier {
         );
   }
 
-  /// ✅ دخل
+  /// ✅ Stream للدخل
   Stream<List<TransactionModel>> get incomesStream {
     final uid = FirebaseAuth.instance.currentUser?.uid;
     if (uid == null) return Stream.value([]);
@@ -53,7 +51,7 @@ class TransactionViewmodel extends ChangeNotifier {
     return _firestore
         .collection("incomes")
         .where("userId", isEqualTo: uid)
-        // .orderBy("date", descending: true)
+        .orderBy("date", descending: true)
         .snapshots()
         .map(
           (snapshot) => snapshot.docs
