@@ -99,14 +99,22 @@ class AuthRepository {
   }
 
   // 🔴 Logout
-  Future<void> signOut() async {
-    try {
-      await _firebaseAuth.signOut();
-      print("✅ User signed out successfully");
-    } catch (e) {
-      print("❌ Error in signOut: $e");
+Future<void> signOut() async {
+  try {
+    // Check if user signed in with Google
+    final GoogleSignIn googleSignIn = GoogleSignIn();
+    if (await googleSignIn.isSignedIn()) {
+      await googleSignIn.signOut();
+      print("✅ User signed out from Google");
     }
+
+    await _firebaseAuth.signOut();
+    print("✅ User signed out from Firebase");
+  } catch (e) {
+    print("❌ Error in signOut: $e");
   }
+}
+
 }
 
 class AuthService {

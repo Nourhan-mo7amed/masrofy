@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart'; // 🟢 عشان نجيب uid
 import 'package:masrofy/l10n/app_localizations.dart';
 import '../../widgets/subscriptions_ExpenseItem.dart';
-// import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class Billsscreen extends StatelessWidget {
   const Billsscreen({super.key});
@@ -10,6 +10,14 @@ class Billsscreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
+
+    final user = FirebaseAuth.instance.currentUser;
+    if (user == null) {
+      return const Scaffold(
+        body: Center(child: Text("❌ User not logged in")),
+      );
+    }
+    final String uid = user.uid;
 
     return Scaffold(
       appBar: AppBar(
@@ -23,8 +31,9 @@ class Billsscreen extends StatelessWidget {
         padding: const EdgeInsets.all(12.0),
         child: StreamBuilder(
           stream: FirebaseFirestore.instance
-              .collection("expenses") // 👈 الكولكشن اللي بتخزن فيه
-              .where("categoryId", isEqualTo: "bills")
+              .collection("expenses")
+              .where("userId", isEqualTo: uid) // 🟢 فلترة باليوزر الحالي
+              .where("categoryId", isEqualTo: "bills") // 🟢 فلترة بالكاتيجوري
               .snapshots(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
@@ -60,7 +69,6 @@ class Billsscreen extends StatelessWidget {
                     date = null;
                   }
                 } else if (data["date"] != null) {
-                  // في حالة إنه Timestamp
                   try {
                     date = (data["date"] as Timestamp).toDate();
                   } catch (e) {
