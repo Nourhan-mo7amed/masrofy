@@ -65,7 +65,7 @@ class LogoutBottomSheet extends StatelessWidget {
                           borderRadius: BorderRadius.circular(30),
                         ),
                       ),
-                      child: Text(loc.confirmLogout), 
+                      child: Text(loc.confirmLogout ,style: TextStyle(color: Colors.white),), 
                       // "نعم، تسجيل الخروج" أو "Yes, Logout"
                     ),
                   ),
