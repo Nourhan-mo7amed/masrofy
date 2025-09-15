@@ -19,17 +19,20 @@ class ExpenseItem extends StatelessWidget {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 16, vertical: 6),
       padding: EdgeInsets.all(14),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(14),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.shade200,
-            blurRadius: 6,
-            spreadRadius: 2,
-          ),
-        ],
-      ),
+     decoration: BoxDecoration(
+  color: Theme.of(context).brightness == Brightness.dark
+      ? Colors.white.withOpacity(0.1) // 🟢 أبيض شفاف في الدارك مود
+      : Colors.white, // 🟢 أبيض كامل في اللايت مود
+  borderRadius: BorderRadius.circular(14),
+  // boxShadow: [
+  //   BoxShadow(
+  //     color: Colors.grey.shade200,
+  //     blurRadius: 6,
+  //     spreadRadius: 2,
+  //   ),
+  // ],
+),
+
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -49,7 +52,7 @@ class ExpenseItem extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w600,
-                  color: Colors.black,
+                  //color: Colors.black,
                 ),
               ),
             ],

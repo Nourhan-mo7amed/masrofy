@@ -39,6 +39,7 @@ class MyApp extends StatelessWidget {
     final settingsVM = context.watch<SettingsViewModel>();
 
     return MaterialApp(
+      locale: settingsVM.locale,
       debugShowCheckedModeBanner: false,
       initialRoute: AppRoutes.splash,
       routes: AppRoutes.routes,
@@ -48,9 +49,8 @@ class MyApp extends StatelessWidget {
           ? ThemeMode.dark
           : ThemeMode.light,
 
-      locale: const Locale('en'),
+      //  locale: const Locale('en'),
 
-      // 👇 لازم عشان الترجمة تشتغل
       localizationsDelegates: const [
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,

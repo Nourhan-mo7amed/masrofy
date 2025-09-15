@@ -61,15 +61,20 @@ class TransactionViewmodel extends ChangeNotifier {
         );
   }
 
-  Stream<List<TransactionModel>> getExpensesByCategory(String categoryId) {
-    return _firestore
-        .collection("expenses")
-        .where("categoryId", isEqualTo: categoryId)
-        .snapshots()
-        .map(
-          (snapshot) => snapshot.docs
-              .map((doc) => TransactionModel.fromFirestore(doc))
-              .toList(),
-        );
-  }
+ Stream<List<TransactionModel>> getExpensesByCategory(String categoryId) {
+  final uid = FirebaseAuth.instance.currentUser?.uid;
+  if (uid == null) return const Stream.empty();
+
+  return _firestore
+      .collection("expenses")
+      .where("categoryId", isEqualTo: categoryId)
+      .where("userId", isEqualTo: uid) // 🟢 فلترة باليوزر الحالي
+      .snapshots()
+      .map(
+        (snapshot) => snapshot.docs
+            .map((doc) => TransactionModel.fromFirestore(doc))
+            .toList(),
+      );
+}
+
 }

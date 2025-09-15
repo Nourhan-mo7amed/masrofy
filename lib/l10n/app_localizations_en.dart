@@ -129,7 +129,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get forgotPasswordTitle => 'Forgot Password';
 
   @override
-  String get forgotPasswordSubtitle => 'Enter your email address and we\'ll send you a code to reset your password.';
+  String get forgotPasswordSubtitle =>
+      'Enter your email address and we\'ll send you a code to reset your password.';
 
   @override
   String get emailLabel => 'Email';
@@ -165,19 +166,22 @@ class AppLocalizationsEn extends AppLocalizations {
   String get page1Title => 'Your Budget, Your Rules';
 
   @override
-  String get page1Subtitle => 'Easily track your expenses, plan your budget, and achieve your financial goals.';
+  String get page1Subtitle =>
+      'Easily track your expenses, plan your budget, and achieve your financial goals.';
 
   @override
   String get page2Title => 'Track Your Spending';
 
   @override
-  String get page2Subtitle => 'Easily record your daily expenses and stay on top of your budget.';
+  String get page2Subtitle =>
+      'Easily record your daily expenses and stay on top of your budget.';
 
   @override
   String get page3Title => 'Save Smarter';
 
   @override
-  String get page3Subtitle => 'Reduce waste and watch your savings grow effortlessly.';
+  String get page3Subtitle =>
+      'Reduce waste and watch your savings grow effortlessly.';
 
   @override
   String get appName => 'Masrofy';
@@ -204,7 +208,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get welcomeBack => 'Welcome back';
 
   @override
-  String get loginDescription => 'Log in to continue managing your budget.';
+  String get loginDescription =>
+      'Log in to continue managing your budget.';
 
   @override
   String get orLoginWith => 'or log in with';
@@ -231,31 +236,36 @@ class AppLocalizationsEn extends AppLocalizations {
   String get privacyPolicyTitle => 'Privacy Policy';
 
   @override
-  String get privacyIntro => 'We value your privacy and want you to feel safe while using our app.';
+  String get privacyIntro =>
+      'We value your privacy and want you to feel safe while using our app.';
 
   @override
   String get whatWeCollect => 'What We Collect';
 
   @override
-  String get whatWeCollectDetails => '• Basic information you provide such as expenses, notes, and uploaded receipts.\n• Optional account details like email (if you sign up).\n• No sensitive banking or card details are collected.';
+  String get whatWeCollectDetails =>
+      '• Basic information you provide such as expenses, notes, and uploaded receipts.\n• Optional account details like email (if you sign up).\n• No sensitive banking or card details are collected.';
 
   @override
   String get howWeUseData => 'How We Use Data';
 
   @override
-  String get howWeUseDataDetails => '• To help you record and organize your daily expenses.\n• To create reports and charts that show your spending.\n• To let you save receipts and link them to your records.\n• To sync your data across devices (if you use cloud backup - Firebase).';
+  String get howWeUseDataDetails =>
+      '• To help you record and organize your daily expenses.\n• To create reports and charts that show your spending.\n• To let you save receipts and link them to your records.\n• To sync your data across devices (if you use cloud backup - Firebase).';
 
   @override
   String get storageAndSecurity => 'Storage & Security';
 
   @override
-  String get storageAndSecurityDetails => '• Your data is saved on your device (offline mode).\n• If you enable cloud sync, data is stored securely on Firebase servers.\n• We take reasonable steps to protect your information from unauthorized access.';
+  String get storageAndSecurityDetails =>
+      '• Your data is saved on your device (offline mode).\n• If you enable cloud sync, data is stored securely on Firebase servers.\n• We take reasonable steps to protect your information from unauthorized access.';
 
   @override
   String get dataSharing => 'Data Sharing';
 
   @override
-  String get dataSharingDetails => 'We do not sell or share your personal data with third parties. Data may only be shared if required by law.';
+  String get dataSharingDetails =>
+      'We do not sell or share your personal data with third parties. Data may only be shared if required by law.';
 
   @override
   String get accountInfo => 'Account Info';
@@ -342,7 +352,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get setupCompleteTitle => 'Setup complete!';
 
   @override
-  String get setupCompleteSubtitle => 'You can now start tracking and organizing your expenses';
+  String get setupCompleteSubtitle =>
+      'You can now start tracking and organizing your expenses';
 
   @override
   String get startBudgeting => 'Start Budgeting';
@@ -361,4 +372,16 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get subscriptionsTitle => 'Subscriptions';
+
+  @override
+  String get noStatistics => 'No Statistics Available';
+
+  @override
+  String get other => 'Other';
+
+  @override
+  String get spendingIn => 'Spending in';
+
+  @override
+  String get statistics => 'Statistics';
 }

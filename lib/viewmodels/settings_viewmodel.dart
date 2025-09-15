@@ -20,4 +20,16 @@ class SettingsViewModel extends ChangeNotifier {
     _settings.language = lang;
     notifyListeners();
   }
+
+  // 👇 Getter بيرجع الـ Locale حسب اللغة المختارة
+  Locale get locale {
+    switch (_settings.language) {
+      case "Arabic":
+      case "العربية":
+        return const Locale('ar');
+      case "English":
+      default:
+        return const Locale('en');
+    }
+  }
 }

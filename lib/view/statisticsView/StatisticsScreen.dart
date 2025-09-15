@@ -5,7 +5,6 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:masrofy/models/category_model.dart';
 import 'package:masrofy/l10n/app_localizations.dart';
 import '../../widgets/Buildcategorycard.dart';
-// import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class StatisticsScreen extends StatefulWidget {
   const StatisticsScreen({super.key});
@@ -15,36 +14,44 @@ class StatisticsScreen extends StatefulWidget {
 }
 
 class _StatisticsScreenState extends State<StatisticsScreen> {
-  final List<CategoryModel> categories = [
-    CategoryModel(
-      id: "food",
-      name: "Food",
-      icon: "🍔",
-      color: Colors.purple,
-      userId: '',
-    ),
-    CategoryModel(
-      id: "shopping",
-      name: "Shopping",
-      icon: "🛍️",
-      color: Colors.orange,
-      userId: '',
-    ),
-    CategoryModel(
-      id: "bills",
-      name: "Bills",
-      icon: "📄",
-      color: Colors.red,
-      userId: '',
-    ),
-    CategoryModel(
-      id: "transport",
-      name: "Transport",
-      icon: "🚗",
-      color: Colors.blue,
-      userId: '',
-    ),
-  ];
+  late List<CategoryModel> categories;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final loc = AppLocalizations.of(context)!;
+
+    categories = [
+      CategoryModel(
+        id: "food",
+        name: loc.food,
+        icon: "🍔",
+        color: Colors.purple,
+        userId: '',
+      ),
+      CategoryModel(
+        id: "shopping",
+        name: loc.shopping,
+        icon: "🛍️",
+        color: Colors.orange,
+        userId: '',
+      ),
+      CategoryModel(
+        id: "bills",
+        name: loc.expenses, // 🔹 مفيش bills في الترانسليشن، استخدمت "expenses"
+        icon: "📄",
+        color: Colors.red,
+        userId: '',
+      ),
+      CategoryModel(
+        id: "transport",
+        name: loc.another, // 🔹 برضه مفيش transport، ممكن تضيفها في JSON لو عايز
+        icon: "🚗",
+        color: Colors.blue,
+        userId: '',
+      ),
+    ];
+  }
 
   Stream<Map<String, dynamic>> _getTotals() {
     final uid = FirebaseAuth.instance.currentUser?.uid;
@@ -96,9 +103,9 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          "Statistics",
-          style: TextStyle(fontWeight: FontWeight.bold),
+        title: Text(
+          loc.statistics,
+          style: const TextStyle(fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
       ),
@@ -110,10 +117,10 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
           }
 
           if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return const Center(
+            return Center(
               child: Text(
-                "No Statistics Available",
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                loc.noStatistics,
+                style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
               ),
             );
           }
@@ -143,7 +150,7 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
                               (c) => c.id == entry.key,
                               orElse: () => CategoryModel(
                                 id: "other",
-                                name: "Other",
+                                name: loc.other,
                                 icon: "❓",
                                 color: Colors.grey,
                                 userId: '',
@@ -160,9 +167,9 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
                       Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Text(
-                            "Total Balance",
-                            style: TextStyle(color: Colors.grey),
+                          Text(
+                            loc.totalBalance,
+                            style: const TextStyle(color: Colors.grey),
                           ),
                           const SizedBox(height: 4),
                           Text(
@@ -174,14 +181,14 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
                           ),
                           const SizedBox(height: 4),
                           Text(
-                            "Income: \$${totalIncome.toStringAsFixed(2)}",
+                            "${loc.income}: \$${totalIncome.toStringAsFixed(2)}",
                             style: TextStyle(
                               color: Colors.green[600],
                               fontSize: 12,
                             ),
                           ),
                           Text(
-                            "Expenses: \$${totalExpenses.toStringAsFixed(2)}",
+                            "${loc.expenses}: \$${totalExpenses.toStringAsFixed(2)}",
                             style: TextStyle(
                               color: Colors.red[600],
                               fontSize: 12,
@@ -205,7 +212,7 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
                       (c) => c.id == entry.key,
                       orElse: () => CategoryModel(
                         id: "other",
-                        name: "Other",
+                        name: loc.other,
                         icon: "❓",
                         color: Colors.grey,
                         userId: '',
@@ -214,7 +221,7 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
                     return BuildCategoryCard(
                       title: cat.name,
                       amount: "\$${entry.value.toStringAsFixed(2)}",
-                      description: "Spending in ${cat.name}",
+                      description: "${loc.spendingIn} ${cat.name}",
                       color: cat.color,
                     );
                   }).toList(),

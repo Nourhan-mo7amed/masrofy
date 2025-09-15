@@ -33,7 +33,7 @@ class _AlltransactionScreen extends State<AlltransactionScreen> {
           ),
         ),
       ),
-      backgroundColor: Colors.white,
+  //    backgroundColor: Colors.white,
       body: SafeArea(
         child: Column(
           children: [

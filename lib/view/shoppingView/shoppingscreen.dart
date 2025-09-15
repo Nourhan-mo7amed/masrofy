@@ -53,18 +53,7 @@ class ShoppingScreen extends StatelessWidget {
                   itemBuilder: (context, index) {
                     final tx = transactions[index];
 
-                    // ✅ التعامل مع التاريخ كـ String أو Timestamp
-                    // DateTime? date;
-                    // if (data["date"] is String) {
-                    //   try {
-                    //     date = DateTime.parse(data["date"]);
-                    //   } catch (e) {
-                    //     date = null;
-                    //   }
-                    // } else if (data["date"] is Timestamp) {
-                    //   date = (data["date"] as Timestamp).toDate();
-                    // }
-
+               
                     return ShoppingExpenseitem(
                       title: tx.title,
                       date: "${tx.date.day}-${tx.date.month}-${tx.date.year}",

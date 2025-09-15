@@ -17,6 +17,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   bool notifications = true;
   bool mode = false;
   String selectedLanguage = "English";
+  
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +36,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           SettingsTile(icon: Icons.person, text: loc.account, onTap: () {}),
 
           SettingsSwitchTile(
-            icon: Icons.notifications,
+            icon: Icons.notifications_none_outlined,
             text: loc.notifications,
             value: notifications,
             onChanged: (val) {
@@ -46,34 +47,38 @@ class _SettingsScreenState extends State<SettingsScreen> {
           SwitchListTile(
             title: const Text("Dark Mode"),
             value: viewModel.settings.darkMode,
-            onChanged: viewModel.toggleDarkMode,
+            onChanged: (val) {
+              viewModel.toggleDarkMode(val);
+            },
           ),
 
+          // error
+          // دي خليها جوه build أو اعمل map
           ListTile(
             leading: const Icon(Icons.language_outlined, color: Colors.black),
             title: Text(loc.language),
             trailing: DropdownButton<String>(
-              value: selectedLanguage,
+              value: selectedLanguage == "English" ? loc.english : loc.arabic,
               items: [loc.english, loc.arabic].map((lang) {
                 return DropdownMenuItem<String>(value: lang, child: Text(lang));
               }).toList(),
               onChanged: (val) {
-                if (val != null) viewModel.changeLanguage(val);
+                if (val != null) {
+                  setState(() => selectedLanguage = val); // 🟢 عدل القيمة
+                  viewModel.changeLanguage(val);
+                }
               },
             ),
           ),
 
+          //error
           const SizedBox(height: 32),
 
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             child: Text(
               loc.supportTitle,
-              style: const TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
-              ),
+              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
           ),
 

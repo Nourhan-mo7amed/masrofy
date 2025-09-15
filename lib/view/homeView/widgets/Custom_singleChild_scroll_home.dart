@@ -78,7 +78,7 @@ class CustomSingleChildScrollViewHome extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
                 child: Text(
                   "Expense",
-                  style: TextStyle(fontSize: 30, color: Colors.black),
+                  style: TextStyle(fontSize: 30, ),
                 ),
               ),
               const SizedBox(height: 10),

@@ -361,4 +361,17 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get subscriptionsTitle => 'الاشتراكات';
+  
+  @override
+  String get noStatistics => 'لا توجد إحصائيات متاحة';
+
+  @override
+  String get other => 'أخرى';
+
+  @override
+  String get spendingIn => 'المصروفات في';
+
+  @override
+  String get statistics => 'الإحصائيات';
+
 }

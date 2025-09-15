@@ -31,7 +31,6 @@ class AddScreen extends StatelessWidget {
           ),
         ),
       ),
-      backgroundColor: Colors.white,
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -39,7 +38,7 @@ class AddScreen extends StatelessWidget {
           children: [
             const SizedBox(height: 40),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Expanded(
                   child: GestureDetector(
@@ -48,9 +47,9 @@ class AddScreen extends StatelessWidget {
                     },
                     child: Container(
                       padding: const EdgeInsets.all(20),
-                      margin: const EdgeInsets.only(right: 8),
+                     margin: const EdgeInsetsDirectional.only(end: 8), 
                       decoration: BoxDecoration(
-                        color: Colors.deepPurple.shade100,
+                        color: const Color.fromARGB(50, 209, 196, 233),
                         borderRadius: BorderRadius.circular(16),
                       ),
                       child: Column(
@@ -77,9 +76,9 @@ class AddScreen extends StatelessWidget {
                     },
                     child: Container(
                       padding: const EdgeInsets.all(20),
-                      margin: const EdgeInsets.only(left: 8),
+                      margin: const EdgeInsetsDirectional.only(end: 8), 
                       decoration: BoxDecoration(
-                        color: Colors.orange.shade100,
+                        color: const Color.fromARGB(50, 255, 224, 178),
                         borderRadius: BorderRadius.circular(16),
                       ),
                       child: Column(

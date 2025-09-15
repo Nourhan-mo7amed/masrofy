@@ -802,6 +802,14 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Subscriptions'**
   String get subscriptionsTitle;
+
+  String get statistics ;
+
+  String get noStatistics ;
+
+  String get other ;
+
+  get spendingIn ;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
