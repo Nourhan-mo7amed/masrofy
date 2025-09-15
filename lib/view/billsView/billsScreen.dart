@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart'; // 🟢 عشان نجيب uid
 import 'package:masrofy/l10n/app_localizations.dart';
-import '../../widgets/subscriptions_ExpenseItem.dart';
+import 'package:masrofy/viewmodels/transaction_viewModel.dart';
+import 'package:provider/provider.dart';
+import '../../widgets/bills_ExpenseItem.dart';
 
 class Billsscreen extends StatelessWidget {
   const Billsscreen({super.key});
@@ -13,9 +14,7 @@ class Billsscreen extends StatelessWidget {
 
     final user = FirebaseAuth.instance.currentUser;
     if (user == null) {
-      return const Scaffold(
-        body: Center(child: Text("❌ User not logged in")),
-      );
+      return const Scaffold(body: Center(child: Text("❌ User not logged in")));
     }
     final String uid = user.uid;
 
@@ -29,61 +28,53 @@ class Billsscreen extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(12.0),
-        child: StreamBuilder(
-          stream: FirebaseFirestore.instance
-              .collection("expenses")
-              .where("userId", isEqualTo: uid) // 🟢 فلترة باليوزر الحالي
-              .where("categoryId", isEqualTo: "bills") // 🟢 فلترة بالكاتيجوري
-              .snapshots(),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(child: CircularProgressIndicator());
-            }
-
-            if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-              return const Center(
-                child: Text(
-                  "No Bills Transactions Yet",
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-                ),
-              );
-            }
-
-            final docs = snapshot.data!.docs;
-
-            return ListView.builder(
-              itemCount: docs.length,
-              itemBuilder: (context, index) {
-                final data = docs[index].data();
-                final title = data["title"] ?? "No Title";
-                final double amount =
-                    (data["amount"] as num?)?.toDouble() ?? 0.0;
-                final String type = data["type"] ?? "expense";
-
-                // ✅ التاريخ String أو Timestamp
-                DateTime? date;
-                if (data["date"] is String) {
-                  try {
-                    date = DateTime.parse(data["date"]);
-                  } catch (e) {
-                    date = null;
-                  }
-                } else if (data["date"] != null) {
-                  try {
-                    date = (data["date"] as Timestamp).toDate();
-                  } catch (e) {
-                    date = null;
-                  }
+        child: Consumer<TransactionViewmodel>(
+          builder: (context, value, child) {
+            return StreamBuilder(
+              stream: value.getExpensesByCategory("bills"),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(child: CircularProgressIndicator());
+                }
+                if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                  return const Center(
+                    child: Text(
+                      "No Food Transactions Yet",
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  );
                 }
 
-                return SubscriptionsExpenseitem(
-                  title: title,
-                  date: date != null
-                      ? "${date.day}-${date.month}-${date.year}"
-                      : "Unknown",
-                  amount:
-                      "${type == "income" ? "+" : "-"} \$${amount.toStringAsFixed(2)}",
-                  color: type == "income" ? Colors.green : Colors.red,
+                final transactions = snapshot.data!;
+
+                return ListView.builder(
+                  itemCount: transactions.length,
+                  itemBuilder: (context, index) {
+                    final tx = transactions[index];
+
+                    // ✅ التعامل مع التاريخ كـ String أو Timestamp
+                    // DateTime? date;
+                    // if (data["date"] is String) {
+                    //   try {
+                    //     date = DateTime.parse(data["date"]);
+                    //   } catch (e) {
+                    //     date = null;
+                    //   }
+                    // } else if (data["date"] is Timestamp) {
+                    //   date = (data["date"] as Timestamp).toDate();
+                    // }
+
+                    return BillsExpenseitem(
+                      title: tx.title,
+                      date: "${tx.date.day}-${tx.date.month}-${tx.date.year}",
+                      amount:
+                          "${tx.type == "income" ? "+" : "-"} \$${tx.amount.toStringAsFixed(2)}",
+                      color: tx.type == "income" ? Colors.green : Colors.red,
+                    );
+                  },
                 );
               },
             );

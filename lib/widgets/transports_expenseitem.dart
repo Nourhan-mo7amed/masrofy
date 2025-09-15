@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-class SubscriptionsExpenseitem extends StatelessWidget {
+class TransportsExpenseitem extends StatelessWidget {
   final String title;
   final String date;
   final String amount;
   final Color color;
 
-  const SubscriptionsExpenseitem({
+  const TransportsExpenseitem({
     super.key,
     required this.title,
     required this.date,
@@ -29,12 +29,19 @@ class SubscriptionsExpenseitem extends StatelessWidget {
           ),
           child: Icon(Icons.attach_money, color: Colors.grey, size: 22),
         ),
-        title: Text(title,
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
+        title: Text(
+          title,
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+        ),
         subtitle: Text(date, style: TextStyle(fontSize: 12)),
-        trailing: Text(amount,
-            style: TextStyle(
-                color: color, fontWeight: FontWeight.bold, fontSize: 14)),
+        trailing: Text(
+          amount,
+          style: TextStyle(
+            color: color,
+            fontWeight: FontWeight.bold,
+            fontSize: 14,
+          ),
+        ),
       ),
     );
   }

@@ -35,7 +35,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final loc = AppLocalizations.of(context)!;
+    //final loc = AppLocalizations.of(context)!;
 
     return Scaffold(
       backgroundColor: AppColors.background,
@@ -48,7 +48,7 @@ class _SplashScreenState extends State<SplashScreen> {
               duration: const Duration(seconds: 2),
               opacity: _opacity,
               child: Text(
-                loc.appName,
+                'Masrofy',
                 style: const TextStyle(
                   fontSize: 50,
                   fontWeight: FontWeight.bold,

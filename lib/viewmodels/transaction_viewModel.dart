@@ -9,8 +9,9 @@ class TransactionViewmodel extends ChangeNotifier {
   /// ✅ إضافة معاملة جديدة
   Future<void> addTransaction(TransactionModel transaction) async {
     try {
-      final collectionName =
-          transaction.type == "expense" ? "expenses" : "incomes";
+      final collectionName = transaction.type == "expense"
+          ? "expenses"
+          : "incomes";
 
       final docRef = _firestore.collection(collectionName).doc();
 
@@ -52,6 +53,18 @@ class TransactionViewmodel extends ChangeNotifier {
         .collection("incomes")
         .where("userId", isEqualTo: uid)
         .orderBy("date", descending: true)
+        .snapshots()
+        .map(
+          (snapshot) => snapshot.docs
+              .map((doc) => TransactionModel.fromFirestore(doc))
+              .toList(),
+        );
+  }
+
+  Stream<List<TransactionModel>> getExpensesByCategory(String categoryId) {
+    return _firestore
+        .collection("expenses")
+        .where("categoryId", isEqualTo: categoryId)
         .snapshots()
         .map(
           (snapshot) => snapshot.docs
