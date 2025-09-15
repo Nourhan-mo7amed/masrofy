@@ -407,7 +407,33 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get noTransportTransactions => "لا توجد معاملات مواصلات حتى الآن";
 
-  
   @override
   String get darkMode => "الوضع الليلي ";
+
+  @override
+  String get expenseAddedSuccessfully => "✅ تم إضافة المصروف بنجاح";
+
+  @override
+  String get failedToSaveExpense => "❌ فشل في حفظ المصروف";
+
+  @override
+  String get fillRequiredFields => "⚠️ من فضلك املأ كل الحقول المطلوبة";
+
+  @override
+  String? get notesHint => "اكتب ملاحظاتك هنا...";
+
+  @override
+  String get selectCategory => "⚠️ من فضلك اختر فئة";
+
+  @override
+  String? get amountHint => "ادخل المبلغ";
+
+  @override
+  String get failedToSaveIncome => "فشل في حفظ الدخل. حاول مرة أخرى.";
+
+  @override
+  String get incomeAddedSuccessfully => "تمت إضافة الدخل بنجاح!";
+
+  @override
+  String? get salaryHint => "ادخل راتبك";
 }

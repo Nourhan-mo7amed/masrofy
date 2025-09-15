@@ -15,16 +15,15 @@ class AddIncomeScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          loc.addIncome,
+          loc.addIncome, // ✅
           style: const TextStyle(fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
       ),
-      backgroundColor: Colors.white,
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.all(20.0),
-          child: SingleChildScrollView(child: CustomIncomeFormField()),
+          padding: const EdgeInsets.all(20.0),
+          child: const SingleChildScrollView(child: CustomIncomeFormField()),
         ),
       ),
     );
@@ -56,11 +55,13 @@ class _CustomIncomeFormFieldState extends State<CustomIncomeFormField> {
   }
 
   Future<void> _saveIncome() async {
+    final loc = AppLocalizations.of(context)!;
+
     if (_titleController.text.isEmpty ||
         _amountController.text.isEmpty ||
         selectedDate == null) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("⚠️ Please fill all required fields")),
+        SnackBar(content: Text(loc.fillRequiredFields)), // ✅
       );
       return;
     }
@@ -68,7 +69,7 @@ class _CustomIncomeFormFieldState extends State<CustomIncomeFormField> {
     if (userId == null) {
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(const SnackBar(content: Text("❌ User not logged in")));
+      ).showSnackBar(SnackBar(content: Text(loc.userNotLoggedIn))); // ✅
       return;
     }
     final transaction = TransactionModel(
@@ -90,7 +91,7 @@ class _CustomIncomeFormFieldState extends State<CustomIncomeFormField> {
       await viewModel.addTransaction(transaction);
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(SnackBar(content: Text("✅ Income Added Successfully")));
+      ).showSnackBar(SnackBar(content: Text(loc.incomeAddedSuccessfully))); // ✅
       Navigator.pop(context);
 
       // reset form
@@ -99,35 +100,35 @@ class _CustomIncomeFormFieldState extends State<CustomIncomeFormField> {
       _dateController.clear();
       _notesController.clear();
       setState(() => selectedDate = null);
-      setState(() {
-        selectedDate = null;
-      });
     } catch (e) {
       print("❌ Error saving income: $e");
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(SnackBar(content: Text("❌ Failed to save income")));
+      ).showSnackBar(SnackBar(content: Text(loc.failedToSaveIncome))); // ✅
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
+
     return Form(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text("Income Title", style: TextStyle(fontWeight: FontWeight.bold)),
-          SizedBox(height: 10),
+          Text(loc.incomeTitle,
+              style: const TextStyle(fontWeight: FontWeight.bold)), // ✅
+          const SizedBox(height: 10),
           TextField(
             controller: _titleController,
             decoration: InputDecoration(
-              hintText: "Salary",
+              hintText: loc.salaryHint, // ✅
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),
               ),
             ),
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           Row(
             children: [
               Expanded(
@@ -135,16 +136,16 @@ class _CustomIncomeFormFieldState extends State<CustomIncomeFormField> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Amount",
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                      loc.amount, // ✅
+                      style: const TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     TextField(
                       controller: _amountController,
                       keyboardType: TextInputType.number,
                       decoration: InputDecoration(
-                        prefixIcon: Icon(Icons.attach_money, size: 20),
-                        hintText: "\$ 2000",
+                        prefixIcon: const Icon(Icons.attach_money, size: 20),
+                        hintText: loc.amountHint, // ✅
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
                         ),
@@ -153,16 +154,16 @@ class _CustomIncomeFormFieldState extends State<CustomIncomeFormField> {
                   ],
                 ),
               ),
-              SizedBox(width: 15),
+              const SizedBox(width: 15),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Select Date",
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                      loc.selectDate, // ✅
+                      style: const TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     TextField(
                       controller: _dateController,
                       readOnly: true,
@@ -182,7 +183,7 @@ class _CustomIncomeFormFieldState extends State<CustomIncomeFormField> {
                         }
                       },
                       decoration: InputDecoration(
-                        prefixIcon: Icon(Icons.calendar_today, size: 20),
+                        prefixIcon: const Icon(Icons.calendar_today, size: 20),
                         hintText: "22 July 2025",
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
@@ -194,34 +195,36 @@ class _CustomIncomeFormFieldState extends State<CustomIncomeFormField> {
               ),
             ],
           ),
-          SizedBox(height: 20),
-          Text("Notes", style: TextStyle(fontWeight: FontWeight.bold)),
-          SizedBox(height: 10),
+          const SizedBox(height: 20),
+          Text(loc.notes,
+              style: const TextStyle(fontWeight: FontWeight.bold)), // ✅
+          const SizedBox(height: 10),
           TextField(
             controller: _notesController,
             maxLines: 5,
             decoration: InputDecoration(
+              hintText: loc.notesHint, // ✅
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),
               ),
             ),
           ),
-          SizedBox(height: 80),
+          const SizedBox(height: 80),
           SizedBox(
             width: double.infinity,
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
-                padding: EdgeInsets.symmetric(vertical: 15),
-                backgroundColor: Color(0xFF6C63FF),
-                foregroundColor: Colors.white,
+                padding: const EdgeInsets.symmetric(vertical: 15),
+                backgroundColor: const Color(0xFF6C63FF),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
               ),
               onPressed: _saveIncome,
               child: Text(
-                "Save",
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                loc.save, // ✅
+                style:
+                    const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
             ),
           ),

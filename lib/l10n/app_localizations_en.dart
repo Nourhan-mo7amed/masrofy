@@ -409,4 +409,29 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get darkMode => "Dark Mode";
+  
+  @override
+  String get expenseAddedSuccessfully => "✅ Expense Added Successfully";
+  @override
+  String get failedToSaveExpense => "❌ Failed to save expense";
+  @override
+  String get fillRequiredFields => "⚠️ Please fill all required fields";
+  @override
+  String? get notesHint => "Write your notes here...";
+  @override
+  String get selectCategory => "⚠️ Please select a category";
+  
+  @override
+String? get amountHint => "Enter the amount";
+
+@override
+String get failedToSaveIncome => "Failed to save income. Please try again.";
+
+@override
+String get incomeAddedSuccessfully => "Income added successfully!";
+
+@override
+String? get salaryHint => "Enter your salary";
+
+
 }

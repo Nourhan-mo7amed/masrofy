@@ -828,6 +828,24 @@ abstract class AppLocalizations {
   String get noTransportTransactions ;
 
   String get darkMode ;
+
+  String? get notesHint ;
+
+  String get failedToSaveExpense ;
+
+  String get expenseAddedSuccessfully ;
+
+  String get selectCategory ;
+
+  String get fillRequiredFields ;
+
+  String? get amountHint ;
+
+  String? get salaryHint ;
+
+  String get failedToSaveIncome;
+
+  String get incomeAddedSuccessfully;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

@@ -1,10 +1,9 @@
 import 'dart:math';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:masrofy/core/constants/month_name.dart';
 import 'package:masrofy/l10n/app_localizations.dart';
-import 'package:firebase_auth/firebase_auth.dart'; // 👈 لازم نضيفها
+import 'package:firebase_auth/firebase_auth.dart'; 
 import 'package:masrofy/models/category_model.dart';
 import 'package:masrofy/models/transaction_model.dart';
 import 'package:masrofy/viewmodels/transaction_viewModel.dart';
@@ -33,28 +32,28 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
     return [
       CategoryModel(
         id: "food",
-        name: "Food",
+        name: "🍔",
         icon: "🍔",
         color: Colors.purple,
         userId: currentUserId,
       ),
       CategoryModel(
         id: "shopping",
-        name: "Shopping",
+        name: "🛍️",
         icon: "🛍️",
         color: Colors.orange,
         userId: currentUserId,
       ),
       CategoryModel(
         id: "bills",
-        name: "Bills",
+        name: "📄",
         icon: "📄",
         color: Colors.red,
         userId: currentUserId,
       ),
       CategoryModel(
         id: "transport",
-        name: "Transport",
+        name: "🚗",
         icon: "🚗",
         color: Colors.blue,
         userId: currentUserId,
@@ -63,25 +62,27 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
   }
 
   Future<void> _saveExpense() async {
+    final loc = AppLocalizations.of(context)!;
+
     if (_titleController.text.isEmpty ||
         _amountController.text.isEmpty ||
         selectedDate == null) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("⚠️ Please fill all required fields")),
+        SnackBar(content: Text(loc.fillRequiredFields)),
       );
       return;
     }
     if (selectedCategory == null) {
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(SnackBar(content: Text("⚠️ Please select a category")));
+      ).showSnackBar(SnackBar(content: Text(loc.selectCategory)));
       return;
     }
     final userId = FirebaseAuth.instance.currentUser?.uid;
     if (userId == null) {
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(const SnackBar(content: Text("❌ User not logged in")));
+      ).showSnackBar(SnackBar(content: Text(loc.userNotLoggedIn)));
       return;
     }
     final transaction = TransactionModel(
@@ -89,7 +90,7 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
       title: _titleController.text.trim(),
       amount: double.tryParse(_amountController.text.trim()) ?? 0.0,
       date: selectedDate!,
-      userId: userId, // 👈 هنا أضفنا uid
+      userId: userId, 
       notes: _notesController.text.trim(),
       type: 'expense',
       source: null,
@@ -103,25 +104,25 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
       await viewModel.addTransaction(transaction);
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(SnackBar(content: Text("✅ Expense Added Successfully")));
+      ).showSnackBar(SnackBar(content: Text(loc.expenseAddedSuccessfully)));
       Navigator.pop(context);
     } catch (e) {
       print("❌ Error saving expense: $e");
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(SnackBar(content: Text("❌ Failed to save expense")));
+      ).showSnackBar(SnackBar(content: Text(loc.failedToSaveExpense)));
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context)!;
+    final loc = AppLocalizations.of(context)!;
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          "Add Expense",
-          style: TextStyle(fontWeight: FontWeight.bold),
+        title: Text(
+          loc.addExpense, // ✅ "إضافة مصروف"
+          style: const TextStyle(fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
       ),
@@ -133,26 +134,26 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 /// Title
-                const Text(
-                  "Expense Title",
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                Text(
+                  loc.expenseTitle, // ✅ عنوان المصروف
+                  style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 5),
                 TextField(
                   controller: _titleController,
                   decoration: InputDecoration(
-                    hintText: l10n.food,
+                    hintText: loc.food, // ✅ مثال: "أكل"
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
 
                 /// Category
-                const Text(
-                  "Category",
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                Text(
+                  loc.category, // ✅ التصنيف
+                  style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 10),
                 Wrap(
@@ -171,7 +172,8 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                     );
                   }).toList(),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
+
                 Row(
                   children: [
                     Expanded(
@@ -179,15 +181,15 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Amount",
-                            style: TextStyle(fontWeight: FontWeight.bold),
+                            loc.amount, // ✅ المبلغ
+                            style: const TextStyle(fontWeight: FontWeight.bold),
                           ),
-                          SizedBox(height: 10),
+                          const SizedBox(height: 10),
                           TextField(
                             controller: _amountController,
                             keyboardType: TextInputType.number,
                             decoration: InputDecoration(
-                              prefixIcon: Icon(Icons.attach_money, size: 20),
+                              prefixIcon: const Icon(Icons.attach_money, size: 20),
                               hintText: "\$ 2000",
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(12),
@@ -203,10 +205,10 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Select Date",
-                            style: TextStyle(fontWeight: FontWeight.bold),
+                            loc.selectDate, // ✅ اختار التاريخ
+                            style: const TextStyle(fontWeight: FontWeight.bold),
                           ),
-                          SizedBox(height: 10),
+                          const SizedBox(height: 10),
 
                           TextField(
                             controller: _dateController,
@@ -245,21 +247,22 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                 const SizedBox(height: 20),
 
                 /// Notes
-                const Text(
-                  "Notes",
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                Text(
+                  loc.notes, // ✅ ملاحظات
+                  style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 10),
                 TextField(
                   controller: _notesController,
                   maxLines: 5,
                   decoration: InputDecoration(
+                    hintText: loc.notesHint, // ✅ مثال: "اكتب ملاحظاتك هنا"
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
                   ),
                 ),
-                SizedBox(height: 70),
+                const SizedBox(height: 70),
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
@@ -273,8 +276,8 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                     ),
                     onPressed: _saveExpense,
                     child: Text(
-                      "Save",
-                      style: TextStyle(
+                      loc.save, // ✅ حفظ
+                      style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
                       ),
@@ -287,24 +290,6 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
         ),
       ),
     );
-  }
-
-  String _monthName(int month) {
-    const months = [
-      "january",
-      "february",
-      "march",
-      "april",
-      "may",
-      "june",
-      "july",
-      "august",
-      "september",
-      "october",
-      "november",
-      "december",
-    ];
-    return months[month - 1];
   }
 
   @override
