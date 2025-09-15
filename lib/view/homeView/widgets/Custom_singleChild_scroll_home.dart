@@ -3,11 +3,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:masrofy/view/homeView/widgets/custom_home_page_card.dart';
 import 'package:masrofy/widgets/expenseItem.dart';
+import 'package:masrofy/l10n/app_localizations.dart';
 
 class CustomSingleChildScrollViewHome extends StatelessWidget {
   const CustomSingleChildScrollViewHome({super.key, required this.context});
 
   final BuildContext context;
+
   Stream<Map<String, double>> _getCategoryTotals() {
     final uid = FirebaseAuth.instance.currentUser?.uid;
     if (uid == null) return const Stream.empty();
@@ -40,6 +42,8 @@ class CustomSingleChildScrollViewHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!; // ✅ جبت الترجمة
+
     return StreamBuilder<Map<String, double>>(
       stream: _getCategoryTotals(),
       builder: (context, snapshot) {
@@ -53,32 +57,24 @@ class CustomSingleChildScrollViewHome extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  children: [
-                    IconButton(
-                      onPressed: () {},
-                      icon: const Icon(Icons.list, size: 30),
+                child: Center(
+                  child: Text(
+                    loc.home, // ✅ بدل Home
+                    style: const TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
                     ),
-                    const SizedBox(width: 90),
-                    const Center(
-                      child: Text(
-                        "Home",
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
               ),
               CustomHomePageCard(),
               const SizedBox(height: 10),
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
                 child: Text(
-                  "Expense",
-                  style: TextStyle(fontSize: 30, ),
+                  loc.expense, // ✅ بدل Expense
+                  style: const TextStyle(fontSize: 30),
                 ),
               ),
               const SizedBox(height: 10),
@@ -89,7 +85,7 @@ class CustomSingleChildScrollViewHome extends StatelessWidget {
                 child: ExpenseItem(
                   icon: Icons.shopping_bag_outlined,
                   color: Colors.orange,
-                  title: "Shopping",
+                  title: loc.shopping, // ✅ بدل Shopping
                   amount: "- ${totals["shopping"]!.toStringAsFixed(2)}",
                 ),
               ),
@@ -100,7 +96,7 @@ class CustomSingleChildScrollViewHome extends StatelessWidget {
                 child: ExpenseItem(
                   icon: Icons.receipt_long_outlined,
                   color: Colors.pink,
-                  title: "bills",
+                  title: loc.bills, // ✅ بدل bills
                   amount: "- ${totals["bills"]!.toStringAsFixed(2)}",
                 ),
               ),
@@ -111,7 +107,7 @@ class CustomSingleChildScrollViewHome extends StatelessWidget {
                 child: ExpenseItem(
                   icon: Icons.fastfood_outlined,
                   color: Colors.purple,
-                  title: "Food",
+                  title: loc.food, // ✅ بدل Food
                   amount: "- ${totals["food"]!.toStringAsFixed(2)}",
                 ),
               ),
@@ -122,7 +118,7 @@ class CustomSingleChildScrollViewHome extends StatelessWidget {
                 child: ExpenseItem(
                   icon: Icons.directions_car_outlined,
                   color: Colors.blue,
-                  title: "Transport",
+                  title: loc.transport, // ✅ بدل Transport
                   amount: "- ${totals["transport"]!.toStringAsFixed(2)}",
                 ),
               ),

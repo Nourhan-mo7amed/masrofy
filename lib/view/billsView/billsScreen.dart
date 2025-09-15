@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart'; // 🟢 عشان نجيب uid
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:masrofy/l10n/app_localizations.dart';
 import 'package:masrofy/viewmodels/transaction_viewModel.dart';
 import 'package:provider/provider.dart';
@@ -14,15 +14,19 @@ class Billsscreen extends StatelessWidget {
 
     final user = FirebaseAuth.instance.currentUser;
     if (user == null) {
-      return const Scaffold(body: Center(child: Text("❌ User not logged in")));
+      return Scaffold(
+        body: Center(
+          child: Text(loc.userNotLoggedIn), // 🟢 لوكالايزيشن هنا
+        ),
+      );
     }
     final String uid = user.uid;
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          "Bills",
-          style: TextStyle(fontWeight: FontWeight.bold),
+        title: Text(
+          loc.bills, // 🟢 Bills باللوكالايزيشن
+          style: const TextStyle(fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
       ),
@@ -37,10 +41,10 @@ class Billsscreen extends StatelessWidget {
                   return const Center(child: CircularProgressIndicator());
                 }
                 if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                  return const Center(
+                  return Center(
                     child: Text(
-                      "No Food Transactions Yet",
-                      style: TextStyle(
+                      loc.noBillsTransactions, // 🟢 رساله عدم وجود معاملات
+                      style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w500,
                       ),
@@ -54,18 +58,6 @@ class Billsscreen extends StatelessWidget {
                   itemCount: transactions.length,
                   itemBuilder: (context, index) {
                     final tx = transactions[index];
-
-                    // ✅ التعامل مع التاريخ كـ String أو Timestamp
-                    // DateTime? date;
-                    // if (data["date"] is String) {
-                    //   try {
-                    //     date = DateTime.parse(data["date"]);
-                    //   } catch (e) {
-                    //     date = null;
-                    //   }
-                    // } else if (data["date"] is Timestamp) {
-                    //   date = (data["date"] as Timestamp).toDate();
-                    // }
 
                     return BillsExpenseitem(
                       title: tx.title,

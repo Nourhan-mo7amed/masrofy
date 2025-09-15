@@ -810,6 +810,24 @@ abstract class AppLocalizations {
   String get other ;
 
   get spendingIn ;
+
+  String get home ;
+
+  String get bills ;
+
+  String get transport ;
+
+  String get userNotLoggedIn;
+
+  String get noShoppingTransactions;
+
+  String get noBillsTransactions ;
+
+  String get noFoodTransactions ;
+
+  String get noTransportTransactions ;
+
+  String get darkMode ;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

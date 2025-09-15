@@ -17,7 +17,7 @@ class SettingsSwitchTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SwitchListTile(
-      secondary: Icon(icon, color: Colors.black),
+      secondary: Icon(icon),
       title: Text(text),
       value: value,
       inactiveThumbColor: Colors.white,

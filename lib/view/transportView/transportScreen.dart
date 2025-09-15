@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart'; // 🟢 عشان نجيب uid
+import 'package:firebase_auth/firebase_auth.dart'; 
+import 'package:masrofy/l10n/app_localizations.dart';
 import 'package:masrofy/viewmodels/transaction_viewModel.dart';
 import 'package:provider/provider.dart';
 import '../../widgets/transports_expenseitem.dart';
-import 'package:intl/intl.dart';
 
 class Transportscreen extends StatelessWidget {
   const Transportscreen({super.key});
@@ -12,15 +11,22 @@ class Transportscreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final user = FirebaseAuth.instance.currentUser;
+    final loc = AppLocalizations.of(context)!;
+
     if (user == null) {
-      return const Scaffold(body: Center(child: Text("❌ User not logged in")));
+      return Scaffold(
+        body: Center(
+          child: Text(loc.userNotLoggedIn), // ✅ ترجمة "User not logged in"
+        ),
+      );
     }
     final String uid = user.uid;
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          "transport",
-          style: TextStyle(fontWeight: FontWeight.bold),
+        title: Text(
+          loc.transport, // ✅ ترجمة "Transport"
+          style: const TextStyle(fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
       ),
@@ -29,16 +35,16 @@ class Transportscreen extends StatelessWidget {
         child: Consumer<TransactionViewmodel>(
           builder: (context, value, child) {
             return StreamBuilder(
-              stream: value.getExpensesByCategory("transport"),
+              stream: value.getExpensesByCategory("transport"), // ✅ هتاخد uid
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const Center(child: CircularProgressIndicator());
                 }
                 if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                  return const Center(
+                  return Center(
                     child: Text(
-                      "No Food Transactions Yet",
-                      style: TextStyle(
+                      loc.noTransportTransactions, // ✅ ترجمة "No Transport Transactions Yet"
+                      style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w500,
                       ),
@@ -52,18 +58,6 @@ class Transportscreen extends StatelessWidget {
                   itemCount: transactions.length,
                   itemBuilder: (context, index) {
                     final tx = transactions[index];
-
-                    // ✅ التعامل مع التاريخ كـ String أو Timestamp
-                    // DateTime? date;
-                    // if (data["date"] is String) {
-                    //   try {
-                    //     date = DateTime.parse(data["date"]);
-                    //   } catch (e) {
-                    //     date = null;
-                    //   }
-                    // } else if (data["date"] is Timestamp) {
-                    //   date = (data["date"] as Timestamp).toDate();
-                    // }
 
                     return TransportsExpenseitem(
                       title: tx.title,

@@ -14,7 +14,6 @@ class PrivacyPolicyScreen extends StatelessWidget {
         title: Text(loc.privacyPolicyTitle),
         centerTitle: true,
         elevation: 0,
-        foregroundColor: Colors.black,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

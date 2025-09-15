@@ -16,7 +16,7 @@ class SettingsTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       leading: icon != null
-          ? Icon(icon, color: Colors.black)
+          ? Icon(icon)
           : null,
       title: Text(text),
       trailing: Icon(Icons.arrow_forward_ios, size: 16),

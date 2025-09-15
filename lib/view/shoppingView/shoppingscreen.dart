@@ -1,26 +1,31 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart'; // 👈 مهم
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:masrofy/l10n/app_localizations.dart';
 import 'package:masrofy/viewmodels/transaction_viewModel.dart';
 import 'package:provider/provider.dart';
 import '../../widgets/shopping_expenseitem.dart';
-// import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+ // 👈 import loc
 
 class ShoppingScreen extends StatelessWidget {
   const ShoppingScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final uid = FirebaseAuth.instance.currentUser?.uid; // 👈 جلب uid الحالي
-
+    final uid = FirebaseAuth.instance.currentUser?.uid;
+    final loc = AppLocalizations.of(context)!;
     if (uid == null) {
-      return const Scaffold(body: Center(child: Text("User not logged in")));
+      return Scaffold(
+        body: Center(
+          child: Text(loc.userNotLoggedIn), // 👈 باستخدام loc
+        ),
+      );
     }
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          "Shopping",
-          style: TextStyle(fontWeight: FontWeight.bold),
+        title: Text(
+          loc.shopping, // 👈 باستخدام loc
+          style: const TextStyle(fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
       ),
@@ -35,10 +40,10 @@ class ShoppingScreen extends StatelessWidget {
                   return const Center(child: CircularProgressIndicator());
                 }
                 if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                  return const Center(
+                  return Center(
                     child: Text(
-                      "No Food Transactions Yet",
-                      style: TextStyle(
+                      loc.noShoppingTransactions, // 👈 باستخدام loc
+                      style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w500,
                       ),
@@ -53,7 +58,6 @@ class ShoppingScreen extends StatelessWidget {
                   itemBuilder: (context, index) {
                     final tx = transactions[index];
 
-               
                     return ShoppingExpenseitem(
                       title: tx.title,
                       date: "${tx.date.day}-${tx.date.month}-${tx.date.year}",

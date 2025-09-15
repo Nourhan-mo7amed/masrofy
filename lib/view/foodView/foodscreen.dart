@@ -1,28 +1,31 @@
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart'; // 👈 مهم
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:masrofy/viewmodels/transaction_viewModel.dart';
+import 'package:provider/provider.dart';
 import '../../widgets/food_expenseitem.dart';
 import 'package:masrofy/l10n/app_localizations.dart';
-import 'package:provider/provider.dart';
-// import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class FoodScreen extends StatelessWidget {
   const FoodScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final uid = FirebaseAuth.instance.currentUser?.uid; // 👈 جلب uid الحالي
+    final loc = AppLocalizations.of(context)!;
+    final uid = FirebaseAuth.instance.currentUser?.uid;
 
     if (uid == null) {
-      return const Scaffold(body: Center(child: Text("User not logged in")));
+      return Scaffold(
+        body: Center(
+          child: Text(loc.userNotLoggedIn), // ✅ مستخدم مش داخل
+        ),
+      );
     }
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          "Food",
-          style: TextStyle(fontWeight: FontWeight.bold),
+        title: Text(
+          loc.food, // ✅ عنوان مترجم
+          style: const TextStyle(fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
       ),
@@ -37,10 +40,10 @@ class FoodScreen extends StatelessWidget {
                   return const Center(child: CircularProgressIndicator());
                 }
                 if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                  return const Center(
+                  return Center(
                     child: Text(
-                      "No Food Transactions Yet",
-                      style: TextStyle(
+                      loc.noFoodTransactions, // ✅ مفيش عمليات للأكل
+                      style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w500,
                       ),
@@ -54,19 +57,6 @@ class FoodScreen extends StatelessWidget {
                   itemCount: transactions.length,
                   itemBuilder: (context, index) {
                     final tx = transactions[index];
-
-                    // ✅ التعامل مع التاريخ كـ String أو Timestamp
-                    // DateTime? date;
-                    // if (data["date"] is String) {
-                    //   try {
-                    //     date = DateTime.parse(data["date"]);
-                    //   } catch (e) {
-                    //     date = null;
-                    //   }
-                    // } else if (data["date"] is Timestamp) {
-                    //   date = (data["date"] as Timestamp).toDate();
-                    // }
-
                     return FoodExpenseItem(
                       title: tx.title,
                       date: "${tx.date.day}-${tx.date.month}-${tx.date.year}",

@@ -208,8 +208,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get welcomeBack => 'Welcome back';
 
   @override
-  String get loginDescription =>
-      'Log in to continue managing your budget.';
+  String get loginDescription => 'Log in to continue managing your budget.';
 
   @override
   String get orLoginWith => 'or log in with';
@@ -384,4 +383,30 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get statistics => 'Statistics';
+
+  @override
+  String get bills => 'Bills';
+
+  @override
+  String get home => 'Home';
+
+  @override
+  String get transport => 'Transport';
+
+  @override
+  String get noShoppingTransactions => "No Shopping Transactions Yet";
+
+  @override
+  String get userNotLoggedIn => "User not logged in";
+
+  @override
+  String get noBillsTransactions => "No bills transactions yet";
+
+  @override
+  String get noFoodTransactions => "No food transactions yet";
+  @override
+  String get noTransportTransactions => "No transport transactions yet";
+
+  @override
+  String get darkMode => "Dark Mode";
 }

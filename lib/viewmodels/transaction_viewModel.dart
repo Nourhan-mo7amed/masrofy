@@ -61,7 +61,7 @@ class TransactionViewmodel extends ChangeNotifier {
         );
   }
 
- Stream<List<TransactionModel>> getExpensesByCategory(String categoryId) {
+ Stream<List<TransactionModel>> getExpensesByCategory(String categoryId,) {
   final uid = FirebaseAuth.instance.currentUser?.uid;
   if (uid == null) return const Stream.empty();
 

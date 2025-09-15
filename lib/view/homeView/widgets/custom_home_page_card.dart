@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:masrofy/l10n/app_localizations.dart';
 
 class CustomHomePageCard extends StatelessWidget {
   const CustomHomePageCard({super.key});
@@ -8,8 +9,8 @@ class CustomHomePageCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final String uid = FirebaseAuth.instance.currentUser!.uid;
+    final loc = AppLocalizations.of(context)!; // ✅ استخدمنا اللغات
 
-    // نقرأ الـ income والـ expenses في نفس الوقت
     final incomeStream = FirebaseFirestore.instance
         .collection("incomes")
         .where("userId", isEqualTo: uid)
@@ -52,13 +53,11 @@ class CustomHomePageCard extends StatelessWidget {
               double income = 0;
               double expenses = 0;
 
-              // حساب الـ income
               for (var doc in incomeSnapshot.data!.docs) {
                 final data = doc.data() as Map<String, dynamic>;
                 income += (data["amount"] as num?)?.toDouble() ?? 0.0;
               }
 
-              // حساب الـ expenses
               for (var doc in expensesSnapshot.data!.docs) {
                 final data = doc.data() as Map<String, dynamic>;
                 expenses += (data["amount"] as num?)?.toDouble() ?? 0.0;
@@ -73,13 +72,13 @@ class CustomHomePageCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Row(
-                        children: const [
+                        children: [
                           Text(
-                            "Total Balance ",
-                            style:
-                                TextStyle(color: Colors.white, fontSize: 14),
+                            loc.totalBalance, // ✅ بدل "Total Balance"
+                            style: const TextStyle(
+                                color: Colors.white, fontSize: 14),
                           ),
-                          Icon(
+                          const Icon(
                             Icons.keyboard_arrow_down,
                             color: Colors.white,
                             size: 18,
@@ -111,7 +110,7 @@ class CustomHomePageCard extends StatelessWidget {
                           ),
                           const SizedBox(width: 6),
                           Text(
-                            "Income \n\$ ${income.toStringAsFixed(2)}",
+                            "${loc.income}\n\$ ${income.toStringAsFixed(2)}", // ✅ بدل Income
                             style: const TextStyle(
                               color: Colors.white,
                               fontSize: 14,
@@ -129,7 +128,7 @@ class CustomHomePageCard extends StatelessWidget {
                           ),
                           const SizedBox(width: 6),
                           Text(
-                            "Expenses\n\$ ${expenses.toStringAsFixed(2)}",
+                            "${loc.expenses}\n\$ ${expenses.toStringAsFixed(2)}", // ✅ بدل Expenses
                             style: const TextStyle(
                               color: Colors.white,
                               fontSize: 14,

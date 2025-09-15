@@ -67,7 +67,6 @@ class Profilescreen extends StatelessWidget {
                       Text(
                         userData["name"] ?? "",
                         style: const TextStyle(
-                          //color: Colors.black,
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
                         ),

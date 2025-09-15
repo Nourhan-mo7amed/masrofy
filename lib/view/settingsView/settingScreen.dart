@@ -4,7 +4,6 @@ import 'package:masrofy/viewmodels/settings_viewmodel.dart';
 import 'package:provider/provider.dart';
 import '../../widgets/SettingsSwitchTile.dart';
 import '../../widgets/SettingsTile.dart';
-// import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -15,9 +14,7 @@ class SettingsScreen extends StatefulWidget {
 
 class _SettingsScreenState extends State<SettingsScreen> {
   bool notifications = true;
-  bool mode = false;
   String selectedLanguage = "English";
-  
 
   @override
   Widget build(BuildContext context) {
@@ -29,15 +26,18 @@ class _SettingsScreenState extends State<SettingsScreen> {
         title: Text(loc.settings),
         centerTitle: true,
         elevation: 0,
-        foregroundColor: Colors.black,
       ),
       body: ListView(
         children: [
-          SettingsTile(icon: Icons.person, text: loc.account, onTap: () {}),
+          SettingsTile(
+            icon: Icons.person_outline,
+            text: loc.account, // 👈 الحساب
+            onTap: () {},
+          ),
 
           SettingsSwitchTile(
             icon: Icons.notifications_none_outlined,
-            text: loc.notifications,
+            text: loc.notifications, // 👈 الإشعارات
             value: notifications,
             onChanged: (val) {
               setState(() => notifications = val);
@@ -45,46 +45,42 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ),
 
           SwitchListTile(
-            title: const Text("Dark Mode"),
+            secondary: const Icon(Icons.dark_mode_outlined),
+            title: Text(loc.darkMode), // 👈 الوضع المظلم
             value: viewModel.settings.darkMode,
             onChanged: (val) {
               viewModel.toggleDarkMode(val);
             },
           ),
 
-          // error
-          // دي خليها جوه build أو اعمل map
-          ListTile(
-            leading: const Icon(Icons.language_outlined, color: Colors.black),
-            title: Text(loc.language),
-            trailing: DropdownButton<String>(
-              value: selectedLanguage == "English" ? loc.english : loc.arabic,
-              items: [loc.english, loc.arabic].map((lang) {
-                return DropdownMenuItem<String>(value: lang, child: Text(lang));
-              }).toList(),
-              onChanged: (val) {
-                if (val != null) {
-                  setState(() => selectedLanguage = val); // 🟢 عدل القيمة
-                  viewModel.changeLanguage(val);
-                }
-              },
+          SwitchListTile(
+            secondary: const Icon(Icons.language_outlined),
+            title: Text(loc.language), // 👈 اللغة
+            subtitle: Text(
+              selectedLanguage == "English" ? loc.english : loc.arabic,
             ),
+            value: selectedLanguage == "English",
+            onChanged: (val) {
+              setState(() {
+                selectedLanguage = val ? "English" : "Arabic";
+              });
+              viewModel.changeLanguage(selectedLanguage);
+            },
           ),
 
-          //error
           const SizedBox(height: 32),
 
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             child: Text(
-              loc.supportTitle,
+              loc.supportTitle, // 👈 الدعم
               style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
           ),
 
-          SettingsTile(text: loc.support, onTap: () {}),
-          SettingsTile(text: loc.help, onTap: () {}),
-          SettingsTile(text: loc.faq, onTap: () {}),
+          SettingsTile(text: loc.support, onTap: () {}), // 👈 الدعم الفني
+          SettingsTile(text: loc.help, onTap: () {}), // 👈 المساعدة
+          SettingsTile(text: loc.faq, onTap: () {}), // 👈 الأسئلة الشائعة
         ],
       ),
     );

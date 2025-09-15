@@ -129,7 +129,8 @@ class AppLocalizationsAr extends AppLocalizations {
   String get forgotPasswordTitle => 'نسيت كلمة المرور';
 
   @override
-  String get forgotPasswordSubtitle => 'أدخل بريدك الإلكتروني وسنرسل لك رمزًا لإعادة تعيين كلمة المرور.';
+  String get forgotPasswordSubtitle =>
+      'أدخل بريدك الإلكتروني وسنرسل لك رمزًا لإعادة تعيين كلمة المرور.';
 
   @override
   String get emailLabel => 'البريد الإلكتروني';
@@ -165,13 +166,15 @@ class AppLocalizationsAr extends AppLocalizations {
   String get page1Title => 'ميزانيتك، قواعدك';
 
   @override
-  String get page1Subtitle => 'تتبع مصروفاتك بسهولة، خطط ميزانيتك، وحقق أهدافك المالية.';
+  String get page1Subtitle =>
+      'تتبع مصروفاتك بسهولة، خطط ميزانيتك، وحقق أهدافك المالية.';
 
   @override
   String get page2Title => 'تتبع مصروفاتك';
 
   @override
-  String get page2Subtitle => 'سجل مصروفاتك اليومية بسهولة وابقَ على اطلاع بميزانيتك.';
+  String get page2Subtitle =>
+      'سجل مصروفاتك اليومية بسهولة وابقَ على اطلاع بميزانيتك.';
 
   @override
   String get page3Title => 'ادخر بذكاء';
@@ -231,31 +234,36 @@ class AppLocalizationsAr extends AppLocalizations {
   String get privacyPolicyTitle => 'سياسة الخصوصية';
 
   @override
-  String get privacyIntro => 'نحن نحترم خصوصيتك ونريدك أن تشعر بالأمان أثناء استخدام التطبيق.';
+  String get privacyIntro =>
+      'نحن نحترم خصوصيتك ونريدك أن تشعر بالأمان أثناء استخدام التطبيق.';
 
   @override
   String get whatWeCollect => 'ما نجمعه';
 
   @override
-  String get whatWeCollectDetails => '• المعلومات الأساسية التي تقدمها مثل المصاريف والملاحظات والإيصالات المحملة.\n• تفاصيل الحساب الاختيارية مثل البريد الإلكتروني (إذا قمت بالتسجيل).\n• لا يتم جمع أي بيانات مصرفية أو بطاقة حساسة.';
+  String get whatWeCollectDetails =>
+      '• المعلومات الأساسية التي تقدمها مثل المصاريف والملاحظات والإيصالات المحملة.\n• تفاصيل الحساب الاختيارية مثل البريد الإلكتروني (إذا قمت بالتسجيل).\n• لا يتم جمع أي بيانات مصرفية أو بطاقة حساسة.';
 
   @override
   String get howWeUseData => 'كيفية استخدام البيانات';
 
   @override
-  String get howWeUseDataDetails => '• لمساعدتك على تسجيل وتنظيم مصاريفك اليومية.\n• لإنشاء تقارير ورسوم بيانية تظهر إنفاقك.\n• للسماح لك بحفظ الإيصالات وربطها بسجلاتك.\n• لمزامنة بياناتك عبر الأجهزة (إذا كنت تستخدم النسخ الاحتياطي السحابي - Firebase).';
+  String get howWeUseDataDetails =>
+      '• لمساعدتك على تسجيل وتنظيم مصاريفك اليومية.\n• لإنشاء تقارير ورسوم بيانية تظهر إنفاقك.\n• للسماح لك بحفظ الإيصالات وربطها بسجلاتك.\n• لمزامنة بياناتك عبر الأجهزة (إذا كنت تستخدم النسخ الاحتياطي السحابي - Firebase).';
 
   @override
   String get storageAndSecurity => 'التخزين والأمان';
 
   @override
-  String get storageAndSecurityDetails => '• يتم حفظ بياناتك على جهازك (وضع عدم الاتصال).\n• إذا قمت بتمكين المزامنة السحابية، يتم تخزين البيانات بأمان على خوادم Firebase.\n• نتخذ خطوات معقولة لحماية معلوماتك من الوصول غير المصرح به.';
+  String get storageAndSecurityDetails =>
+      '• يتم حفظ بياناتك على جهازك (وضع عدم الاتصال).\n• إذا قمت بتمكين المزامنة السحابية، يتم تخزين البيانات بأمان على خوادم Firebase.\n• نتخذ خطوات معقولة لحماية معلوماتك من الوصول غير المصرح به.';
 
   @override
   String get dataSharing => 'مشاركة البيانات';
 
   @override
-  String get dataSharingDetails => 'نحن لا نبيع أو نشارك بياناتك الشخصية مع أطراف ثالثة. قد يتم مشاركة البيانات فقط إذا طلب القانون ذلك.';
+  String get dataSharingDetails =>
+      'نحن لا نبيع أو نشارك بياناتك الشخصية مع أطراف ثالثة. قد يتم مشاركة البيانات فقط إذا طلب القانون ذلك.';
 
   @override
   String get accountInfo => 'معلومات الحساب';
@@ -342,7 +350,8 @@ class AppLocalizationsAr extends AppLocalizations {
   String get setupCompleteTitle => 'تم إعداد التطبيق!';
 
   @override
-  String get setupCompleteSubtitle => 'يمكنك الآن البدء في متابعة وتنظيم مصاريفك';
+  String get setupCompleteSubtitle =>
+      'يمكنك الآن البدء في متابعة وتنظيم مصاريفك';
 
   @override
   String get startBudgeting => 'ابدأ الميزانية';
@@ -361,7 +370,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get subscriptionsTitle => 'الاشتراكات';
-  
+
   @override
   String get noStatistics => 'لا توجد إحصائيات متاحة';
 
@@ -374,4 +383,31 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get statistics => 'الإحصائيات';
 
+  @override
+  String get bills => 'الفواتير';
+
+  @override
+  String get home => 'الرئيسية';
+
+  @override
+  String get transport => 'المواصلات';
+
+  @override
+  String get noShoppingTransactions => "لا توجد معاملات تسوق بعد"; // عربي
+
+  @override
+  String get userNotLoggedIn => "المستخدم غير مسجل الدخول";
+
+  @override
+  String get noBillsTransactions => "لا توجد معاملات فواتير بعد";
+
+  @override
+  String get noFoodTransactions => "لا توجد معاملات للأكل حتى الآن";
+
+  @override
+  String get noTransportTransactions => "لا توجد معاملات مواصلات حتى الآن";
+
+  
+  @override
+  String get darkMode => "الوضع الليلي ";
 }
