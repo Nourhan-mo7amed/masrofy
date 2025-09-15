@@ -3,6 +3,7 @@ import 'package:masrofy/view/homeView/widgets/Custom_singleChild_scroll_home.dar
 
 import '../../view/statisticsView/StatisticsScreen.dart';
 import '../../view/addView/addScreen.dart';
+import 'package:provider/provider.dart';
 import '../../view/allTransactionView/all_transactionScreen.dart';
 import '../../view/profileView/profileScreen.dart';
 
@@ -11,6 +12,7 @@ class HomeScreen extends StatefulWidget {
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
+  // Remove this line; access providers inside build or state methods where context is available.
 }
 
 class _HomeScreenState extends State<HomeScreen> {
@@ -45,7 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         currentIndex: _selectedIndex,
-        selectedItemColor: const Color(0xFF6155F5),
+        selectedItemColor: Theme.of(context).iconTheme.color,
         unselectedItemColor: Colors.grey,
         onTap: _onItemTapped,
         items: const [

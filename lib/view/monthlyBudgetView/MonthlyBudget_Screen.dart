@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:masrofy/core/constants/colors_app.dart';
 import 'package:masrofy/l10n/app_localizations.dart';
+import 'package:masrofy/viewmodels/budget_viewModel.dart';
+import 'package:provider/provider.dart';
 import '../../widgets/Custom_TextField.dart';
 // import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -10,6 +12,7 @@ class MonthlyBudgetScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
+    final budgetVM = context.watch<BudgetViewModel>();
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -45,7 +48,10 @@ class MonthlyBudgetScreen extends StatelessWidget {
                       const SizedBox(height: 8),
                       Text(
                         loc.monthlyBudgetSubtitle,
-                        style: const TextStyle(fontSize: 14, color: Colors.black54),
+                        style: const TextStyle(
+                          fontSize: 14,
+                          color: Colors.black54,
+                        ),
                         textAlign: TextAlign.center,
                       ),
 
@@ -55,7 +61,7 @@ class MonthlyBudgetScreen extends StatelessWidget {
                       CustomTextField(
                         hintText: loc.enterAmountHint,
                         icon: Icons.attach_money,
-                        controller: null, // assign a controller if needed
+                        controller: budgetVM.amountController,
                       ),
                       const SizedBox(height: 8),
                       Text(loc.changeLaterNote),
@@ -93,6 +99,7 @@ class MonthlyBudgetScreen extends StatelessWidget {
                     ),
                   ),
                   onPressed: () {
+                    budgetVM.saveBudget();
                     Navigator.pushNamed(context, '/categories');
                   },
                   child: Text(

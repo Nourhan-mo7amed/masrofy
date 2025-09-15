@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart'; // 👈 مهم
+import 'package:masrofy/viewmodels/transaction_viewModel.dart';
+import 'package:provider/provider.dart';
 import '../../widgets/shopping_expenseitem.dart';
 // import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -25,57 +26,53 @@ class ShoppingScreen extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(12.0),
-        child: StreamBuilder(
-          stream: FirebaseFirestore.instance
-              .collection("expenses")
-              .where("categoryId", isEqualTo: "shopping")
-              .where("userId", isEqualTo: uid) // 👈 فلترة بالـ uid
-              .snapshots(),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(child: CircularProgressIndicator());
-            }
-
-            if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-              return const Center(
-                child: Text(
-                  "No Shopping Transactions Yet",
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-                ),
-              );
-            }
-
-            final docs = snapshot.data!.docs;
-
-            return ListView.builder(
-              itemCount: docs.length,
-              itemBuilder: (context, index) {
-                final data = docs[index].data();
-                final title = data["title"] ?? "No Title";
-                final double amount =
-                    (data["amount"] as num?)?.toDouble() ?? 0.0;
-                final String type = data["type"] ?? "expense";
-
-                // ✅ التعامل مع التاريخ سواء String أو Timestamp
-                DateTime? date;
-                if (data["date"] is String) {
-                  try {
-                    date = DateTime.parse(data["date"]);
-                  } catch (e) {
-                    date = null;
-                  }
-                } else if (data["date"] is Timestamp) {
-                  date = (data["date"] as Timestamp).toDate();
+        child: Consumer<TransactionViewmodel>(
+          builder: (context, value, child) {
+            return StreamBuilder(
+              stream: value.getExpensesByCategory("shopping"),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(child: CircularProgressIndicator());
+                }
+                if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                  return const Center(
+                    child: Text(
+                      "No Food Transactions Yet",
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  );
                 }
 
-                return ShoppingExpenseitem(
-                  title: title,
-                  date: date != null
-                      ? "${date.day}-${date.month}-${date.year}"
-                      : "Unknown",
-                  amount:
-                      "${type == "income" ? "+" : "-"} \$${amount.toStringAsFixed(2)}",
-                  color: type == "income" ? Colors.green : Colors.red,
+                final transactions = snapshot.data!;
+
+                return ListView.builder(
+                  itemCount: transactions.length,
+                  itemBuilder: (context, index) {
+                    final tx = transactions[index];
+
+                    // ✅ التعامل مع التاريخ كـ String أو Timestamp
+                    // DateTime? date;
+                    // if (data["date"] is String) {
+                    //   try {
+                    //     date = DateTime.parse(data["date"]);
+                    //   } catch (e) {
+                    //     date = null;
+                    //   }
+                    // } else if (data["date"] is Timestamp) {
+                    //   date = (data["date"] as Timestamp).toDate();
+                    // }
+
+                    return ShoppingExpenseitem(
+                      title: tx.title,
+                      date: "${tx.date.day}-${tx.date.month}-${tx.date.year}",
+                      amount:
+                          "${tx.type == "income" ? "+" : "-"} \$${tx.amount.toStringAsFixed(2)}",
+                      color: tx.type == "income" ? Colors.green : Colors.red,
+                    );
+                  },
                 );
               },
             );
