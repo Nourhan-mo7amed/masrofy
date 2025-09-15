@@ -224,7 +224,7 @@ class _CustomIncomeFormFieldState extends State<CustomIncomeFormField> {
               child: Text(
                 loc.save, // ✅
                 style:
-                    const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    const TextStyle(fontSize: 16, fontWeight: FontWeight.bold,color: Colors.white),
               ),
             ),
           ),

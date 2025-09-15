@@ -269,7 +269,6 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                     style: ElevatedButton.styleFrom(
                       padding: const EdgeInsets.symmetric(vertical: 15),
                       backgroundColor: const Color(0xFF6C63FF),
-                      foregroundColor: Colors.white,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
@@ -280,6 +279,7 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                       style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
+                        color: Colors.white
                       ),
                     ),
                   ),
