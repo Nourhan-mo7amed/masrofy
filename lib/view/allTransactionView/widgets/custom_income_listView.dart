@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart'; // 🟢 لازم نجيب الـ uid
-import 'package:masrofy/models/IncomeModel.dart';
 import 'package:masrofy/models/transaction_model.dart';
 
 class CustomExpandedIncome extends StatelessWidget {
@@ -15,7 +14,7 @@ class CustomExpandedIncome extends StatelessWidget {
       stream: FirebaseFirestore.instance
           .collection("incomes")
           .where("userId", isEqualTo: uid)
-        //  .orderBy("date", descending: true)
+          //  .orderBy("date", descending: true)
           .snapshots(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {

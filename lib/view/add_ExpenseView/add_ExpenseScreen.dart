@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:masrofy/core/constants/month_name.dart';
 import 'package:masrofy/l10n/app_localizations.dart';
 import 'package:firebase_auth/firebase_auth.dart'; // 👈 لازم نضيفها
-import 'package:masrofy/models/ExpenseModel.dart';
 import 'package:masrofy/models/category_model.dart';
 import 'package:masrofy/models/transaction_model.dart';
 import 'package:masrofy/viewmodels/transaction_viewModel.dart';
