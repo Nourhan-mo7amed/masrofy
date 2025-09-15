@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:masrofy/l10n/app_localizations.dart';
 
 class LogoutBottomSheet extends StatelessWidget {
   final VoidCallback onConfirm;
@@ -8,31 +9,32 @@ class LogoutBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
+
     return ClipRRect(
       borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
       child: BackdropFilter(
         filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
         child: Container(
           padding: const EdgeInsets.all(20),
-          decoration: BoxDecoration(
-            color: Colors.white.withOpacity(0.9),
-            borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
+          decoration: const BoxDecoration(
+            borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
           ),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Text(
-                "Logout",
-                style: TextStyle(
+              Text(
+                loc.logout, // "تسجيل الخروج" أو "Logout"
+                style: const TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
                   color: Color(0xFF6155F5),
                 ),
               ),
               const SizedBox(height: 10),
-              const Text(
-                "Are you sure you want to log out?",
-                style: TextStyle(fontSize: 15, color: Colors.black),
+              Text(
+                loc.logoutConfirmation, // "هل أنت متأكد أنك تريد تسجيل الخروج؟"
+                style: const TextStyle(fontSize: 15),
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 20),
@@ -47,10 +49,10 @@ class LogoutBottomSheet extends StatelessWidget {
                           borderRadius: BorderRadius.circular(30),
                         ),
                       ),
-                      child: Text("Cancel"),
+                      child: Text(loc.cancel), // "إلغاء" أو "Cancel"
                     ),
                   ),
-                  SizedBox(width: 10),
+                  const SizedBox(width: 10),
                   Expanded(
                     child: ElevatedButton(
                       onPressed: () {
@@ -58,13 +60,13 @@ class LogoutBottomSheet extends StatelessWidget {
                         onConfirm();
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Color(0xFF6155F5),
-                        foregroundColor: Colors.white,
+                        backgroundColor: const Color(0xFF6155F5),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30),
                         ),
                       ),
-                      child: Text("Yes, Logout"),
+                      child: Text(loc.confirmLogout), 
+                      // "نعم، تسجيل الخروج" أو "Yes, Logout"
                     ),
                   ),
                 ],

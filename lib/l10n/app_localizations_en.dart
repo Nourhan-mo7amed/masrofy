@@ -409,7 +409,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get darkMode => "Dark Mode";
-  
+
   @override
   String get expenseAddedSuccessfully => "✅ Expense Added Successfully";
   @override
@@ -420,18 +420,25 @@ class AppLocalizationsEn extends AppLocalizations {
   String? get notesHint => "Write your notes here...";
   @override
   String get selectCategory => "⚠️ Please select a category";
-  
+
   @override
-String? get amountHint => "Enter the amount";
+  String get amountHint => "Enter the amount";
 
-@override
-String get failedToSaveIncome => "Failed to save income. Please try again.";
+  @override
+  String get failedToSaveIncome => "Failed to save income. Please try again.";
 
-@override
-String get incomeAddedSuccessfully => "Income added successfully!";
+  @override
+  String get incomeAddedSuccessfully => "Income added successfully!";
 
-@override
-String? get salaryHint => "Enter your salary";
+  @override
+  String get salaryHint => "Enter your salary";
 
+  @override
+  String get logoutConfirmation => "Are you sure you want to log out?";
 
+  @override
+  String get cancel => "Cancel";
+
+  @override
+  String get confirmLogout => "Yes, Logout";
 }

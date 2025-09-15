@@ -426,7 +426,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get selectCategory => "⚠️ من فضلك اختر فئة";
 
   @override
-  String? get amountHint => "ادخل المبلغ";
+  String get amountHint => "ادخل المبلغ";
 
   @override
   String get failedToSaveIncome => "فشل في حفظ الدخل. حاول مرة أخرى.";
@@ -435,5 +435,14 @@ class AppLocalizationsAr extends AppLocalizations {
   String get incomeAddedSuccessfully => "تمت إضافة الدخل بنجاح!";
 
   @override
-  String? get salaryHint => "ادخل راتبك";
+  String get salaryHint => "ادخل راتبك";
+
+  @override
+  String get logoutConfirmation => "هل أنت متأكد أنك تريد تسجيل الخروج؟";
+
+  @override
+  String get cancel => "إلغاء";
+
+  @override
+  String get confirmLogout => "نعم، تسجيل الخروج";
 }

@@ -839,13 +839,20 @@ abstract class AppLocalizations {
 
   String get fillRequiredFields ;
 
-  String? get amountHint ;
+  String get amountHint ;
 
-  String? get salaryHint ;
+  String get salaryHint ;
 
   String get failedToSaveIncome;
 
   String get incomeAddedSuccessfully;
+
+  String get confirmLogout ;
+
+  String get cancel ;
+
+  String get logoutConfirmation ;
+
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

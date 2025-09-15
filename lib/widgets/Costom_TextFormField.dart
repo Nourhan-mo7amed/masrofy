@@ -30,7 +30,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       autovalidateMode: AutovalidateMode.onUserInteraction,
       validator: (value) {
         if (value == null || value.isEmpty) {
-          return "Please enter your ${widget.hintText}";
+          return "${widget.hintText}";
         }
         return null;
       },

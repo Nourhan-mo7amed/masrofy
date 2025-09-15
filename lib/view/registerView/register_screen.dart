@@ -12,7 +12,6 @@ class RegisterScreen extends StatelessWidget {
     final loc = AppLocalizations.of(context)!;
 
     return Scaffold(
-      backgroundColor: Colors.white,
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(24.0),
@@ -29,7 +28,7 @@ class RegisterScreen extends StatelessWidget {
               const SizedBox(height: 8),
               Text(
                 loc.signUpToStart,
-                style: const TextStyle(fontSize: 14, color: Colors.black54),
+                style: const TextStyle(fontSize: 14, ),
               ),
 
               const SizedBox(height: 32),
@@ -45,7 +44,6 @@ class RegisterScreen extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
                     child: Text(
                       loc.orSignUpWith,
-                      style: const TextStyle(color: Colors.black54),
                     ),
                   ),
                   const Expanded(child: Divider(thickness: 1, color: Colors.grey)),

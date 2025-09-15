@@ -13,7 +13,6 @@ class LoginScreen extends StatelessWidget {
     final loc = AppLocalizations.of(context)!;
 
     return Scaffold(
-      backgroundColor: Colors.white,
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(24.0),
@@ -32,7 +31,7 @@ class LoginScreen extends StatelessWidget {
               // Description
               Text(
                 loc.loginDescription,
-                style: const TextStyle(fontSize: 14, color: Colors.black54),
+                style: const TextStyle(fontSize: 14, ),
               ),
               const SizedBox(height: 32),
 
@@ -48,7 +47,7 @@ class LoginScreen extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
                     child: Text(
                       loc.orLoginWith,
-                      style: const TextStyle(color: Colors.black54),
+                     
                     ),
                   ),
                   const Expanded(child: Divider(thickness: 1, color: Colors.grey)),
