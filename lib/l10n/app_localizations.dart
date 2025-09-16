@@ -920,6 +920,72 @@ abstract class AppLocalizations {
   String get multiCurrencySupport;
   String get aboutDescription;
   String get aboutMission;
+
+  String get noUserLoggedIn ;
+
+  String get passwordChangedSuccessfully ;
+
+  String get incorrectCurrentPassword ;
+
+  String get weakPassword ;
+
+  get error ;
+
+  String get editProfile;
+
+  String get noUserDataFound ;
+
+  String get changeAmount ;
+
+  String? get changeCurrency ;
+
+  String get profileUpdated ;
+
+  String get fillAllFields ;
+
+  String get helpCenter ;
+
+  String get contactUs ;
+
+  get faqAddExpenseQuestion;
+
+  get faqAddExpenseAnswer ;
+
+  get faqEditDeleteQuestion ;
+
+  get faqEditDeleteAnswer ;
+
+  get faqSetBudgetQuestion;
+
+  get faqSetBudgetAnswer ;
+
+  get faqReportsQuestion ;
+
+  get faqReportsAnswer ;
+
+  get faqChangeCurrencyLanguageQuestion ;
+
+  get faqChangeCurrencyLanguageAnswer ;
+
+  get contactInstagramDetails ;
+
+  get contactInstagram ;
+
+  get contactFacebookDetails ;
+
+  get contactFacebook ;
+
+  get contactWhatsappDetails ;
+
+  get contactWhatsapp ;
+
+  get contactWebsiteDetails ;
+
+  get contactWebsite;
+
+  get contactCustomerServiceDetails;
+
+  get contactCustomerService ;
 }
 
 class _AppLocalizationsDelegate

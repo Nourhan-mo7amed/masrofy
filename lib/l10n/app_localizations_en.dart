@@ -543,4 +543,86 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get aboutMission =>
       "To make money management simple, clear, and stress-free for everyone.";
+
+  String get error => "Error";
+  String get incorrectCurrentPassword => "Current password is incorrect";
+  String get noUserLoggedIn => "No user logged in";
+  String get passwordChangedSuccessfully => "Password changed successfully!";
+  String get weakPassword => "The new password is too weak";
+
+  @override
+  String get editProfile => "Edit Profile";
+
+  @override
+  String get noUserDataFound => "No user data found";
+  
+@override
+String get changeAmount => "Change amount";
+
+@override
+String? get changeCurrency => "Change currency";
+
+@override
+String get fillAllFields => "Please fill all fields";
+
+@override
+String get profileUpdated => "Profile updated successfully";
+
+@override
+String get contactUs => "Contact Us";
+
+@override
+String get faqAddExpenseQuestion => "How can I add a new expense?";
+@override
+String get faqAddExpenseAnswer => "From the home screen, tap the + button and enter the details (amount, category, date).";
+
+@override
+String get faqEditDeleteQuestion => "Can I edit or delete an expense?";
+@override
+String get faqEditDeleteAnswer => "Yes, tap long press on the expense from the list to edit or delete it.";
+
+@override
+String get faqSetBudgetQuestion => "How do I set a monthly budget?";
+@override
+String get faqSetBudgetAnswer => "Go to the 'Budget' tab and set the target amount for the month and categories you want to track.";
+
+@override
+String get faqReportsQuestion => "Does the app provide reports or statistics?";
+@override
+String get faqReportsAnswer => "Yes, you can view charts and monthly reports to track your spending habits.";
+
+@override
+String get faqChangeCurrencyLanguageQuestion => "How can I change the currency or language?";
+@override
+String get faqChangeCurrencyLanguageAnswer => "You can change currency (EGP, USD, EUR, etc.) and language from the settings menu.";
+
+@override
+String get helpCenter => "Help Center";
+
+@override
+String get contactCustomerService => "Customer Service";
+@override
+String get contactCustomerServiceDetails => "Phone : +1 555 123 4567\nEmail : support@masrofy.com\nWorking Hours : 9:00 AM – 6:00 PM";
+
+@override
+String get contactWebsite => "Website";
+@override
+String get contactWebsiteDetails => "Visit us : www.masrofy.com\nContact Form : www.masrofy.com/contact";
+
+@override
+String get contactWhatsapp => "Whatsapp";
+@override
+String get contactWhatsappDetails => "Chat with us : +1 555 987 6543\nAvailable : 10:00 AM – 8:00 PM";
+
+@override
+String get contactFacebook => "Facebook";
+@override
+String get contactFacebookDetails => "Page : facebook.com/masrofyapp\nMessenger : m.me/masrofyapp";
+
+@override
+String get contactInstagram => "Instagram";
+@override
+String get contactInstagramDetails => "Follow us : instagram.com/masrofyapp\nDM us for support";
+
+
 }

@@ -1,35 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:masrofy/l10n/app_localizations.dart';
 
 class FAQTab extends StatelessWidget {
   const FAQTab({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
+
     final faqList = [
       {
-        "question": "How can I add a new expense?",
-        "answer":
-            "From the home screen, tap the + button and enter the details (amount, category, date).",
+        "question": loc.faqAddExpenseQuestion,
+        "answer": loc.faqAddExpenseAnswer,
       },
       {
-        "question": "Can I edit or delete an expense?",
-        "answer":
-            "Yes, tap long press on the expense from the list to edit or delete it.",
+        "question": loc.faqEditDeleteQuestion,
+        "answer": loc.faqEditDeleteAnswer,
       },
       {
-        "question": "How do I set a monthly budget?",
-        "answer":
-            "Go to the 'Budget' tab and set the target amount for the month and categories you want to track.",
+        "question": loc.faqSetBudgetQuestion,
+        "answer": loc.faqSetBudgetAnswer,
       },
       {
-        "question": "Does the app provide reports or statistics?",
-        "answer":
-            "Yes, you can view charts and monthly reports to track your spending habits.",
+        "question": loc.faqReportsQuestion,
+        "answer": loc.faqReportsAnswer,
       },
       {
-        "question": "How can I change the currency or language?",
-        "answer":
-            "You can change currency (EGP, USD, EUR, etc.) and language from the settings menu.",
+        "question": loc.faqChangeCurrencyLanguageQuestion,
+        "answer": loc.faqChangeCurrencyLanguageAnswer,
       },
     ];
 
@@ -52,14 +50,14 @@ class FAQTab extends StatelessWidget {
                     color: Colors.grey,
                   ),
                 ),
-                iconColor: Color(0xFF6155F5),
-                collapsedIconColor: Color(0xFF6155F5),
+                iconColor: const Color(0xFF6155F5),
+                collapsedIconColor: const Color(0xFF6155F5),
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(12.0),
                     child: Text(
                       faqList[index]["answer"]!,
-                      style: TextStyle(color: Colors.grey),
+                      style: const TextStyle(color: Colors.grey),
                     ),
                   ),
                 ],

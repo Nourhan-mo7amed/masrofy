@@ -44,7 +44,7 @@ class Profilescreen extends StatelessWidget {
             return const Center(child: CircularProgressIndicator());
           }
           if (!snapshot.hasData || !snapshot.data!.exists) {
-            return const Center(child: Text("No user data found"));
+            return Center(child: Text(loc.noUserDataFound));
           }
 
           final userData = snapshot.data!.data() as Map<String, dynamic>;
@@ -96,7 +96,7 @@ class Profilescreen extends StatelessWidget {
                   children: [
                     ProfileCard(
                       icon: Icons.account_circle,
-                      text: "Edit Profile",
+                      text: loc.editProfile,
                       color: Colors.purple,
                       onTap: () {
                         Navigator.pushNamed(context, '/editprofile');
@@ -123,7 +123,7 @@ class Profilescreen extends StatelessWidget {
                     const SizedBox(height: 10),
                     ProfileCard(
                       icon: Icons.help_outline_outlined,
-                      text: "Help",
+                      text: loc.help,
                       color: Color.fromARGB(255, 33, 130, 240),
                       onTap: () {
                         Navigator.pushNamed(context, '/help');

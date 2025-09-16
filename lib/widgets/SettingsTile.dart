@@ -24,7 +24,7 @@ class SettingsTile extends StatelessWidget {
       child: ListTile(
         leading: avatar != null
             ? CircleAvatar(radius: 20, backgroundImage: avatar)
-            : (icon != null ? Icon(icon, color: Colors.black) : null),
+            : (icon != null ? Icon(icon, ) : null),
         title: Text(text, style: TextStyle(fontWeight: FontWeight.bold)),
         subtitle: subtext != null
             ? Text(subtext!, style: TextStyle(color: Colors.grey))

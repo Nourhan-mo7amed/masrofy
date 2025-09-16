@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:masrofy/models/user_model.dart';
+import 'package:masrofy/l10n/app_localizations.dart';
 import '../../widgets/TextFieldProfile.dart';
 
 class EditProfileScreen extends StatefulWidget {
@@ -40,12 +41,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   }
 
   void saveProfile() async {
+    final loc = AppLocalizations.of(context)!;
+
     if (nameController.text.isEmpty ||
         emailController.text.isEmpty ||
         amountController.text.isEmpty) {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text("Please fill all fields")));
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(loc.fillAllFields)),
+      );
       return;
     }
 
@@ -61,18 +64,21 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         .doc(updatedUser.uid)
         .update(updatedUser.toJson());
 
-    ScaffoldMessenger.of(
-      context,
-    ).showSnackBar(SnackBar(content: Text("Profile updated successfully")));
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(loc.profileUpdated)),
+    );
+    Navigator.pop(context);
   }
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Edit profile",
-          style: TextStyle(color: Colors.black, fontWeight: FontWeight.w600),
+          loc.editProfile,
+          style: TextStyle(fontWeight: FontWeight.w600),
         ),
         centerTitle: true,
       ),
@@ -108,15 +114,19 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             ),
             SizedBox(height: 30),
             TextFieldProfile(
-              label: "Full name",
+              label: loc.fullName,
               hint: "puerto Rico",
               controller: nameController,
+              fillColor: Colors.grey,
+              textColor: Colors.black,
             ),
             SizedBox(height: 20),
             TextFieldProfile(
-              label: "e-mail",
+              label: loc.email,
               hint: "youremail@domain.com",
               controller: emailController,
+              fillColor: Colors.grey,
+              textColor: Colors.black,
             ),
             SizedBox(height: 20),
             Row(
@@ -136,9 +146,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       });
                     },
                     decoration: InputDecoration(
-                      labelText: "Change currency",
-                      filled: true,
-                      fillColor: Colors.grey[200],
+                      labelText: loc.changeCurrency,
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8),
                       ),
@@ -149,9 +157,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 Expanded(
                   flex: 1,
                   child: TextFieldProfile(
-                    label: "Change amount",
+                    label: loc.changeAmount,
                     hint: "3000 EGP",
                     controller: amountController,
+                    fillColor: Colors.grey,
+                    textColor: Colors.black,
                   ),
                 ),
               ],
@@ -169,7 +179,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 ),
                 onPressed: saveProfile,
                 child: Text(
-                  "Save",
+                  loc.save,
                   style: TextStyle(fontSize: 16, color: Colors.white),
                 ),
               ),

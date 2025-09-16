@@ -72,7 +72,7 @@ class CustomSingleChildScrollViewHome extends StatelessWidget {
                 icon: Icon(
                   Icons.smart_toy_outlined,
                   size: 35,
-                  color: Colors.black,
+                  
                 ),
                 onPressed: () {
                   if (ChatBotScreen.isCompleted) {

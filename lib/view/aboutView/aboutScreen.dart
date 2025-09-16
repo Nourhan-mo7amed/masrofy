@@ -13,7 +13,7 @@ class AboutScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           loc.aboutUs,
-          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+          style: TextStyle( fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
         elevation: 0,
@@ -62,7 +62,7 @@ class AboutScreen extends StatelessWidget {
             ),
             SizedBox(height: 8),
             Text(
-              "Developed By: [Your Name / Your Team]",
+              "Developed By: [GDG Group 6]",
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
             ),
           ],

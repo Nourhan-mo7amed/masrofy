@@ -17,7 +17,6 @@ class TransportsExpenseitem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: Colors.white,
       elevation: 0,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       margin: EdgeInsets.symmetric(vertical: 8),
@@ -26,7 +25,6 @@ class TransportsExpenseitem extends StatelessWidget {
           width: 40,
           height: 40,
           decoration: BoxDecoration(
-            color: Colors.grey.shade50,
             borderRadius: BorderRadius.circular(8),
           ),
           child: Icon(Icons.attach_money, color: Colors.grey, size: 22),

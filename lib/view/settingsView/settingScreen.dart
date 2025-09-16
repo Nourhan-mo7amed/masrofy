@@ -32,7 +32,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
           SettingsTile(
             icon: Icons.person_outline,
             text: loc.account, // 👈 الحساب
-            onTap: () {},
+            onTap: () {
+               Navigator.pushNamed(context, '/editprofile');
+            },
           ),
           Divider(thickness: 1),
 

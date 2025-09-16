@@ -544,4 +544,96 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get aboutMission =>
       "نجعل إدارة الأموال بسيطة وواضحة وخالية من التوتر للجميع.";
+
+  // رسائل الخطأ والنجاح
+  String get error => "حدث خطأ";
+  String get incorrectCurrentPassword => "كلمة المرور الحالية غير صحيحة";
+  String get noUserLoggedIn => "لا يوجد مستخدم مسجل الدخول";
+  String get passwordChangedSuccessfully => "تم تغيير كلمة المرور بنجاح!";
+  String get weakPassword => "كلمة المرور الجديدة ضعيفة جدًا";
+
+  @override
+  String get editProfile => "تعديل الملف الشخصي";
+
+  @override
+  String get noUserDataFound => "لم يتم العثور على بيانات المستخدم";
+
+  @override
+  String get changeAmount => "تغيير المبلغ";
+
+  @override
+  String? get changeCurrency => "تغيير العملة";
+
+  @override
+  String get fillAllFields => "يرجى ملء جميع الحقول";
+
+  @override
+  String get profileUpdated => "تم تحديث الملف الشخصي بنجاح";
+
+  @override
+  String get contactUs => "تواصل معنا";
+
+  @override
+  String get faqAddExpenseQuestion => "كيف يمكنني إضافة مصروف جديد؟";
+  @override
+  String get faqAddExpenseAnswer =>
+      "من الشاشة الرئيسية، اضغط على زر + وأدخل التفاصيل (المبلغ، الفئة، التاريخ).";
+
+  @override
+  String get faqEditDeleteQuestion => "هل يمكنني تعديل أو حذف مصروف؟";
+  @override
+  String get faqEditDeleteAnswer =>
+      "نعم، اضغط ضغطة طويلة على المصروف من القائمة للتعديل أو الحذف.";
+
+  @override
+  String get faqSetBudgetQuestion => "كيف أحدد ميزانية شهرية؟";
+  @override
+  String get faqSetBudgetAnswer =>
+      "اذهب إلى تبويب 'الميزانية' وحدد المبلغ المستهدف للشهر والفئات التي تريد تتبعها.";
+
+  @override
+  String get faqReportsQuestion => "هل يوفر التطبيق تقارير أو إحصائيات؟";
+  @override
+  String get faqReportsAnswer =>
+      "نعم، يمكنك عرض الرسوم البيانية والتقارير الشهرية لتتبع عادات إنفاقك.";
+
+  @override
+  String get faqChangeCurrencyLanguageQuestion =>
+      "كيف يمكنني تغيير العملة أو اللغة؟";
+  @override
+  String get faqChangeCurrencyLanguageAnswer =>
+      "يمكنك تغيير العملة (EGP، USD، EUR، إلخ) واللغة من قائمة الإعدادات.";
+
+  @override
+  String get helpCenter => "مركز المساعدة";
+
+  @override
+  String get contactCustomerService => "خدمة العملاء";
+  @override
+  String get contactCustomerServiceDetails =>
+      "الهاتف : +1 555 123 4567\nالبريد الإلكتروني : support@masrofy.com\nساعات العمل : 9:00 ص – 6:00 م";
+
+  @override
+  String get contactWebsite => "الموقع الإلكتروني";
+  @override
+  String get contactWebsiteDetails =>
+      "تفضل بزيارتنا : www.masrofy.com\nنموذج الاتصال : www.masrofy.com/contact";
+
+  @override
+  String get contactWhatsapp => "واتساب";
+  @override
+  String get contactWhatsappDetails =>
+      "تحدث معنا : +1 555 987 6543\nمتاح : 10:00 ص – 8:00 م";
+
+  @override
+  String get contactFacebook => "فيسبوك";
+  @override
+  String get contactFacebookDetails =>
+      "الصفحة : facebook.com/masrofyapp\nالرسائل : m.me/masrofyapp";
+
+  @override
+  String get contactInstagram => "إنستجرام";
+  @override
+  String get contactInstagramDetails =>
+      "تابعنا : instagram.com/masrofyapp\nراسلنا للدعم";
 }

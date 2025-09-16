@@ -19,14 +19,14 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
   final ChatUser _user = ChatUser(
     id: "1",
     firstName: "You",
-    profileImage: "https://i.pravatar.cc/150?img=3", // صورة افتراضية لليوزر
+    profileImage: null,
   );
 
   final ChatUser _bot = ChatUser(
     id: "2",
     firstName: "Bot",
     profileImage:
-        "https://cdn-icons-png.flaticon.com/512/4712/4712027.png", // أيقونة روبوت
+        null,
   );
 
   final List<String> _questions = [
@@ -81,19 +81,20 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
+        title: Text(
           "Chat Bot",
-          style: TextStyle(fontWeight: FontWeight.bold),
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+          ),
         ),
         centerTitle: true,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.pushNamed(context, '/home');
-          },
-        ),
+        backgroundColor: isDark ? Colors.grey[900] : Colors.white,
+        elevation: 1,
       ),
       body: DashChat3(
         currentUser: _user,
@@ -103,9 +104,9 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
         /// Bubble Style
         messageOptions: MessageOptions(
           showTime: true,
-          currentUserContainerColor: Colors.blue[400]!,
-          containerColor: Colors.grey[300]!,
-          textColor: Colors.black,
+          currentUserContainerColor:
+              isDark ? Colors.blueAccent[700]! : Colors.blue[400]!,
+          containerColor: isDark ? Colors.grey[800]! : Colors.grey[300]!,
           currentUserTextColor: Colors.white,
         ),
 
@@ -116,17 +117,17 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
             return Center(
               child: Container(
                 margin: const EdgeInsets.symmetric(vertical: 8),
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 12,
-                  vertical: 4,
-                ),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                 decoration: BoxDecoration(
-                  color: Colors.grey[300],
+                  color: isDark ? Colors.grey[700] : Colors.grey[300],
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Text(
                   DateFormat('EEEE, MMM d, yyyy').format(date),
-                  style: const TextStyle(color: Colors.black54, fontSize: 12),
+                  style: TextStyle(
+                    fontSize: 12,
+                  ),
                 ),
               ),
             );

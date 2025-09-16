@@ -20,14 +20,13 @@ class LogoutDialog extends StatelessWidget {
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
-                color: Colors.black,
               ),
             ),
             SizedBox(height: 10),
             Text(
               "Are you sure you want to log out? \n you'll "
               "need to login again to use the app",
-              style: TextStyle(fontSize: 14, color: Colors.black87),
+              style: TextStyle(fontSize: 14,),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 20),

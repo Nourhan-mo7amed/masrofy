@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:masrofy/l10n/app_localizations.dart';
 import '../../widgets/tabbuttonhelp.dart';
 import '../../widgets/FAQTab.dart';
 import '../../widgets/ContactTab.dart';
@@ -15,11 +16,13 @@ class _HelpScreenState extends State<HelpScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Help Center",
-          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+          loc.helpCenter,
+          style: TextStyle(fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
       ),
@@ -34,7 +37,7 @@ class _HelpScreenState extends State<HelpScreen> {
                 children: [
                   Expanded(
                     child: TabButtonhelp(
-                      text: "FAQ",
+                      text: loc.faq,
                       isSelected: selectedTab == 0,
                       onTap: () {
                         setState(() {
@@ -46,7 +49,7 @@ class _HelpScreenState extends State<HelpScreen> {
                   SizedBox(width: 10),
                   Expanded(
                     child: TabButtonhelp(
-                      text: "Contact Us",
+                      text: loc.contactUs,
                       isSelected: selectedTab == 1,
                       onTap: () {
                         setState(() {

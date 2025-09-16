@@ -1,54 +1,41 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:masrofy/l10n/app_localizations.dart';
 
 class ContactTab extends StatelessWidget {
   const ContactTab({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
+
     final contacts = [
       {
         "icon": Icon(Icons.headset_mic, color: Color(0xFF6C63FF)),
-        "title": "Customer Service",
-        "details": '''
-Phone : +1 555 123 4567
-Email : support@masrofy.com
-Working Hours : 9:00 AM – 6:00 PM
-''',
+        "title": loc.contactCustomerService,
+        "details": loc.contactCustomerServiceDetails,
       },
       {
         "icon": Icon(Icons.language, color: Color(0xFF6C63FF)),
-        "title": "Website",
-        "details": '''
-Visit us : www.masrofy.com
-Contact Form : www.masrofy.com/contact
-''',
+        "title": loc.contactWebsite,
+        "details": loc.contactWebsiteDetails,
       },
       {
-        "icon": FaIcon(FontAwesomeIcons.whatsapp, color: Color(0xFF6C63FF)),
-        "title": "Whatsapp",
-        "details": '''
-Chat with us : +1 555 987 6543
-Available : 10:00 AM – 8:00 PM 
-''',
+        "icon": Icon(Icons.phone, color: Color(0xFF6C63FF)),
+        "title": loc.contactWhatsapp,
+        "details": loc.contactWhatsappDetails,
       },
       {
-        "icon": FaIcon(FontAwesomeIcons.facebook, color: Color(0xFF6C63FF)),
-        "title": "Facebook",
-        "details": '''
-Page : facebook.com/masrofyapp
-Messenger : m.me/masrofyapp
-''',
+        "icon": Icon(Icons.facebook, color: Color(0xFF6C63FF)),
+        "title": loc.contactFacebook,
+        "details": loc.contactFacebookDetails,
       },
       {
-        "icon": FaIcon(FontAwesomeIcons.instagram, color: Color(0xFF6C63FF)),
-        "title": "Instagram",
-        "details": '''
-Follow us : instagram.com/masrofyapp
-DM us for support
-''',
+        "icon": Icon(Icons.camera_alt_rounded, color: Color(0xFF6C63FF)),
+        "title": loc.contactInstagram,
+        "details": loc.contactInstagramDetails,
       },
     ];
+
     return ListView.builder(
       padding: EdgeInsets.all(16),
       itemCount: contacts.length,
@@ -75,7 +62,6 @@ DM us for support
                 ),
               ],
             ),
-
             SizedBox(height: 12),
           ],
         );

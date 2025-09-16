@@ -9,7 +9,7 @@ class TextFieldProfile extends StatelessWidget {
     super.key,
     required this.label,
     required this.hint,
-    required this.controller,
+    required this.controller, required Color fillColor, required Color textColor,
   });
 
   @override
@@ -20,9 +20,7 @@ class TextFieldProfile extends StatelessWidget {
         labelText: label,
         hintText: hint,
         floatingLabelBehavior: FloatingLabelBehavior.always,
-        hintStyle: const TextStyle(color: Colors.grey),
-        filled: true,
-        fillColor: Colors.grey[200],
+
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
         ),
