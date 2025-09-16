@@ -1,5 +1,5 @@
+import 'package:dash_chat_3/dash_chat_3.dart';
 import 'package:flutter/material.dart';
-import 'package:dash_chat_2/dash_chat_2.dart';
 
 class ReportScreen extends StatelessWidget {
   final List<ChatMessage> answers;
@@ -14,7 +14,10 @@ class ReportScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Financial Report",style: TextStyle(fontWeight: FontWeight.bold)),
+        title: Text(
+          "Financial Report",
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
         centerTitle: true,
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
@@ -68,7 +71,7 @@ class ReportScreen extends StatelessWidget {
       ),
     );
   }
-  
+
   String _getUserAnswer(int questionIndex) {
     final userAnswers = answers
         .where((msg) => msg.user.firstName == "You")

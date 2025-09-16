@@ -1,7 +1,6 @@
+import 'package:dash_chat_3/dash_chat_3.dart';
 import 'package:flutter/material.dart';
-import 'package:dash_chat_2/dash_chat_2.dart';
 import 'package:intl/intl.dart';
-import '../../view/reportView/reportScreen.dart';
 
 class ChatBotScreen extends StatefulWidget {
   const ChatBotScreen({super.key});
@@ -15,8 +14,20 @@ class ChatBotScreen extends StatefulWidget {
 
 class _ChatBotScreenState extends State<ChatBotScreen> {
   final List<ChatMessage> _messages = [];
-  final ChatUser _user = ChatUser(id: "1", firstName: "You");
-  final ChatUser _bot = ChatUser(id: "2", firstName: "Bot");
+
+  /// تعريف اليوزر والبوت
+  final ChatUser _user = ChatUser(
+    id: "1",
+    firstName: "You",
+    profileImage: "https://i.pravatar.cc/150?img=3", // صورة افتراضية لليوزر
+  );
+
+  final ChatUser _bot = ChatUser(
+    id: "2",
+    firstName: "Bot",
+    profileImage:
+        "https://cdn-icons-png.flaticon.com/512/4712/4712027.png", // أيقونة روبوت
+  );
 
   final List<String> _questions = [
     "What's your average monthly spending?",
@@ -29,7 +40,7 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(Duration(milliseconds: 500), () {
+    Future.delayed(const Duration(milliseconds: 500), () {
       _sendBotMessage(_questions[_currentQuestion]);
     });
   }
@@ -52,15 +63,15 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
 
     if (_currentQuestion < _questions.length - 1) {
       _currentQuestion++;
-      Future.delayed(Duration(milliseconds: 500), () {
+      Future.delayed(const Duration(milliseconds: 500), () {
         _sendBotMessage(_questions[_currentQuestion]);
       });
     } else {
-      Future.delayed(Duration(milliseconds: 500), () {
+      Future.delayed(const Duration(milliseconds: 500), () {
         _sendBotMessage("You have answered all questions!");
       });
 
-      Future.delayed(Duration(seconds: 1), () {
+      Future.delayed(const Duration(seconds: 1), () {
         ChatBotScreen.isCompleted = true;
         ChatBotScreen.answers = _messages;
         Navigator.pushNamed(context, '/report', arguments: _messages);
@@ -72,32 +83,50 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Chat Bot", style: TextStyle(fontWeight: FontWeight.bold)),
+        title: const Text(
+          "Chat Bot",
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
         centerTitle: true,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () {
             Navigator.pushNamed(context, '/home');
           },
         ),
       ),
-      body: DashChat(
+      body: DashChat3(
         currentUser: _user,
         messages: _messages,
         onSend: _onSend,
+
+        /// Bubble Style
         messageOptions: MessageOptions(
           showTime: true,
-          timeFormat: DateFormat('hh:mm a'),
+          currentUserContainerColor: Colors.blue[400]!,
+          containerColor: Colors.grey[300]!,
+          textColor: Colors.black,
+          currentUserTextColor: Colors.white,
         ),
+
+        /// Date Separator
         messageListOptions: MessageListOptions(
           showDateSeparator: true,
           dateSeparatorBuilder: (date) {
             return Center(
-              child: Text(
-                DateFormat('EEEE, MMM d, yyyy').format(date),
-                style: const TextStyle(
-                  color: Colors.grey,
-                  fontWeight: FontWeight.bold,
+              child: Container(
+                margin: const EdgeInsets.symmetric(vertical: 8),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 4,
+                ),
+                decoration: BoxDecoration(
+                  color: Colors.grey[300],
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Text(
+                  DateFormat('EEEE, MMM d, yyyy').format(date),
+                  style: const TextStyle(color: Colors.black54, fontSize: 12),
                 ),
               ),
             );

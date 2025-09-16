@@ -3,9 +3,8 @@ import 'package:masrofy/repositories/auth_repsitories.dart';
 import 'package:masrofy/l10n/app_localizations.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
+import 'package:masrofy/widgets/LogoutDialog.dart';
 import '../../widgets/profilecard.dart';
-import '../../widgets/LogoutDialog.dart';
 
 class Profilescreen extends StatelessWidget {
   const Profilescreen({super.key});
@@ -15,7 +14,7 @@ class Profilescreen extends StatelessWidget {
       context: context,
       barrierDismissible: false,
       builder: (context) {
-        return LogoutBottomSheet(
+        return LogoutDialog(
           onConfirm: () async {
             await AuthRepository().signOut();
             Navigator.pushNamedAndRemoveUntil(
@@ -134,7 +133,7 @@ class Profilescreen extends StatelessWidget {
                       icon: Icons.logout,
                       text: loc.logout,
                       color: const Color(0xFFFF0000),
-                      onTap: () => _showLogoutSheet(context),
+                      onTap: () => _showLogoutDialog(context),
                     ),
                     const SizedBox(height: 20),
                   ],

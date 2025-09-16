@@ -445,4 +445,103 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get confirmLogout => "نعم، تسجيل الخروج";
+  @override
+  String get passwordManager => 'مدير كلمات المرور';
+
+  @override
+  String get feedback => 'ملاحظات';
+
+  @override
+  String get aboutUs => 'من نحن';
+
+  @override
+  String get currentPassword => 'كلمة المرور الحالية';
+
+  @override
+  String get newPassword => 'كلمة المرور الجديدة';
+
+  @override
+  String get changePassword => 'تغيير كلمة المرور';
+
+  @override
+  String get experienceFinished => "لقد انتهت تجربتك.";
+
+  @override
+  String get rateApp => "كيف تقيم التطبيق؟";
+
+  @override
+  String get whatDidYouLike => "ما الذي أعجبك فيه؟";
+
+  @override
+  String get whatCouldBeImproved => "ما الذي يمكن تحسينه؟";
+
+  @override
+  String get anythingElse => "أي شيء آخر؟";
+
+  @override
+  String get tellUsEverything => "أخبرنا بكل شيء.";
+
+  @override
+  String get submit => "إرسال";
+
+  // Options
+  @override
+  String get easyToUse => "سهل الاستخدام";
+
+  @override
+  String get complete => "كامل";
+
+  @override
+  String get helpful => "مفيد";
+
+  @override
+  String get convenient => "مريح";
+
+  @override
+  String get looksGood => "يبدو جيدًا";
+
+  @override
+  String get moreComponents => "يمكن أن يحتوي على مكونات أكثر";
+
+  @override
+  String get complex => "معقد";
+
+  @override
+  String get notInteractive => "غير تفاعلي";
+
+  @override
+  String get onlyEnglish => "اللغة الإنجليزية فقط";
+  // AboutScreen
+
+  @override
+  String get ourMission => 'مهمتنا';
+
+  @override
+  String get version => 'الإصدار';
+
+  @override
+  String get developedBy => 'تم تطويره بواسطة';
+
+  @override
+  String get trackExpenses => 'تتبع مصروفاتك اليومية بسهولة وسرعة.';
+
+  @override
+  String get manageBudget =>
+      'قم بتحديد وإدارة ميزانيتك الشهرية لتحقيق أهدافك المالية.';
+
+  @override
+  String get viewReports => 'عرض تقارير ورسوم بيانية مفصلة لفهم عادات إنفاقك.';
+
+  @override
+  String get smartReminders =>
+      'الحصول على تذكيرات ذكية للبقاء على المسار الصحيح مع مصروفاتك.';
+
+  @override
+  String get multiCurrencySupport => 'دعم لعدة عملات (EGP, USD, EUR، والمزيد).';
+  String get aboutDescription =>
+      "تطبيق مصروفي لإدارة الأموال يساعدك على التحكم في أموالك.\n"
+      "مع مصروفي، يمكنك:";
+  @override
+  String get aboutMission =>
+      "نجعل إدارة الأموال بسيطة وواضحة وخالية من التوتر للجميع.";
 }

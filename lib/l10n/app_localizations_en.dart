@@ -441,4 +441,106 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get confirmLogout => "Yes, Logout";
+  @override
+  String get passwordManager => 'Password Manager';
+
+  @override
+  String get feedback => 'Feedback';
+
+  @override
+  String get aboutUs => 'About us';
+  @override
+  @override
+  String get currentPassword => 'Current Password';
+  @override
+  String get newPassword => 'New Password';
+
+  @override
+  String get changePassword => 'Change Password';
+
+  @override
+  String get experienceFinished => "Your Experience is finished.";
+
+  @override
+  String get rateApp => "How would you rate the app?";
+
+  @override
+  String get whatDidYouLike => "What did you like about it?";
+
+  @override
+  String get whatCouldBeImproved => "What could be improved?";
+
+  @override
+  String get anythingElse => "Anything else?";
+
+  @override
+  String get tellUsEverything => "Tell us everything.";
+
+  @override
+  String get submit => "Submit";
+
+  // Options
+  @override
+  String get easyToUse => "Easy to use";
+
+  @override
+  String get complete => "Complete";
+
+  @override
+  String get helpful => "Helpful";
+
+  @override
+  String get convenient => "Convenient";
+
+  @override
+  String get looksGood => "Looks good";
+
+  @override
+  String get moreComponents => "Could have more components";
+
+  @override
+  String get complex => "Complex";
+
+  @override
+  String get notInteractive => "Not interactive";
+
+  @override
+  String get onlyEnglish => "Only English";
+
+  // AboutScreen
+
+  @override
+  String get ourMission => 'Our Mission';
+
+  @override
+  String get version => 'Version';
+
+  @override
+  String get developedBy => 'Developed By';
+
+  @override
+  String get trackExpenses => 'Track your daily expenses easily and quickly.';
+
+  @override
+  String get manageBudget =>
+      'Set and manage your monthly budget to reach your financial goals.';
+
+  @override
+  String get viewReports =>
+      'View detailed reports and charts to understand your spending habits.';
+
+  @override
+  String get smartReminders =>
+      'Get smart reminders to stay on track with your expenses.';
+
+  @override
+  String get multiCurrencySupport =>
+      'Support for multiple currencies (EGP, USD, EUR, and more).';
+  @override
+  String get aboutDescription =>
+      "Masrofy is a personal finance management app designed to help you stay in control of your money.\n"
+      "With Masrofy, You Can:";
+  @override
+  String get aboutMission =>
+      "To make money management simple, clear, and stress-free for everyone.";
 }

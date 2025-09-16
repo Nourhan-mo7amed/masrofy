@@ -1,4 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:masrofy/models/user_model.dart';
 import '../../widgets/TextFieldProfile.dart';
 
 class EditProfileScreen extends StatefulWidget {
@@ -14,6 +17,54 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   final TextEditingController amountController = TextEditingController();
 
   String selectedCurrency = "EGP";
+  UserModel? currentUser;
+
+  void loadUser() async {
+    final doc = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .get();
+
+    if (doc.exists) {
+      currentUser = UserModel.fromJson(doc.data()!);
+      nameController.text = currentUser!.name;
+      emailController.text = currentUser!.email;
+      setState(() {});
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    loadUser();
+  }
+
+  void saveProfile() async {
+    if (nameController.text.isEmpty ||
+        emailController.text.isEmpty ||
+        amountController.text.isEmpty) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text("Please fill all fields")));
+      return;
+    }
+
+    UserModel updatedUser = UserModel(
+      uid: FirebaseAuth.instance.currentUser!.uid,
+      name: nameController.text,
+      email: emailController.text,
+      photoUrl: currentUser?.photoUrl,
+    );
+
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(updatedUser.uid)
+        .update(updatedUser.toJson());
+
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(SnackBar(content: Text("Profile updated successfully")));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -116,7 +167,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     borderRadius: BorderRadius.circular(19),
                   ),
                 ),
-                onPressed: () {},
+                onPressed: saveProfile,
                 child: Text(
                   "Save",
                   style: TextStyle(fontSize: 16, color: Colors.white),

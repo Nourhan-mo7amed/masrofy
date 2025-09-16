@@ -34,6 +34,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
             text: loc.account, // 👈 الحساب
             onTap: () {},
           ),
+          Divider(thickness: 1),
+
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            child: Text(
+              loc.settings, // 👈 ترجمها من الـ l10n
+              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            ),
+          ),
 
           SettingsSwitchTile(
             icon: Icons.notifications_none_outlined,
@@ -43,45 +52,48 @@ class _SettingsScreenState extends State<SettingsScreen> {
               setState(() => notifications = val);
             },
           ),
-
-          SwitchListTile(
-            secondary: const Icon(Icons.dark_mode_outlined),
-            title: Text(loc.darkMode), // 👈 الوضع المظلم
+          SizedBox(height: 5),
+          SettingsSwitchTile(
+            icon: Icons.dark_mode_outlined,
+            text: loc.darkMode, // 👈 الإشعارات
             value: viewModel.settings.darkMode,
             onChanged: (val) {
               viewModel.toggleDarkMode(val);
             },
           ),
+          // SwitchListTile(
+          //   secondary: const Icon(Icons.dark_mode_outlined),
+          //   title: Text(loc.darkMode), // 👈 الوضع المظلم
+          //   value: viewModel.settings.darkMode,
+          //   onChanged: (val) {
+          //     viewModel.toggleDarkMode(val);
+          //   },
+          // ),
           SizedBox(height: 5),
 
-          SwitchListTile(
-            secondary: const Icon(Icons.language_outlined),
-            title: Text(loc.language), // 👈 اللغة
-            subtitle: Text(
-              selectedLanguage == "English" ? loc.english : loc.arabic,
+          Card(
+            elevation: 0,
+            child: SwitchListTile(
+              secondary: const Icon(Icons.language_outlined),
+              title: Text(loc.language), // 👈 اللغة
+              subtitle: Text(
+                selectedLanguage == "English" ? loc.english : loc.arabic,
+              ),
+              value: selectedLanguage == "English",
+              onChanged: (val) {
+                setState(() {
+                  selectedLanguage = val ? "English" : "Arabic";
+                });
+                viewModel.changeLanguage(selectedLanguage);
+              },
             ),
-            value: selectedLanguage == "English",
-            onChanged: (val) {
-              setState(() {
-                selectedLanguage = val ? "English" : "Arabic";
-              });
-              viewModel.changeLanguage(selectedLanguage);
-            },
           ),
 
           const SizedBox(height: 32),
-
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            child: Text(
-              loc.supportTitle, // 👈 الدعم
-              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-            ),
-          ),
           SizedBox(height: 5),
           SettingsTile(
             icon: Icons.key_sharp,
-            text: "Password Manager",
+            text: loc.passwordManager, // 👈 مدير كلمات المرور
             onTap: () {
               Navigator.pushNamed(context, '/passwordManager');
             },
@@ -89,7 +101,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           SizedBox(height: 5),
           SettingsTile(
             icon: Icons.feedback_outlined,
-            text: "Feedback",
+            text: loc.feedback, // 👈 الملاحظات",
             onTap: () {
               Navigator.pushNamed(context, '/feedback');
             },
@@ -97,7 +109,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           SizedBox(height: 5),
           SettingsTile(
             icon: Icons.info_outline,
-            text: "About us",
+            text: loc.aboutUs, // 👈 حول التطبي ق
             onTap: () {
               Navigator.pushNamed(context, '/about');
             },

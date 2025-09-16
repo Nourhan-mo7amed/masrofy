@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:masrofy/l10n/app_localizations.dart';
 import '../../widgets/AboutItem.dart';
 
 class AboutScreen extends StatelessWidget {
@@ -6,10 +7,12 @@ class AboutScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "About",
+          loc.aboutUs,
           style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
@@ -21,13 +24,12 @@ class AboutScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Masrofy",
+              loc.appName,
               style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 8),
             Text(
-              "Masrofy is a personal finance management app designed to help you stay in control of your money.\n"
-              "With Masrofy, You Can :",
+              loc.aboutDescription,
               style: TextStyle(
                 fontSize: 15,
                 height: 1.5,
@@ -37,40 +39,25 @@ class AboutScreen extends StatelessWidget {
             SizedBox(height: 16),
             AboutItem(
               icon: Icons.account_balance_wallet,
-              text: "Track your daily expenses easily and quickly.",
+              text: loc.trackExpenses,
             ),
-            AboutItem(
-              icon: Icons.bar_chart,
-              text:
-                  "Set and manage your monthly budget to reach your financial goals.",
-            ),
-            AboutItem(
-              icon: Icons.show_chart,
-              text:
-                  "View detailed reports and charts to understand your spending habits.",
-            ),
-            AboutItem(
-              icon: Icons.notifications,
-              text: "Get smart reminders to stay on track with your expenses.",
-            ),
-            AboutItem(
-              icon: Icons.public,
-              text:
-                  "Support for multiple currencies (EGP, USD, EUR, and more).",
-            ),
+            AboutItem(icon: Icons.bar_chart, text: loc.manageBudget),
+            AboutItem(icon: Icons.show_chart, text: loc.viewReports),
+            AboutItem(icon: Icons.notifications, text: loc.smartReminders),
+            AboutItem(icon: Icons.public, text: loc.multiCurrencySupport),
             SizedBox(height: 20),
             Text(
-              "Our Mission :",
+              loc.ourMission,
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
             ),
             SizedBox(height: 4),
             Text(
-              "To make money management simple, clear, and stress-free for everyone.",
+              loc.aboutMission,
               style: TextStyle(height: 1.5, fontWeight: FontWeight.w500),
             ),
             SizedBox(height: 20),
             Text(
-              "Version: 1.0.0",
+              loc.version,
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
             ),
             SizedBox(height: 8),

@@ -62,7 +62,8 @@ import 'app_localizations_en.dart';
 /// be consistent with the languages listed in the AppLocalizations.supportedLocales
 /// property.
 abstract class AppLocalizations {
-  AppLocalizations(String locale) : localeName = intl.Intl.canonicalizedLocale(locale.toString());
+  AppLocalizations(String locale)
+    : localeName = intl.Intl.canonicalizedLocale(locale.toString());
 
   final String localeName;
 
@@ -70,7 +71,8 @@ abstract class AppLocalizations {
     return Localizations.of<AppLocalizations>(context, AppLocalizations);
   }
 
-  static const LocalizationsDelegate<AppLocalizations> delegate = _AppLocalizationsDelegate();
+  static const LocalizationsDelegate<AppLocalizations> delegate =
+      _AppLocalizationsDelegate();
 
   /// A list of this localizations delegate along with the default localizations
   /// delegates.
@@ -82,17 +84,18 @@ abstract class AppLocalizations {
   /// Additional delegates can be added by appending to this list in
   /// MaterialApp. This list does not have to be used at all if a custom list
   /// of delegates is preferred or required.
-  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates = <LocalizationsDelegate<dynamic>>[
-    delegate,
-    GlobalMaterialLocalizations.delegate,
-    GlobalCupertinoLocalizations.delegate,
-    GlobalWidgetsLocalizations.delegate,
-  ];
+  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates =
+      <LocalizationsDelegate<dynamic>>[
+        delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ];
 
   /// A list of this localizations delegate's supported locales.
   static const List<Locale> supportedLocales = <Locale>[
     Locale('ar'),
-    Locale('en')
+    Locale('en'),
   ];
 
   /// No description provided for @addExpense.
@@ -803,59 +806,124 @@ abstract class AppLocalizations {
   /// **'Subscriptions'**
   String get subscriptionsTitle;
 
-  String get statistics ;
+  String get statistics;
 
-  String get noStatistics ;
+  String get noStatistics;
 
-  String get other ;
+  String get other;
 
-  get spendingIn ;
+  get spendingIn;
 
-  String get home ;
+  String get home;
 
-  String get bills ;
+  String get bills;
 
-  String get transport ;
+  String get transport;
 
   String get userNotLoggedIn;
 
   String get noShoppingTransactions;
 
-  String get noBillsTransactions ;
+  String get noBillsTransactions;
 
-  String get noFoodTransactions ;
+  String get noFoodTransactions;
 
-  String get noTransportTransactions ;
+  String get noTransportTransactions;
 
-  String get darkMode ;
+  String get darkMode;
 
-  String? get notesHint ;
+  String? get notesHint;
 
-  String get failedToSaveExpense ;
+  String get failedToSaveExpense;
 
-  String get expenseAddedSuccessfully ;
+  String get expenseAddedSuccessfully;
 
-  String get selectCategory ;
+  String get selectCategory;
 
-  String get fillRequiredFields ;
+  String get fillRequiredFields;
 
-  String get amountHint ;
+  String get amountHint;
 
-  String get salaryHint ;
+  String get salaryHint;
 
   String get failedToSaveIncome;
 
   String get incomeAddedSuccessfully;
 
-  String get confirmLogout ;
+  String get confirmLogout;
 
-  String get cancel ;
+  String get cancel;
 
-  String get logoutConfirmation ;
+  String get logoutConfirmation;
 
+  String get passwordManager;
+
+  String get feedback;
+
+  String get aboutUs;
+
+  String get currentPassword;
+
+  String get newPassword;
+
+  String get changePassword;
+
+  String get experienceFinished;
+
+  String get rateApp;
+
+  String get whatDidYouLike;
+
+  String get whatCouldBeImproved;
+
+  String get anythingElse;
+
+  String get tellUsEverything;
+
+  String get submit;
+
+  // Options
+
+  String get easyToUse;
+
+  String get complete;
+
+  String get helpful;
+
+  String get convenient;
+
+  String get looksGood;
+
+  String get moreComponents;
+
+  String get complex;
+
+  String get notInteractive;
+
+  String get onlyEnglish;
+  // AboutScreen
+
+  String get ourMission;
+
+  String get version;
+
+  String get developedBy;
+
+  String get trackExpenses;
+
+  String get manageBudget;
+
+  String get viewReports;
+
+  String get smartReminders;
+
+  String get multiCurrencySupport;
+  String get aboutDescription;
+  String get aboutMission;
 }
 
-class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
+class _AppLocalizationsDelegate
+    extends LocalizationsDelegate<AppLocalizations> {
   const _AppLocalizationsDelegate();
 
   @override
@@ -864,25 +932,26 @@ class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> 
   }
 
   @override
-  bool isSupported(Locale locale) => <String>['ar', 'en'].contains(locale.languageCode);
+  bool isSupported(Locale locale) =>
+      <String>['ar', 'en'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_AppLocalizationsDelegate old) => false;
 }
 
 AppLocalizations lookupAppLocalizations(Locale locale) {
-
-
   // Lookup logic when only language code is specified.
   switch (locale.languageCode) {
-    case 'ar': return AppLocalizationsAr();
-    case 'en': return AppLocalizationsEn();
+    case 'ar':
+      return AppLocalizationsAr();
+    case 'en':
+      return AppLocalizationsEn();
   }
 
   throw FlutterError(
     'AppLocalizations.delegate failed to load unsupported locale "$locale". This is likely '
     'an issue with the localizations generation tool. Please file an issue '
     'on GitHub with a reproducible sample app and the gen-l10n configuration '
-    'that was used.'
+    'that was used.',
   );
 }

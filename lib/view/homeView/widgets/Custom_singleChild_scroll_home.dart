@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:masrofy/view/homeView/widgets/custom_home_page_card.dart';
 import 'package:masrofy/widgets/expenseItem.dart';
 import 'package:masrofy/l10n/app_localizations.dart';
+import '../../chatbotView/chatbotScreen.dart';
 
 class CustomSingleChildScrollViewHome extends StatelessWidget {
   const CustomSingleChildScrollViewHome({super.key, required this.context});
@@ -67,11 +68,31 @@ class CustomSingleChildScrollViewHome extends StatelessWidget {
                   ),
                 ),
               ),
+              IconButton(
+                icon: Icon(
+                  Icons.smart_toy_outlined,
+                  size: 35,
+                  color: Colors.black,
+                ),
+                onPressed: () {
+                  if (ChatBotScreen.isCompleted) {
+                    Navigator.pushNamed(
+                      context,
+                      '/report',
+                      arguments: ChatBotScreen.answers,
+                    );
+                  } else {
+                    Navigator.pushNamed(context, '/chatbot');
+                  }
+                },
+              ),
               CustomHomePageCard(),
               const SizedBox(height: 10),
               Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 10,
+                ),
                 child: Text(
                   loc.expense, // ✅ بدل Expense
                   style: const TextStyle(fontSize: 30),

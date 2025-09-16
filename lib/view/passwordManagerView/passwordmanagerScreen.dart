@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:masrofy/l10n/app_localizations.dart';
 import '../../widgets/PasswordField.dart';
 
 class PasswordManager extends StatefulWidget {
@@ -19,10 +20,12 @@ class _PasswordManagerState extends State<PasswordManager> {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Password Manager",
+          loc.passwordManager,
           style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
@@ -33,7 +36,7 @@ class _PasswordManagerState extends State<PasswordManager> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             PasswordField(
-              label: "Current Password",
+              label: loc.currentPassword,
               controller: currentPasswordController,
               obscureText: _obscureCurrent,
               onToggle: () {
@@ -47,14 +50,14 @@ class _PasswordManagerState extends State<PasswordManager> {
               child: TextButton(
                 onPressed: () {},
                 child: Text(
-                  "Forgot password?",
+                  loc.forgotPassword,
                   style: TextStyle(color: Color(0xFF6155F5)),
                 ),
               ),
             ),
             SizedBox(height: 10),
             PasswordField(
-              label: "New Password",
+              label: loc.newPassword,
               controller: newPasswordController,
               obscureText: _obscureNew,
               onToggle: () {
@@ -65,7 +68,7 @@ class _PasswordManagerState extends State<PasswordManager> {
             ),
             SizedBox(height: 20),
             PasswordField(
-              label: "Confirm New Password",
+              label: loc.confirmPassword,
               controller: confirmPasswordController,
               obscureText: _obscureConfirm,
               onToggle: () {
@@ -87,7 +90,7 @@ class _PasswordManagerState extends State<PasswordManager> {
                 ),
                 onPressed: () {},
                 child: Text(
-                  "Change Password",
+                  loc.changePassword,
                   style: TextStyle(fontSize: 16, color: Colors.white),
                 ),
               ),

@@ -16,14 +16,18 @@ class SettingsSwitchTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SwitchListTile(
-      secondary: Icon(icon),
-      title: Text(text),
-      value: value,
-      inactiveThumbColor: Colors.white,
-      activeTrackColor: Color(0xFF6155F5),
-      inactiveTrackColor: Colors.grey,
-      onChanged: onChanged,
+    return Card(
+      elevation: 0,
+
+      child: SwitchListTile(
+        secondary: Icon(icon),
+        title: Text(text),
+        value: value,
+        inactiveThumbColor: Colors.white,
+        activeTrackColor: Color(0xFF6155F5),
+        inactiveTrackColor: Colors.grey,
+        onChanged: onChanged,
+      ),
     );
   }
 }

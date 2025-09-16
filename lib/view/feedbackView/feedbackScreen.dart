@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:masrofy/l10n/app_localizations.dart';
 import '../../widgets/ChipsSection.dart';
 import '../../widgets/Ratingstar.dart';
 
@@ -15,44 +16,53 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
   List<String> improvementOptions = [];
   final TextEditingController feedbackController = TextEditingController();
 
-  final List<String> likedList = [
-    "Easy to use",
-    "Complete",
-    "Helpful",
-    "Convenient",
-    "Looks good",
-  ];
-
-  final List<String> improveList = [
-    "Could have more components",
-    "Complex",
-    "Not interactive",
-    "Only English",
-  ];
-
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
+
+    // ✅ lists now use localized strings
+    final List<String> likedList = [
+      loc.easyToUse,
+      loc.complete,
+      loc.helpful,
+      loc.convenient,
+      loc.looksGood,
+    ];
+
+    final List<String> improveList = [
+      loc.moreComponents,
+      loc.complex,
+      loc.notInteractive,
+      loc.onlyEnglish,
+    ];
+
     return Scaffold(
       appBar: AppBar(
-        title: Text("Feedback", style: TextStyle(fontWeight: FontWeight.bold)),
+        title: Text(
+          loc.feedback,
+          style: const TextStyle(fontWeight: FontWeight.bold),
+        ),
         centerTitle: true,
       ),
       body: Padding(
-        padding: EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Your Experience is finished.",
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                loc.experienceFinished,
+                style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-              SizedBox(height: 4),
+              const SizedBox(height: 4),
               Text(
-                "How would you rate the app?",
-                style: TextStyle(fontSize: 14, color: Colors.black54),
+                loc.rateApp,
+                style: const TextStyle(fontSize: 14, color: Colors.black54),
               ),
-              SizedBox(height: 12),
+              const SizedBox(height: 12),
               RatingStars(
                 rating: rating,
                 onRate: (value) {
@@ -60,9 +70,9 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                 },
               ),
 
-              SizedBox(height: 50),
+              const SizedBox(height: 50),
               ChipsSection(
-                title: "What did you like about it?",
+                title: loc.whatDidYouLike,
                 options: likedList,
                 selectedOptions: likedOptions,
                 onSelected: (item, val) {
@@ -76,10 +86,10 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                 },
               ),
 
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
 
               ChipsSection(
-                title: "What could be improved?",
+                title: loc.whatCouldBeImproved,
                 options: improveList,
                 selectedOptions: improvementOptions,
                 onSelected: (item, value) {
@@ -93,40 +103,45 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                 },
               ),
 
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
 
               Text(
-                "Anything else?",
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                loc.anythingElse,
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               TextField(
                 controller: feedbackController,
                 maxLines: 4,
                 decoration: InputDecoration(
-                  hintText: "Tell us everything.",
+                  hintText: loc.tellUsEverything,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
                   ),
                 ),
               ),
 
-              SizedBox(height: 30),
+              const SizedBox(height: 30),
 
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    // TODO: Handle submit action
+                  },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xFF6155F5),
+                    backgroundColor: const Color(0xFF6155F5),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30),
                     ),
-                    padding: EdgeInsets.symmetric(vertical: 14),
+                    padding: const EdgeInsets.symmetric(vertical: 14),
                   ),
                   child: Text(
-                    "Submit",
-                    style: TextStyle(fontSize: 16, color: Colors.white),
+                    loc.submit,
+                    style: const TextStyle(fontSize: 16, color: Colors.white),
                   ),
                 ),
               ),
