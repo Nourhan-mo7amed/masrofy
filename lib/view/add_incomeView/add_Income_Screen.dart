@@ -116,8 +116,10 @@ class _CustomIncomeFormFieldState extends State<CustomIncomeFormField> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(loc.incomeTitle,
-              style: const TextStyle(fontWeight: FontWeight.bold)), // ✅
+          Text(
+            loc.incomeTitle,
+            style: const TextStyle(fontWeight: FontWeight.bold),
+          ), // ✅
           const SizedBox(height: 10),
           TextField(
             controller: _titleController,
@@ -196,8 +198,10 @@ class _CustomIncomeFormFieldState extends State<CustomIncomeFormField> {
             ],
           ),
           const SizedBox(height: 20),
-          Text(loc.notes,
-              style: const TextStyle(fontWeight: FontWeight.bold)), // ✅
+          Text(
+            loc.notes,
+            style: const TextStyle(fontWeight: FontWeight.bold),
+          ), // ✅
           const SizedBox(height: 10),
           TextField(
             controller: _notesController,
@@ -223,13 +227,34 @@ class _CustomIncomeFormFieldState extends State<CustomIncomeFormField> {
               onPressed: _saveIncome,
               child: Text(
                 loc.save, // ✅
-                style:
-                    const TextStyle(fontSize: 16, fontWeight: FontWeight.bold,color: Colors.white),
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
               ),
             ),
           ),
         ],
       ),
     );
+  }
+
+  String _monthName(int month) {
+    const months = [
+      "january",
+      "february",
+      "march",
+      "april",
+      "may",
+      "june",
+      "july",
+      "august",
+      "september",
+      "october",
+      "november",
+      "december",
+    ];
+    return months[month - 1];
   }
 }

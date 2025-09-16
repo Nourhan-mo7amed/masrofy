@@ -52,6 +52,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               viewModel.toggleDarkMode(val);
             },
           ),
+          SizedBox(height: 5),
 
           SwitchListTile(
             secondary: const Icon(Icons.language_outlined),
@@ -77,10 +78,30 @@ class _SettingsScreenState extends State<SettingsScreen> {
               style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
           ),
-
-          SettingsTile(text: loc.support, onTap: () {}), // 👈 الدعم الفني
-          SettingsTile(text: loc.help, onTap: () {}), // 👈 المساعدة
-          SettingsTile(text: loc.faq, onTap: () {}), // 👈 الأسئلة الشائعة
+          SizedBox(height: 5),
+          SettingsTile(
+            icon: Icons.key_sharp,
+            text: "Password Manager",
+            onTap: () {
+              Navigator.pushNamed(context, '/passwordManager');
+            },
+          ),
+          SizedBox(height: 5),
+          SettingsTile(
+            icon: Icons.feedback_outlined,
+            text: "Feedback",
+            onTap: () {
+              Navigator.pushNamed(context, '/feedback');
+            },
+          ),
+          SizedBox(height: 5),
+          SettingsTile(
+            icon: Icons.info_outline,
+            text: "About us",
+            onTap: () {
+              Navigator.pushNamed(context, '/about');
+            },
+          ),
         ],
       ),
     );

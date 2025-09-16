@@ -3,12 +3,16 @@ import 'package:masrofy/l10n/app_localizations.dart';
 import 'package:masrofy/view/allTransactionView/widgets/custom_expeneses_listView.dart';
 import 'package:masrofy/view/allTransactionView/widgets/custom_income_listView.dart';
 import '../../widgets/tapButtom.dart';
+import '../../view/edittransactionView/EditTransactionScreen.dart';
+import '../../widgets/transaction_details_bottomsheet.dart';
 
 class AlltransactionScreen extends StatefulWidget {
   const AlltransactionScreen({super.key});
+
   @override
   _AlltransactionScreen createState() => _AlltransactionScreen();
 }
+
 class _AlltransactionScreen extends State<AlltransactionScreen> {
   bool selectedTab = false;
 
@@ -33,11 +37,11 @@ class _AlltransactionScreen extends State<AlltransactionScreen> {
           ),
         ),
       ),
-  //    backgroundColor: Colors.white,
+      //    backgroundColor: Colors.white,
       body: SafeArea(
         child: Column(
           children: [
-            const SizedBox(height: 20),
+            SizedBox(height: 20),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(
@@ -83,6 +87,3 @@ class _AlltransactionScreen extends State<AlltransactionScreen> {
     );
   }
 }
-
-
-

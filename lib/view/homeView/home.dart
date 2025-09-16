@@ -6,6 +6,7 @@ import '../../view/addView/addScreen.dart';
 import 'package:provider/provider.dart';
 import '../../view/allTransactionView/all_transactionScreen.dart';
 import '../../view/profileView/profileScreen.dart';
+import '../../view/chatbotView/chatbotScreen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

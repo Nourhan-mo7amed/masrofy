@@ -47,7 +47,7 @@ class AddScreen extends StatelessWidget {
                     },
                     child: Container(
                       padding: const EdgeInsets.all(20),
-                     margin: const EdgeInsetsDirectional.only(end: 8), 
+                      margin: const EdgeInsetsDirectional.only(end: 8),
                       decoration: BoxDecoration(
                         color: const Color.fromARGB(50, 209, 196, 233),
                         borderRadius: BorderRadius.circular(16),
@@ -76,7 +76,7 @@ class AddScreen extends StatelessWidget {
                     },
                     child: Container(
                       padding: const EdgeInsets.all(20),
-                      margin: const EdgeInsetsDirectional.only(end: 8), 
+                      margin: const EdgeInsetsDirectional.only(end: 8),
                       decoration: BoxDecoration(
                         color: const Color.fromARGB(50, 255, 224, 178),
                         borderRadius: BorderRadius.circular(16),

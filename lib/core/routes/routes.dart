@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:masrofy/view/billsView/billsScreen.dart';
+import 'package:dash_chat_2/dash_chat_2.dart';
 import '../../view/intro/splash_screen.dart';
 import '../../view/categoriesView/CategoriesScreen.dart';
 import '../../view/monthlyBudgetView/MonthlyBudget_Screen.dart';
@@ -20,6 +20,13 @@ import '../../view/foodView/foodscreen.dart';
 import '../../view/transportView/transportScreen.dart';
 import '../../view/privacypolicyView/privacypolicyScreen.dart';
 import '../../view/settingsView/settingScreen.dart';
+import '../../view/feedbackView/feedbackScreen.dart';
+import '../../view/editprofileView/editprofileScreen.dart';
+import '../../view/helpView/helpScreen.dart';
+import '../../view/aboutView/aboutScreen.dart';
+import '../../view/passwordManagerView/passwordmanagerScreen.dart';
+import '../../view/chatbotView/chatbotScreen.dart';
+import '../../view/reportView/reportScreen.dart';
 
 class AppRoutes {
   static const String splash = '/';
@@ -43,6 +50,13 @@ class AppRoutes {
   static const String transport = '/transport';
   static const String privacypolicy = '/privacypolicy';
   static const String settings = '/settings';
+  static const String feedback = '/feedback';
+  static const String editprofile = '/editprofile';
+  static const String help = '/help';
+  static const String about = '/about';
+  static const String passwordManager = '/passwordManager';
+  static const String chatbot = '/chatbot';
+  static const String report = '/report';
 
   static Map<String, WidgetBuilder> routes = {
     splash: (context) => const SplashScreen(),
@@ -66,5 +80,16 @@ class AppRoutes {
     transport: (context) => const Transportscreen(),
     privacypolicy: (context) => const PrivacyPolicyScreen(),
     settings: (context) => const SettingsScreen(),
+    feedback: (context) => const FeedbackScreen(),
+    editprofile: (context) => const EditProfileScreen(),
+    help: (context) => const HelpScreen(),
+    about: (context) => const AboutScreen(),
+    passwordManager: (context) => PasswordManager(),
+    chatbot: (context) => ChatBotScreen(),
+    report: (context) {
+      final args =
+          ModalRoute.of(context)!.settings.arguments as List<ChatMessage>;
+      return ReportScreen(answers: args);
+    },
   };
 }

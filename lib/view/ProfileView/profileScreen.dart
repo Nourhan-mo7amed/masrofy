@@ -5,14 +5,15 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import '../../widgets/profilecard.dart';
-import '../../widgets/LogoutBottomSheet.dart';
+import '../../widgets/LogoutDialog.dart';
 
 class Profilescreen extends StatelessWidget {
   const Profilescreen({super.key});
 
-  void _showLogoutSheet(BuildContext context) {
-    showModalBottomSheet(
+  void _showLogoutDialog(BuildContext context) {
+    showDialog(
       context: context,
+      barrierDismissible: false,
       builder: (context) {
         return LogoutBottomSheet(
           onConfirm: () async {
@@ -96,8 +97,11 @@ class Profilescreen extends StatelessWidget {
                   children: [
                     ProfileCard(
                       icon: Icons.account_circle,
-                      text: loc.accountInfo,
+                      text: "Edit Profile",
                       color: Colors.purple,
+                      onTap: () {
+                        Navigator.pushNamed(context, '/editprofile');
+                      },
                     ),
                     const SizedBox(height: 10),
                     ProfileCard(
@@ -118,6 +122,14 @@ class Profilescreen extends StatelessWidget {
                       },
                     ),
                     const SizedBox(height: 10),
+                    ProfileCard(
+                      icon: Icons.help_outline_outlined,
+                      text: "Help",
+                      color: Color.fromARGB(255, 33, 130, 240),
+                      onTap: () {
+                        Navigator.pushNamed(context, '/help');
+                      },
+                    ),
                     ProfileCard(
                       icon: Icons.logout,
                       text: loc.logout,

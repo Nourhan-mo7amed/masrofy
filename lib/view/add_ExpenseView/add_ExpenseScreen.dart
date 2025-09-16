@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:masrofy/core/constants/month_name.dart';
 import 'package:masrofy/l10n/app_localizations.dart';
-import 'package:firebase_auth/firebase_auth.dart'; 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:masrofy/models/category_model.dart';
 import 'package:masrofy/models/transaction_model.dart';
 import 'package:masrofy/viewmodels/transaction_viewModel.dart';
@@ -67,9 +67,9 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
     if (_titleController.text.isEmpty ||
         _amountController.text.isEmpty ||
         selectedDate == null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(loc.fillRequiredFields)),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(loc.fillRequiredFields)));
       return;
     }
     if (selectedCategory == null) {
@@ -90,7 +90,7 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
       title: _titleController.text.trim(),
       amount: double.tryParse(_amountController.text.trim()) ?? 0.0,
       date: selectedDate!,
-      userId: userId, 
+      userId: userId,
       notes: _notesController.text.trim(),
       type: 'expense',
       source: null,
@@ -189,7 +189,10 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                             controller: _amountController,
                             keyboardType: TextInputType.number,
                             decoration: InputDecoration(
-                              prefixIcon: const Icon(Icons.attach_money, size: 20),
+                              prefixIcon: const Icon(
+                                Icons.attach_money,
+                                size: 20,
+                              ),
                               hintText: "\$ 2000",
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(12),
@@ -279,7 +282,7 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                       style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
-                        color: Colors.white
+                        color: Colors.white,
                       ),
                     ),
                   ),
