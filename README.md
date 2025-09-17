@@ -1,9 +1,3 @@
-<div>
-  <img src="./assets/masrofy1.png" width="120" align="left" />
-  <img src="./assets/masrofy1.png" width="120" align="right" />
-</div>
-<br>
-
 <h1 align="center">💸 Masrofy - Expense Tracker App</h1>
 
 Masrofy is a **Flutter-based mobile application** that helps users manage and track their daily expenses with ease.  
@@ -11,7 +5,7 @@ It combines **simplicity, efficiency, and AI-powered insights** to encourage bet
 
 ---
 
-<img src="./assets/masrofy_cover.png" />
+<img src="./assets/masrofy1.png" />
 
 ---
 
