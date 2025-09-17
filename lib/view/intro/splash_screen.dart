@@ -35,7 +35,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    //final loc = AppLocalizations.of(context)!;
+    final loc = AppLocalizations.of(context)!;
 
     return Scaffold(
       backgroundColor: AppColors.background,
@@ -43,16 +43,17 @@ class _SplashScreenState extends State<SplashScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Lottie.asset("assets/animations/logo2.json", height: 400),
+            Lottie.asset("assets/animations/logo.json", height: 400),
             AnimatedOpacity(
               duration: const Duration(seconds: 2),
               opacity: _opacity,
               child: Text(
-                'Masrofy',
+                loc.appName,
                 style: const TextStyle(
                   fontSize: 50,
                   fontWeight: FontWeight.bold,
                   color: Colors.black,
+                  fontFamily: "WinkyRough",
                 ),
               ),
             ),

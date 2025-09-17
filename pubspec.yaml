@@ -51,3 +51,9 @@ l10n:
   arb-dir: l10n
   template-arb-file: app_en.arb
   output-localization-file: app_localizations.dart
+
+  fonts:
+    - family: WinkyRough
+      fonts:
+        - asset: assets/fonts/WinkyRough-VariableFont_wght.ttf
+          weight: 400     
